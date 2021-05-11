@@ -1,27 +1,52 @@
-# Ngaox
+<h1 align="center">NGAOX</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.10.
+<p align="center"> 
+    <img src="https://img.shields.io/github/license/chaospad/ngaox?style=flat-square" alt="GitHub License"/>
+    <img alt="ngaox@npm" src="https://img.shields.io/npm/v/@chaospad/ngaox?label=ngaox&logo=npm&logoColor=red&style=flat-square">
+    <img alt="ngaox-ui@npm" src="https://img.shields.io/npm/v/@chaospad/ngaox-ui?label=ngaox-ui&style=flat-square">
+</p>
 
-## Development server
+- [@rabraghib](https://twitter.com/rabraghib) - Get the latest updates on Twitter
+- Chackout project [features & plan lists](TODO.md)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## Description
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+| Package                   | Description                                                                         | 
+| ------------------------- | ----------------------------------------------------------------------------------- | 
+| `@chaospad/ngaox`         | UI components & front-end stuffs for Angular applications used in chaospad apps 👊. |
+| `@chaospad/ngaox-ui`      | lightweight CSS framework which is styling `@chaospad/ngaox`           |
 
-## Build
+#### Technologies
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- Angular
+- Typescript
+- Scss / Css
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Getting started
+You can install ngaox in an angular app via:
+- NPM: `npm install @chaospad/ngaox`
+- yarn: `yarn add @chaospad/ngaox`
 
-## Running end-to-end tests
+You can install ngaox-ui in any web app using:
+- cdn:
+  - css: https://cdn.jsdelivr.net/npm/@chaospad/ngaox-ui/css/ngaox.css
+  - js: https://cdn.jsdelivr.net/npm/@chaospad/ngaox-ui/js/ngaox.js
+- NPM: `npm install @chaospad/ngaox-ui`
+- yarn: `yarn add @chaospad/ngaox-ui`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+---
 
-## Further help
+## References
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```ts
+    // coming soon...
+```
+
+---
+
+## License
+This project is licensed under the terms of the [MIT License](LICENSE)

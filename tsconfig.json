@@ -11,6 +11,16 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
+    "paths": {
+      "chaospad": [
+        "dist/chaospad/chaospad",
+        "dist/chaospad"
+      ],
+      "seo": [
+        "dist/seo/seo",
+        "dist/seo"
+      ]
+    },
     "module": "es2020",
     "lib": [
       "es2018",
