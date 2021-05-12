@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve dev --open",
     "build": "ng build",
+    "build:seo": "ng build seo --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -10,7 +10,7 @@ jobs:
       - name: build @ngaox/seo
         run: |
           npm ci
-          ng build seo --prod
+          npm run build:seo
   publish-seo:
     needs: build
     runs-on: ubuntu-latest
