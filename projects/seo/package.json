@@ -1,11 +1,30 @@
 {
   "name": "@ngaox/seo",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "Social Media/SEO metatags for angular apps",
   "peerDependencies": {
     "@angular/common": "^11.2.13",
     "@angular/core": "^11.2.13"
   },
   "dependencies": {
     "tslib": "^2.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rabraghib/ngaox.git"
+  },
+  "keywords": [
+    "ngaox",
+    "seo",
+    "ngx",
+    "angular",
+    "universal",
+    "ssr"
+  ],
+  "author": "Rabyâ Raghib",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/rabraghib/ngaox/issues"
+  },
+  "homepage": "https://github.com/rabraghib/ngaox/tree/main/projects/seo#readme"
 }
