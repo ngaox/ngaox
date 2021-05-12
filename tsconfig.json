@@ -12,11 +12,11 @@
     "importHelpers": true,
     "target": "es2015",
     "paths": {
-      "chaospad": [
+      "@ngaox/chaospad": [
         "dist/chaospad/chaospad",
         "dist/chaospad"
       ],
-      "seo": [
+      "@ngaox/seo": [
         "dist/seo/seo",
         "dist/seo"
       ]
