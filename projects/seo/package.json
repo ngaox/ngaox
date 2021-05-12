@@ -1,7 +1,7 @@
 {
   "name": "@ngaox/seo",
   "version": "1.0.0",
-  "description": "Social Media/SEO metatags for angular apps",
+  "description": "angular library to help generate & managing Social-Media/SEO meta & other related tags.",
   "peerDependencies": {
     "@angular/common": "^11.2.13",
     "@angular/core": "^11.2.13"

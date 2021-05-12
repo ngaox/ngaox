@@ -2,6 +2,7 @@
 
 <p align="center"> 
     <img src="https://img.shields.io/github/license/chaospad/ngaox?style=flat-square" alt="GitHub License"/>
+    <img alt="@ngaox/seo@npm" src="https://img.shields.io/npm/v/@ngaox/seo?label=@ngaox/seo&logo=npm&logoColor=red&style=flat-square">
 </p>
 
 - [@rabraghib](https://twitter.com/rabraghib) - Get the latest updates on Twitter
@@ -10,14 +11,6 @@
 ---
 
 ## Description
-coming soon...
-
-#### Technologies
-coming soon...
-
----
-
-## Getting started
 coming soon...
 
 ---
