@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SeoService } from '@ngaox/seo';
 
 @Component({
     selector: 'app-root',
@@ -8,7 +7,4 @@ import { SeoService } from '@ngaox/seo';
 })
 export class AppComponent {
     title = 'app-dev';
-    constructor(seo: SeoService) {
-        seo.set({});
-    }
 }

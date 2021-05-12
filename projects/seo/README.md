@@ -2,7 +2,7 @@
 
 `@ngaox/seo` is an angular library to help generate & managing meta & other necessary tags that allow Social Media sharing & improve page seo display info & ranking
 
-**Important:** Generally you should use this library only if randering you pages before page laod which can be done on the angular world using [Universal](https://angular.io/guide/universal) or [Scully](https://scully.io/) or any other library you prefer.
+**Important:** Generally you should use this library only if you are rendering you pages before page laod which can be done on the angular world using [Universal](https://angular.io/guide/universal) or [Scully](https://scully.io/) or any other way you prefer.
 
 ---
 
@@ -13,7 +13,7 @@
   - [Usage](#usage)
     - [Getting started](#getting-started)
     - [Set global defaults](#set-global-defaults)
-    - [Other `SeoService` methods](#other-seoservice-methods)
+    - [Other methods](#other-seoservice-methods)
   - [License](#license)
   - [How can I support the project?](#how-can-i-support-the-project)
 

@@ -5,3 +5,4 @@
 export * from './lib/seo.module';
 export * from './lib/interfaces';
 export * from './lib/seo.service';
+export * from './lib/presetsLaoder';

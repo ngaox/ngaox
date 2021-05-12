@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { SeoModule } from '@ngaox/seo';
+import { presetAutoSeoLaoder, SeoModule } from '@ngaox/seo';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +28,14 @@ import { AppComponent } from './app.component';
             twitterCreator: "@string",
             fbAppId: "string",
             siteName: "Dev App | Tesing"
+        }, (e) => {
+            return presetAutoSeoLaoder(e,
+                {
+                    "/": {
+                        title: "✌✌"
+                    }
+                }
+            )
         })
     ],
     providers: [],

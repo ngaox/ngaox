@@ -1,3 +1,7 @@
+export interface routesSeoData {
+    [key: string]: PageSeoData
+};
+
 export interface PageSeoData  {
     title?: string;
     keywords?: string;

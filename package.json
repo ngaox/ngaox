@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve dev --open",
+    "start": "ng serve app-dev --open",
     "build": "ng build",
     "build:seo": "ng build seo --prod",
     "test": "ng test",
