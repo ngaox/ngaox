@@ -1,0 +1,29 @@
+import { NgModule, Injector } from '@angular/core';
+import { NavigationEnd } from '@angular/router';
+import { PageSeoData, presetsLaoder, routesSeoData, SeoModule } from '@ngaox/seo';
+
+function <%= classify(name) %>SeoLaoder(event: NavigationEnd,injector: Injector): PageSeoData {
+    // put your logic here
+    // eg: using presets SeoData definitions
+    let definitions:routesSeoData = {
+        "/*": {
+            title: "Unknown 🤒: " + event.urlAfterRedirects
+        },
+        "/": { title: "Home" },
+    };
+    return presetsLaoder(event, definitions);
+}
+
+const SeoDefaults:PageSeoData = {
+    title: "Alien",
+    description: "🧪🤖",
+    twitterCreator: "@TheCoolAlien",
+    // Add defaults data set...
+};
+@NgModule({
+    imports: [
+        SeoModule.forRoot(SeoDefaults, <%= classify(name) %>SeoLaoder)
+    ],
+    exports: [ SeoModule ]
+})
+export class <%= classify(name) %>SeoModule { }

@@ -1,4 +1,4 @@
-import { Inject, ModuleWithProviders, NgModule } from '@angular/core';
+import { Inject, Injector, ModuleWithProviders, NgModule } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { PageSeoData } from './interfaces';
@@ -17,13 +17,13 @@ const EXPORTS = [];
 })
 export class SeoModule {
 
-    constructor(@Inject("AutoLaoder") AutoLaoder: Function = null,router: Router,seo: SeoService) {
+    constructor(@Inject("AutoLaoder") AutoLaoder: Function = null,injector: Injector,router: Router,seo: SeoService) {
         if (AutoLaoder) {
             router.events.pipe(
                 filter(event => event instanceof NavigationEnd)
             ).subscribe(
                 (e: NavigationEnd) => {
-                    seo.set(AutoLaoder(e));
+                    seo.set(AutoLaoder(e,injector));
                 }
             );
         }

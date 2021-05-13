@@ -12,8 +12,10 @@
   - [Installation](#installation)
   - [Usage](#usage)
     - [Getting started](#getting-started)
+    - [Only want a service?](#only-want-a-service)
     - [Set global defaults](#set-global-defaults)
-    - [A cleaner & better way 👌](#a-cleaner--better-way-)
+    - [Laoders](#laoders)
+      - [How to handle Dynamic routes](#how-to-handle-dynamic-routes-seo)
     - [Other helpful methods](#other-helpful-methods)
   - [License](#license)
   - [How can I support the project?](#how-can-i-support-the-project)
@@ -34,11 +36,41 @@ yarn add @ngaox/seo
 
 ## Usage
 ### Getting started
+To setup the Ngaox Seo in your application run the following CLI command:
+```bash
+ng generate @ngaox/seo:setup
+```
+make sure to firstly check `ng generate @ngaox/seo:setup --help` to see all possible args & params...
+
+#### And you good to go 🎉 you should see the title changed for all routes
+The previous command did update your module to import the generated SeoModule? if not you can add it yoursel.
+```ts
+// app.module.ts
+
+import { AppSeoModule } from 'app-seo/app-seo.module.ts'; // the generated SeoModule
+/* ... */
+@NgModule({
+    imports: [
+        AppSeoModule
+        /* ... */
+    ],
+    /* ... */
+})
+```
+Dont foget to Edit `AppSeoDefaults` in the generated file `app-seo/app-seo.defaults.ts` & define default SeoData (page infos)
+
+& also update the pre given [laoder](#laoders) `AppSeoLaoder` from `app-seo/app-seo.laoder.ts` to laod SeoData for the current route (will overwrite your defaults for that route)
+
+
+**PS: Where & how these files named may deffer for you depend on the used command options** 
+
+### Only want a service?
+
 The `SeoService` is the service used to set page meta tags & title & canonical links.
 
 The service is provided in the `root` module. So you need just to inject it wherever you need it.
 
-and you can set page seo data by calling `set` of it method & passing your Data
+and you can set page SeoData by calling `set` of it method & passing your Data
 ```ts
 // exemple.component.ts
 import { SeoService } from '@ngaox/seo';
@@ -53,7 +85,7 @@ import { SeoService } from '@ngaox/seo';
     }
 //...
 ```
-the seoData given to `.set` method should be of type `PageSeoData` wich is:
+the SeoData given to `.set` method should be of type `PageSeoData` wich is:
 ```ts
 export interface PageSeoData  {
     title?: string;
@@ -74,7 +106,7 @@ export interface PageSeoData  {
 }
 ```
 ### Set global defaults
-However you might want to set some default values for your app like `siteName`  or `twitterCreator` ...
+You might want to set some default values for your app like `siteName`  or `twitterCreator` ...
 
 thats can be done by importing `SeoModule` and calling `forRoot` method with your defaults values wich are also of type `PageSeoData`
 ```ts
@@ -99,54 +131,30 @@ import { SeoModule } from '@ngaox/seo';
 })
 // ...
 ```
-### A cleaner & better way 👌
-Ngaox Seo v2 comes with support of **laoder** concept wich is a function that `SeoModule` call whenever navigating to route on the app & it pass it a `NavigationEnd` event.
+### Laoders
+Ngaox Seo comes with support of **laoder** concept wich is a function that `SeoModule` call whenever navigating to route on the app & it pass it a `NavigationEnd` event & an `Injector` and expect `PageSeoData` object to be returned that represent the SeoData for the current page.
 
-**PS:** a laoder has to return `PageSeoData` object that will overwritte the given default for that specific route.
-
-& here where comes the reel magic since we can seprate setting seo data for all pages from our components & also keep it all in one place (eg: `app.seo.ts`).
-
-```ts
-// app.seo.ts
-import { NgModule } from '@angular/core';
-import { NavigationEnd } from '@angular/router';
-import { PageSeoData, routesSeoData, SeoModule } from '@ngaox/seo';
-
-function myAppLaoder(event: NavigationEnd): PageSeoData {
-    // put your logic here
-    // eg: using presets SeoData definitions
-    let definitions:routesSeoData = {
-        "/": { /* ... */ },
-        "/about": { /* ... */ },
-        // you can use /* at the end to specify definition for all /user sub routes
-        "/user/*": userLaoder() // you can also call functions to resolve route seoData
-    };
-    // dont forget to import presetsLaoder if you would use it 
-    return presetsLaoder(event, definitions);
-}
-
-const SeoDefaults:PageSeoData = {
-    title: "cool title 😎",
-    // ...
-};
-@NgModule({
-    imports: [ SeoModule.forRoot(SeoDefaults, myAppLaoder) ],
-    exports: [ SeoModule ]
-})
-export class AppSeo { }
-
-```
-& the final touch is importing `AppSeo` in your `AppModule`
+To use just create it and pass it as a second argument for `forRoot` function
 ```ts
 // app.module.ts
+import { Injector } from '@angular/core';
+import { NavigationEnd } from '@angular/router';
+
+function myLaoder(event: NavigationEnd, injector:Injectot) {/* ... */}
+
 @NgModule({
-    // ...
     imports: [
-        AppSeo
-        // ...
-    ]
+        SeoModule.forRoot({ /* ... */},myLaoder)
+        /* ... */
+    ],
+    /* ... */
 })
 ```
+
+If you used the `ng generate @ngaox/seo:setup` we will generate a laoder for you & make it use with a preset of routes definitions.
+
+#### How to handle Dynamic routes SEO
+as montined above the `laoder` get an [injactor](https://angular.io/api/core/Injector-0) that can inject any injectabale service like the [ActivatedRoute](https://angular.io/api/router/ActivatedRoute) wich give access to your route params & your resoved data ...
 
 ### Other helpful methods
 `SeoService` comes with varied setter methods, used in the `set` method to set individual `PageSeoData` property meta tags.

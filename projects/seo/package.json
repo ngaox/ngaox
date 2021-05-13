@@ -1,6 +1,17 @@
 {
   "name": "@ngaox/seo",
-  "version": "2.0.0",
+  "version": "1.1.0",
+  "scripts": {
+    "build": "..\\..\\node_modules\\.bin\\tsc -p tsconfig.schematics.json",
+    "copy:schemas": "cp --parents schematics/*/schema.json ../../dist/seo/",
+    "copy:files": "cp --parents -p -r schematics/*/files/** ../../dist/seo/",
+    "copy:collection": "cp schematics/collection.json ../../dist/seo/schematics/collection.json",
+    "postbuild": "npm run copy:schemas && npm run copy:files && npm run copy:collection"
+  },
+  "schematics": "./schematics/collection.json",
+  "ng-add":{
+    "save": "dependencies"
+  },
   "description": "angular library to help generate & managing Social-Media/SEO meta & other related tags.",
   "peerDependencies": {
     "@angular/common": "^11.2.13",

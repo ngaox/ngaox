@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppSeo } from './app.seo';
+import { AppSeoModule } from './app-seo/app-seo.module';
 
 @NgModule({
     declarations: [
@@ -12,7 +12,7 @@ import { AppSeo } from './app.seo';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        AppSeo
+        AppSeoModule
     ],
     providers: [],
     bootstrap: [AppComponent]
