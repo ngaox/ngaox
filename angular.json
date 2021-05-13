@@ -102,7 +102,6 @@
             "main": "projects/app-dev/src/main.ts",
             "polyfills": "projects/app-dev/src/polyfills.ts",
             "tsConfig": "projects/app-dev/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/app-dev/src/favicon.ico",
               "projects/app-dev/src/assets"
@@ -110,7 +109,13 @@
             "styles": [
               "projects/app-dev/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
