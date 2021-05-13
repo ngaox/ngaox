@@ -11,7 +11,11 @@
 ---
 
 ## Description
-coming soon...
+This repository contains several npm packages that are published under the scope `@ngaox` wich are tools & libraries to speed up and facilitate developing web apps.
+
+- ### [Ngaox Seo](projects/seo/README.md)
+  `@ngaox/seo` is an angular library to help generate & managing Social-Media/SEO meta tags, canonical links & page title.
+
 
 ---
 

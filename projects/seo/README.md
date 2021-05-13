@@ -60,7 +60,7 @@ import { AppSeoModule } from 'app-seo/app-seo.module.ts'; // the generated SeoMo
 ```
 Dont foget to Edit `AppSeoDefaults` in the generated file `app-seo/app-seo.defaults.ts` & define default SeoData (page infos)
 
-& also update the pre given [laoder](#laoders) `AppSeoLaoder` from `app-seo/app-seo.laoder.ts` to laod SeoData for the current route (will overwrite your defaults for that route)
+& also update the pre given [laoder](#laoders) `AppSeoLaoder` from `app-seo/app-seo.laoder.ts` to laod `SeoData` for the current route (will overwrite your defaults for that route)
 
 
 **PS: Where & how these files named may deffer for you depend on the used command options** 
@@ -71,7 +71,7 @@ The `SeoService` is the service used to set page meta tags & title & canonical l
 
 The service is provided in the `root` module. So you need just to inject it wherever you need it.
 
-and you can set page SeoData by calling `set` of it method & passing your Data
+and you can set page `SeoData` by calling `set` method of it & passing it your Data
 ```ts
 // exemple.component.ts
 import { SeoService } from '@ngaox/seo';
@@ -152,7 +152,7 @@ function myLaoder(event: NavigationEnd, injector:Injectot) {/* ... */}
 })
 ```
 
-If you used the `ng generate @ngaox/seo:setup` we will generate a laoder for you & make it use with a preset of routes definitions.
+If you used the `ng generate @ngaox/seo:setup` it will generate a laoder for you & make it use with a preset of routes definitions.
 
 #### How to handle Dynamic routes SEO
 as montined above the `laoder` get an [injactor](https://angular.io/api/core/Injector-0) that can inject any injectabale service like the [ActivatedRoute](https://angular.io/api/router/ActivatedRoute) wich give access to your route params & your resoved data ...
