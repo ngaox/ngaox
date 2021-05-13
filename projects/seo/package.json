@@ -2,7 +2,7 @@
   "name": "@ngaox/seo",
   "version": "1.1.0",
   "scripts": {
-    "build": "..\\..\\node_modules\\.bin\\tsc -p tsconfig.schematics.json",
+    "build": "..\/..\/node_modules\/.bin\/tsc -p tsconfig.schematics.json",
     "copy:schemas": "cp --parents schematics/*/schema.json ../../dist/seo/",
     "copy:files": "cp --parents -p -r schematics/*/files/** ../../dist/seo/",
     "copy:collection": "cp schematics/collection.json ../../dist/seo/schematics/collection.json",
