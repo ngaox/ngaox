@@ -1,0 +1,8 @@
+# Changelog
+
+## v1.1.0
+- add Laoders support for @ngaox/seo
+- add `ng g @ngaox/seo:setup` for an easy `SeoModule` setup in any module
+## v1.0.0
+- Add `SeoService` for setting document meta tags & title
+- Add `SeoModule` to set `SeoService` page seoData default values
