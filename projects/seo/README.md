@@ -42,7 +42,8 @@ ng generate @ngaox/seo:setup
 ```
 make sure to firstly check `ng generate @ngaox/seo:setup --help` to see all possible args & params...
 
-#### And you good to go 🎉 you should see the title changed for all routes
+**And you good to go 🎉** you should see the title changed for all routes
+
 The previous command did update your module to import the generated SeoModule? if not you can add it yoursel.
 ```ts
 // app.module.ts
