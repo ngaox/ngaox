@@ -32,7 +32,7 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           access: public
-          package: ./dist/seo/package.json
+          package: dist/seo/package.json
       - name: Log version update
         if: steps.publish.outputs.type != 'none'
         run: |
