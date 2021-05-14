@@ -2,8 +2,15 @@
   "name": "@ngaox/padup",
   "version": "1.0.0",
   "description": "Lightweight css framework for rapidly and easily build nice looking user interfaces",
-  "main": "index.ts",
-  "scripts": { },
+  "main": "scss/index.scss",
+  "scripts": {
+    "start": "..\\..\\node_modules\\.bin\\sass scss/themes:css -s expanded -w",
+    "build": "npm run build-cleanDist && npm run build-scss && npm run build-autoprefix && npm run build-cleancss",
+    "build-cleanDist": "..\\..\\node_modules\\.bin\\rimraf css",
+    "build-scss": "..\\..\\node_modules\\.bin\\sass scss/themes:css --no-source-map",
+    "build-autoprefix": "..\\..\\node_modules\\.bin\\postcss css --use autoprefixer --map --replace",
+    "build-cleancss": "..\\..\\node_modules\\.bin\\cleancss --batch --batch-suffix .min css/*.css"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rabraghib/ngaox.git"
