@@ -1,5 +1,10 @@
+import { Injector } from "@angular/core";
+import { NavigationEnd } from "@angular/router";
+
+export type Loader = (event: NavigationEnd,Injector: Injector) => PageSeoData;
+
 export interface routesSeoData {
-    [key: string]: PageSeoData
+    [key: string]: PageSeoData|Loader
 };
 
 export interface PageSeoData  {
@@ -11,6 +16,7 @@ export interface PageSeoData  {
     image?: string;
     imageData?: imageData;
     twitterCreator?: string;
+    twitterCard?: "summary_large_image" | "summary";
     fbAppId?: string;
     siteName?: string;
 }

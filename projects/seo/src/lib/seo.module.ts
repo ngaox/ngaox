@@ -1,7 +1,7 @@
 import { Inject, Injector, ModuleWithProviders, NgModule } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { PageSeoData } from './interfaces';
+import { Loader, PageSeoData } from './interfaces';
 import { SeoService } from './seo.service';
 
 const EXPORTS = [];
@@ -17,19 +17,19 @@ const EXPORTS = [];
 })
 export class SeoModule {
 
-    constructor(@Inject("AutoLaoder") AutoLaoder: Function = null,injector: Injector,router: Router,seo: SeoService) {
-        if (AutoLaoder) {
+    constructor(@Inject("AutoLoader") AutoLoader: Loader = null,injector: Injector,router: Router,seo: SeoService) {
+        if (AutoLoader) {
             router.events.pipe(
                 filter(event => event instanceof NavigationEnd)
             ).subscribe(
-                (e: NavigationEnd) => {
-                    seo.set(AutoLaoder(e,injector));
+                (event: NavigationEnd) => {
+                    seo.set(AutoLoader(event, injector));
                 }
             );
         }
     }
     
-    public static forRoot(defaults: PageSeoData = {},AutoLaoder?:Function): ModuleWithProviders<SeoModule>
+    public static forRoot(defaults: PageSeoData = {},AutoLoader?:Loader): ModuleWithProviders<SeoModule>
     {
         return {
             ngModule: SeoModule,
@@ -40,8 +40,8 @@ export class SeoModule {
                     useValue: defaults
                 },
                 {
-                    provide: 'AutoLaoder',
-                    useValue: AutoLaoder
+                    provide: 'AutoLoader',
+                    useValue: AutoLoader
                 }
             ]
         };

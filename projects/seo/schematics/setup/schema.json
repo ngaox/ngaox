@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema",
-    "id": "setup",
+    "$id": "setup",
     "title": "Easy setup to get started with Ngaox-Seo in a specific Module",
     "type": "object",
     "properties": {

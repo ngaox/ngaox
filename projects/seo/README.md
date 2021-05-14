@@ -14,7 +14,7 @@
     - [Getting started](#getting-started)
     - [Only want a service?](#only-want-a-service)
     - [Set global defaults](#set-global-defaults)
-    - [Laoders](#laoders)
+    - [Loaders](#loaders)
       - [How to handle Dynamic routes](#how-to-handle-dynamic-routes-seo)
     - [Other helpful methods](#other-helpful-methods)
   - [License](#license)
@@ -60,7 +60,7 @@ import { AppSeoModule } from 'app-seo/app-seo.module.ts'; // the generated SeoMo
 ```
 Dont foget to Edit `AppSeoDefaults` in the generated file `app-seo/app-seo.defaults.ts` & define default SeoData (page infos)
 
-& also update the pre given [laoder](#laoders) `AppSeoLaoder` from `app-seo/app-seo.laoder.ts` to laod `SeoData` for the current route (will overwrite your defaults for that route)
+& also update the pre given [loader](#loaders) `AppSeoLoader` from `app-seo/app-seo.loader.ts` to laod `SeoData` for the current route (will overwrite your defaults for that route)
 
 
 **PS: Where & how these files named may deffer for you depend on the used command options** 
@@ -102,6 +102,7 @@ export interface PageSeoData  {
         mimeType?: string;
     }; // imageData interface 
     twitterCreator?: string;
+    twitterCard?: "summary_large_image" | "summary";
     fbAppId?: string;
     siteName?: string;
 }
@@ -132,30 +133,38 @@ import { SeoModule } from '@ngaox/seo';
 })
 // ...
 ```
-### Laoders
-Ngaox Seo comes with support of **laoder** concept wich is a function that `SeoModule` call whenever navigating to route on the app & it pass it a `NavigationEnd` event & an `Injector` and expect `PageSeoData` object to be returned that represent the SeoData for the current page.
+### Loaders
+Ngaox Seo comes with support of **loader** concept wich is a function that `SeoModule` call whenever navigating to route on the app & it pass it a `NavigationEnd` event & an `Injector` and expect `PageSeoData` object to be returned that represent the SeoData for the current page.
+```ts
+import { Injector } from "@angular/core";
+import { NavigationEnd } from "@angular/router";
+
+// Loader Type
+export type Loader = (event: NavigationEnd,Injector: Injector) => PageSeoData;
+```
 
 To use just create it and pass it as a second argument for `forRoot` function
 ```ts
 // app.module.ts
 import { Injector } from '@angular/core';
 import { NavigationEnd } from '@angular/router';
+import { PageSeoData, Loader } from '@ngaox/seo';
 
-function myLaoder(event: NavigationEnd, injector:Injectot) {/* ... */}
+let myLoader:Loader = (event: NavigationEnd, injector:Injectot) :PageSeoData => {/* ... */}
 
 @NgModule({
     imports: [
-        SeoModule.forRoot({ /* ... */},myLaoder)
+        SeoModule.forRoot({ /* ... */},myLoader)
         /* ... */
     ],
     /* ... */
 })
 ```
 
-If you used the `ng generate @ngaox/seo:setup` it will generate a laoder for you & make it use with a preset of routes definitions.
+If you used the `ng generate @ngaox/seo:setup` it will generate a loader for you & make it use with a preset of routes definitions.
 
 #### How to handle Dynamic routes SEO
-as montined above the `laoder` get an [injactor](https://angular.io/api/core/Injector-0) that can inject any injectabale service like the [ActivatedRoute](https://angular.io/api/router/ActivatedRoute) wich give access to your route params & your resoved data ...
+as montined above the `loader` get an [injactor](https://angular.io/api/core/Injector-0) that can inject any injectabale service like the [ActivatedRoute](https://angular.io/api/router/ActivatedRoute) wich give access to your route params & your resoved data ...
 
 ### Other helpful methods
 `SeoService` comes with varied setter methods, used in the `set` method to set individual `PageSeoData` property meta tags.

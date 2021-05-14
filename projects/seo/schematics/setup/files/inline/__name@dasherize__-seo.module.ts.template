@@ -1,8 +1,8 @@
 import { NgModule, Injector } from '@angular/core';
 import { NavigationEnd } from '@angular/router';
-import { PageSeoData, presetsLaoder, routesSeoData, SeoModule } from '@ngaox/seo';
+import { PageSeoData, presetsLoader, routesSeoData, SeoModule, Loader } from '@ngaox/seo';
 
-function <%= classify(name) %>SeoLaoder(event: NavigationEnd,injector: Injector): PageSeoData {
+let <%= classify(name) %>SeoLoader:Loader = (event: NavigationEnd,injector: Injector): PageSeoData => {
     // put your logic here
     // eg: using presets SeoData definitions
     let definitions:routesSeoData = {
@@ -11,7 +11,7 @@ function <%= classify(name) %>SeoLaoder(event: NavigationEnd,injector: Injector)
         },
         "/": { title: "Home" },
     };
-    return presetsLaoder(event, definitions);
+    return presetsLoader(event, injector, definitions);
 }
 
 const SeoDefaults:PageSeoData = {
@@ -22,7 +22,7 @@ const SeoDefaults:PageSeoData = {
 };
 @NgModule({
     imports: [
-        SeoModule.forRoot(SeoDefaults, <%= classify(name) %>SeoLaoder)
+        SeoModule.forRoot(SeoDefaults, <%= classify(name) %>SeoLoader)
     ],
     exports: [ SeoModule ]
 })

@@ -32,6 +32,7 @@ export class SeoService {
         if (seoData.type)           this.setType(seoData.type);
         if (seoData.image)          this.setImage(seoData.image,seoData.imageData);
         if (seoData.twitterCreator) this.setTwitterCreator(seoData.twitterCreator);
+        if (seoData.twitterCard)    this.setTwitterCard(seoData.twitterCard);
         if (seoData.fbAppId)        this.setFbAppId(seoData.fbAppId);
         if (seoData.siteName)       this.setSiteName(seoData.siteName);
     }
@@ -117,10 +118,16 @@ export class SeoService {
         }
     }
 
-    public setTwitterCreator(username?: string): void {
+    public setTwitterCreator(username: string): void {
         this.generateTags([
             { name: 'twitter:site', content: username },
             { name: 'twitter:creator', content: username }
+        ]);
+    }
+
+    public setTwitterCard(twitterCard: "summary_large_image" | "summary"): void {
+        this.generateTags([
+            { name: 'twitter:card', content: twitterCard }
         ]);
     }
 
