@@ -177,16 +177,14 @@ For exemple `setTitle(title: string)` will set title related meta tags wich are:
 ---
 
 ## License
-This project is licensed under the terms of the [MIT License](LICENSE)
+This library is licensed under the terms of the [MIT License](LICENSE)
 
 ---
 
-## How can I support the project?
-
-- Star the GitHub repo ⭐
+## Show your support 🤗!
+- 🌟 Star the GitHub repository
 - Create pull requests, submit bugs, suggest new features ...
 - Follow me on [Twitter](https://twitter.com/rabraghib)
-
 
 ---
 

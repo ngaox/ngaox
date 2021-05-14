@@ -6,7 +6,7 @@
 </p>
 
 - [@rabraghib](https://twitter.com/rabraghib) - Get the latest updates on Twitter
-- Chackout project libraries [features lists](https://github.com/rabraghib/ngaox/issues/1)
+- Chackout project libraries [features lists](https://github.com/rabraghib/ngaox/issues/1) & tell me your thoughts
 
 ---
 
@@ -16,10 +16,21 @@ This repository contains several npm packages that are published under the scope
 - ### Ngaox Seo 
   `@ngaox/seo` is an angular library to help generate & managing Social-Media/SEO meta tags, canonical links & page title.
 
-  Feel free to [check it out ↗](projects/seo/README.md)
+  Feel free to [check it out ↗](projects/seo#readme)
 
+
+---
+
+## Show your support 🤗!
+- 🌟 Star the GitHub repository
+- Create pull requests, submit bugs, suggest new features ...
+- Follow me on [Twitter](https://twitter.com/rabraghib)
 
 ---
 
 ## License
 This project is licensed under the terms of the [MIT License](LICENSE)
+
+---
+
+<p align="center">Made with ❤️ by <a href="https://www.rabraghib.me">Rabyâ Raghib</a></p>
