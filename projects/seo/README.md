@@ -15,10 +15,9 @@
     - [Only want a service?](#only-want-a-service)
     - [Set global defaults](#set-global-defaults)
     - [Loaders](#loaders)
-      - [How to handle Dynamic routes](#how-to-handle-dynamic-routes-seo)
+      - [How to handle Dynamic routes SEO](#how-to-handle-dynamic-routes-seo)
     - [Other helpful methods](#other-helpful-methods)
-  - [License](#license)
-  - [How can I support the project?](#how-can-i-support-the-project)
+  - [Show your support 🤗!](#show-your-support-)
 
 ---
 
@@ -133,6 +132,7 @@ import { SeoModule } from '@ngaox/seo';
 })
 // ...
 ```
+
 ### Loaders
 Ngaox Seo comes with support of **loader** concept wich is a function that `SeoModule` call whenever navigating to route on the app & it pass it a `NavigationEnd` event & an `Injector` and expect `PageSeoData` object to be returned that represent the SeoData for the current page.
 ```ts
@@ -176,14 +176,9 @@ For exemple `setTitle(title: string)` will set title related meta tags wich are:
 
 ---
 
-## License
-This library is licensed under the terms of the [MIT License](LICENSE)
-
----
-
 ## Show your support 🤗!
 - 🌟 Star the GitHub repository
-- Create pull requests, submit bugs, suggest new features ...
+- Create pull requests, submit bugs, suggest new features...
 - Follow me on [Twitter](https://twitter.com/rabraghib)
 
 ---

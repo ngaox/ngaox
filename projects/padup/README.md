@@ -1,16 +1,16 @@
 # Ngaox PadUp
+
 `@ngaox/padup` is lightweight css framework for rapidly and easily build nice looking user interfaces.
 
 ---
 
-## License
-This library is licensed under the terms of the [MIT License](LICENSE)
+// coming soon...
 
 ---
 
 ## Show your support 🤗!
 - 🌟 Star the GitHub repository
-- Create pull requests, submit bugs, suggest new features ...
+- Create pull requests, submit bugs, suggest new features...
 - Follow me on [Twitter](https://twitter.com/rabraghib)
 
 ---
