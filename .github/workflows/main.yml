@@ -33,14 +33,24 @@ jobs:
           name: dist
           path: dist
       - name: Publish @ngaox/seo to npm
+        id: publishSeo
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           access: public
           package: dist/seo/package.json
+      - name: Log version update
+        if: steps.publishSeo.outputs.type != 'none'
+        run: |
+          echo "Version changed: ${{ steps.publishSeo.outputs.old-version }} => ${{ steps.publishSeo.outputs.version }}"
       - name: Publish @ngaox/padup to npm
+        id: publishPadUp
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           access: public
           package: dist/padup/package.json
+      - name: Log version update
+        if: steps.publishPadUp.outputs.type != 'none'
+        run: |
+          echo "Version changed: ${{ steps.publishPadUp.outputs.old-version }} => ${{ steps.publishPadUp.outputs.version }}"
