@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve app-dev --open",
+    "start:padup": "cd projects/padup && npm start",
     "build": "ng build",
     "build:seo": "ng build seo --configuration production && cd projects/seo && npm run build",
     "build:padup": "cd projects/padup && npm run build",
