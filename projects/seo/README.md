@@ -109,7 +109,7 @@ export interface PageSeoData  {
 ### Set global defaults
 You might want to set some default values for your app like `siteName`  or `twitterCreator` ...
 
-thats can be done by importing `SeoModule` and calling `forRoot` method with your defaults values wich are also of type `PageSeoData`
+thats can be done by importing `SeoModule` and calling `forRoot` method with your defaults values ass its first argument wich are also of type `PageSeoData`
 ```ts
 // app.module.ts
 // ...
@@ -143,7 +143,7 @@ import { NavigationEnd } from "@angular/router";
 export type Loader = (event: NavigationEnd,Injector: Injector) => PageSeoData;
 ```
 
-To use just create it and pass it as a second argument for `forRoot` function
+To use just create it and pass it as a second argument for `SeoModule.forRoot` function
 ```ts
 // app.module.ts
 import { Injector } from '@angular/core';
