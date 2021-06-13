@@ -7,8 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --c development",
     "lint": "ng lint",
-    "start:padup": "./scripts/shell/padup start",
-    "build:padup": "./scripts/shell/padup build",
+    "start:padup": ".\/scripts\/shell\/padup start",
+    "build:padup": ".\/scripts\/shell\/padup build",
     "build:seo": "ng build seo && cd projects/seo && yarn build"
   },
   "private": true,
