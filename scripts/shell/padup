@@ -10,6 +10,8 @@ sass() {
   SASS_ARGUMENTS=$1
   bin "sass $SASS_ARGUMENTS"
 }
+
+printf "\n"
 if [ $# -eq 0 ]
 then
   printf "$AVAILABLE_COMMANDS"
@@ -26,3 +28,4 @@ then
 else
   printf "Unknown command \"$COMMAND\"\n$AVAILABLE_COMMANDS"
 fi
+printf "\n"

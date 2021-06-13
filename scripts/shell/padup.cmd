@@ -32,7 +32,7 @@ GOTO main
 :availabale_commands
 echo Availabales commands: & echo.
 echo      - start & echo.
-echo      - build & echo.
+echo      - build
 EXIT /B
 
 @REM the bin function to add node_modules/bin prefix
@@ -49,3 +49,4 @@ CALL :bin sass %*
 EXIT /B
 
 :main
+echo.

@@ -18,6 +18,7 @@ function sass {
   bin -cmd "sass $arg"
 }
 
+Write-Output "`n"
 if ($command -eq "") {
   Write-Output $AVAILABLE_COMMANDS;
 }elseif ($command -eq "start") {
@@ -30,3 +31,4 @@ if ($command -eq "") {
 }else {
   Write-Output "Unknown command `"$COMMAND`"`n$AVAILABLE_COMMANDS";
 }
+Write-Output "`n"
