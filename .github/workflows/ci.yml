@@ -1,0 +1,20 @@
+name: Continuous Integration (Lint & test)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    name: 🧪 Lint & Test Packages
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+      - name: Lint packages
+        run: yarn lint
+      - name: Test packages
+        run: yarn test
