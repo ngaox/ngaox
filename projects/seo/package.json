@@ -6,7 +6,7 @@
     "copy:schemas": "cp --parents schematics/*/schema.json ../../dist/seo/",
     "copy:files": "cp --parents -p -r schematics/*/files/** ../../dist/seo/",
     "copy:collection": "cp schematics/collection.json ../../dist/seo/schematics/collection.json",
-    "postbuild": "npm run copy:schemas && npm run copy:files && npm run copy:collection"
+    "postbuild": "yarn copy:schemas && yarn copy:files && yarn copy:collection"
   },
   "schematics": "./schematics/collection.json",
   "ng-add":{

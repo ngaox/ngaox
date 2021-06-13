@@ -8,13 +8,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependicies
-        run: npm ci
+        run: yarn install --frozen-lockfile
       - name: build @ngaox/seo
         run: |
-          npm run build:seo
+          yarn build:seo
       - name: build @ngaox/padup
         run: |
-          npm run build:padup
+          yarn build:padup
           cp -R projects/padup dist/padup
       - name: Store dist folder 💾
         uses: actions/upload-artifact@v2

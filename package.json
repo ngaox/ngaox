@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "start:padup": "./scripts/shell/padup start",
     "build:padup": "./scripts/shell/padup build",
-    "build:seo": "ng build seo && cd projects/seo && npm run build"
+    "build:seo": "ng build seo && cd projects/seo && yarn build"
   },
   "private": true,
   "dependencies": {
