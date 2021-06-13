@@ -1,0 +1,28 @@
+#!/bin/sh
+DIR=projects/padup
+AVAILABLE_COMMANDS="Availabales commands:\n\t- start \n\t- build"
+
+bin() {
+  COMMAND=$1
+  ./node_modules/.bin/$COMMAND
+}
+sass() {
+  SASS_ARGUMENTS=$1
+  bin "sass $SASS_ARGUMENTS"
+}
+if [ $# -eq 0 ]
+then
+  printf "$AVAILABLE_COMMANDS"
+elif [ $@ == "start" ]
+then
+  # Start watching scss files
+  sass "$DIR/scss/themes:$DIR/css -s expanded -w"
+elif [ $@ == "build" ]
+then
+  bin "rimraf $DIR/css"
+  sass "$DIR/scss/themes:$DIR/css --no-source-map"
+  bin "postcss $DIR/css --use autoprefixer --map --replace"
+  bin "cleancss --batch --batch-suffix .min $DIR/css/*.css"
+else
+  printf "Unknown command \"$COMMAND\"\n$AVAILABLE_COMMANDS"
+fi
