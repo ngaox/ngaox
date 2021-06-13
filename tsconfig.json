@@ -15,21 +15,12 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "paths": {
-      "@ngaox/padup": [
-        "projects/padup",
-        "dist/padup"
-      ],
-      "@ngaox/seo": [
-        "dist/seo/seo",
-        "dist/seo"
-      ]
+      "@ngaox/padup": ["projects/padup", "dist/padup"],
+      "@ngaox/seo": ["dist/seo/seo", "dist/seo"]
     },
     "target": "es2017",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "lib": ["es2018", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -3,13 +3,11 @@
   "ignorePatterns": [],
   "overrides": [
     {
-      "files": [
-        "*.js"
-      ],
+      "files": ["*.js"],
       "parserOptions": {
         "ecmaVersion": 2017
       },
-      "rules": { }
+      "rules": {}
     }
   ]
 }

@@ -1,14 +1,14 @@
 {
-    "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
-    "schematics": {
-        "ng-add": {
-            "description": "Add Ngaox-Seo to the project.",
-            "factory": "./ng-add/index#ngAdd"
-        },
-        "setup": {
-            "description": "Auto setup Ngaox-Seo",
-            "factory": "./setup/index#setup",
-            "schema": "./setup/schema.json"
-        }
+  "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add Ngaox-Seo to the project.",
+      "factory": "./ng-add/index#ngAdd"
+    },
+    "setup": {
+      "description": "Auto setup Ngaox-Seo",
+      "factory": "./setup/index#setup",
+      "schema": "./setup/schema.json"
     }
+  }
 }

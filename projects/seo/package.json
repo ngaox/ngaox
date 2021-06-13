@@ -2,14 +2,14 @@
   "name": "@ngaox/seo",
   "version": "1.4.0",
   "scripts": {
-    "build": "..\/..\/node_modules\/.bin\/tsc -p tsconfig.schematics.json",
+    "build": "../../node_modules/.bin/tsc -p tsconfig.schematics.json",
     "copy:schemas": "cp --parents schematics/*/schema.json ../../dist/seo/",
     "copy:files": "cp --parents -p -r schematics/*/files/** ../../dist/seo/",
     "copy:collection": "cp schematics/collection.json ../../dist/seo/schematics/collection.json",
     "postbuild": "yarn copy:schemas && yarn copy:files && yarn copy:collection"
   },
   "schematics": "./schematics/collection.json",
-  "ng-add":{
+  "ng-add": {
     "save": "dependencies"
   },
   "description": "Angular library to help generate & managing Social-Media/SEO meta tags, canonical links & page title.",
