@@ -10,7 +10,7 @@ export class SeoService {
     
     constructor(
         private title: Title, private meta: Meta,
-        @Inject(DOCUMENT) private document,
+        @Inject(DOCUMENT) private document: Document,
         @Inject('Defaults') private defaults:PageSeoData = {}
     ) { }
 
@@ -112,7 +112,7 @@ export class SeoService {
             }
             if (extra.width) {
                 this.generateTags([
-                    { property: "og:image:type", content: extra.mimeType },
+                    { property: "og:image:type", content: `${ extra.mimeType }` },
                 ]);
             }
         }

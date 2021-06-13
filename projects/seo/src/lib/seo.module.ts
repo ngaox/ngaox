@@ -4,7 +4,7 @@ import { filter } from 'rxjs/operators';
 import { Loader, PageSeoData } from './interfaces';
 import { SeoService } from './seo.service';
 
-const EXPORTS = [];
+const EXPORTS:any = [];
 
 @NgModule({
     declarations: [
@@ -17,11 +17,15 @@ const EXPORTS = [];
 })
 export class SeoModule {
 
-    constructor(@Inject("AutoLoader") AutoLoader: Loader = null,injector: Injector,router: Router,seo: SeoService) {
+    constructor(
+        @Inject("AutoLoader") AutoLoader: Loader | null = null,
+        injector: Injector, router: Router, seo: SeoService
+    ) {
         if (AutoLoader) {
             router.events.pipe(
                 filter(event => event instanceof NavigationEnd)
             ).subscribe(
+                // @ts-ignore
                 (event: NavigationEnd) => {
                     seo.set(AutoLoader(event, injector));
                 }
