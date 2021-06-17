@@ -1,4 +1,4 @@
-import { Topic } from './topic';
+import { Post, Topic } from './_index';
 
 export interface User {
   id: number;
@@ -15,10 +15,11 @@ export interface User {
   background?: File | string;
   visibility: Topic | string; // Topic IRI <type:visibility>
   joinedAt: Date | string;
+
+  posts?: (Post | string)[];
   // * files?: (File | string)[]; // ?* private
   // * contactInfos?: (ContactInfo | string)[];
   // * careers?: (Career | string)[];
-  // * posts?: (Post | string)[];
   // * skills?: (Topic | string)[];
   // * projects?: (Project | string)[]
   // * blogs?: (Blog | string)[]

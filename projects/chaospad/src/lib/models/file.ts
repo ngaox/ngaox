@@ -1,5 +1,4 @@
-import { Topic } from './topic';
-import { User } from './user';
+import { Topic, User } from './_index';
 
 export interface File {
   id: number;
