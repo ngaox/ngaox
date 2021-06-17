@@ -1,4 +1,4 @@
-import { Post, Topic } from './_index';
+import { Blog, Career, ContactInfo, IRI, Post, Project, Topic } from './_index';
 
 export interface User {
   id: number;
@@ -8,19 +8,21 @@ export interface User {
   // password: string;
   // plainPassword: string;
   fullname: string; // 50
-  gender: Topic | string; // Topic IRI <type:gender>
-  birthday: Date | string;
+  gender: Topic | IRI; // Topic IRI <type:gender>
+  birthday: Date;
   bio?: string; // 255
-  picture?: File | string;
-  background?: File | string;
-  visibility: Topic | string; // Topic IRI <type:visibility>
-  joinedAt: Date | string;
+  picture?: File | IRI;
+  background?: File | IRI;
+  visibility: Topic | IRI; // Topic IRI <type:visibility>
+  joinedAt: Date;
 
-  posts?: (Post | string)[];
-  // * files?: (File | string)[]; // ?* private
-  // * contactInfos?: (ContactInfo | string)[];
-  // * careers?: (Career | string)[];
-  // * skills?: (Topic | string)[];
-  // * projects?: (Project | string)[]
-  // * blogs?: (Blog | string)[]
+  contactInfos?: (ContactInfo | IRI)[];
+  projects?: (Project | IRI)[];
+  careers?: (Career | IRI)[];
+
+  blogs?: (Blog | IRI)[];
+  posts?: (Post | IRI)[];
+
+  // * files?: (File | IRI)[]; // ?* private
+  // * skills?: (Topic | IRI)[];
 }
