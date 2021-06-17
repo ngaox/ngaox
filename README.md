@@ -11,20 +11,20 @@
 
 ---
 
-## Description
+# Description
 
 This repository contains several npm packages that are published under the scope `@ngaox` wich are tools & libraries to speed up and facilitate developing web apps.
 
-- ### Ngaox Seo
+- ## Ngaox Seo
 
   [@ngaox/seo](projects/seo#readme) is an angular library to help generate & managing Social-Media/SEO meta tags, canonical links & page title.
 
-- ### Ngaox PadUp
+- ## Ngaox PadUp
   [@ngaox/padup](projects/padup#readme) is lightweight css framework for rapidly and easily build nice looking user interfaces.
 
 ---
 
-## Show your support 🤗!
+# Show your support 🤗!
 
 - 🌟 Star the GitHub repository
 - Create pull requests, submit bugs, suggest new features...
@@ -32,7 +32,7 @@ This repository contains several npm packages that are published under the scope
 
 ---
 
-## License
+# License
 
 This project is licensed under the terms of the [MIT License](LICENSE)
 

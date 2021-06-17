@@ -6,23 +6,22 @@
 
 ---
 
-## Table of Contents
+# Table of Contents
 
 - [Ngaox Seo](#ngaox-seo)
-  - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-  - [Usage](#usage)
-    - [Getting started](#getting-started)
-    - [Only want a service?](#only-want-a-service)
-    - [Set global defaults](#set-global-defaults)
-    - [Loaders](#loaders)
-      - [How to handle Dynamic routes SEO](#how-to-handle-dynamic-routes-seo)
-    - [Other helpful methods](#other-helpful-methods)
-  - [Show your support 🤗!](#show-your-support-)
+- [Table of Contents](#table-of-contents)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Getting started](#getting-started)
+  - [Only want a service?](#only-want-a-service)
+  - [Set global defaults](#set-global-defaults)
+  - [Loaders](#loaders)
+    - [How to handle Dynamic routes SEO](#how-to-handle-dynamic-routes-seo)
+  - [Other helpful methods](#other-helpful-methods)
 
 ---
 
-## Installation
+# Installation
 
 To install this library with `npm` run:
 
@@ -38,9 +37,9 @@ yarn add @ngaox/seo
 
 ---
 
-## Usage
+# Usage
 
-### Getting started
+## Getting started
 
 To setup the Ngaox Seo in your application run the following CLI command:
 
@@ -74,7 +73,7 @@ Dont foget to Edit `AppSeoDefaults` in the generated file `app-seo/app-seo.defau
 
 **PS: Where & how these files named may deffer for you depend on the used command options**
 
-### Only want a service?
+## Only want a service?
 
 The `SeoService` is the service used to set page meta tags & title & canonical links.
 
@@ -120,7 +119,7 @@ export interface PageSeoData {
 }
 ```
 
-### Set global defaults
+## Set global defaults
 
 You might want to set some default values for your app like `siteName` or `twitterCreator` ...
 
@@ -149,7 +148,7 @@ import { SeoModule } from '@ngaox/seo';
 // ...
 ```
 
-### Loaders
+## Loaders
 
 Ngaox Seo comes with support of **loader** concept wich is a function that `SeoModule` call whenever navigating to route on the app & it pass it a `NavigationEnd` event & an `Injector` and expect `PageSeoData` object to be returned that represent the SeoData for the current page.
 
@@ -182,11 +181,11 @@ let myLoader:Loader = (event: NavigationEnd, injector:Injectot) :PageSeoData => 
 
 If you used the `ng generate @ngaox/seo:setup` it will generate a loader for you & make it use with a preset of routes definitions.
 
-#### How to handle Dynamic routes SEO
+### How to handle Dynamic routes SEO
 
 as montined above the `loader` get an [injactor](https://angular.io/api/core/Injector-0) that can inject any injectabale service like the [ActivatedRoute](https://angular.io/api/router/ActivatedRoute) wich give access to your route params & your resoved data ...
 
-### Other helpful methods
+## Other helpful methods
 
 `SeoService` comes with varied setter methods, used in the `set` method to set individual `PageSeoData` property meta tags.
 For exemple `setTitle(title: string)` will set title related meta tags wich are:
@@ -195,14 +194,6 @@ For exemple `setTitle(title: string)` will set title related meta tags wich are:
 - Meta tags: `meta[property='og:title']` - `meta[name='twitter:title']` & `meta[name='title']`
 
 & also comes with a method `generateTags` to create/update meta tags for a given `MetaDefinition` array to generate non supported meta tags
-
----
-
-## Show your support 🤗!
-
-- 🌟 Star the GitHub repository
-- Create pull requests, submit bugs, suggest new features...
-- Follow me on [Twitter](https://twitter.com/rabraghib)
 
 ---
 

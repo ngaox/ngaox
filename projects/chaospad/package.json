@@ -1,0 +1,29 @@
+{
+  "name": "@ngaox/chaospad",
+  "version": "0.0.1",
+  "description": "Chaospad SDK",
+  "peerDependencies": {
+    "@angular/common": "^12.0.4",
+    "@angular/core": "^12.0.4"
+  },
+  "dependencies": {
+    "tslib": "^2.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rabraghib/ngaox.git"
+  },
+  "keywords": [
+    "ngaox",
+    "chaospad",
+    "sdk",
+    "angular",
+    "ui/ux"
+  ],
+  "author": "Rabyâ Raghib",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rabraghib/ngaox/issues"
+  },
+  "homepage": "https://github.com/rabraghib/ngaox/tree/main/projects/chaospad"
+}

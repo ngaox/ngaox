@@ -52,7 +52,9 @@
               "projects/app-dev/src/favicon.ico",
               "projects/app-dev/src/assets"
             ],
-            "styles": ["projects/app-dev/src/styles.scss"],
+            "styles": [
+              "projects/app-dev/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -152,6 +154,46 @@
             "lintFilePatterns": [
               "projects/seo/**/*.ts",
               "projects/seo/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "chaospad": {
+      "projectType": "library",
+      "root": "projects/chaospad",
+      "sourceRoot": "projects/chaospad/src",
+      "prefix": "cp",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/chaospad/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/chaospad/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/chaospad/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/chaospad/src/test.ts",
+            "tsConfig": "projects/chaospad/tsconfig.spec.json",
+            "karmaConfig": "projects/chaospad/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/chaospad/**/*.ts",
+              "projects/chaospad/**/*.html"
             ]
           }
         }

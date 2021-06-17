@@ -16,7 +16,14 @@
     "importHelpers": true,
     "paths": {
       "@ngaox/padup": ["projects/padup", "dist/padup"],
-      "@ngaox/seo": ["dist/seo/seo", "dist/seo"]
+      "@ngaox/seo": [
+        "dist/seo/seo",
+        "dist/seo"
+      ],
+      "chaospad": [
+        "dist/chaospad/chaospad",
+        "dist/chaospad"
+      ]
     },
     "target": "es2017",
     "module": "es2020",
