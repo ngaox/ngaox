@@ -1,10 +1,10 @@
 export interface Topic {
   id: number;
-  topicname: string; // 30
+  topicname: string; // 50
   logo: string;
-  title: string; // 30
+  title: string; // 50
   description?: string; // 255
-  aliases: string[]; // 30
+  aliases: string[]; // 50
   types: (
     | 'topic' // default / auto-included
     | 'gender'

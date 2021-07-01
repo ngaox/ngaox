@@ -1,27 +1,24 @@
-import { Blog, Career, ContactInfo, IRI, Post, Project, Topic } from './_index';
+import { Blog, Career, ContactInfo, IRI, Topic } from './_index';
 
 export interface User {
   id: number;
-  username: string;
-  roles?: string[]; // * private
-  email: string; // ContactInfo
-  // password: string;
-  // plainPassword: string;
-  fullname: string; // 50
-  gender: Topic | IRI; // Topic IRI <type:gender>
+  username: string; // 25
+  roles?: string[];
+  email: string; // ! ContactInfo
+  // password: string; // 6 - 50
+  fullname: string; // 30
+  gender: Topic | IRI; // Topic <type:gender>
   birthday: Date;
-  bio?: string; // 255
+  bio?: string; // 150
   picture?: File | IRI;
   background?: File | IRI;
-  visibility: Topic | IRI; // Topic IRI <type:visibility>
+  visibility: Topic | IRI; // Topic <type:visibility>
   joinedAt: Date;
 
   contactInfos?: (ContactInfo | IRI)[];
-  projects?: (Project | IRI)[];
   careers?: (Career | IRI)[];
 
   blogs?: (Blog | IRI)[];
-  posts?: (Post | IRI)[];
 
   // * files?: (File | IRI)[]; // ?* private
   // * skills?: (Topic | IRI)[];
