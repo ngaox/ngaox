@@ -37,7 +37,7 @@
       },
       "root": "projects/app-dev",
       "sourceRoot": "projects/app-dev/src",
-      "prefix": "app",
+      "prefix": "dev",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -52,9 +52,7 @@
               "projects/app-dev/src/favicon.ico",
               "projects/app-dev/src/assets"
             ],
-            "styles": [
-              "projects/app-dev/src/styles.scss"
-            ],
+            "styles": ["projects/app-dev/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
