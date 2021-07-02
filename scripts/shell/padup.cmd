@@ -11,13 +11,13 @@ IF "%command%"=="" (
   SET known=true
 ) 
 IF "%command%"=="start" (
-  CALL :sass %DIR%/scss/themes:%DIR%/css -s expanded -w
+  CALL :sass %DIR%/scss/themes:%DIR%/css -s expanded -w --load-path %DIR%
   SET known=true
 )  
 IF "%command%"=="build" (
   CALL :bin rimraf %DIR%/css
   CALL :sass %DIR%/scss/themes:%DIR%/css --no-source-map
-  CALL :bin postcss %DIR%/css --use autoprefixer --map --replace
+  CALL :bin postcss %DIR%/css --use autoprefixer --replace
   CALL :bin cleancss --batch --batch-suffix .min %DIR%/css/*.css
   SET known=true
 )

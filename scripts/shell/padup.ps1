@@ -22,11 +22,11 @@ Write-Output "`n"
 if ($command -eq "") {
   Write-Output $AVAILABLE_COMMANDS;
 }elseif ($command -eq "start") {
-  sass -arg "$DIR/scss/themes:$DIR/css -s expanded -w"
+  sass -arg "$DIR/scss/themes:$DIR/css -s expanded -w --load-path $DIR"
 }elseif ($command -eq "build") {
   bin -cmd "rimraf $DIR/css"
   sass -arg "$DIR/scss/themes:$DIR/css --no-source-map"
-  bin -cmd "postcss $DIR/css --use autoprefixer --map --replace"
+  bin -cmd "postcss $DIR/css --use autoprefixer --replace"
   bin -cmd "cleancss --batch --batch-suffix .min $DIR/css/*.css"
 }else {
   Write-Output "Unknown command `"$COMMAND`"`n$AVAILABLE_COMMANDS";
