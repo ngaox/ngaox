@@ -1,9 +1,18 @@
 @use './variables';
 
-* {
-    outline: none;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    max-width: 100%;
+$scrollbar-width: 15px;
+$scrollbar-thumb-color: #bbb;
+
+*::-webkit-scrollbar {
+  width: $scrollbar-width;
+  height: $scrollbar-width;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: $scrollbar-thumb-color;
+  border-radius: 8px;
+  border: 4px solid transparent;
+  background-clip: content-box;
+  &:hover {
+    background-color: darken($color: $scrollbar-thumb-color, $amount: 20);
+  }
 }
