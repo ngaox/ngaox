@@ -1,7 +1,15 @@
-@use './variables';
-
-$scrollbar-width: 15px;
-$scrollbar-thumb-color: #bbb;
+// Scrollbar variables
+$scrollbar-width: 1rem !default;
+$scrollbar-thumb-color: #bbb !default;
+// Root variables
+$root-bgColor: #ecf0f1 !default;
+$root-color: #000 !default;
+$root-fontFamily: sans-serif !default;
+$root-fontSize: 16px !default;
+$root-fontWeight: normal !default;
+// Selection variables
+$selection-background: #bb6bd9 !default;
+$selection-color: #fff !default;
 
 *::-webkit-scrollbar {
   width: $scrollbar-width;
@@ -9,10 +17,29 @@ $scrollbar-thumb-color: #bbb;
 }
 *::-webkit-scrollbar-thumb {
   background-color: $scrollbar-thumb-color;
-  border-radius: 8px;
-  border: 4px solid transparent;
+  border-radius: $scrollbar-width/2;
+  border: $scrollbar-width/4 solid transparent;
   background-clip: content-box;
   &:hover {
     background-color: darken($color: $scrollbar-thumb-color, $amount: 20);
   }
+}
+
+/*
+ * Set `font-size` so I can use rem `units`
+ * Styles for the page
+ */
+html {
+  background-color: $root-bgColor;
+  color: $root-color;
+  font-family: $root-fontFamily;
+  font-size: $root-fontSize;
+  font-weight: $root-fontWeight;
+}
+
+/* add selection style to all elements */
+::selection {
+  background: $selection-background;
+  color: $selection-color;
+  text-shadow: none;
 }

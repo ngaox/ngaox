@@ -1,5 +1,22 @@
-// From https://piccalil.li/blog/a-modern-css-reset/
+/* Remove links outline on focus/hover */
+a:active,
+a:hover {
+  outline: none;
+}
 
+/* correct browser default display */
+details,
+main {
+  display: block;
+}
+summary {
+  display: list-item;
+}
+template {
+  display: none;
+}
+
+// From https://piccalil.li/blog/a-modern-css-reset/
 /* Box sizing rules */
 *,
 *::before,
