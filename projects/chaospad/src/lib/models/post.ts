@@ -1,4 +1,3 @@
-import { Interface } from 'readline';
 import { IRI, Topic, User } from './_index';
 
 export interface Post {
