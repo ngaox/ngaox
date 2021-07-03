@@ -1,0 +1,10 @@
+{
+  "release-as": "",
+  "release-type": "node",
+  "packages": {
+    ".": {},
+    "projects/chaospad": {},
+    "projects/seo": {},
+    "projects/padup": {}
+  }
+}
