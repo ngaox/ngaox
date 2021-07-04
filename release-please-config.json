@@ -1,10 +1,12 @@
 {
-  "bootstrap-sha": "9cc7e643d6ab663d1ef7d62de06eae591cb635bc",
+  "bootstrap-sha": "d9fa5e0797c1bf26128d5028623a0a0313a14e40",
   "release-type": "node",
   "packages": {
     ".": {},
     "projects/seo": {
       "release-as": "1.4.1"
-    }
+    },
+    "projects/chaospad": {},
+    "projects/padup": {}
   }
 }

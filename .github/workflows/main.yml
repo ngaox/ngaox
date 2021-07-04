@@ -11,6 +11,7 @@ jobs:
       upload_url: ${{ steps.release.outputs.upload_url }}
     steps:
       - uses: google-github-actions/release-please-action@v2
+        id: release
         with:
           token: ${{ secrets.RELEASE_BOT_TOKEN }}
           command: manifest-pr
