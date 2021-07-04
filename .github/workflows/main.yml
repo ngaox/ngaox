@@ -14,7 +14,7 @@ jobs:
         id: release
         with:
           token: ${{ secrets.RELEASE_BOT_TOKEN }}
-          command: manifest-pr
+          command: manifest
 
   install-dependicies:
     needs: changelogs

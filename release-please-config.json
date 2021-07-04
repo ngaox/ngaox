@@ -3,9 +3,7 @@
   "release-type": "node",
   "packages": {
     ".": {},
-    "projects/seo": {
-      "release-as": "1.4.1"
-    },
+    "projects/seo": {},
     "projects/chaospad": {},
     "projects/padup": {}
   }
