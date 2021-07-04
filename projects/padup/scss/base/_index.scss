@@ -1,10 +1,3 @@
-@use '../variables' as vars;
-
 @use './reset';
-
-@use './global.scss' with (
-  $root-color: vars.$color,
-  $root-fontSize: vars.$fontSize
-);
-
+@use './global.scss';
 @use './typography.scss';

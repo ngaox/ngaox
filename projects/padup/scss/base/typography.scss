@@ -1,0 +1,127 @@
+// Default styling for HTML elements
+//
+// Components:     `link` (`a` tag)
+//                 `h1` `h2` `h3` `h4` `h5` `h6`
+//
+// Html tags:      hr - h1 h2 h3 h4 h5 h6
+//                 abbr[title] b/strong em q small sub sup
+//
+// ========================================================================
+@use '../variables';
+@use 'sass:map';
+
+/* Variables
+ ========================================================================== */
+$link-color: map.get(variables.$colors, primary, 200);
+$link-hover-color: map.get(variables.$colors, primary, 300);
+$margin-vertical: map.get(variables.$spacing, meduim);
+$heading-color: map.get(variables.$colors, gray, 100);
+$fontBold: map.get(variables.$fonts, weight, blod);
+$h1-fontSize: map.get(variables.$fonts, sizes, 700);
+$h1-color: map.get(variables.$colors, accent, 200);
+$h2-fontSize: map.get(variables.$fonts, sizes, 600);
+$h3-fontSize: map.get(variables.$fonts, sizes, 500);
+$h4-fontSize: map.get(variables.$fonts, sizes, 400);
+$h5-fontSize: map.get(variables.$fonts, sizes, 300);
+$h6-fontSize: map.get(variables.$fonts, sizes, 200);
+$em-color: map.get(variables.$colors, accent, 400);
+$hr-color: map.get(variables.$colors, primary, 300);
+
+/* Links
+ ========================================================================== */
+a,
+.link {
+  color: $link-color;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: underline;
+  }
+}
+
+/* Headings
+ ========================================================================== */
+// prettier-ignore
+h1, h2, h3, h4,
+.h1, .h2, .h3, h4 {
+  line-height: 1.1;
+}
+// prettier-ignore
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  margin-bottom: $margin-vertical;
+  font-weight: $fontBold;
+  color: $heading-color;
+  text-transform: none;
+}
+h1,
+.h1 {
+  font-size: $h1-fontSize;
+  color: $h1-color;
+}
+h2,
+.h2 {
+  font-size: $h2-fontSize;
+}
+h3,
+.h3 {
+  font-size: $h3-fontSize;
+}
+h4,
+.h4 {
+  font-size: $h4-fontSize;
+}
+h5,
+.h5 {
+  font-size: $h5-fontSize;
+}
+h6,
+.h6 {
+  font-size: $h6-fontSize;
+}
+
+/* Other typography tags
+ ========================================================================== */
+abbr[title] {
+  text-decoration: underline dotted;
+}
+b,
+strong {
+  font-weight: bolder;
+}
+em {
+  color: $em-color;
+}
+q {
+  font-style: italic;
+}
+small {
+  font-size: smaller;
+}
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+
+// Horizontal line
+hr {
+  overflow: visible;
+  text-align: inherit;
+  margin: $margin-vertical 0;
+  border: 0;
+  border-top: 3px solid $hr-color;
+}

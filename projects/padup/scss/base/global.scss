@@ -1,17 +1,22 @@
 @use "sass:math";
+@use "sass:map";
+@use '../variables' as vars;
 
 // Scrollbar variables
 $scrollbar-width: 1rem !default;
 $scrollbar-thumb-color: #bbb !default;
 // Root variables
-$root-bgColor: #ecf0f1 !default;
-$root-color: #000 !default;
-$root-fontFamily: sans-serif !default;
-$root-fontSize: 16px !default;
+$root-bgColor: map.get(vars.$colors, bgColor);
+$root-color: map.get(vars.$colors, gray, 200);
+$root-fontFamily: map.get(vars.$fonts, family);
+$root-fontSize: map.get(vars.$fonts, rootSize);
 $root-fontWeight: normal !default;
 // Selection variables
-$selection-background: #bb6bd9 !default;
-$selection-color: #fff !default;
+// $selection-background: map.get(vars.$colors, accent, 200);
+// $selection-color: map.get(vars.$colors, white);
+
+$list-paddingLeft: map.get(vars.$spacing, large);
+$margin-vertical: map.get(vars.$spacing, meduim);
 
 *::-webkit-scrollbar {
   width: $scrollbar-width;
@@ -40,8 +45,45 @@ html {
 }
 
 /* add selection style to all elements */
-::selection {
-  background: $selection-background;
-  color: $selection-color;
-  text-shadow: none;
+// ::selection {
+//   background: $selection-background;
+//   color: $selection-color;
+//   text-shadow: none;
+// }
+
+p,
+ul,
+ol,
+dl,
+pre,
+address,
+fieldset,
+figure,
+blockquote {
+  &:not(:first-child) {
+    margin-top: $margin-vertical;
+  }
+  &:not(:last-child) {
+    margin-bottom: $margin-vertical;
+  }
+}
+
+/* Lists */
+ul,
+ol {
+  padding-left: $list-paddingLeft;
+}
+
+// correct some browsers default display
+details,
+main {
+  display: block;
+}
+
+summary {
+  display: list-item;
+}
+
+template {
+  display: none;
 }
