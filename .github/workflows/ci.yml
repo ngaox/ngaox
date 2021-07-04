@@ -1,4 +1,4 @@
-name: Continuous Integration (Lint & test)
+name: Continuous Integration (Lint, Test & Analyze code)
 
 on:
   push:
@@ -18,3 +18,22 @@ jobs:
         run: yarn lint
       - name: Test packages
         run: yarn test
+  analyze:
+    needs: lint-test
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v2
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: 'javascript'
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v1
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
