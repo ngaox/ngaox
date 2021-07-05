@@ -14,7 +14,9 @@
     "build:seo": "ng build seo && cd projects/seo && yarn build",
     "start:chaospad": "ng build chaospad --watch --c development",
     "build:chaospad": "ng build chaospad",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "scully": "npx scully --project docs",
+    "scully:serve": "npx scully serve --project docs"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +28,9 @@
     "@angular/platform-browser": "~12.1.1",
     "@angular/platform-browser-dynamic": "~12.1.1",
     "@angular/router": "~12.1.1",
+    "@scullyio/init": "1.1.4",
+    "@scullyio/ng-lib": "^1.0.0",
+    "@scullyio/scully": "^1.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"

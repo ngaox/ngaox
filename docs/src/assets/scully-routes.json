@@ -1,0 +1,10 @@
+[
+  { "route": "/" },
+  {
+    "route": "/docs/introduction",
+    "title": "Introduction",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "published": true,
+    "sourceFile": "introduction.md"
+  }
+]

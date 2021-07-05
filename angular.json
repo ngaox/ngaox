@@ -228,7 +228,7 @@
       },
       "root": "docs",
       "sourceRoot": "docs/src",
-      "prefix": "app",
+      "prefix": "docs",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
