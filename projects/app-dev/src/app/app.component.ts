@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SeoService } from '@ngaox/seo';
 
 @Component({
   selector: 'dev-root',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styles: ['']
 })
 export class AppComponent {
-  title = 'app-dev';
+  constructor(seoService: SeoService) {
+    seoService.setTitle('dfdf');
+  }
 }

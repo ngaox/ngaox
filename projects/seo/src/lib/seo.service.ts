@@ -1,18 +1,24 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, InjectionToken, Injector } from '@angular/core';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 import { imageData, PageSeoData } from './interfaces';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class SeoService {
+  defaults: PageSeoData;
   constructor(
     private title: Title,
     private meta: Meta,
-    @Inject(DOCUMENT) private document: Document,
-    @Inject('Defaults') private defaults: PageSeoData = {}
-  ) {}
+    injector: Injector,
+    @Inject(DOCUMENT) private document: Document
+  ) {
+    this.defaults = injector.get<PageSeoData>(
+      new InjectionToken<PageSeoData>('Defaults'),
+      {}
+    );
+  }
 
   public generateTags(definitions: MetaDefinition[]): void {
     definitions.forEach(meta => {
@@ -23,7 +29,7 @@ export class SeoService {
   public set(seoData: PageSeoData) {
     seoData = {
       ...this.defaults,
-      ...seoData,
+      ...seoData
     };
     if (seoData.title) this.setTitle(seoData.title);
     if (seoData.keywords) this.setKeywords(seoData.keywords);
@@ -42,7 +48,7 @@ export class SeoService {
     this.generateTags([
       { property: 'og:title', content: title },
       { name: 'twitter:title', content: title },
-      { name: 'title', content: title },
+      { name: 'title', content: title }
     ]);
   }
 
@@ -54,7 +60,7 @@ export class SeoService {
     this.generateTags([
       { name: 'description', content: description },
       { property: 'og:description', content: description },
-      { name: 'twitter:description', content: description },
+      { name: 'twitter:description', content: description }
     ]);
   }
 
@@ -81,7 +87,7 @@ export class SeoService {
     this.generateTags([
       { property: 'og:image', content: image },
       { name: 'twitter:image', content: image },
-      { property: 'image', content: image },
+      { property: 'image', content: image }
     ]);
     if (image.startsWith('https')) {
       this.generateTags([{ property: 'og:image:secure_url', content: image }]);
@@ -90,22 +96,22 @@ export class SeoService {
       if (extra.alt) {
         this.generateTags([
           { property: 'twitter:image:alt', content: extra.alt },
-          { property: 'twitter:image:alt', content: extra.alt },
+          { property: 'og:image:alt', content: extra.alt }
         ]);
       }
       if (extra.height) {
         this.generateTags([
-          { property: 'og:image:height', content: extra.height.toString() },
+          { property: 'og:image:height', content: extra.height.toString() }
         ]);
       }
       if (extra.width) {
         this.generateTags([
-          { property: 'og:image:width', content: extra.width.toString() },
+          { property: 'og:image:width', content: extra.width.toString() }
         ]);
       }
       if (extra.width) {
         this.generateTags([
-          { property: 'og:image:type', content: `${extra.mimeType}` },
+          { property: 'og:image:type', content: `${extra.mimeType}` }
         ]);
       }
     }
@@ -114,7 +120,7 @@ export class SeoService {
   public setTwitterCreator(username: string): void {
     this.generateTags([
       { name: 'twitter:site', content: username },
-      { name: 'twitter:creator', content: username },
+      { name: 'twitter:creator', content: username }
     ]);
   }
 

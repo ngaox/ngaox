@@ -9,7 +9,13 @@ const EXPORTS: any = [];
 @NgModule({
   declarations: [...EXPORTS],
   imports: [],
-  exports: [...EXPORTS],
+  providers: [
+    {
+      provide: 'AutoLoader',
+      useValue: undefined
+    }
+  ],
+  exports: [...EXPORTS]
 })
 export class SeoModule {
   constructor(
@@ -40,13 +46,13 @@ export class SeoModule {
         SeoService,
         {
           provide: 'Defaults',
-          useValue: defaults,
+          useValue: defaults
         },
         {
           provide: 'AutoLoader',
-          useValue: AutoLoader,
-        },
-      ],
+          useValue: AutoLoader
+        }
+      ]
     };
   }
 }
