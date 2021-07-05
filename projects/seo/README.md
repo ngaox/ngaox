@@ -26,7 +26,7 @@
 To install this library with `npm` run:
 
 ```bash
-npm install @ngaox/ceo --save
+npm install @ngaox/seo --save
 ```
 
 or using `yarn`

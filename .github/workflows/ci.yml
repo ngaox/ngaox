@@ -1,4 +1,4 @@
-name: Continuous Integration (Lint, Test & Analyze code)
+name: Lint, Test & Analyze
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
         run: yarn test
   analyze:
     needs: lint-test
-    name: Analyze
+    name: Analyze Code
     runs-on: ubuntu-latest
     permissions:
       actions: read
