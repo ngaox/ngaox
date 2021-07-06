@@ -1,0 +1,17 @@
+.doc {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  padding: 40px 40px 40px 0;
+  gap: 20px;
+  height: 100%;
+  width: 100%;
+  .sidebar {
+    height: 100%;
+  }
+  .content {
+    background: #fff;
+    padding: 40px;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+}

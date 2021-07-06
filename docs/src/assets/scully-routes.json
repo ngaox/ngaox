@@ -6,5 +6,12 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "published": true,
     "sourceFile": "introduction.md"
+  },
+  {
+    "route": "/docs/padup/base",
+    "title": "Base",
+    "description": "Ngaox-Pdaup Default style for all HTML elements",
+    "published": true,
+    "sourceFile": "base.md"
   }
 ]

@@ -14,10 +14,11 @@ export class SidebarComponent implements OnInit {
   constructor(private scully: ScullyRoutesService) {}
 
   ngOnInit() {
-    this.links$.pipe(
+    this.links$ = this.links$.pipe(
       map(links => {
-        console.log(links);
-        return links;
+        return links.filter((route: ScullyRoute) =>
+          route.route.startsWith(`/docs/`)
+        );
       })
     );
   }

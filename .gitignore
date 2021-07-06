@@ -46,3 +46,6 @@ Thumbs.db
 
 # scully logs
 scully.log
+scully.docs.config.js
+scully/**/*.js
+scully/**/*.map
