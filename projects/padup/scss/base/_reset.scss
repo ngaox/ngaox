@@ -4,18 +4,6 @@ a:hover {
   outline: none;
 }
 
-/* correct browser default display */
-details,
-main {
-  display: block;
-}
-summary {
-  display: list-item;
-}
-template {
-  display: none;
-}
-
 // From https://piccalil.li/blog/a-modern-css-reset/
 /* Box sizing rules */
 *,
@@ -68,14 +56,6 @@ img,
 picture {
   max-width: 100%;
   display: block;
-}
-
-/* Inherit fonts for inputs and buttons */
-input,
-button,
-textarea,
-select {
-  font: inherit;
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */

@@ -4,7 +4,7 @@
 //                 `h1` `h2` `h3` `h4` `h5` `h6`
 //
 // Html tags:      hr - h1 h2 h3 h4 h5 h6
-//                 abbr[title] b/strong em q small sub sup
+//                 abbr[title] b/strong em q small sub sup blockquote
 //
 // ========================================================================
 @use '../variables';
@@ -24,7 +24,9 @@ $h3-fontSize: map.get(variables.$fonts, sizes, 500);
 $h4-fontSize: map.get(variables.$fonts, sizes, 400);
 $h5-fontSize: map.get(variables.$fonts, sizes, 300);
 $h6-fontSize: map.get(variables.$fonts, sizes, 200);
-$em-color: map.get(variables.$colors, accent, 400);
+$blockquote-fontSize: map.get(variables.$fonts, sizes, 300);
+$blockquote-padding: map.get(variables.$spacing, small);
+$blockquote-footerColor: map.get(variables.$colors, gray, 300);
 $hr-color: map.get(variables.$colors, primary, 300);
 
 /* Links
@@ -54,10 +56,15 @@ h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-  margin-bottom: $margin-vertical;
   font-weight: $fontBold;
   color: $heading-color;
   text-transform: none;
+  &:not(:first-child) {
+    margin-top: $margin-vertical;
+  }
+  &:not(:last-child) {
+    margin-bottom: $margin-vertical;
+  }
 }
 h1,
 .h1 {
@@ -87,39 +94,35 @@ h6,
 
 /* Other typography tags
  ========================================================================== */
-abbr[title] {
-  text-decoration: underline dotted;
-}
-b,
-strong {
-  font-weight: bolder;
-}
 em {
-  color: $em-color;
+  font-style: italic;
 }
 q {
   font-style: italic;
 }
-small {
-  font-size: smaller;
-}
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-sup {
-  top: -0.5em;
-}
-sub {
-  bottom: -0.25em;
+
+/* Blockquote */
+blockquote {
+  font-size: $blockquote-fontSize;
+  font-style: italic;
+  padding: $blockquote-padding;
+  padding-left: $blockquote-padding * 3;
+  > p:last-of-type {
+    margin-bottom: 0;
+  }
+  footer {
+    margin-top: $blockquote-padding;
+    font-size: 75%;
+    color: $blockquote-footerColor;
+    text-align: right;
+    &::before {
+      content: '— ';
+    }
+  }
 }
 
 // Horizontal line
 hr {
-  overflow: visible;
   text-align: inherit;
   margin: $margin-vertical 0;
   border: 0;
