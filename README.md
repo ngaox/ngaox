@@ -18,7 +18,7 @@
 
 # Description
 
-This repository contains several npm packages that are published under the scope `@ngaox` wich are tools & libraries to speed up and facilitate developing web apps.
+This repository contains several npm packages that are published under the scope `@ngaox` which are tools & libraries to speed up and facilitate developing web apps.
 
 | package                               | description                                                                                              | Docs                     |
 | ------------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------ |
@@ -30,7 +30,8 @@ This repository contains several npm packages that are published under the scope
 # Before you go!
 
 - 🌟 Star the GitHub repository
-- Create pull requests, submit bugs, suggest new features...
+- Don't forget contributions are always welcome!
+- Feel free to create pull requests, submit bugs, suggest new features, etc.
 
 ---
 

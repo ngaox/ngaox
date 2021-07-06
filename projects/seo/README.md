@@ -1,47 +1,45 @@
-# Ngaox Seo
+# Ngaox-Seo <!-- omit in toc -->
 
-`@ngaox/seo` is an angular library to help generate & managing meta & other necessary tags that allow Social Media sharing & improve page seo ranking
+`@ngaox/seo` is an angular library to help generate & managing meta & other necessary tags that allow Social Media sharing & improve page SEO ranking
 
-**Important:** Generally you should use this library only if you are rendering you pages before page laod which can be done on the angular world using [Universal](https://angular.io/guide/universal) or [Scully](https://scully.io/) or any other way you prefer.
+Ngaox-Seo mainly provides:
+
+- A [service](#only-want-a-service) which is responsible for generating page title & meta tags
+- `NgaoxModule` to help setting [global defaults](#set-global-defaults) & to define the entry [loader](#loaders)
+- An [Angular schematics](#getting-started) to make setting a SeoModule as easy as possible!
 
 ---
 
-# Table of Contents
+# Table of Contents <!-- omit in toc -->
 
-- [Ngaox Seo](#ngaox-seo)
-- [Table of Contents](#table-of-contents)
 - [Installation](#installation)
-- [Usage](#usage)
-  - [Getting started](#getting-started)
-  - [Only want a service?](#only-want-a-service)
-  - [Set global defaults](#set-global-defaults)
-  - [Loaders](#loaders)
-    - [How to handle Dynamic routes SEO](#how-to-handle-dynamic-routes-seo)
-  - [Other helpful methods](#other-helpful-methods)
+- [Getting started](#getting-started)
+- [Only want a service?](#only-want-a-service)
+- [Set global defaults](#set-global-defaults)
+- [Loaders](#loaders)
+  - [How to handle Dynamic routes SEO](#how-to-handle-dynamic-routes-seo)
 
 ---
 
 # Installation
 
-To install this library with `npm` run:
+To install this library run:
 
 ```bash
-npm install @ngaox/seo --save
+ng add @ngaox/seo
 ```
 
-or using `yarn`
+or using `npm`
 
 ```bash
-yarn add @ngaox/seo
+npm install @ngaox/seo
 ```
 
 ---
 
-# Usage
+# Getting started
 
-## Getting started
-
-To setup the Ngaox Seo in your application run the following CLI command:
+To set up a module to manage all pages SEO in your application, run the following CLI command:
 
 ```bash
 ng generate @ngaox/seo:setup
@@ -51,7 +49,7 @@ make sure to firstly check `ng generate @ngaox/seo:setup --help` to see all poss
 
 **And you good to go 🎉** you should see the title changed for all routes
 
-The previous command did update your module to import the generated SeoModule? if not you can add it yoursel.
+The previous command did update your module to import the generated SeoModule? If not, You can add it yourself.
 
 ```ts
 // app.module.ts
@@ -69,11 +67,11 @@ import { AppSeoModule } from 'app-seo/app-seo.module.ts'; // the generated SeoMo
 
 Dont foget to Edit `AppSeoDefaults` in the generated file `app-seo/app-seo.defaults.ts` & define default SeoData (page infos)
 
-& also update the pre given [loader](#loaders) `AppSeoLoader` from `app-seo/app-seo.loader.ts` to laod `SeoData` for the current route (will overwrite your defaults for that route)
+& also update the pre given [loader](#loaders) `AppSeoLoader` from `app-seo/app-seo.loader.ts` to laod `SeoData` for the each route (overwrite your defaults)
 
 **PS: Where & how these files named may deffer for you depend on the used command options**
 
-## Only want a service?
+# Only want a service?
 
 The `SeoService` is the service used to set page meta tags & title & canonical links.
 
@@ -96,7 +94,7 @@ import { SeoService } from '@ngaox/seo';
 //...
 ```
 
-the SeoData given to `.set` method should be of type `PageSeoData` wich is:
+the SeoData given to `.set` method should be of type `PageSeoData` which is:
 
 ```ts
 export interface PageSeoData {
@@ -119,11 +117,13 @@ export interface PageSeoData {
 }
 ```
 
-## Set global defaults
+It also comes with a method `generateTags` to create/update meta tags for a given `MetaDefinition` array to generate non-supported meta tags.
+
+# Set global defaults
 
 You might want to set some default values for your app like `siteName` or `twitterCreator` ...
 
-thats can be done by importing `SeoModule` and calling `forRoot` method with your defaults values ass its first argument wich are also of type `PageSeoData`
+thats can be done by importing `SeoModule` and calling `forRoot` method with your defaults values ass its first argument which are also of type `PageSeoData`
 
 ```ts
 // app.module.ts
@@ -148,9 +148,9 @@ import { SeoModule } from '@ngaox/seo';
 // ...
 ```
 
-## Loaders
+# Loaders
 
-Ngaox Seo comes with support of **loader** concept wich is a function that `SeoModule` call whenever navigating to route on the app & it pass it a `NavigationEnd` event & an `Injector` and expect `PageSeoData` object to be returned that represent the SeoData for the current page.
+Ngaox Seo comes with support of **loader** concept which is a function that `SeoModule` call whenever navigating to route on the app & it pass it a `NavigationEnd` event & an `Injector` and expect `PageSeoData` object to be returned that represent the SeoData for the current page.
 
 ```ts
 import { Injector } from '@angular/core';
@@ -181,19 +181,11 @@ let myLoader:Loader = (event: NavigationEnd, injector:Injectot) :PageSeoData => 
 
 If you used the `ng generate @ngaox/seo:setup` it will generate a loader for you & make it use with a preset of routes definitions.
 
-### How to handle Dynamic routes SEO
+## How to handle Dynamic routes SEO
 
-as montined above the `loader` get an [injactor](https://angular.io/api/core/Injector-0) that can inject any injectabale service like the [ActivatedRoute](https://angular.io/api/router/ActivatedRoute) wich give access to your route params & your resoved data ...
+As montined above the `loader` get an [injactor](https://angular.io/api/core/Injector-0) that can inject any injectabale service like the [ActivatedRoute](https://angular.io/api/router/ActivatedRoute) which give access to your route params & your resoved data...
 
-## Other helpful methods
-
-`SeoService` comes with varied setter methods, used in the `set` method to set individual `PageSeoData` property meta tags.
-For exemple `setTitle(title: string)` will set title related meta tags wich are:
-
-- title tag: `<title></title>`
-- Meta tags: `meta[property='og:title']` - `meta[name='twitter:title']` & `meta[name='title']`
-
-& also comes with a method `generateTags` to create/update meta tags for a given `MetaDefinition` array to generate non supported meta tags
+you can check [blog-up](https://github.com/rabraghib/blog-up/blob/main/src/app/app-seo/app-seo.loader.ts#L67) as an exemple.
 
 ---
 
