@@ -8,6 +8,10 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 const routes: Routes = [
   {
+    path: 'seo',
+    component: DocsComponent
+  },
+  {
     path: ':slug',
     component: DocsComponent
   },

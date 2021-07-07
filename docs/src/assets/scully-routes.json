@@ -1,5 +1,4 @@
 [
-  { "route": "/" },
   {
     "route": "/docs/introduction",
     "title": "Introduction",
@@ -10,7 +9,7 @@
   {
     "route": "/docs/padup/base",
     "title": "Base",
-    "description": "Ngaox-Pdaup Default style for all HTML elements",
+    "description": "Ngaox-Pdaup Default styling for all HTML elements",
     "published": true,
     "sourceFile": "base.md"
   }
