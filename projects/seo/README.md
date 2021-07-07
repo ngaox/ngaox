@@ -57,12 +57,12 @@ The previous command did update your module to import the generated SeoModule? I
 import { AppSeoModule } from 'app-seo/app-seo.module.ts'; // the generated SeoModule
 /* ... */
 @NgModule({
-    imports: [
-        AppSeoModule
-        /* ... */
-    ],
+  imports: [
+    AppSeoModule
     /* ... */
+  ]
 })
+export class AppModule {}
 ```
 
 Dont foget to Edit `AppSeoDefaults` in the generated file `app-seo/app-seo.defaults.ts` & define default SeoData (page infos)
@@ -70,6 +70,8 @@ Dont foget to Edit `AppSeoDefaults` in the generated file `app-seo/app-seo.defau
 & also update the pre given [loader](#loaders) `AppSeoLoader` from `app-seo/app-seo.loader.ts` to laod `SeoData` for the each route (overwrite your defaults)
 
 **PS: Where & how these files named may deffer for you depend on the used command options**
+
+---
 
 # Only want a service?
 
@@ -81,17 +83,19 @@ and you can set page `SeoData` by calling `set` method of it & passing it your D
 
 ```ts
 // exemple.component.ts
-import { SeoService } from '@ngaox/seo';
-// ...
-    let seoData: PageSeoData = {
-        // your data ...
-        // check PageSeoData interface below
-    }
-    constructor(seo: SeoService) {
-        seo.set(seoData)
-        // ...
-    }
-//...
+import { SeoService, PageSeoData } from '@ngaox/seo';
+/*... */
+export class ExempleComponent {
+  seoData: PageSeoData = {
+    title: 'What if you were an alien?'
+    // check PageSeoData interface below
+  };
+  constructor(seo: SeoService) {
+    seo.set(seoData);
+    // ...
+  }
+  /*... */
+}
 ```
 
 the SeoData given to `.set` method should be of type `PageSeoData` which is:
@@ -109,7 +113,7 @@ export interface PageSeoData {
     width?: number;
     height?: number;
     mimeType?: string;
-  }; // imageData interface
+  };
   twitterCreator?: string;
   twitterCard?: 'summary_large_image' | 'summary';
   fbAppId?: string;
@@ -119,6 +123,8 @@ export interface PageSeoData {
 
 It also comes with a method `generateTags` to create/update meta tags for a given `MetaDefinition` array to generate non-supported meta tags.
 
+---
+
 # Set global defaults
 
 You might want to set some default values for your app like `siteName` or `twitterCreator` ...
@@ -127,26 +133,26 @@ thats can be done by importing `SeoModule` and calling `forRoot` method with you
 
 ```ts
 // app.module.ts
-// ...
 import { SeoModule } from '@ngaox/seo';
 // ...
 @NgModule({
+  /* ... */
+  imports: [
     /* ... */
-    imports: [
-        /* ... */
-        SeoModule.forRoot({
-            title: "React is garbage 😈",
-            keywords: "1, 2, 3",
-            type: "website",
-            twitterCreator: "@twitter",
-            siteName: "Cool app 😎"
-            // ...
-        })
-    ],
-    /* ... */
+    SeoModule.forRoot({
+      title: 'React is garbage 😈',
+      keywords: '1, 2, 3',
+      type: 'website',
+      twitterCreator: '@twitter',
+      siteName: 'Cool app 😎'
+      // ...
+    })
+  ]
 })
-// ...
+export class AppModule {}
 ```
+
+---
 
 # Loaders
 
@@ -162,21 +168,24 @@ export type Loader = (event: NavigationEnd, Injector: Injector) => PageSeoData;
 
 To use just create it and pass it as a second argument for `SeoModule.forRoot` function
 
+<!-- prettier-ignore -->
 ```ts
 // app.module.ts
 import { Injector } from '@angular/core';
 import { NavigationEnd } from '@angular/router';
 import { PageSeoData, Loader } from '@ngaox/seo';
 
-let myLoader:Loader = (event: NavigationEnd, injector:Injectot) :PageSeoData => {/* ... */}
+const myLoader: Loader = (event: NavigationEnd, injector: Injectot): PageSeoData => {
+  /* ... */
+};
 
 @NgModule({
-    imports: [
-        SeoModule.forRoot({ /* ... */},myLoader)
-        /* ... */
-    ],
-    /* ... */
+  /* ... */
+  imports: [
+    SeoModule.forRoot({/* ... */}, myLoader)
+  ]
 })
+export class AppModule {}
 ```
 
 If you used the `ng generate @ngaox/seo:setup` it will generate a loader for you & make it use with a preset of routes definitions.
