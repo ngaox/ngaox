@@ -16,7 +16,7 @@ $link-color: map.get(variables.$colors, primary, 200);
 $link-hover-color: map.get(variables.$colors, primary, 300);
 $margin-vertical: map.get(variables.$spacing, meduim);
 $heading-color: map.get(variables.$colors, gray, 100);
-$fontBold: map.get(variables.$fonts, weight, blod);
+$fontBold: map.get(variables.$fonts, weight, bold);
 $h1-fontSize: map.get(variables.$fonts, sizes, 700);
 $h1-color: map.get(variables.$colors, primary, 100);
 $h2-fontSize: map.get(variables.$fonts, sizes, 600);
@@ -128,5 +128,5 @@ hr {
   text-align: inherit;
   margin: $margin-vertical * 1.5 0;
   border: 0;
-  border-top: 3px solid $hr-color;
+  border-top: 3px solid mix($hr-color, #00000000, 60%);
 }
