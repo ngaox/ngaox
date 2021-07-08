@@ -1,4 +1,5 @@
 import { registerPlugin, scullyConfig, ScullyConfig } from '@scullyio/scully';
+import { docLink } from '@scullyio/scully-plugin-docs-link-update';
 import { join } from 'path';
 
 registerPlugin('router', 'static', (route?: string, config?: any): any => {
@@ -6,7 +7,7 @@ registerPlugin('router', 'static', (route?: string, config?: any): any => {
     {
       route,
       templateFile: join(`${scullyConfig.homeFolder}`, config.file),
-      postRenderers: ['contentFolder']
+      postRenderers: ['contentFolder', docLink]
     }
   ];
 });
@@ -20,7 +21,8 @@ export const config: ScullyConfig = {
       type: 'contentFolder',
       slug: {
         folder: './docs/content'
-      }
+      },
+      postRenderers: [docLink]
     },
     '/docs/seo': {
       type: 'static',
