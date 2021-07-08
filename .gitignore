@@ -45,6 +45,7 @@ testem.log
 Thumbs.db
 
 # scully logs
+docs/src/assets/scully-routes.json
 scully.log
 scully.docs.config.js
 scully/**/*.js

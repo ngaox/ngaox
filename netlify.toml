@@ -1,0 +1,11 @@
+[build]
+  command = "yarn build:docs"
+  publish = "dist/static"
+
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.original.html"
+#   status = 200
+
+[functions]
+  directory = "functions"

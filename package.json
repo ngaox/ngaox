@@ -8,6 +8,7 @@
     "watch": "ng build --watch --c development",
     "lint": "ng lint",
     "test": "ng test --watch false",
+    "build:docs": "ng build docs && yarn scully",
     "start:padup": "./scripts/shell/padup start",
     "build:padup": "./scripts/shell/padup build",
     "start:seo": "ng build seo --watch --c development",
