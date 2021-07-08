@@ -18,12 +18,13 @@ $margin-vertical: map.get(variables.$spacing, meduim);
 $heading-color: map.get(variables.$colors, gray, 100);
 $fontBold: map.get(variables.$fonts, weight, blod);
 $h1-fontSize: map.get(variables.$fonts, sizes, 700);
-$h1-color: map.get(variables.$colors, accent, 200);
+$h1-color: map.get(variables.$colors, primary, 100);
 $h2-fontSize: map.get(variables.$fonts, sizes, 600);
 $h3-fontSize: map.get(variables.$fonts, sizes, 500);
 $h4-fontSize: map.get(variables.$fonts, sizes, 400);
 $h5-fontSize: map.get(variables.$fonts, sizes, 300);
 $h6-fontSize: map.get(variables.$fonts, sizes, 200);
+$em-color: map.get(variables.$colors, accent, 400);
 $blockquote-fontSize: map.get(variables.$fonts, sizes, 300);
 $blockquote-padding: map.get(variables.$spacing, small);
 $blockquote-footerColor: map.get(variables.$colors, gray, 300);
@@ -96,6 +97,7 @@ h6,
  ========================================================================== */
 em {
   font-style: italic;
+  color: $em-color;
 }
 q {
   font-style: italic;
@@ -124,7 +126,7 @@ blockquote {
 // Horizontal line
 hr {
   text-align: inherit;
-  margin: $margin-vertical 0;
+  margin: $margin-vertical * 1.5 0;
   border: 0;
   border-top: 3px solid $hr-color;
 }
