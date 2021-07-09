@@ -1,0 +1,59 @@
+/* ========================================================================
+nav:
+  nav .nav
+  .nav-accordion (> .nav-parent)
+========================================================================== */
+
+$nav-padding: 1.5rem;
+$nav-item-color: #666;
+$nav-item-color-hover: #000;
+$nav-item-color-active: #d93d0e;
+
+nav,
+.nav {
+  /* Resets */
+  &:is(ul),
+  & ul {
+    margin: 0;
+    list-style: none;
+    padding: 0 0 0 $nav-padding;
+    &:not(& &) {
+      padding: 0;
+    }
+  }
+  li > a {
+    display: block;
+    text-decoration: none;
+  }
+  /* Nav Item styling */
+  > li,
+  ul > li {
+    > a {
+      color: $nav-item-color;
+      margin: 5px 0;
+      &:hover {
+        color: $nav-item-color-hover;
+      }
+    }
+    &.active > a,
+    > a.active {
+      color: $nav-item-color-active;
+    }
+  }
+
+  /* Modifiers */
+  // &-accordion {
+  //   > .nav-parent::after {
+  //     content: '<';
+  //     width: 1.5em;
+  //     height: 1.5em;
+  //     margin-left: auto;
+  //     background-repeat: no-repeat;
+  //     background-position: 50% 50%;
+  //     @include svg-fill($internal-nav-parent-close-image, #000, #333);
+  //   }
+  //   &:not(.active) > ul {
+  //     display: none;
+  //   }
+  // }
+}

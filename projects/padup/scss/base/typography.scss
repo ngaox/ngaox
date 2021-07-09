@@ -105,6 +105,7 @@ q {
 
 /* Blockquote */
 blockquote {
+  border-left: $blockquote-padding solid mix($em-color, #00000000, 60%);
   font-size: $blockquote-fontSize;
   font-style: italic;
   padding: $blockquote-padding;

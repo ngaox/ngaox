@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 /* Colors =============================================== */
 $colors: (
   bgColor: #ecf0f1,
@@ -27,7 +29,7 @@ $colors: (
 $fonts: (
   lineHeight: 1.5,
   rootSize: 16px,
-  family: sans-serif,
+  family: 'Roboto' unquote(',') sans-serif,
   sizes: (
     100: 0.75rem,
     200: 1rem,

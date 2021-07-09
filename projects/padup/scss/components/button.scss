@@ -56,6 +56,7 @@ $button-link-hover-color: map.get(variables.$colors, primary, 300);
 button,
 .button {
   @include buttonCssVars($button-background, $button-color);
+  margin: 0;
   border: none;
   line-height: 1.4;
   text-decoration: none;
@@ -66,6 +67,9 @@ button,
   font-size: 1rem;
   background-color: var(--button-bgColor);
   color: var(--button-color);
+  &:not(.button-group &) {
+    border-radius: $button-padding;
+  }
   &:not(:disabled) {
     cursor: pointer;
   }
@@ -113,6 +117,7 @@ button,
 // text
 .button-text,
 .button-link {
+  cursor: pointer;
   padding: 0;
   vertical-align: middle;
   &,
