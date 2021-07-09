@@ -12,8 +12,8 @@ $nav-item-color-active: #d93d0e;
 nav,
 .nav {
   /* Resets */
-  &:is(ul),
-  & ul {
+  ul,
+  &.ul {
     margin: 0;
     list-style: none;
     padding: 0 0 0 $nav-padding;
@@ -23,22 +23,19 @@ nav,
   }
   li > a {
     display: block;
-    text-decoration: none;
+    color: $nav-item-color;
+    margin: 5px 0;
+    &,
+    &:hover {
+      text-decoration: none;
+    }
+    &:hover {
+      color: $nav-item-color-hover;
+    }
   }
-  /* Nav Item styling */
-  > li,
-  ul > li {
-    > a {
-      color: $nav-item-color;
-      margin: 5px 0;
-      &:hover {
-        color: $nav-item-color-hover;
-      }
-    }
-    &.active > a,
-    > a.active {
-      color: $nav-item-color-active;
-    }
+  li.active > a,
+  a.active {
+    color: $nav-item-color-active;
   }
 
   /* Modifiers */

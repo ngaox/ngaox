@@ -16,7 +16,7 @@ const routes: Routes = [
     component: DocsComponent
   },
   {
-    path: '**',
+    path: 'padup/:slug',
     component: DocsComponent
   }
 ];

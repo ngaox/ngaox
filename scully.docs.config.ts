@@ -24,6 +24,13 @@ export const config: ScullyConfig = {
       },
       postRenderers: [docLink]
     },
+    '/docs/padup/:slug': {
+      type: 'contentFolder',
+      slug: {
+        folder: './docs/content/padup'
+      },
+      postRenderers: [docLink]
+    },
     '/docs/seo': {
       type: 'static',
       file: './projects/seo/README.md'
