@@ -1,0 +1,53 @@
+/* ========================================================================
+container:
+  .container
+  .container-${ xsmall | small | large | xlarge | expand}
+========================================================================== */
+
+// Variables
+$container-padding: 1.25rem;
+$container-max-width: 1200px;
+$container-xsmall-max-width: 750px;
+$container-small-max-width: 900px;
+$container-large-max-width: 1400px;
+$container-xlarge-max-width: 1600px;
+
+.container {
+  display: flow-root;
+  padding: $container-padding;
+  max-width: $container-max-width;
+  margin-left: auto;
+  margin-right: auto;
+  > :last-child {
+    margin-bottom: 0;
+  }
+  & & {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  // modifiers
+  &-xsmall,
+  &-small,
+  &-large,
+  &-xlarge,
+  &-expand {
+    @extend .container;
+  }
+
+  &-xsmall {
+    max-width: $container-xsmall-max-width;
+  }
+  &-small {
+    max-width: $container-small-max-width;
+  }
+  &-large {
+    max-width: $container-large-max-width;
+  }
+  &-xlarge {
+    max-width: $container-xlarge-max-width;
+  }
+  &-expand {
+    max-width: none;
+  }
+}

@@ -1,0 +1,155 @@
+/* ========================================================================
+button:
+  .button-group
+  .button (button)
+  .button-primary
+  .button-secondary
+  .button-danger
+  .button-small .button-large
+  .button-text .button-link
+========================================================================== */
+@use '../variables';
+@use 'sass:map';
+
+// Variables
+$button-padding: 10px;
+// Default
+$button-background: map.get(variables.$colors, primary, 200);
+$button-color: map.get(variables.$colors, white);
+// disabled
+$button-disabled-background: map.get(variables.$colors, gray, 500);
+$button-disabled-color: map.get(variables.$colors, gray, 300);
+// primary
+$button-primary-background: map.get(variables.$colors, accent, 200);
+$button-primary-color: map.get(variables.$colors, white);
+// secondary
+$button-secondary-background: map.get(variables.$colors, primary, 100);
+$button-secondary-color: map.get(variables.$colors, white);
+// danger
+$button-danger-background: map.get(variables.$colors, accent, 400);
+$button-danger-color: map.get(variables.$colors, white);
+// other button size
+$button-small-fontSize: 0.85rem;
+$button-small-padding: 6px;
+$button-large-fontSize: 1.25rem;
+// text button style
+$button-text-color: map.get(variables.$colors, gray, 200);
+$button-text-hover-color: map.get(variables.$colors, accent, 200);
+$button-text-disabled-color: map.get(variables.$colors, gray, 300);
+// link button style
+$button-link-color: map.get(variables.$colors, primary, 200);
+$button-link-hover-color: map.get(variables.$colors, primary, 300);
+
+@mixin buttonCssVars($bgColor, $color) {
+  --button-bgColor: #{$bgColor};
+  --button-color: #{$color};
+  --button-bgColorHover: #{lighten($bgColor, 4%)};
+  --button-bgColorActive: #{darken($bgColor, 10%)};
+}
+
+.button-group {
+  display: inline-flex;
+  vertical-align: middle;
+  position: relative;
+}
+// primary styling - default
+button,
+.button {
+  @include buttonCssVars($button-background, $button-color);
+  margin: 0;
+  border: none;
+  line-height: 1.4;
+  text-decoration: none;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  padding: $button-padding ($button-padding * 2.5);
+  font-size: 1rem;
+  background-color: var(--button-bgColor);
+  color: var(--button-color);
+  &:not(.button-group &) {
+    border-radius: $button-padding;
+  }
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+  &:focus,
+  &:hover {
+    background-color: var(--button-bgColorHover);
+    text-decoration: none;
+    outline: none;
+  }
+  &:active,
+  &.active {
+    background-color: var(--button-bgColorActive);
+  }
+  &:disabled {
+    background-color: $button-disabled-background;
+    color: $button-disabled-color;
+    border: 1px solid lighten($button-background, 25%);
+  }
+}
+
+.button {
+  &-primary {
+    @include buttonCssVars($button-primary-background, $button-primary-color);
+  }
+  &-secondary {
+    @include buttonCssVars(
+      $button-secondary-background,
+      $button-secondary-color
+    );
+  }
+  &-danger {
+    @include buttonCssVars($button-danger-background, $button-danger-color);
+  }
+}
+
+// button sizes small - large
+.button-small {
+  padding: $button-small-padding ($button-small-padding * 2.5);
+  font-size: $button-small-fontSize;
+}
+.button-large {
+  font-size: $button-large-fontSize;
+}
+
+// text
+.button-text,
+.button-link {
+  cursor: pointer;
+  padding: 0;
+  vertical-align: middle;
+  &,
+  &:focus,
+  &:hover,
+  &:active,
+  &.active,
+  &:disabled {
+    border: none;
+    background: none;
+  }
+}
+.button-text {
+  color: $button-text-color;
+  &:hover,
+  &:focus {
+    color: $button-text-hover-color;
+  }
+  &:disabled {
+    color: $button-text-disabled-color;
+    text-decoration: underline;
+  }
+}
+.button-link {
+  color: $button-link-color;
+  &:hover,
+  &:focus {
+    color: $button-link-hover-color;
+    text-decoration: underline;
+  }
+  &:disabled {
+    color: $button-text-disabled-color;
+    text-decoration: underline;
+  }
+}

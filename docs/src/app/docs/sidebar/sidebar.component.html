@@ -1,7 +1,19 @@
-<ul>
-  <li *ngFor="let page of links$ | async">
-    <a [routerLink]="[page.route]">
-      {{ page.route }}
+<ul class="nav" style="padding: 20px 30px">
+  <li *ngFor="let section of links$ | async" routerLinkActive="active-section">
+    <a
+      [routerLink]="[section.route]"
+      style="font-size: 1.25rem"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      {{ section.title }}
     </a>
+    <ul class="nav" *ngIf="section.content.length > 0">
+      <li *ngFor="let page of section.content" routerLinkActive="active">
+        <a [routerLink]="[page.route]">
+          {{ page.title }}
+        </a>
+      </li>
+    </ul>
   </li>
 </ul>

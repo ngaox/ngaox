@@ -1,0 +1,20 @@
+@use '../variables';
+@use 'sass:map';
+
+$table-head-bgColor: map.get(variables.$colors, gray, 500);
+$table-cell-padding: map.get(variables.$spacing, small);
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  td,
+  th {
+    padding: ($table-cell-padding * 1.5) ($table-cell-padding * 2);
+    border: 1px solid darken($table-head-bgColor, 4%);
+  }
+  thead {
+    background: $table-head-bgColor;
+  }
+  // tbody {}
+}

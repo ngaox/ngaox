@@ -1,51 +1,90 @@
 <div class="container">
-  <div>
-    <h1>Heeading 1</h1>
-    <h2>Heeading 2</h2>
-    <h3>Heeading 3</h3>
-    <h4>Heeading 4</h4>
-    <h5>Heeading 5</h5>
-    <h6>Heeading 6</h6>
-    <hr />
-    <p>
-      <abbr title="Abbr title">abbr element with a title</abbr>
-      Lorem <sub>Sub text</sub> dolor sit, amet <a>consectetur</a> adipisicing
-      elit. <b>b/strong text</b> Adipisci possimus et <sup>Sup text</sup> omnis
-      deserunt? <a>Voluptatum laborum</a> rerum placeat illo
-      <em>em content</em> quia modi <small>this is small</small> expedita.
-      <q>Lorem ipsum dolor sit amet.</q>
-    </p>
-    <blockquote cite="#">
-      <p>
-        For 50 years, WWF has been protecting the future of nature. The world's
-        leading conservation organization, WWF works in 100 countries and is
-        supported by 1.2 million members in the United States and close to 5
-        million globally.
-      </p>
-      <footer>
-        WHO in <cite><a href="#">Source</a></cite>
-      </footer>
-    </blockquote>
-    <hr />
-    <ul>
-      <li class="item1"><a href="">UL Item 1</a></li>
-      <li class="item2"><a href="">UL Item 2</a></li>
-      <li class="item3"><a href="">UL Item 3</a></li>
+  <!-- nav / navbar -->
+  <nav><a href="#">fd</a> | <a href="#">dsf</a> |</nav>
+  <nav>
+    <ul class="nav-center">
+      <li routerLinkActive="active"><a routerLink="/padup/item1">Active</a></li>
+      <li routerLinkActive="active"><a routerLink="/padup/item2">Item</a></li>
+      <li class="nav nav-accordion" routerLinkActive="active">
+        <a class="nav-parent" routerLink="/padup/list-parent">Parent Item</a>
+        <ul>
+          <li>
+            <a routerLinkActive="active" routerLink="/padup/item3"
+              >Child Item</a
+            >
+          </li>
+          <li>
+            <a routerLinkActive="active" routerLink="/padup/item4"
+              >Parent/Child Item</a
+            >
+          </li>
+          <ul class="nav">
+            <li>
+              <a routerLinkActive="active" routerLink="/padup/item5"
+                >Child Item</a
+              >
+            </li>
+            <li>
+              <a routerLinkActive="active" routerLink="/padup/item6"
+                >Child Item</a
+              >
+            </li>
+          </ul>
+        </ul>
+      </li>
     </ul>
-    <ol>
-      <li class="item1"><a href="">OL Item 1</a></li>
-      <li class="item2"><a href="">OL Item 2</a></li>
-      <li class="item3"><a href="">OL Item 3</a></li>
-    </ol>
-    <hr />
-    <code>code</code> - <kbd>SHIFT + A</kbd> - <var>$x</var>
-    <pre>
-This is a pre with a fixed width. It will use as much space as specified.</pre
-    >
-    <pre>
-<code>// Code example
-&lt;div id="myid" class="myclass" hidden&gt;
-    Lorem ipsum &lt;strong&gt;dolor&lt;/strong&gt; sit amet, consectetur adipiscing elit.
-&lt;/div&gt;</code></pre>
+  </nav>
+  <br />
+  <!-- Overlay  -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px">
+    <div class="overlay">
+      <div class="title">Overlay Title</div>
+      <div style="padding: 20px">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, cumque
+        incidunt in iure molestias odit sequi saepe, fugiat natus optio ab?
+        Totam aut debitis eius. Iste inventore unde sed quae.
+      </div>
+      <div class="action">Action name</div>
+    </div>
+    <div class="overlay">
+      <div style="padding: 20px">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, cumque
+        incidunt in iure molestias odit sequi saepe, fugiat natus optio ab?
+        Totam aut debitis eius. Iste inventore unde sed quae.
+      </div>
+      <div class="action">Action name</div>
+    </div>
+    <div class="overlay">
+      <div class="title">Overlay Title</div>
+      <div style="padding: 20px">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, cumque
+        incidunt in iure molestias odit sequi saepe, fugiat natus optio ab?
+        Totam aut debitis eius. Iste inventore unde sed quae.
+      </div>
+    </div>
+  </div>
+  <br />
+  <!-- Buttons  -->
+  <div>
+    <button>Click!</button>
+    <br />
+    <br />
+    <div class="button-group">
+      <button class="button" disabled>Click Disabled!</button>
+      <button>Click!</button>
+      <button class="button-primary">Click!</button>
+      <button class="button-secondary">Click!</button>
+      <button class="button-danger">Click!</button>
+    </div>
+    <br />
+    <br />
+    <button class="button-small">Click!</button>
+    <button>Click!</button>
+    <button class="button-large">Click!</button>
+    <br />
+    <br />
+    <a class="button-text">Click!</a>, <a class="button-link">Click!</a>,
+    <button class="button-link" disabled>Disabled!</button>,
+    <button class="button-text">Click!</button>
   </div>
 </div>

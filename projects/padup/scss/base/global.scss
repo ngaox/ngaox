@@ -19,10 +19,10 @@ $list-paddingLeft: map.get(vars.$spacing, large);
 $margin-vertical: map.get(vars.$spacing, meduim);
 /* code - pre */
 $code-fontSize: 0.85rem;
-$code-color: #f0506e;
+$code-color: map.get(vars.$colors, accent, 400);
 $pre-color: map.get(vars.$colors, gray, 100);
 $code-background: map.get(vars.$colors, gray, 500);
-$pre-padding: map.get(vars.$spacing, small);
+$pre-padding: map.get(vars.$spacing, meduim);
 
 *::-webkit-scrollbar {
   width: var(--scrolBar-width);
@@ -79,6 +79,9 @@ blockquote {
 ul,
 ol {
   padding-left: $list-paddingLeft;
+  & li > a + &:first-of-type {
+    margin-top: 0;
+  }
 }
 
 audio,
