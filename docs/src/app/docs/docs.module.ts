@@ -8,16 +8,22 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 const routes: Routes = [
   {
-    path: 'seo',
-    component: DocsComponent
-  },
-  {
-    path: ':slug',
-    component: DocsComponent
-  },
-  {
-    path: 'padup/:slug',
-    component: DocsComponent
+    path: '',
+    component: DocsComponent,
+    children: [
+      {
+        path: 'seo',
+        children: []
+      },
+      {
+        path: ':slug',
+        children: []
+      },
+      {
+        path: 'padup/:slug',
+        children: []
+      }
+    ]
   }
 ];
 

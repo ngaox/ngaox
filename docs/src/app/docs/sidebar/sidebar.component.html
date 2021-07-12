@@ -1,4 +1,4 @@
-<ul class="nav" style="padding: 20px 30px">
+<ul class="nav" style="padding: 20px 0 20px 30px">
   <li
     *ngFor="let section of links$ | async"
     [class.nav-accordion]="section.content.length > 0"
@@ -6,7 +6,6 @@
   >
     <a
       [routerLink]="[section.route]"
-      style="font-size: 1.25rem"
       routerLinkActive="active"
       class="nav-parent"
       [routerLinkActiveOptions]="{ exact: true }"
