@@ -10,5 +10,8 @@ import { ApiService } from '@ngaox/chaospad';
 export class AppComponent {
   constructor(seoService: SeoService, api: ApiService) {
     seoService.setTitle('dfdf');
+    api.getCollection('/api/users').subscribe(data => {
+      console.log(data);
+    });
   }
 }

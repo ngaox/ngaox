@@ -6,17 +6,11 @@ import { ApiService } from './services/api.service';
   declarations: [],
   imports: [HttpClientModule],
   exports: [],
-  providers: [
-    ApiService,
-    {
-      provide: 'API_BASE',
-      useValue: 'https://chaospad-dev.herokuapp.com'
-    }
-  ]
+  providers: [ApiService]
 })
 export class ChaospadModule {
   public static forRoot(
-    API_BASE: string = 'https://chaospad-dev.herokuapp.com'
+    API_BASE: string | null = null
   ): ModuleWithProviders<ChaospadModule> {
     return {
       ngModule: ChaospadModule,

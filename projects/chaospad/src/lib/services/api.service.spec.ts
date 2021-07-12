@@ -8,13 +8,7 @@ describe('ApiService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        {
-          provide: 'API_BASE',
-          useValue: 'https://chaospad-dev.herokuapp.com'
-        },
-        ApiService
-      ],
+      providers: [ApiService],
       imports: [HttpClientModule]
     });
     service = TestBed.inject(ApiService);
