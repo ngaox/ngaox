@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { PadupComponent } from './padup.component';
 
-const routes: Routes = [{ path: '', component: PadupComponent }];
+const routes: Routes = [{ path: '**', component: PadupComponent }];
 
 @NgModule({
   declarations: [PadupComponent],

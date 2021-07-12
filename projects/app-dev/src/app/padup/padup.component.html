@@ -3,16 +3,32 @@
   <nav><a href="#">fd</a> | <a href="#">dsf</a> |</nav>
   <nav>
     <ul class="nav-center">
-      <li class="active"><a href="#">Active</a></li>
-      <li><a href="#">Item</a></li>
-      <li class="nav nav-accordion">
-        <a class="nav-parent">Parent Item</a>
+      <li routerLinkActive="active"><a routerLink="/padup/item1">Active</a></li>
+      <li routerLinkActive="active"><a routerLink="/padup/item2">Item</a></li>
+      <li class="nav nav-accordion" routerLinkActive="active">
+        <a class="nav-parent" routerLink="/padup/list-parent">Parent Item</a>
         <ul>
-          <li><a href="#">Child Item</a></li>
-          <li><a href="#">Parent/Child Item</a></li>
+          <li>
+            <a routerLinkActive="active" routerLink="/padup/item3"
+              >Child Item</a
+            >
+          </li>
+          <li>
+            <a routerLinkActive="active" routerLink="/padup/item4"
+              >Parent/Child Item</a
+            >
+          </li>
           <ul class="nav">
-            <li><a href="#">Child Item</a></li>
-            <li><a href="#">Child Item</a></li>
+            <li>
+              <a routerLinkActive="active" routerLink="/padup/item5"
+                >Child Item</a
+              >
+            </li>
+            <li>
+              <a routerLinkActive="active" routerLink="/padup/item6"
+                >Child Item</a
+              >
+            </li>
           </ul>
         </ul>
       </li>
