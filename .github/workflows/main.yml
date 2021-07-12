@@ -16,23 +16,9 @@ jobs:
           token: ${{ secrets.RELEASE_BOT_TOKEN }}
           command: manifest
 
-  install-dependicies:
-    needs: changelogs
-    runs-on: ubuntu-latest
-    if: ${{ needs.changelogs.outputs.release_created }}
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install dependicies
-        run: yarn install --frozen-lockfile
-      - name: 💾 Store node_modules folder
-        uses: actions/upload-artifact@v2
-        with:
-          name: node_modules
-          path: node_modules
-
   release-publish:
-    needs: install-dependicies
-    if: ${{ success() }}
+    needs: changelogs
+    if: ${{ needs.changelogs.outputs.release_created }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -48,11 +34,8 @@ jobs:
             buildScript: yarn build:padup
     steps:
       - uses: actions/checkout@v2
-      - name: 💾 Download stored node_modules folder
-        uses: actions/download-artifact@v2
-        with:
-          name: node_modules
-          path: node_modules
+      - name: Install dependicies
+        run: yarn install --frozen-lockfile
       - name: Build ${{ matrix.name }}
         run: ${{ matrix.buildScript }}
       - name: 🎉 Publishing @ngaox/${{ matrix.name }} to npm

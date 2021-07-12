@@ -2,6 +2,7 @@
   "bootstrap-sha": "d9fa5e0797c1bf26128d5028623a0a0313a14e40",
   "release-type": "node",
   "packages": {
+    ".": {},
     "projects/seo": {},
     "projects/chaospad": {},
     "projects/padup": {}
