@@ -7,8 +7,8 @@ export type ShortName =
   | 'career'
   | 'project';
 
-export type entityEntryPoint = `/api/${ShortName}s`;
-export type IRI = `${entityEntryPoint}/${string}`;
+export type EntityEntryPoint = `/api/${ShortName}s`;
+export type IRI = `${EntityEntryPoint}/${string}`;
 
 export interface collection<T> {
   'hydra:member': T[];

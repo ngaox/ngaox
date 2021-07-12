@@ -15,11 +15,9 @@ export interface User {
   visibility: Topic | IRI; // Topic <type:visibility>
   joinedAt: Date;
 
-  contactInfos?: (ContactInfo | IRI)[];
-  careers?: (Career | IRI)[];
-
-  blogs?: (Blog | IRI)[];
-
+  // * contactInfos?: (ContactInfo | IRI)[];
+  // * careers?: (Career | IRI)[];
+  // * blogs?: (Blog | IRI)[];
   // * files?: (File | IRI)[]; // ?* private
-  // * skills?: (Topic | IRI)[];
+  // ? * skills?: (Topic | IRI)[];
 }

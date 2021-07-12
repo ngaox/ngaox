@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ChaospadModule } from '@ngaox/chaospad';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,7 +9,8 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [
     BrowserModule, //
-    AppRoutingModule
+    AppRoutingModule,
+    ChaospadModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
