@@ -7,7 +7,7 @@ import {
   applyTemplates,
   move,
   chain,
-  mergeWith,
+  mergeWith
 } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
 
@@ -18,7 +18,7 @@ import {
   strings,
   normalize,
   virtualFs,
-  workspaces,
+  workspaces
 } from '@angular-devkit/core';
 
 import { SetupSchema } from './schema';
@@ -40,7 +40,7 @@ function createHost(tree: Tree): workspaces.WorkspaceHost {
     },
     async isFile(path: string): Promise<boolean> {
       return tree.exists(path);
-    },
+    }
   };
 }
 
@@ -80,15 +80,15 @@ export function setup(options: SetupSchema): Rule {
         applyTemplates({
           classify: strings.classify,
           dasherize: strings.dasherize,
-          name: options.name,
+          name: options.name
         }),
-        move(normalize(path as string)),
+        move(normalize(path as string))
       ]
     );
 
     return chain([
       mergeWith(templateSource),
-      addImportToNgModule(options, modulePath, WorkingDirectory),
+      addImportToNgModule(options, modulePath, WorkingDirectory)
     ]);
   };
 }
@@ -112,7 +112,7 @@ function addImportToNgModule(
       throw new SchematicsException(`File ${modulePath} does not exist.`);
     }
     const sourceText = text.toString();
-    const source = ts.createSourceFile(
+    const source: any = ts.createSourceFile(
       modulePath,
       sourceText,
       ts.ScriptTarget.Latest,
