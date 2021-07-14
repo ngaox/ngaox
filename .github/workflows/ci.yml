@@ -1,4 +1,4 @@
-name: Lint, Test & Analyze
+name: Continuous Integration
 
 on:
   push:
