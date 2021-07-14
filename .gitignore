@@ -50,3 +50,6 @@ scully.log
 scully.docs.config.js
 scully/**/*.js
 scully/**/*.map
+
+# Changelog 
+/CHANGELOG.md
