@@ -2,7 +2,7 @@ name: 🚀 Build & Release
 on:
   push:
     branches:
-      - main
+      - v1
 jobs:
   changelogs:
     runs-on: ubuntu-latest
