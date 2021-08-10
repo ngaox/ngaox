@@ -1,12 +1,12 @@
 [build]
   command = "yarn build:docs"
-  publish = "dist/static"
+  publish = "dist/docs"
   ignore = "git diff --quiet HEAD^ HEAD docs/"
 
-# [[redirects]]
-#   from = "/*"
-#   to = "/index.original.html"
-#   status = 200
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 [functions]
   directory = "functions"

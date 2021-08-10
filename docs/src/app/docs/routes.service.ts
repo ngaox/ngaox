@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ScullyRoute } from '@scullyio/ng-lib';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-export interface NavRoute extends ScullyRoute {
-  content: ScullyRoute[];
-}
+// export interface NavRoute extends ScullyRoute {
+//   content: ScullyRoute[];
+// }
+export type NavRoute = any;
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +28,12 @@ export class RoutesService {
     ];
   }
 
-  docsRoutesList(links$: Observable<ScullyRoute[]>): Observable<NavRoute[]> {
+  docsRoutesList(links$: Observable<any[]> = of([])): Observable<NavRoute[]> {
     return links$.pipe(
       map(links => {
         const sections: NavRoute[] = this.docsRouesSections();
         sections.forEach((section, i: number) => {
-          sections[i].content = links.filter((route: ScullyRoute) =>
+          sections[i].content = links.filter((route: any) =>
             route.route.startsWith(`${section.route}/`)
           );
         });

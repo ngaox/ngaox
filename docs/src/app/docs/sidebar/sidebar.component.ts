@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ScullyRoutesService } from '@scullyio/ng-lib';
 import { Observable } from 'rxjs';
 import { NavRoute, RoutesService } from '../routes.service';
 
@@ -11,7 +10,7 @@ import { NavRoute, RoutesService } from '../routes.service';
 export class SidebarComponent {
   links$: Observable<NavRoute[]>;
 
-  constructor(scully: ScullyRoutesService, routesHelper: RoutesService) {
-    this.links$ = routesHelper.docsRoutesList(scully.available$);
+  constructor(routesHelper: RoutesService) {
+    this.links$ = routesHelper.docsRoutesList(); //scully.available$
   }
 }
