@@ -7,7 +7,9 @@ export type ShortName =
   | 'career'
   | 'project';
 
-export type EntityEntryPoint = `/api/${ShortName}s`;
+export type AuthActionEndPoint = '/login' | '/logout' | '/token/refresh';
+
+export type EntityEntryPoint = `/${ShortName}s`;
 export type IRI = `${EntityEntryPoint}/${string}`;
 
 export interface collection<T> {

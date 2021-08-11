@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
 import { Observable } from 'rxjs';
-import { collection, EntityEntryPoint, IRI } from '../models/_core';
+import {
+  AuthActionEndPoint,
+  collection,
+  EntityEntryPoint,
+  IRI
+} from '../models/_core';
 
 export const DEFAULT_API_BASE = 'https://chaospad-dev.herokuapp.com';
 
@@ -28,7 +33,10 @@ export class ApiService {
     return this.API_BASE;
   }
 
-  post<T>(iri: EntityEntryPoint, body: any): Observable<T> {
+  post<T>(
+    iri: EntityEntryPoint | AuthActionEndPoint,
+    body: any
+  ): Observable<T> {
     return this.http.post<T>(this.API_BASE + iri, body);
   }
 
