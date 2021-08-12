@@ -1,11 +1,13 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ApiService } from './services/api.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [],
   imports: [HttpClientModule],
   exports: [],
-  providers: []
+  providers: [ApiService, AuthService]
 })
 export class ChaospadModule {
   public static forRoot(

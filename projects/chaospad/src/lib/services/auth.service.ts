@@ -4,9 +4,7 @@ import { tap } from 'rxjs/operators';
 import { loginCredentials, UserResponse } from '../models/_auth';
 import { ApiService } from './api.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
   private readonly LOGGED_USER = 'LOGGED_USER';
 

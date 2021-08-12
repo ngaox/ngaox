@@ -10,9 +10,7 @@ import {
 
 export const DEFAULT_API_BASE = 'https://chaospad-dev.herokuapp.com';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ApiService {
   constructor(
     private http: HttpClient,
