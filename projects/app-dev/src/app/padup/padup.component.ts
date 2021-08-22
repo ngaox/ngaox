@@ -13,12 +13,18 @@ export class PadupComponent {
       '',
       UserValidators.Username(),
       UserValidators.Unique(this.api)
-    )
+    ),
+    date: new FormControl('', UserValidators.Birthday())
   });
 
   constructor(private api: ApiService) {}
 
   get username() {
     return this.group.get('username');
+  }
+
+  get date() {
+    console.log(this.group.get('date')?.value);
+    return this.group.get('date');
   }
 }

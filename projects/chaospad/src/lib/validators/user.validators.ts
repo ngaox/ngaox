@@ -51,4 +51,25 @@ export class UserValidators {
       Validators.pattern(regex)
     ]);
   }
+
+  static Birthday(): ValidatorFn | null {
+    return (control: AbstractControl) => {
+      const date = new Date(control.value);
+      const maxDate = new Date();
+      maxDate.setUTCFullYear(maxDate.getUTCFullYear() - 13);
+      const minDate = new Date();
+      minDate.setUTCFullYear(maxDate.getUTCFullYear() - 85);
+
+      if (control.value && (date > maxDate || date < minDate)) {
+        return {
+          birthday: {
+            valid: false,
+            tooOld: date < minDate,
+            tooYoung: date > maxDate
+          }
+        };
+      }
+      return null;
+    };
+  }
 }

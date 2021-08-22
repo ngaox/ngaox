@@ -1,6 +1,8 @@
 <form [formGroup]="group" style="padding: 50px">
   <input type="text" formControlName="username" />
   {{ username?.errors | json }}
+  <input type="date" formControlName="date" />
+  {{ date?.errors | json }}
 </form>
 <br /><br />
 <div class="container">
