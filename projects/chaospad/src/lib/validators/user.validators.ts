@@ -72,4 +72,8 @@ export class UserValidators {
       return null;
     };
   }
+
+  static Bio(): ValidatorFn | null {
+    return Validators.compose([Validators.maxLength(150)]);
+  }
 }
