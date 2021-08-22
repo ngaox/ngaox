@@ -1,3 +1,8 @@
+<form [formGroup]="group" style="padding: 50px">
+  <input type="text" formControlName="username" />
+  {{ username?.errors | json }}
+</form>
+<br /><br />
 <div class="container">
   <!-- nav / navbar -->
   <nav><a href="#">fd</a> | <a href="#">dsf</a> |</nav>
