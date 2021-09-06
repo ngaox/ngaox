@@ -1,3 +1,4 @@
+const start = +new Date();
 const fs = require('fs');
 const sass = require('sass');
 const postcss = require('postcss');
@@ -44,7 +45,7 @@ fs.mkdirSync(pathOf('css'));
 entryFileNames.forEach(filename => {
   compileFile(filename, true);
   log(
-    `Entry file '${filename}.scss' built successfully!`,
+    `Entry file '${filename}.scss' compiled successfully!`,
     'greenCheckMark',
     false
   );
@@ -55,9 +56,10 @@ log(
   `\n------------------------------------------------------------------------------
 Built done! to: ${distFolder}
 ------------------------------------------------------------------------------`,
-  'green',
-  false
+  'green'
 );
+const end = +new Date();
+log(`Build at: ${new Date().toISOString()} - Time: ${end - start}ms`);
 
 function compileFile(filename, optimize = false) {
   const css_path = pathOf(`css\\${filename}.css`);
