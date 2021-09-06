@@ -20,9 +20,9 @@ This repository contains several npm packages that are published under the scope
 
 | package                                     | description                                                                                              | Docs                          |
 | ------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| [@ngaox/seo](projects/seo#readme)           | An angular library to help generate & managing Social-Media/SEO meta tags, canonical links & page title. | [↗](projects/seo#readme)      |
-| [@ngaox/chaospad](projects/chaospad#readme) | Chaospad SDK & rest api client                                                                           | [↗](projects/chaospad#readme) |
-| [@ngaox/padup](projects/padup#readme)       | lightweight css framework for rapidly and easily build nice looking user interfaces.                     | [↗](projects/padup#readme)    |
+| [@ngaox/seo](packages/seo#readme)           | An angular library to help generate & managing Social-Media/SEO meta tags, canonical links & page title. | [↗](packages/seo#readme)      |
+| [@ngaox/chaospad](packages/chaospad#readme) | Chaospad SDK & rest api client                                                                           | [↗](packages/chaospad#readme) |
+| [@ngaox/padup](packages/padup#readme)       | lightweight css framework for rapidly and easily build nice looking user interfaces.                     | [↗](packages/padup#readme)    |
 
 ---
 

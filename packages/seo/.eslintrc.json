@@ -1,17 +1,13 @@
 {
   "extends": "../../.eslintrc.json",
-  "ignorePatterns": [
-    "!**/*"
-  ],
+  "ignorePatterns": ["!**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
         "project": [
-          "projects/chaospad/tsconfig.lib.json",
-          "projects/chaospad/tsconfig.spec.json"
+          "packages/seo/tsconfig.lib.json",
+          "packages/seo/tsconfig.spec.json"
         ],
         "createDefaultProgram": true
       },
@@ -20,7 +16,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "cp",
+            "prefix": "seo",
             "style": "camelCase"
           }
         ],
@@ -28,16 +24,14 @@
           "error",
           {
             "type": "element",
-            "prefix": "cp",
+            "prefix": "seo",
             "style": "kebab-case"
           }
         ]
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
+      "files": ["*.html"],
       "rules": {}
     }
   ]

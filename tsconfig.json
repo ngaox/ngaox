@@ -15,7 +15,7 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "paths": {
-      "@ngaox/padup": ["projects/padup", "dist/padup"],
+      "@ngaox/padup": ["packages/padup", "dist/padup"],
       "@ngaox/seo": ["dist/seo/seo", "dist/seo"],
       "@ngaox/chaospad": ["dist/chaospad/chaospad", "dist/chaospad"]
     },

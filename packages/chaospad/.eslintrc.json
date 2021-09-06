@@ -6,8 +6,8 @@
       "files": ["*.ts"],
       "parserOptions": {
         "project": [
-          "projects/seo/tsconfig.lib.json",
-          "projects/seo/tsconfig.spec.json"
+          "packages/chaospad/tsconfig.lib.json",
+          "packages/chaospad/tsconfig.spec.json"
         ],
         "createDefaultProgram": true
       },
@@ -16,7 +16,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "seo",
+            "prefix": "cp",
             "style": "camelCase"
           }
         ],
@@ -24,7 +24,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "seo",
+            "prefix": "cp",
             "style": "kebab-case"
           }
         ]

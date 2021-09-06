@@ -2,24 +2,21 @@
 
 ### [1.1.2](https://www.github.com/rabraghib/ngaox/compare/chaospad-v1.1.1...chaospad-v1.1.2) (2021-08-12)
 
-
 ### Bug Fixes
 
-* services providation scop ([f04ec0d](https://www.github.com/rabraghib/ngaox/commit/f04ec0dd2d538d983cd42854537a73f77c46720b))
+- services providation scop ([f04ec0d](https://www.github.com/rabraghib/ngaox/commit/f04ec0dd2d538d983cd42854537a73f77c46720b))
 
 ### [1.1.1](https://www.github.com/rabraghib/ngaox/compare/chaospad-v1.1.0...chaospad-v1.1.1) (2021-08-12)
 
-
 ### Bug Fixes
 
-* `ApiService` not provided ([cf8d37f](https://www.github.com/rabraghib/ngaox/commit/cf8d37fd4fc6d34b6539d873077441b3741fd219))
+- `ApiService` not provided ([cf8d37f](https://www.github.com/rabraghib/ngaox/commit/cf8d37fd4fc6d34b6539d873077441b3741fd219))
 
 ## [1.1.0](https://www.github.com/rabraghib/ngaox/compare/chaospad-v1.0.0...chaospad-v1.1.0) (2021-08-12)
 
-
 ### Features
 
-* add `AuthService` to facilate auth related api calls ([f10a16f](https://www.github.com/rabraghib/ngaox/commit/f10a16f07e54c01ddd09b522a8487dd0c7f2b03f))
+- add `AuthService` to facilate auth related api calls ([f10a16f](https://www.github.com/rabraghib/ngaox/commit/f10a16f07e54c01ddd09b522a8487dd0c7f2b03f))
 
 ## 1.0.0 (2021-07-12)
 

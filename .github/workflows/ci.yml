@@ -3,11 +3,11 @@ name: Continuous Integration
 on:
   push:
     paths:
-      - 'projects/**'
+      - 'packages/**'
     branches: [main]
   pull_request:
     paths:
-      - 'projects/**'
+      - 'packages/**'
     branches: [main]
 
 jobs:
