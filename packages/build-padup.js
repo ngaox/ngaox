@@ -3,11 +3,31 @@ const sass = require('sass');
 const postcss = require('postcss');
 const autoprefixer = require('autoprefixer');
 const CleanCSS = require('clean-css');
+const path = require('path');
 
 // TODO add support for watch flag
 
+function log(msg, color, newLine = true) {
+  colors = {
+    green: '\x1b[32m',
+    blue: '\x1b[34m',
+    greenCheckMark: '\x1b[32m' + '✓ ' + '\x1b[0m'
+  };
+  console.log((colors[color] || '') + msg + '\x1b[0m' + (newLine ? '\n' : ''));
+}
+
 const entryFileNames = ['ngaox'];
+const distFolder = path.resolve(`${__dirname}\\..\\dist\\padup`);
 const pathOf = path => `${__dirname}\\padup\\${path}`;
+
+log('Building package: PadUp', 'blue');
+log(
+  `------------------------------------------------------------------------------
+Building scss entry files
+------------------------------------------------------------------------------`,
+  '',
+  false
+);
 
 // delete css directory
 if (fs.existsSync(pathOf('css'))) {
@@ -17,12 +37,27 @@ if (fs.existsSync(pathOf('css'))) {
     console.error(`Error while deleting old css folder.`);
   }
 }
+log(`Clearing output director.`, 'greenCheckMark', false);
 
 // compile scss
 fs.mkdirSync(pathOf('css'));
 entryFileNames.forEach(filename => {
   compileFile(filename, true);
+  log(
+    `Entry file '${filename}.scss' built successfully!`,
+    'greenCheckMark',
+    false
+  );
 });
+
+// scripts end
+log(
+  `\n------------------------------------------------------------------------------
+Built done! to: ${distFolder}
+------------------------------------------------------------------------------`,
+  'green',
+  false
+);
 
 function compileFile(filename, optimize = false) {
   const css_path = pathOf(`css\\${filename}.css`);
