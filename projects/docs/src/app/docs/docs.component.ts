@@ -2,7 +2,7 @@ import { AfterViewChecked, Component } from '@angular/core';
 import { HighlightService } from './highlight.service';
 
 @Component({
-  selector: 'docs-docs',
+  selector: 'docs-entry',
   template: ` <p>docs works!</p> `,
   styles: [``]
 })

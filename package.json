@@ -3,12 +3,11 @@
   "version": "1.2.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve app-dev -o",
+    "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --c development",
     "lint": "ng lint",
     "test": "ng test --watch false",
-    "build:docs": "ng build docs-app",
     "start:padup": "./scripts/shell/padup start",
     "build:padup": "./scripts/shell/padup build",
     "start:seo": "ng build seo --watch --c development",

@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "app-dev": {
+    "docs": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -35,24 +35,24 @@
           "strict": true
         }
       },
-      "root": "projects/app-dev",
-      "sourceRoot": "projects/app-dev/src",
-      "prefix": "dev",
+      "root": "projects/docs",
+      "sourceRoot": "projects/docs/src",
+      "prefix": "docs",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/app-dev",
-            "index": "projects/app-dev/src/index.html",
-            "main": "projects/app-dev/src/main.ts",
-            "polyfills": "projects/app-dev/src/polyfills.ts",
-            "tsConfig": "projects/app-dev/tsconfig.app.json",
+            "outputPath": "dist/docs",
+            "index": "projects/docs/src/index.html",
+            "main": "projects/docs/src/main.ts",
+            "polyfills": "projects/docs/src/polyfills.ts",
+            "tsConfig": "projects/docs/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "projects/app-dev/src/favicon.ico",
-              "projects/app-dev/src/assets"
+              "projects/docs/src/favicon.ico",
+              "projects/docs/src/assets"
             ],
-            "styles": ["projects/app-dev/src/styles.scss"],
+            "styles": ["projects/docs/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -71,8 +71,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "projects/app-dev/src/environments/environment.ts",
-                  "with": "projects/app-dev/src/environments/environment.prod.ts"
+                  "replace": "projects/docs/src/environments/environment.ts",
+                  "with": "projects/docs/src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -92,10 +92,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "app-dev:build:production"
+              "browserTarget": "docs:build:production"
             },
             "development": {
-              "browserTarget": "app-dev:build:development"
+              "browserTarget": "docs:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -103,15 +103,15 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "app-dev:build"
+            "browserTarget": "docs:build"
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/app-dev/**/*.ts",
-              "projects/app-dev/**/*.html"
+              "projects/docs/**/*.ts",
+              "projects/docs/**/*.html"
             ]
           }
         }
@@ -196,118 +196,7 @@
           }
         }
       }
-    },
-    "docs-app": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss",
-          "skipTests": true
-        },
-        "@schematics/angular:class": {
-          "skipTests": true
-        },
-        "@schematics/angular:directive": {
-          "skipTests": true
-        },
-        "@schematics/angular:guard": {
-          "skipTests": true
-        },
-        "@schematics/angular:interceptor": {
-          "skipTests": true
-        },
-        "@schematics/angular:pipe": {
-          "skipTests": true
-        },
-        "@schematics/angular:service": {
-          "skipTests": true
-        },
-        "@schematics/angular:application": {
-          "strict": true
-        }
-      },
-      "root": "projects/docs-app",
-      "sourceRoot": "projects/docs-app/src",
-      "prefix": "docs",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/docs-app",
-            "index": "projects/docs-app/src/index.html",
-            "main": "projects/docs-app/src/main.ts",
-            "polyfills": "projects/docs-app/src/polyfills.ts",
-            "tsConfig": "projects/docs-app/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/docs-app/src/favicon.ico",
-              "projects/docs-app/src/assets"
-            ],
-            "styles": ["projects/docs-app/src/styles.scss"],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "projects/docs-app/src/environments/environment.ts",
-                  "with": "projects/docs-app/src/environments/environment.prod.ts"
-                }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "docs-app:build:production"
-            },
-            "development": {
-              "browserTarget": "docs-app:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "docs-app:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/docs-app/**/*.ts",
-              "projects/docs-app/**/*.html"
-            ]
-          }
-        }
-      }
     }
   },
-  "defaultProject": "app-dev"
+  "defaultProject": "docs"
 }
