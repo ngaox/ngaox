@@ -1,8 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { FALLBACK_ICON } from './models';
 
 @Injectable()
 export class IconsService {
@@ -11,16 +12,19 @@ export class IconsService {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private http: HttpClient
+    private http: HttpClient,
+    @Optional() @Inject(FALLBACK_ICON) private fallbackIcon: string
   ) {}
 
   private textToSvgElement(svg: string): SVGElement {
     const div = this.document.createElement('div');
     div.innerHTML = svg;
     const svgEl = div.querySelector('svg') as SVGElement;
-    svgEl.removeAttribute('style');
-    svgEl.removeAttribute('class');
-    svgEl.setAttribute('fill', 'currentColor');
+    if (svgEl) {
+      svgEl.removeAttribute('style');
+      svgEl.removeAttribute('class');
+      svgEl.setAttribute('fill', 'currentColor');
+    }
     return svgEl;
   }
 
@@ -39,11 +43,7 @@ export class IconsService {
   }
 
   getFallbackIcon() {
-    return `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-      </svg>
-    `;
+    return this.fallbackIcon;
   }
 
   /**
