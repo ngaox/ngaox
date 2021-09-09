@@ -1,5 +1,6 @@
 const start = +new Date();
 const fs = require('fs');
+const fsExtra = require('fs-extra');
 const sass = require('sass');
 const postcss = require('postcss');
 const autoprefixer = require('autoprefixer');
@@ -22,7 +23,7 @@ const distFolder = path.resolve(
   `${__dirname}\\..\\dist\\padup`.replace(/\\/g, '/')
 );
 const pathOf = itemPath =>
-  `${__dirname}\\padup\\${itemPath}`.replace(/\\/g, '/');
+  path.resolve(`${__dirname}\\padup\\${itemPath}`).replace(/\\/g, '/');
 
 log('Building package: PadUp', 'blue');
 log(
@@ -37,11 +38,12 @@ Building scss entry files
 if (fs.existsSync(pathOf('css'))) {
   try {
     fs.rmdirSync(pathOf('css'), { recursive: true });
+    fs.rmdirSync(distFolder, { recursive: true });
   } catch (err) {
-    console.error(`Error while deleting old css folder.`);
+    console.error(`Error while deleting old css & dist folders.`);
   }
 }
-log(`Clearing output director.`, 'greenCheckMark', false);
+log(`Clearing output directories.`, 'greenCheckMark', false);
 
 // compile scss
 fs.mkdirSync(pathOf('css'));
@@ -54,15 +56,18 @@ entryFileNames.forEach(filename => {
   );
 });
 
-// scripts end
-log(
-  `\n------------------------------------------------------------------------------
+// copy padup folder to dist
+fsExtra.copy(pathOf(''), distFolder).then(() => {
+  // scripts end
+  log(
+    `\n------------------------------------------------------------------------------
 Built done! to: ${distFolder}
 ------------------------------------------------------------------------------`,
-  'green'
-);
-const end = +new Date();
-log(`Build at: ${new Date().toISOString()} - Time: ${end - start}ms`);
+    'green'
+  );
+  const end = +new Date();
+  log(`Build at: ${new Date().toISOString()} - Time: ${end - start}ms`);
+});
 
 function compileFile(filename, optimize = false) {
   const css_path = pathOf(`css\\${filename}.css`);
