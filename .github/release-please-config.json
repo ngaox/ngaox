@@ -1,0 +1,12 @@
+{
+  "bootstrap-sha": "0665b3b8020cecea84f5892f3a618e56ae4c605a",
+  "last-release-sha": "0665b3b8020cecea84f5892f3a618e56ae4c605a",
+  "release-type": "node",
+  "packages": {
+    ".": {},
+    "packages/chaospad": {},
+    "packages/icons": {},
+    "packages/padup": {},
+    "packages/seo": {}
+  }
+}

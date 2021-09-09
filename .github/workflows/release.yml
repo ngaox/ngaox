@@ -1,0 +1,141 @@
+name: 🚀 Build & Release
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+jobs:
+  github-release:
+    if: |
+      contains(github.event.pull_request.labels.*.name, 'autorelease: pending') &&
+      github.event.pull_request.merged
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ true }}
+      upload_url: ${{ steps.release.outputs.upload_url }}
+      major: ${{ steps.version.outputs.major }}
+      minor: ${{ steps.version.outputs.minor }}
+      yarn-cache-dir-path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get new release version
+        id: version
+        run: |
+          RELEASE_VERSION=`node -p "require('./package.json').version"`
+          echo "::set-output name=version::$RELEASE_VERSION"
+          echo "::set-output name=major::${RELEASE_VERSION:0:1}"
+          echo "::set-output name=minor::${RELEASE_VERSION:2:1}"
+      - name: prepare release body
+        uses: satackey/action-js-inline@v0.0.2
+        id: body
+        with:
+          script: |
+            const core = require('@actions/core')
+            let body = ${{ toJSON(github.event.pull_request.body) }};
+            body = body.split('<details><summary>ngaox: ${{ steps.version.outputs.version }}</summary>')[1].split('</details>');
+            body.pop();
+            firstElement = body.shift();
+            body = firstElement.split('<summary>')[0] + body.join('</details>') + '</details>';
+            core.setOutput('body', body)
+      - uses: ncipollo/release-action@v1
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.version.outputs.version }}
+          name: ngaox-v${{ steps.version.outputs.version }}
+          body: ${{ steps.body.outputs.body }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-node_modules
+      - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+  release-publish:
+    needs: github-release
+    if: ${{ needs.github-release.outputs.release_created && success() }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Ngaox-SEO
+            distPath: dist/seo
+            buildScript: yarn build seo
+          - name: Ngaox-Chaospad
+            distPath: dist/chaospad
+            buildScript: yarn build chaospad
+          - name: Ngaox-Icons
+            distPath: dist/icons
+            buildScript: yarn build icons
+          - name: Ngaox-Padup
+            distPath: dist/padup
+            buildScript: yarn build:padup
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ needs.github-release.outputs.yarn-cache-dir-path }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-node_modules
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build ${{ matrix.name }}
+        run: ${{ matrix.buildScript }}
+      - name: 🎉 Publishing @ngaox/${{ matrix.name }} to npm
+        id: publish
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          access: public
+          package: ${{ matrix.distPath }}/package.json
+      - if: steps.publish.outputs.type != 'none'
+        run: |
+          echo "Version changed: ${{ steps.publish.outputs.old-version }} => ${{ steps.publish.outputs.version }}"
+      - name: Zip package dist folder
+        run: zip -r ${{ matrix.distPath }}.zip ${{ matrix.distPath }}
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.github-release.outputs.upload_url }}
+          asset_path: ${{ matrix.distPath }}.zip
+          asset_name: ${{ matrix.name }}.zip
+          asset_content_type: application/zip
+      - run: |
+          echo "Asset Uploaded!"
+          echo "\tID: ${{ steps.upload-release-asset.outputs.id }}"
+          echo "\tDownload-Url: ${{ steps.upload-release-asset.outputs.browser_download_url }}"
+
+  git-tagging:
+    needs: github-release
+    if: ${{ needs.github-release.outputs.release_created && success() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Tag major and minor versions
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git remote add gh-token "https://${{ secrets.GITHUB_TOKEN }}@github.com/google-github-actions/release-please-action.git"
+          git tag -d v${{ needs.github-release.outputs.major }} || true
+          git tag -d v${{ needs.github-release.outputs.major }}.${{ needs.github-release.outputs.minor }} || true
+          git push origin :v${{ needs.github-release.outputs.major }} || true
+          git push origin :v${{ needs.github-release.outputs.major }}.${{ needs.github-release.outputs.minor }} || true
+          git tag -a v${{ needs.github-release.outputs.major }} -m "Release v${{ needs.github-release.outputs.major }}"
+          git tag -a v${{ needs.github-release.outputs.major }}.${{ needs.github-release.outputs.minor }} -m "Release v${{ needs.github-release.outputs.major }}.${{ needs.github-release.outputs.minor }}"
+          git push origin v${{ needs.github-release.outputs.major }}
+          git push origin v${{ needs.github-release.outputs.major }}.${{ needs.github-release.outputs.minor }}
