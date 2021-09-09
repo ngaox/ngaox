@@ -18,8 +18,11 @@ function log(msg, color, newLine = true) {
 }
 
 const entryFileNames = ['ngaox'];
-const distFolder = path.resolve(`${__dirname}\\..\\dist\\padup`);
-const pathOf = path => `${__dirname}\\padup\\${path}`;
+const distFolder = path.resolve(
+  `${__dirname}\\..\\dist\\padup`.replace(/\\/g, '/')
+);
+const pathOf = itemPath =>
+  `${__dirname}\\padup\\${itemPath}`.replace(/\\/g, '/');
 
 log('Building package: PadUp', 'blue');
 log(
