@@ -2,7 +2,11 @@
   "name": "@ngaox/icons",
   "version": "0.0.1",
   "bin": {
-    "ngaox-icons": "bin/index.js"
+    "ngaox-icons": "bin/bundle.js"
+  },
+  "scripts": {
+    "bundle-bin": "../../node_modules/.bin/webpack -c ./webpack.config.js --mode production",
+    "build": "yarn bundle-bin && node bin/bundle.js build src/svgs src/svgs/index.json"
   },
   "peerDependencies": {
     "@angular/common": "^12.1.2",

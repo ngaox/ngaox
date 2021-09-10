@@ -1,6 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
-const { log, logBuildStart, logSeparatedMsg } = require('../../scripts-utils');
+const { log, logSeparatedMsg } = require('../../scripts-utils');
 
 module.exports = async function buildIcons(
   iconsDir,
@@ -41,6 +41,7 @@ module.exports = async function buildIcons(
     });
   });
   log(`Writing output to json file`, 'greenCheckMark', false);
+  await fs.mkdir(path.dirname(outputFile), { recursive: true });
   fs.writeFileSync(outputFile, JSON.stringify(iconsList));
   // scripts end
   console.log('');

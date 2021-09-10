@@ -1,4 +1,4 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 const start = +new Date();
 const yargs = require('yargs');
 const buildIcons = require('./build-icons');

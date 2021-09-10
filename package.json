@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build:padup": "node packages/build-padup.js",
-    "build:icons:svgs": "node packages/icons/bin/index.js build packages/icons/src/svgs packages/icons/src/svgs/index.json",
+    "build:icons:svgs": "cd packages/icons && yarn build",
     "build:icons": "yarn build:icons:svgs && yarn build icons",
     "build:seo": "yarn build icons && cd packages/seo && yarn build",
     "watch": "ng build --watch --c development",
@@ -61,6 +61,8 @@
     "prettier": "^2.3.2",
     "sass": "^1.34.2",
     "typescript": "~4.3.5",
+    "webpack-cli": "^4.8.0",
+    "webpack-shebang-plugin": "^1.1.6",
     "yargs": "^17.1.1"
   },
   "lint-staged": {

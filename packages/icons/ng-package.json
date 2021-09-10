@@ -3,5 +3,6 @@
   "dest": "../../dist/icons",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": ["bin/bundle.js"]
 }
