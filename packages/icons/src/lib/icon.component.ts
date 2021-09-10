@@ -16,18 +16,18 @@ import { IconsService } from './icons.service';
 })
 export class IconComponent implements OnInit {
   @HostBinding('innerHTML') svgEl?: SafeHtml;
-  @Input() svgIcon?: string;
+  @Input() name?: string;
   @Input() svgUrl?: string;
 
   constructor(private icons: IconsService, private sanitizer: DomSanitizer) {}
 
   async ngOnInit() {
     if (this.svgUrl) {
-      await this.icons.addByUrl(this.svgUrl, this.svgIcon, true);
-      this.svgIcon = this.svgIcon ?? this.svgUrl;
+      await this.icons.addByUrl(this.svgUrl, this.name, true);
+      this.name = this.name ?? this.svgUrl;
     }
-    if (this.svgIcon) {
-      this.icons.get(this.svgIcon)?.subscribe({
+    if (this.name) {
+      this.icons.get(this.name)?.subscribe({
         next: svg => {
           if (!svg?.outerHTML) throw new Error('incorrect svg content');
           this.svgEl = this.sanitizer.bypassSecurityTrustHtml(svg.outerHTML);

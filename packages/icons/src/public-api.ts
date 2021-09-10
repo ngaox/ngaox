@@ -6,3 +6,6 @@ export * from './lib/icons.service';
 export * from './lib/icon.component';
 export * from './lib/icons.module';
 export * from './lib/models';
+
+// svg icons
+export * from './svgs/_index';

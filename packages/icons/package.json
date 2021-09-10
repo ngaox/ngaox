@@ -1,6 +1,9 @@
 {
   "name": "@ngaox/icons",
   "version": "0.0.1",
+  "bin": {
+    "ngaox-build-icons": "bin/build-icons.js"
+  },
   "peerDependencies": {
     "@angular/common": "^12.1.2",
     "@angular/core": "^12.1.2"
