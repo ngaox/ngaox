@@ -6,17 +6,9 @@ const postcss = require('postcss');
 const autoprefixer = require('autoprefixer');
 const CleanCSS = require('clean-css');
 const path = require('path');
+const { log, logBuildStart, logSeparatedMsg } = require('./scripts-utils');
 
 // TODO add support for watch flag
-
-function log(msg, color, newLine = true) {
-  colors = {
-    green: '\x1b[32m',
-    blue: '\x1b[34m',
-    greenCheckMark: '\x1b[32m' + '✓ ' + '\x1b[0m'
-  };
-  console.log((colors[color] || '') + msg + '\x1b[0m' + (newLine ? '\n' : ''));
-}
 
 const entryFileNames = ['ngaox'];
 const distFolder = path.resolve(
@@ -25,14 +17,8 @@ const distFolder = path.resolve(
 const pathOf = itemPath =>
   path.resolve(`${__dirname}\\padup\\${itemPath}`).replace(/\\/g, '/');
 
-log('Building package: PadUp', 'blue');
-log(
-  `------------------------------------------------------------------------------
-Building scss entry files
-------------------------------------------------------------------------------`,
-  '',
-  false
-);
+logBuildStart('PadUp');
+logSeparatedMsg(`Building scss entry files`, '', false);
 
 // delete css directory
 if (fs.existsSync(pathOf('css'))) {
@@ -59,12 +45,8 @@ entryFileNames.forEach(filename => {
 // copy padup folder to dist
 fsExtra.copy(pathOf(''), distFolder).then(() => {
   // scripts end
-  log(
-    `\n------------------------------------------------------------------------------
-Built done! to: ${distFolder}
-------------------------------------------------------------------------------`,
-    'green'
-  );
+  console.log('');
+  logSeparatedMsg(`Built done! to: ${distFolder}`, 'green');
   const end = +new Date();
   log(`Build at: ${new Date().toISOString()} - Time: ${end - start}ms`);
 });

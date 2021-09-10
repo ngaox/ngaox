@@ -1,20 +1,31 @@
-#! /usr/bin/env node
 const fs = require('fs-extra');
 const path = require('path');
+const { log, logBuildStart, logSeparatedMsg } = require('../../scripts-utils');
 
-// TODO get these CONSTs via arguments...
-const ICONS_DIR = 'packages/icons/src/svgs';
-const OUTPUT_DIR = 'packages/icons/src/svgs/index.json';
-const NAME_SPACE = '';
-
-(async function () {
-  const files = await getSvgFiles(ICONS_DIR);
+module.exports = async function buildIcons(
+  iconsDir,
+  outputFile,
+  namespace = ''
+) {
+  log('', '', false);
+  logSeparatedMsg(`Building icons from: ${iconsDir}`, '', false, 'blue');
+  const files = await getSvgFiles(iconsDir);
+  log(`Getting all SVG icons...`, 'greenCheckMark', false);
+  if (files.length < 1) {
+    log(
+      `No svg icon found in dir: ${path.resolve(iconsDir)}\n`,
+      'redFailMark',
+      false
+    );
+    process.exit(1);
+  }
+  log(`Building ${files.length} svg file...`, 'greenCheckMark', false);
   let iconsList = {};
   files.forEach(filepath => {
     const iconName =
-      (NAME_SPACE ? `${NAME_SPACE}:` : '') +
+      (namespace ? `${namespace}:` : '') +
       filepath
-        .slice(ICONS_DIR.length + 1)
+        .slice(iconsDir.length + 1)
         .slice(0, -4)
         .replace(/\\/g, ':')
         .replace(/\//g, ':');
@@ -29,8 +40,12 @@ const NAME_SPACE = '';
       svg: svgElm
     });
   });
-  fs.writeFileSync(OUTPUT_DIR, JSON.stringify(iconsList));
-})();
+  log(`Writing output to json file`, 'greenCheckMark', false);
+  fs.writeFileSync(outputFile, JSON.stringify(iconsList));
+  // scripts end
+  console.log('');
+  logSeparatedMsg(`Built done! to: ${path.resolve(outputFile)}`, 'green');
+};
 
 async function getSvgFiles(dir, fileList = []) {
   const files = await fs.readdir(dir);

@@ -67,15 +67,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: Ngaox-SEO
-            distPath: dist/seo
-            buildScript: yarn build seo
           - name: Ngaox-Chaospad
             distPath: dist/chaospad
             buildScript: yarn build chaospad
+          - name: Ngaox-SEO
+            distPath: dist/seo
+            buildScript: yarn build:seo
           - name: Ngaox-Icons
             distPath: dist/icons
-            buildScript: yarn build icons
+            buildScript: yarn build:icons
           - name: Ngaox-Padup
             distPath: dist/padup
             buildScript: yarn build:padup
