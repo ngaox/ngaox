@@ -1,6 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { IconsModule, ICONS_COLLECTIONS } from '@ngaox/icons';
 
 import { AppComponent } from './app.component';
 
@@ -17,7 +19,12 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, RouterModule.forRoot(routes)],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes),
+    HttpClientModule,
+    IconsModule.forRoot('', ICONS_COLLECTIONS['social'])
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

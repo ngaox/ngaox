@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <div class="navbar"></div>
     <main>
+      <ngaox-icon name="social:linkedin-in" style="width: 60px;"></ngaox-icon>
       <router-outlet></router-outlet>
     </main>
   `,
