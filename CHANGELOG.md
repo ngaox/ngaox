@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/rabraghib/ngaox/compare/ngaox-v1.3.0...ngaox-v1.4.0) (2021-09-11)
+
+
+### Features
+
+* **chaospad:** add user validators ([a207a09](https://www.github.com/rabraghib/ngaox/commit/a207a0914b191f60899258dba111bb2433a609a2))
+* **icons:** `IconsModule.forRoot()` to define fallback icon & register a globa icons ([6325567](https://www.github.com/rabraghib/ngaox/commit/63255677412d795ee3671ccecb1d5683d3486739))
+* **icons:** add social platforms logos icons ([44de8fa](https://www.github.com/rabraghib/ngaox/commit/44de8faf02ee7bb45ee827481e51f4e0922dcd7d))
+* **icons:** add svg directory build command ([1310fa3](https://www.github.com/rabraghib/ngaox/commit/1310fa38f87122b38c8b9d27f14ada4368cb02d9))
+* **icons:** setup `@ngaox/icons` an angular library to manage svgs ([6982d87](https://www.github.com/rabraghib/ngaox/commit/6982d87282452f55979ca1bbf09c0b1f2130d93c))
+* **icons:** update `ngaox-icons` build commad ([ef8f902](https://www.github.com/rabraghib/ngaox/commit/ef8f90230e025dfaf5eda4690a4c7f8e201f8c25))
+* restore docs-app with the same setup ([7a81010](https://www.github.com/rabraghib/ngaox/commit/7a81010927bc63097da5db219253c05065217da6))
+* **seo:** provide a helper function to get activated route ([3bdc5ae](https://www.github.com/rabraghib/ngaox/commit/3bdc5ae7d539f3a7540846104613e74f10221c2f))
+* **validators:** add topic validators (topicname, title, type, alias...) ([90d8ab1](https://www.github.com/rabraghib/ngaox/commit/90d8ab17509be90df4b8f16067263bcb4dff1ba1))
+* **validators:** add user bio validator ([1afea28](https://www.github.com/rabraghib/ngaox/commit/1afea287911e08c41280ae673b356b7e78f01fec))
+* **validators:** add user birthday validator ([9fe5bb5](https://www.github.com/rabraghib/ngaox/commit/9fe5bb54fdb37717741e28038f4c9a5a3ef592a3))
+
+
+### Bug Fixes
+
+* **models:** correct `file.uploadedAt` property name ([837a2b8](https://www.github.com/rabraghib/ngaox/commit/837a2b8092c90a3d48747cf10727d268c84a20c7))
+* **padup:** paths error across platforms ([edaf369](https://www.github.com/rabraghib/ngaox/commit/edaf36951fe334108f790598b9f80e58fefd809c))
+
+
+### Reverts
+
+* remove `docs` app ([e977275](https://www.github.com/rabraghib/ngaox/commit/e977275157e4e095ac8ec24f13e13a6812efd37c))
+
 ## [1.3.0](https://www.github.com/rabraghib/ngaox/compare/ngaox-v1.2.0...ngaox-v1.3.0) (2021-09-11)
 
 

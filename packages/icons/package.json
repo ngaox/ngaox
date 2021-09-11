@@ -1,6 +1,6 @@
 {
   "name": "@ngaox/icons",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "bin": {
     "ngaox-icons": "bin/bundle.js"
   },

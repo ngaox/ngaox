@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://www.github.com/rabraghib/ngaox/compare/seo-v1.5.0...seo-v1.6.0) (2021-09-11)
+
+
+### Features
+
+* **seo:** provide a helper function to get activated route ([3bdc5ae](https://www.github.com/rabraghib/ngaox/commit/3bdc5ae7d539f3a7540846104613e74f10221c2f))
+
 ## [1.5.0](https://www.github.com/rabraghib/ngaox/compare/seo-v1.4.1...seo-v1.5.0) (2021-09-11)
 
 
