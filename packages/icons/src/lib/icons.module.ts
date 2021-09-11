@@ -59,9 +59,9 @@ export class IconsModule {
   }
 
   /**
-   * @param fallbackSvgIcon a string represent the svg element tp fallback to when icon not exist
-   * @param icons an array of `SvgIcon` objects that icons to be registered globally
-   * @param iconsByUrl an array of `IconByUrl` objects that icons by url to be registered globally
+   * @param fallbackSvgIcon a string represent the svg element to fallback to when icon not exist
+   * @param icons an array of `SvgIcon` objects that are icons to be registered globally
+   * @param iconsByUrl an array of `IconByUrl` objects that are icons by url to be registered globally
    */
   static forRoot(
     fallbackSvgIcon: string = '',

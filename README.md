@@ -9,32 +9,29 @@
     </a>
 </p>
 
-- [@rabraghib](https://twitter.com/rabraghib) - Get the latest updates on Twitter
-- Checkout project libraries [features lists](https://github.com/rabraghib/ngaox/issues/1) & tell me your thoughts
+- Where angular apps can't get chaotic 😎
+- [@rabraghib](https://twitter.com/rabraghib) - Get the latest updates about the project on Twitter
+- Checkout project [road map](https://github.com/rabraghib/ngaox/milestone/1) & tell me your thoughts
 
----
-
-# Description
+## Description
 
 This repository contains several npm packages that are published under the scope `@ngaox` which are tools & libraries to speed up and facilitate developing angular web apps.
 
 | package                                     | description                                                                                              | Docs                          |
 | ------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------- |
 | [@ngaox/seo](packages/seo#readme)           | An angular library to help generate & managing Social-Media/SEO meta tags, canonical links & page title. | [↗](packages/seo#readme)      |
-| [@ngaox/chaospad](packages/chaospad#readme) | Chaospad SDK & rest api client                                                                           | [↗](packages/chaospad#readme) |
+| [@ngaox/chaospad](packages/chaospad#readme) | Chaospad SDK & rest api client for angular.                                                              | [↗](packages/chaospad#readme) |
+| [@ngaox/icons](packages/icons#readme)       | Easily inline SVG icons into your angular app with a ready to import and use set of icons.               | [↗](packages/icons#readme)    |
 | [@ngaox/padup](packages/padup#readme)       | lightweight css framework for rapidly and easily build nice looking user interfaces.                     | [↗](packages/padup#readme)    |
 
----
+## Contributing
 
-# Before you go!
+Contributions are always welcome!
+See [`contributing.md`](https://github.com/rabraghib/.github/blob/main/CONTRIBUTING.md) for ways to get started.
 
-- 🌟 Star the GitHub repository
-- Don't forget contributions are always welcome!
-- Feel free to create pull requests, submit bugs, suggest new features, etc.
+Please adhere to this project's [`code of conduct`](https://github.com/rabraghib/.github/blob/main/CONTRIBUTING.md).
 
----
-
-# License
+## License
 
 This project is licensed under the terms of the [MIT License](LICENSE)
 

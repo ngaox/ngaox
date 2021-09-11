@@ -1,4 +1,6 @@
-# Chaospad
+# Ngaox Chaospad
+
+Chaospad SDK & rest api client for angular
 
 ---
 
