@@ -8,7 +8,7 @@
     "build:padup": "node packages/build-padup.js",
     "build:icons:svgs": "cd packages/icons && yarn build",
     "build:icons": "yarn build:icons:svgs && yarn build icons",
-    "build:seo": "yarn build icons && cd packages/seo && yarn build",
+    "build:seo": "yarn build seo && cd packages/seo && yarn build",
     "watch": "ng build --watch --c development",
     "lint": "ng lint",
     "test": "ng test --watch false",
