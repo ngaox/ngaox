@@ -23,7 +23,6 @@ yargs
         })
         .positional('output', {
           type: 'string',
-          alias: 'o',
           description: 'where to store the generated json file'
         })
         .option('namespace', {
