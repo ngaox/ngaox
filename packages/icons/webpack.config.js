@@ -8,9 +8,5 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'bin')
   },
-  externals: {
-    'fs-extra': 'commonjs2 fs-extra',
-    yargs: 'commonjs2 yargs'
-  },
   plugins: [new ShebangPlugin()]
 };

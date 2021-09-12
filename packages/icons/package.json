@@ -1,6 +1,7 @@
 {
   "name": "@ngaox/icons",
   "version": "1.0.0",
+  "description": "Easily inline SVG icons into your angular app with a ready to import and use set of icons",
   "bin": {
     "ngaox-icons": "bin/bundle.js"
   },
@@ -14,5 +15,23 @@
   },
   "dependencies": {
     "tslib": "^2.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rabraghib/ngaox.git"
+  },
+  "keywords": [
+    "ngaox",
+    "icons",
+    "ngx",
+    "angular",
+    "svg",
+    "ssr"
+  ],
+  "author": "Rabyâ Raghib",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rabraghib/ngaox/issues"
+  },
+  "homepage": "https://github.com/rabraghib/ngaox/tree/main/packages/icons"
 }
