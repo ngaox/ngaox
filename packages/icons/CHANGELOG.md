@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/rabraghib/ngaox/compare/icons-v1.0.1...icons-v1.0.2) (2021-09-12)
+
+
+### Bug Fixes
+
+* **icons:** yargs invalid argument alias ([1df7caa](https://www.github.com/rabraghib/ngaox/commit/1df7caa88e848e37fbff586a858d8def88f454ad))
+
 ### [1.0.1](https://www.github.com/rabraghib/ngaox/compare/icons-v1.0.0...icons-v1.0.1) (2021-09-12)
 
 
