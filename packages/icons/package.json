@@ -1,6 +1,6 @@
 {
   "name": "@ngaox/icons",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Easily inline SVG icons into your angular app with a ready to import and use set of icons",
   "bin": {
     "ngaox-icons": "bin/bundle.js"
