@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.1](https://www.github.com/rabraghib/ngaox/compare/ngaox-v1.3.0...ngaox-v1.3.1) (2021-09-12)
+
+
+### Bug Fixes
+
+* **icons:** bin commad missing dependecies ([9130b47](https://www.github.com/rabraghib/ngaox/commit/9130b47d3d58ca3370dbe392081e58aeed107c38))
+
 ## [1.3.0](https://www.github.com/rabraghib/ngaox/compare/ngaox-v1.2.0...ngaox-v1.3.0) (2021-09-11)
 
 

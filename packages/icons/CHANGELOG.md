@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/rabraghib/ngaox/compare/icons-v1.0.0...icons-v1.0.1) (2021-09-12)
+
+
+### Bug Fixes
+
+* **icons:** bin commad missing dependecies ([9130b47](https://www.github.com/rabraghib/ngaox/commit/9130b47d3d58ca3370dbe392081e58aeed107c38))
+
 ## 1.0.0 (2021-09-11)
 
 
