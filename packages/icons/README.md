@@ -58,7 +58,7 @@ To inject an public (accessible via browser) SVG file to a component template:
 <svg-icon svgUrl="assets/my-icon.svg" style="width: 100px;"></svg-icon>
 ```
 
-_By default all icons will have 50px width_
+_By default, the icon has no width set so It may not appear!_
 
 Or if the icon was previously registered with a name you can use it like:
 

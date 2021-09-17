@@ -9,7 +9,6 @@ import { IconsService } from './icons.service';
     `
       :host {
         display: inline-block;
-        width: 50px;
       }
     `
   ]

@@ -48,12 +48,12 @@ export class IconsModule {
   ) {
     if (globalIcons.icons) {
       globalIcons.icons.forEach(icon => {
-        iconsService.add(icon.name, icon.svg);
+        iconsService.add(icon.name, icon.svg, true);
       });
     }
     if (globalIcons.icons) {
       globalIcons.iconsByUrl.forEach(iconByUrl => {
-        iconsService.addByUrl(iconByUrl.url, iconByUrl.name);
+        iconsService.addByUrl(iconByUrl.url, iconByUrl.name, true);
       });
     }
   }

@@ -50,16 +50,16 @@ export class IconsService {
    * Add an SVG icon to the registry with an alias `name`
    *
    * pass to it a `name` for the icon and the `svg` element
-   * you can pass also a boolean value `override` (default to false) whether or not replacing existing `svg` if `name` already exists
+   * you can pass also a boolean value `override` whether or not replacing existing `svg` if `name` already exists
    *
    * @see {@link IconsService.addByUrl}
    */
-  add(name: string, svg: string, override: boolean = false) {
+  add(name: string, svg: string, override?: boolean) {
     if (override || !this.icons.has(name)) {
       this.icons.set(name, this.textToSvgElement(svg));
-    } else if (this.icons.has(name)) {
+    } else if (this.icons.has(name) && override === undefined) {
       throw new Error(
-        'svg icon name already used!!\nset override argument to true if you want to replace its content.'
+        'svg icon name already used!!\nset override argument whether you want to replace its content or not.'
       );
     }
   }
