@@ -22,16 +22,22 @@ module.exports = async function buildIcons(
   log(`Building ${files.length} svg file...`, 'greenCheckMark', false);
   let iconsList = {};
   files.forEach(filepath => {
-    const iconName =
+    const iconName = (
       (namespace ? `${namespace}:` : '') +
       filepath
         .slice(iconsDir.length + 1)
         .slice(0, -4)
         .replace(/\\/g, ':')
-        .replace(/\//g, ':');
+        .replace(/\//g, ':')
+    ).toLowerCase();
 
     const collectionName =
-      iconName.split(':').slice(0, -1).join(':') || 'default';
+      iconName
+        .split(':')
+        .slice(0, -1)
+        .map(namespace => namespace[0].toUpperCase() + namespace.slice(1))
+        .join('') || 'default';
+
     if (!iconsList[collectionName]) iconsList[collectionName] = [];
 
     const svgElm = fs.readFileSync(filepath).toString();
