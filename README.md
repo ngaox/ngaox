@@ -1,4 +1,7 @@
-<h1 align="center">NGAOX</h1>
+<p align="center">
+    <img src="docs/app/src/assets/ngaox.png" alt="ngaox-logo" width="150px" height="150px"/>
+    <h1 align="center">NGAOX - <i>Where angular apps can't get chaotic</i></h1>
+</p>
 
 <p align="center">
     <a href="#license">
@@ -9,7 +12,8 @@
     </a>
 </p>
 
-- Where angular apps can't get chaotic 😎
+<br>
+
 - [@rabraghib](https://twitter.com/rabraghib) - Get the latest updates about the project on Twitter
 - Checkout project [road map](https://github.com/rabraghib/ngaox/milestone/1) & tell me your thoughts
 
