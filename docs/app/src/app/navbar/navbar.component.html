@@ -1,18 +1,35 @@
-<mat-toolbar color="primary">
-  <span class="ngaox-logo" routerLink="/">
-    <img src="assets/ngaox-white.png" />
-    Ngaox
-  </span>
-  <button mat-button routerLink="/docs">Docs</button>
-  <button mat-button routerLink="login">Schematics</button>
-  <button mat-button routerLink="login">Guide</button>
-  <span class="fill-remaining-space"></span>
-  <a
-    mat-flat-button
-    href="https://github.com/rabraghib/ngaox"
-    aria-label="GitHub Repository"
-  >
-    <ngaox-icon name="social:github" class="github-icon"></ngaox-icon>
-    Github
-  </a>
+<mat-toolbar color="primary" class="mat-elevation-z3">
+  <mat-toolbar-row>
+    <span class="ngaox-logo" routerLink="/">
+      <img src="assets/ngaox-white.png" />
+      Ngaox
+    </span>
+    <ng-container *ngIf="(isHandset$ | async) === false">
+      <button
+        mat-button
+        *ngFor="let section of SECTIONS"
+        [routerLink]="section.path"
+      >
+        {{ section.name }}
+      </button>
+    </ng-container>
+    <span class="fill-remaining-space"></span>
+    <a
+      mat-flat-button
+      href="https://github.com/rabraghib/ngaox"
+      aria-label="GitHub Repository"
+    >
+      <ngaox-icon name="social:github" class="github-icon"></ngaox-icon>
+      Github
+    </a>
+  </mat-toolbar-row>
+  <mat-toolbar-row style="justify-content: center" *ngIf="isHandset$ | async">
+    <button
+      mat-button
+      *ngFor="let section of SECTIONS"
+      [routerLink]="section.path"
+    >
+      {{ section.name }}
+    </button>
+  </mat-toolbar-row>
 </mat-toolbar>
