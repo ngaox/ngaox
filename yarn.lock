@@ -1437,7 +1437,7 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.7.0"
 
-"@ngaox/icons@^1.0.2":
+"@ngaox/icons@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@ngaox/icons/-/icons-1.0.3.tgz#df9f6a3cf9ae08aebc5c05700093b43a4de59799"
   integrity sha512-tdZVG35QmabFixIvcHKI8UTq6cmo8IHlmy5M4aMOaBB4yj0cPtwvdpnUdEL8pkiF9nwuSCzmdgt3BKziGEvBrg==
