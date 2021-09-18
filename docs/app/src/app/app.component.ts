@@ -3,9 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'docs-root',
   template: `
-    <div class="navbar"></div>
+    <docs-navbar></docs-navbar>
     <main>
-      <ngaox-icon name="social:linkedin-in" style="width: 60px;"></ngaox-icon>
       <router-outlet></router-outlet>
     </main>
   `,
@@ -15,14 +14,7 @@ import { Component } from '@angular/core';
         display: grid;
         width: 100vw;
         height: 100vh;
-        grid-template-rows: 60px 1fr;
-      }
-      .navbar {
-        background: #4869ee;
-      }
-      .navbar,
-      main {
-        overflow: hidden;
+        grid-template-rows: auto 1fr;
       }
     `
   ]

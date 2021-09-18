@@ -1,29 +1,51 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { IconsModule, ICONS_COLLECTIONS } from '@ngaox/icons';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { ICONS, IconsModule } from 'packages/icons/src/public-api';
 
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { MatIconModule } from '@angular/material/icon';
 
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
     path: 'docs',
-    loadChildren: () => import('./docs/docs.module').then(m => m.DocsModule)
+    loadChildren: () =>
+      import('./pages/docs/docs.module').then(m => m.DocsModule)
   }
 ];
 
+const MATERIAL_IMPORTS = [
+  MatToolbarModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatListModule,
+  MatIconModule
+];
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NavbarComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    IconsModule.forRoot('', ICONS_COLLECTIONS['social'])
+    IconsModule.forRoot('', ICONS.Social),
+    BrowserAnimationsModule,
+    LayoutModule,
+    ...MATERIAL_IMPORTS
   ],
   providers: [],
   bootstrap: [AppComponent]
