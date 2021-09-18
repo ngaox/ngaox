@@ -4,9 +4,9 @@ import { Component } from '@angular/core';
   selector: 'docs-root',
   template: `
     <docs-navbar></docs-navbar>
-    <main>
+    <div>
       <router-outlet></router-outlet>
-    </main>
+    </div>
   `,
   styles: [
     `
@@ -15,6 +15,9 @@ import { Component } from '@angular/core';
         width: 100vw;
         height: 100vh;
         grid-template-rows: auto 1fr;
+      }
+      div {
+        overflow: hidden auto;
       }
     `
   ]

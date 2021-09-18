@@ -13,12 +13,13 @@ import { ICONS, IconsModule } from '@ngaox/icons';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+    component: HomeComponent
   },
   {
     path: 'docs',
@@ -35,7 +36,7 @@ const MATERIAL_IMPORTS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [AppComponent, NavbarComponent, HomeComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),

@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
 
 html,
 body {
@@ -10,4 +13,8 @@ body {
 }
 svg {
   vertical-align: middle;
+}
+.container {
+  max-width: 1200px;
+  margin: auto;
 }
