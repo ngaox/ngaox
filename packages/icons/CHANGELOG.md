@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/rabraghib/ngaox/compare/icons-v1.0.2...icons-v1.0.3) (2021-09-18)
+
+
+### Bug Fixes
+
+* **icons:** prevent inconsistent logos/namespaces naming ([cdb3bd9](https://www.github.com/rabraghib/ngaox/commit/cdb3bd9d0fd1b808ee3b5de0f0d3f16334b7e084))
+* **icons:** unset default width ([86fabe8](https://www.github.com/rabraghib/ngaox/commit/86fabe8476ce8770f58ee8f7172d2068925c7360))
+
 ### [1.0.2](https://www.github.com/rabraghib/ngaox/compare/icons-v1.0.1...icons-v1.0.2) (2021-09-12)
 
 
