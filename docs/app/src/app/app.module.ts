@@ -9,11 +9,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { ICONS, IconsModule } from 'packages/icons/src/public-api';
+import { ICONS, IconsModule } from '@ngaox/icons';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { MatIconModule } from '@angular/material/icon';
 
 const routes: Routes = [
   {
@@ -32,8 +31,7 @@ const MATERIAL_IMPORTS = [
   MatToolbarModule,
   MatButtonModule,
   MatSidenavModule,
-  MatListModule,
-  MatIconModule
+  MatListModule
 ];
 
 @NgModule({
