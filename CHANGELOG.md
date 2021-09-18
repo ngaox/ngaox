@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/rabraghib/ngaox/compare/ngaox-v1.3.2...ngaox-v1.4.0) (2021-09-18)
+
+
+### Features
+
+* **docs:** setup angular material and navigation components ([31ccd9a](https://www.github.com/rabraghib/ngaox/commit/31ccd9a121f2cf2155081218d735bf4e604146cd))
+
+
+### Bug Fixes
+
+* **icons:** prevent inconsistent logos/namespaces naming ([cdb3bd9](https://www.github.com/rabraghib/ngaox/commit/cdb3bd9d0fd1b808ee3b5de0f0d3f16334b7e084))
+* **icons:** unset default width ([86fabe8](https://www.github.com/rabraghib/ngaox/commit/86fabe8476ce8770f58ee8f7172d2068925c7360))
+
 ### [1.3.2](https://www.github.com/rabraghib/ngaox/compare/ngaox-v1.3.1...ngaox-v1.3.2) (2021-09-12)
 
 
