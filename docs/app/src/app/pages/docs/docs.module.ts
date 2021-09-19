@@ -10,7 +10,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
-const routes: Routes = [{ path: '', component: DocsComponent }];
+import { ViewerComponent } from './viewer/viewer.component';
+import { CategoriesComponent } from './categories/categories.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: DocsComponent,
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'categories' },
+      { path: 'categories', component: CategoriesComponent },
+      { path: ':slug', component: ViewerComponent }
+    ]
+  }
+];
 
 const MATERIAL_IMPORTS = [
   MatToolbarModule,
@@ -20,7 +33,7 @@ const MATERIAL_IMPORTS = [
 ];
 
 @NgModule({
-  declarations: [DocsComponent],
+  declarations: [DocsComponent, ViewerComponent, CategoriesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
