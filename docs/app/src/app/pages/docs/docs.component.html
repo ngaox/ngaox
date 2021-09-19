@@ -12,6 +12,7 @@
         mat-list-item
         *ngFor="let docItem of docItemsList"
         [routerLink]="['/docs', docItem.slug]"
+        routerLinkActive="active"
         >{{ docItem.name }}</a
       >
     </mat-nav-list>
@@ -32,7 +33,7 @@
           aria-label="Side nav toggle icon"
         ></ngaox-icon>
       </button>
-      <span>docs</span>
+      <span>{{ pageTitle | async }}</span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
