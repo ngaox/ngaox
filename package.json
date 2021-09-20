@@ -3,7 +3,7 @@
   "version": "1.4.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npx netlify dev",
     "build": "ng build",
     "build:padup": "node packages/build-padup.js",
     "build:icons:svgs": "cd packages/icons && yarn build",
@@ -12,7 +12,8 @@
     "watch": "ng build --watch --c development",
     "lint": "ng lint",
     "test": "ng test --watch false",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "npm install -g @angular/cli"
   },
   "private": true,
   "dependencies": {
