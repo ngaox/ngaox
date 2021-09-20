@@ -12,6 +12,8 @@ import { MatListModule } from '@angular/material/list';
 
 import { ViewerComponent } from './viewer/viewer.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ContentResolver } from './content.resolver';
 
 const routes: Routes = [
   {
@@ -20,7 +22,13 @@ const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'categories' },
       { path: 'categories', component: CategoriesComponent },
-      { path: ':slug', component: ViewerComponent }
+      {
+        path: ':slug',
+        component: ViewerComponent,
+        resolve: {
+          content: ContentResolver
+        }
+      }
     ]
   }
 ];
@@ -37,6 +45,7 @@ const MATERIAL_IMPORTS = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    HttpClientModule,
     IconsModule,
     LayoutModule,
     ...MATERIAL_IMPORTS

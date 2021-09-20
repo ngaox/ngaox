@@ -7,34 +7,29 @@ export type DocContentItem = DocItem & {
 
 export const DocItems: DocContentItem[] = [
   {
-    name: 'Getting Started',
+    name: 'README',
     slug: 'getting-started',
-    contentUrl: ''
-  },
-  {
-    name: 'Xetting Started',
-    slug: 'getting-starfgdted',
-    contentUrl: ''
-  },
-  {
-    name: 'Betting Started',
-    slug: 'getting-stdfgarted',
-    contentUrl: ''
-  },
-  {
-    name: 'GGetting Started',
-    slug: 'gettdgfing-started',
-    contentUrl: ''
-  },
-  {
-    name: 'Getting Started dsf',
-    slug: 'gettidgfng-started',
     priority: 1,
-    contentUrl: ''
+    contentUrl: '/README.md'
   },
   {
-    name: 'Aetting Started',
-    slug: 'getting-stargdted',
-    contentUrl: ''
+    name: 'Chaospad README',
+    slug: 'chaospad',
+    contentUrl: '/packages/chaospad/README.md'
+  },
+  {
+    name: 'Seo README',
+    slug: 'seo',
+    contentUrl: '/packages/seo/README.md'
+  },
+  {
+    name: 'Icons README',
+    slug: 'icons',
+    contentUrl: '/packages/icons/README.md'
+  },
+  {
+    name: 'Padup README',
+    slug: 'padup',
+    contentUrl: '/packages/padup/README.md'
   }
 ];
