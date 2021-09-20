@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TitleService } from '../../../core/title.service';
 
 @Component({
   selector: 'docs-categories',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent {
-  constructor() {}
+  constructor(private titleService: TitleService) {
+    this.titleService.setTitle('Categories');
+  }
 }

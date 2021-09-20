@@ -17,9 +17,9 @@ export const handler: Handler = async (event: Event, context: any) => {
     const res = await fetch(contentUrl.href);
     return {
       statusCode: 200,
-      headers: {
-        'Cache-Control': 'public, max-age=604800'
-      },
+      // headers: {
+      //   'Cache-Control': 'public, max-age=604800'
+      // },
       body: JSON.stringify({
         name: docItem.name,
         content: await res.text()

@@ -1,8 +1,5 @@
 import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { HighlightService } from '../../../core/highlight.service';
-import { TitleService } from '../../../core/title.service';
-import marked from 'marked';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { map, mergeMap } from 'rxjs/operators';
@@ -17,21 +14,11 @@ export class ViewerComponent implements AfterViewChecked, OnInit {
 
   constructor(
     private highlightService: HighlightService,
-    private titleService: TitleService,
-    private route: ActivatedRoute,
-    private http: HttpClient
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.content$ = this.route.params.pipe(
-      mergeMap(params =>
-        this.http.get<any>(`/.netlify/functions/doc-content/${params.slug}`)
-      ),
-      map(docItem => {
-        this.titleService.setTitle(docItem.name);
-        return marked(docItem.content);
-      })
-    );
+    this.content$ = this.route.data.pipe(map(data => data['content']));
   }
 
   ngAfterViewChecked(): void {
