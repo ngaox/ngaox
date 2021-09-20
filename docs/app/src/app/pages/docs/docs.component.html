@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="height-full">
   <mat-sidenav
     #drawer
     class="sidenav"
@@ -18,24 +18,27 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        style="margin-right: 10px"
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
-      >
-        <ngaox-icon
-          style="width: 25px"
-          name="social:github"
-          aria-label="Side nav toggle icon"
-        ></ngaox-icon>
-      </button>
-      <span>{{ pageTitle | async }}</span>
-    </mat-toolbar>
-    <!-- Add Content Here -->
-    <router-outlet></router-outlet>
+    <div class="min-height-full">
+      <mat-toolbar color="primary">
+        <button
+          style="margin-right: 10px"
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async"
+        >
+          <ngaox-icon
+            style="width: 25px"
+            name="social:github"
+            aria-label="Side nav toggle icon"
+          ></ngaox-icon>
+        </button>
+        <span>{{ pageTitle | async }}</span>
+      </mat-toolbar>
+      <!-- Add Content Here -->
+      <router-outlet></router-outlet>
+    </div>
+    <docs-footer></docs-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

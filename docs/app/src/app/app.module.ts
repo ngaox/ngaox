@@ -15,6 +15,7 @@ import { ICONS, IconsModule } from '@ngaox/icons';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
+import { SharedModule } from './shared/shared.module';
 
 const routes: Routes = [
   {
@@ -46,6 +47,7 @@ const MATERIAL_IMPORTS = [
     IconsModule.forRoot('', ICONS.Social),
     BrowserAnimationsModule,
     LayoutModule,
+    SharedModule,
     ...MATERIAL_IMPORTS
   ],
   providers: [],

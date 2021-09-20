@@ -14,6 +14,7 @@ import { ViewerComponent } from './viewer/viewer.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ContentResolver } from './content.resolver';
+import { SharedModule } from '../../shared/shared.module';
 
 const routes: Routes = [
   {
@@ -48,6 +49,7 @@ const MATERIAL_IMPORTS = [
     HttpClientModule,
     IconsModule,
     LayoutModule,
+    SharedModule,
     ...MATERIAL_IMPORTS
   ]
 })

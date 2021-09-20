@@ -20,7 +20,7 @@ import { filter, map } from 'rxjs/operators';
         *ngIf="showProgressBar$ | async"
       ></mat-progress-bar>
     </div>
-    <div>
+    <div class="main-content">
       <router-outlet></router-outlet>
     </div>
   `,
@@ -32,7 +32,7 @@ import { filter, map } from 'rxjs/operators';
         height: 100vh;
         grid-template-rows: auto auto 1fr;
       }
-      div {
+      .main-content {
         overflow: hidden auto;
       }
     `
