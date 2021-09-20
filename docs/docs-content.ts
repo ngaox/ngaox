@@ -9,32 +9,32 @@ export const DocItems: DocContentItem[] = [
   {
     name: 'Getting Started',
     slug: 'getting-started',
-    contentUrl: ''
+    contentUrl: '/README.md'
   },
   {
     name: 'Xetting Started',
     slug: 'getting-starfgdted',
-    contentUrl: ''
+    contentUrl: '/packages/chaospad/README.md'
   },
   {
     name: 'Betting Started',
     slug: 'getting-stdfgarted',
-    contentUrl: ''
+    contentUrl: '/README.md'
   },
   {
     name: 'GGetting Started',
     slug: 'gettdgfing-started',
-    contentUrl: ''
+    contentUrl: '/README.md'
   },
   {
     name: 'Getting Started dsf',
     slug: 'gettidgfng-started',
     priority: 1,
-    contentUrl: ''
+    contentUrl: '/README.md'
   },
   {
     name: 'Aetting Started',
     slug: 'getting-stargdted',
-    contentUrl: ''
+    contentUrl: '/README.md'
   }
 ];

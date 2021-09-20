@@ -12,6 +12,7 @@ import { MatListModule } from '@angular/material/list';
 
 import { ViewerComponent } from './viewer/viewer.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -37,6 +38,7 @@ const MATERIAL_IMPORTS = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    HttpClientModule,
     IconsModule,
     LayoutModule,
     ...MATERIAL_IMPORTS

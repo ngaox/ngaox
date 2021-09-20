@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 import { DocItem } from '../../core/interfaces';
 import { NavbarDocItems } from 'docs/docs-map';
 import { TitleService } from '../../core/title.service';
@@ -18,11 +18,16 @@ export class DocsComponent {
       map(result => result.matches),
       shareReplay()
     );
-  pageTitle = this.titleService.getTitle();
+  pageTitle = this.titleService.getTitle().pipe(
+    tap({
+      next: () => this.changeDetector.detectChanges()
+    })
+  );
   docItemsList: DocItem[] = NavbarDocItems;
 
   constructor(
     private titleService: TitleService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private changeDetector: ChangeDetectorRef
   ) {}
 }
