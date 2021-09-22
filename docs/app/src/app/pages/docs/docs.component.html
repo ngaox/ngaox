@@ -37,7 +37,9 @@
         <span>{{ pageTitle | async }}</span>
       </mat-toolbar>
       <!-- Add Content Here -->
-      <router-outlet></router-outlet>
+      <div class="container" style="padding: 30px">
+        <router-outlet></router-outlet>
+      </div>
     </div>
     <docs-footer></docs-footer>
   </mat-sidenav-content>

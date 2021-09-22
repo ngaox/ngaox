@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 
 import { ViewerComponent } from './viewer/viewer.component';
 import { CategoriesComponent } from './categories/categories.component';
@@ -38,7 +39,8 @@ const MATERIAL_IMPORTS = [
   MatToolbarModule,
   MatButtonModule,
   MatSidenavModule,
-  MatListModule
+  MatListModule,
+  MatCardModule
 ];
 
 @NgModule({
