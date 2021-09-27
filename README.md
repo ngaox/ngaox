@@ -33,7 +33,7 @@ This repository contains several npm packages that are published under the scope
 Contributions are always welcome!
 See [`contributing.md`](https://github.com/rabraghib/.github/blob/main/CONTRIBUTING.md) for ways to get started.
 
-Please adhere to this project's [`code of conduct`](https://github.com/rabraghib/.github/blob/main/CONTRIBUTING.md).
+Please adhere to this project's [`code of conduct`](https://github.com/rabraghib/.github/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
