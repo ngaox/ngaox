@@ -9,7 +9,7 @@
   &::before {
     content: '';
     position: absolute;
-    background: #3f51b5;
+    background: var(--primary-color);
     height: 100%;
     z-index: -1;
     width: calc(50% + 100px);
@@ -48,8 +48,7 @@
       margin: 15px 0 25px 0;
       max-width: 35ch;
     }
-    .docs-button {
-    }
+    // .docs-button {}
   }
   @media (max-width: 768px) {
     &::before {

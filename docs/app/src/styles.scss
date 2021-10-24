@@ -2,7 +2,9 @@
 * {
   box-sizing: border-box;
 }
-
+:root {
+  --primary-color: #3f51b5;
+}
 html,
 body {
   height: 100%;

@@ -1,6 +1,12 @@
-p {
+footer {
   display: block;
-  padding: 40px;
-  background: #eee;
+  padding: 25px;
+  background: var(--primary-color);
   margin: 0;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #fff;
+  a {
+    color: #fff;
+  }
 }
