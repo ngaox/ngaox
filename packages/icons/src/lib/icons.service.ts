@@ -24,6 +24,7 @@ export class IconsService {
       svgEl.removeAttribute('style');
       svgEl.removeAttribute('class');
       svgEl.setAttribute('fill', 'currentColor');
+      svgEl.setAttribute('style', 'height: 100%; width: 100%;');
     }
     return svgEl;
   }
