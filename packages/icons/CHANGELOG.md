@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/rabraghib/ngaox/compare/icons-v1.0.3...icons-v1.1.0) (2021-11-20)
+
+
+### Features
+
+* **docs:** :art: improve sidenav ([183b0f2](https://www.github.com/rabraghib/ngaox/commit/183b0f2314d0e142b1d3b86584b256f7245d09a6))
+* **icons:** add arrows icons ([ee2e767](https://www.github.com/rabraghib/ngaox/commit/ee2e767931645575df4ff8233bc42621fe21c973))
+
+
+### Bug Fixes
+
+* **icons:** svg ignore height ([fd5ada7](https://www.github.com/rabraghib/ngaox/commit/fd5ada79bdf785ca329c0abdc264fb9cc05d82d2))
+
 ### [1.0.3](https://www.github.com/rabraghib/ngaox/compare/icons-v1.0.2...icons-v1.0.3) (2021-09-18)
 
 
