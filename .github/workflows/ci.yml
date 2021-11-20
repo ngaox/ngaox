@@ -4,10 +4,12 @@ on:
   push:
     paths:
       - 'packages/**'
+      - '!**/*.md'
     branches: [main]
   pull_request:
     paths:
       - 'packages/**'
+      - '!**/*.md'
     branches: [main]
 
 jobs:
