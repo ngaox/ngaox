@@ -14,13 +14,13 @@ import { filter, map } from 'rxjs/operators';
   selector: 'docs-root',
   template: `
     <docs-navbar></docs-navbar>
-    <div>
-      <mat-progress-bar
-        mode="indeterminate"
-        *ngIf="showProgressBar$ | async"
-      ></mat-progress-bar>
-    </div>
     <div class="main-content">
+      <div class="progress-bar-container">
+        <mat-progress-bar
+          mode="indeterminate"
+          *ngIf="showProgressBar$ | async"
+        ></mat-progress-bar>
+      </div>
       <router-outlet></router-outlet>
     </div>
   `,
@@ -30,10 +30,18 @@ import { filter, map } from 'rxjs/operators';
         display: grid;
         width: 100vw;
         height: 100vh;
-        grid-template-rows: auto auto 1fr;
+        grid-template-rows: auto 1fr;
       }
       .main-content {
         overflow: hidden auto;
+        position: relative;
+      }
+      .progress-bar-container {
+        position: absolute;
+        z-index: 9;
+        top: 0;
+        left: 0;
+        width: 100%;
       }
     `
   ]
