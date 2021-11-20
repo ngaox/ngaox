@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SharedModule } from './shared/shared.module';
+import { APP_ICONS } from './app.icons';
 
 const routes: Routes = [
   {
@@ -44,7 +45,7 @@ const MATERIAL_IMPORTS = [
     BrowserModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    IconsModule.forRoot('', ICONS.Social),
+    IconsModule.forRoot(':(', APP_ICONS),
     BrowserAnimationsModule,
     LayoutModule,
     SharedModule,

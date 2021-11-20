@@ -16,6 +16,8 @@ import { CategoriesComponent } from './categories/categories.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ContentResolver } from './content.resolver';
 import { SharedModule } from '../../shared/shared.module';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 const routes: Routes = [
   {
@@ -40,11 +42,17 @@ const MATERIAL_IMPORTS = [
   MatButtonModule,
   MatSidenavModule,
   MatListModule,
-  MatCardModule
+  MatCardModule,
+  CdkAccordionModule
 ];
 
 @NgModule({
-  declarations: [DocsComponent, ViewerComponent, CategoriesComponent],
+  declarations: [
+    DocsComponent,
+    ViewerComponent,
+    CategoriesComponent,
+    SidenavComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

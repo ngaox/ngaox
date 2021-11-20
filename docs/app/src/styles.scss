@@ -26,3 +26,9 @@ svg {
 .min-height-full {
   min-height: 100%;
 }
+.rotate-90 {
+  transform: rotate(90deg);
+}
+.-rotate-90 {
+  transform: rotate(-90deg);
+}

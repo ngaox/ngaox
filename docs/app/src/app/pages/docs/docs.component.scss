@@ -1,9 +1,5 @@
 .sidenav {
-  width: 200px;
-}
-
-.sidenav .mat-toolbar {
-  background: inherit;
+  width: 250px;
 }
 
 .mat-toolbar.mat-primary {
@@ -12,6 +8,7 @@
   z-index: 1;
 }
 
-a.active {
-  color: #ff4081;
+.page-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

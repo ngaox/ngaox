@@ -2,9 +2,9 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
-import { DocItem } from '../../core/interfaces';
-import { NavbarDocItems } from 'docs/docs-map';
 import { TitleService } from '../../core/title.service';
+import { SortedDocItems } from 'docs/docs-map';
+import { DocSection } from 'docs/models';
 
 @Component({
   selector: 'docs-entry',
@@ -23,7 +23,7 @@ export class DocsComponent {
       next: () => this.changeDetector.detectChanges()
     })
   );
-  docItemsList: DocItem[] = NavbarDocItems;
+  docSectionsList: DocSection[] = SortedDocItems;
 
   constructor(
     private titleService: TitleService,

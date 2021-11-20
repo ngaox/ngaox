@@ -2,21 +2,11 @@
   Ngaox provides (all) the missing functionality of Angular
 </h3>
 <div class="categories-container">
-  <mat-card
-    *ngFor="let category of categories"
-    [routerLink]="['/docs', category.slug]"
-    class="card"
-  >
-    <img
-      mat-card-image
-      *ngIf="category.screenshotUrl"
-      [src]="category.screenshotUrl"
-    />
-    <mat-card-title style="margin-bottom: 20px">{{
-      category.name
-    }}</mat-card-title>
-    <mat-card-subtitle>
-      {{ category.summary || 'No description provided yet!' }}
-    </mat-card-subtitle>
-  </mat-card>
+  <ng-container *ngFor="let category of categories">
+    <docs-category-card
+      *ngIf="category | DocSection: 'item' as category; else elseTemplate"
+      [category]="category"
+    ></docs-category-card>
+    <ng-template #elseTemplate> Hmm... </ng-template>
+  </ng-container>
 </div>

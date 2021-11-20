@@ -7,15 +7,8 @@
     [opened]="(isHandset$ | async) === false"
   >
     <mat-toolbar>Ngaox Docs</mat-toolbar>
-    <mat-nav-list>
-      <a
-        mat-list-item
-        *ngFor="let docItem of docItemsList"
-        [routerLink]="['/docs', docItem.slug]"
-        routerLinkActive="active"
-        >{{ docItem.name }}</a
-      >
-    </mat-nav-list>
+    <mat-divider></mat-divider>
+    <docs-sidenav [DocSections]="docSectionsList"></docs-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="min-height-full">
@@ -30,11 +23,13 @@
         >
           <ngaox-icon
             style="width: 25px"
-            name="social:github"
+            name="ui:menu-bars"
             aria-label="Side nav toggle icon"
           ></ngaox-icon>
         </button>
-        <span>{{ pageTitle | async }}</span>
+        <span class="page-title" [title]="pageTitle | async">{{
+          pageTitle | async
+        }}</span>
       </mat-toolbar>
       <!-- Add Content Here -->
       <div class="container" style="padding: 30px">

@@ -1,9 +1,4 @@
-import { DocItem } from './app/src/app/core/interfaces';
-
-export type DocContentItem = DocItem & {
-  contentUrl: string;
-  priority?: number;
-};
+import { DocContentItem, DocItemType } from './models';
 
 export const DocItems: DocContentItem[] = [
   {
@@ -16,12 +11,14 @@ export const DocItems: DocContentItem[] = [
   {
     name: 'Chaospad README',
     slug: 'chaospad',
+    type: DocItemType.Guide,
     screenshotUrl: 'https://picsum.photos/320/200?id=chaospad',
     contentUrl: '/packages/chaospad/README.md'
   },
   {
     name: 'Seo README',
     slug: 'seo',
+    type: DocItemType.Demo,
     screenshotUrl: 'https://picsum.photos/320/200?id=seo',
     contentUrl: '/packages/seo/README.md'
   },

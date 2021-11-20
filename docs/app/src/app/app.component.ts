@@ -56,7 +56,6 @@ export class AppComponent {
         e instanceof NavigationEnd
     ),
     map(e => {
-      console.log('gg');
       return (
         e instanceof ResolveStart ||
         e instanceof NavigationStart ||
