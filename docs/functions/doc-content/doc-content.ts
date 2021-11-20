@@ -22,6 +22,7 @@ export const handler: Handler = async (event: Event, context: any) => {
       // },
       body: JSON.stringify({
         name: docItem.name,
+        type: docItem.type,
         content: await res.text()
       })
     };

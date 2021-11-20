@@ -8,7 +8,8 @@ function BuildDocSections(items: DocContentItem[]): DocSection[] {
   let result: DocSection[] = [
     ...SortDocItems(DocItems.filter(item => !item.type))
   ];
-  Object.values(DocItemType).forEach(type => {
+  Object.keys(DocItemType).forEach(key => {
+    let type = DocItemType[key as keyof typeof DocItemType];
     let section = {
       name: type,
       items: DocItems.filter(item => item.type === type)

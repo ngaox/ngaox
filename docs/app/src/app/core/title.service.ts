@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TitleService {
-  private _title: BehaviorSubject<string> = new BehaviorSubject('GG');
+  private _title: BehaviorSubject<string> = new BehaviorSubject('');
   defaultTitle = 'Ngaox';
 
   getTitle(): BehaviorSubject<string> {

@@ -12,7 +12,7 @@ export type DocContentItem = DocItem & {
 };
 
 export interface DocParentSection {
-  name: string;
+  name: DocItemType;
   items: DocContentItem[];
 }
 export type DocSection = DocContentItem | DocParentSection;

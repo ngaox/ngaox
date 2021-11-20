@@ -4,8 +4,9 @@
       <cdk-accordion-item
         class="accordion-item"
         *ngIf="item | DocSection: 'collection' ?? false as item; else LinkItem"
-        [class.active]="accordionItem.expanded"
+        routerLinkActive="active"
         #accordionItem="cdkAccordionItem"
+        [expanded]="isCurrentPageSection(item)"
       >
         <div class="accordion-item-header" (click)="accordionItem.toggle()">
           {{ item.name }}

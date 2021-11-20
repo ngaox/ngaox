@@ -1,16 +1,16 @@
-a.active {
-  color: #ff4081;
-}
-.nested-items-icon {
-  color: #999;
-  width: 15px;
-  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
-}
 .accordion-item {
   --border-color: rgba(0, 0, 0, 0.5);
   &.active {
     --border-color: rgba(255, 64, 129, 0.5);
   }
+}
+a.active {
+  color: #ff4081;
+}
+.nested-items-icon {
+  color: var(--border-color);
+  width: 15px;
+  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .accordion-item-header {
   font-size: 1rem;
