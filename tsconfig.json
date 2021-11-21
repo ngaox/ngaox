@@ -17,7 +17,6 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@ngaox/padup": ["packages/padup", "dist/padup"],
       "@ngaox/seo": ["dist/seo/seo", "dist/seo"],
       "@ngaox/chaospad": ["dist/chaospad/chaospad", "dist/chaospad"],
       "@ngaox/icons": ["dist/icons/icons", "dist/icons"]

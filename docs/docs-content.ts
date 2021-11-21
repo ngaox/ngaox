@@ -27,11 +27,5 @@ export const DocItems: DocContentItem[] = [
     slug: 'icons',
     screenshotUrl: 'https://picsum.photos/320/200?id=icons',
     contentUrl: '/packages/icons/README.md'
-  },
-  {
-    name: 'Padup README',
-    slug: 'padup',
-    screenshotUrl: 'https://picsum.photos/320/200?id=padup',
-    contentUrl: '/packages/padup/README.md'
   }
 ];

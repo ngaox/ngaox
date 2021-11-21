@@ -26,7 +26,6 @@ This repository contains several npm packages that are published under the scope
 | [@ngaox/seo](packages/seo#readme)           | An angular library to help generate & managing Social-Media/SEO meta tags, canonical links & page title. | [↗](packages/seo#readme)      |
 | [@ngaox/chaospad](packages/chaospad#readme) | Chaospad SDK & rest api client for angular.                                                              | [↗](packages/chaospad#readme) |
 | [@ngaox/icons](packages/icons#readme)       | Easily inline SVG icons into your angular app with a ready to import and use set of icons.               | [↗](packages/icons#readme)    |
-| [@ngaox/padup](packages/padup#readme)       | lightweight css framework for rapidly and easily build nice looking user interfaces.                     | [↗](packages/padup#readme)    |
 
 ## Contributing
 
