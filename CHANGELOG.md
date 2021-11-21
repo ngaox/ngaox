@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.5.1](https://www.github.com/rabraghib/ngaox/compare/ngaox-v1.5.0...ngaox-v1.5.1) (2021-11-21)
+
+
+### Reverts
+
+* **padup:** :alien: extract padup from main source ([eb81bd6](https://www.github.com/rabraghib/ngaox/commit/eb81bd6e42691e5462c409c36c545cf17523b2dd))
+
 ## [1.5.0](https://www.github.com/rabraghib/ngaox/compare/ngaox-v1.4.0...ngaox-v1.5.0) (2021-11-20)
 
 
