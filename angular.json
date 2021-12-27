@@ -119,7 +119,7 @@
       "projectType": "library",
       "root": "packages/seo",
       "sourceRoot": "packages/seo/src",
-      "prefix": "seo",
+      "prefix": "ngaox",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -136,14 +136,6 @@
           },
           "defaultConfiguration": "production"
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "packages/seo/src/test.ts",
-            "tsConfig": "packages/seo/tsconfig.spec.json",
-            "karmaConfig": "packages/seo/karma.conf.js"
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
@@ -159,7 +151,7 @@
       "projectType": "library",
       "root": "packages/chaospad",
       "sourceRoot": "packages/chaospad/src",
-      "prefix": "cp",
+      "prefix": "ngaox",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -176,14 +168,6 @@
           },
           "defaultConfiguration": "production"
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "packages/chaospad/src/test.ts",
-            "tsConfig": "packages/chaospad/tsconfig.spec.json",
-            "karmaConfig": "packages/chaospad/karma.conf.js"
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
@@ -199,7 +183,7 @@
       "projectType": "library",
       "root": "packages/icons",
       "sourceRoot": "packages/icons/src",
-      "prefix": "lib",
+      "prefix": "ngaox",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
