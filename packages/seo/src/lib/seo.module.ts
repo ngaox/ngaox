@@ -27,12 +27,9 @@ export class SeoModule {
     if (AutoLoader) {
       router.events
         .pipe(filter(event => event instanceof NavigationEnd))
-        .subscribe(
-          // @ts-ignore
-          (event: NavigationEnd) => {
-            seo.set(AutoLoader(event, injector));
-          }
-        );
+        .subscribe(event => {
+          seo.set(AutoLoader(event as NavigationEnd, injector));
+        });
     }
   }
 

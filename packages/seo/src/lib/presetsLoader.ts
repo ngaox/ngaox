@@ -7,23 +7,21 @@ export function presetsLoader(
   injector: Injector,
   routesSeoData: routesSeoData
 ): PageSeoData {
-  let resultsKeys = Object.keys(routesSeoData).filter(path => {
+  const resultsKeys = Object.keys(routesSeoData).filter(path => {
     path = noLastSlash(path);
-    let url = noLastSlash(event.urlAfterRedirects.split('?')[0]);
+    const url = noLastSlash(event.urlAfterRedirects.split('?')[0]);
     if (path.endsWith('/*')) {
       return url.startsWith(path.slice(0, -2));
     } else {
       return path === url;
     }
   });
-  let dataKey = resultsKeys[resultsKeys.length - 1];
+  const dataKey = resultsKeys[resultsKeys.length - 1];
   if (typeof routesSeoData[dataKey] === 'function') {
-    // @ts-ignore
-    let loader: Loader = routesSeoData[dataKey];
+    const loader: Loader = routesSeoData[dataKey] as Loader;
     return loader(event, injector);
   }
-  // @ts-ignore
-  return routesSeoData[dataKey];
+  return routesSeoData[dataKey] as PageSeoData;
 }
 
 function noLastSlash(url: string) {

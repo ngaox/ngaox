@@ -7,8 +7,6 @@ import { DocSection } from 'docs/models';
 export class DataService {
   private _currentDocSection?: DocSection;
 
-  constructor() {}
-
   setCurrentDocSection(item: DocSection) {
     this._currentDocSection = item;
   }

@@ -1,22 +1,19 @@
 {
-  "extends": "../../.eslintrc.json",
+  "extends": ["../../.eslintrc.json"],
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
       "files": ["*.ts"],
-      "parserOptions": {
-        "project": [
-          "packages/seo/tsconfig.lib.json",
-          "packages/seo/tsconfig.spec.json"
-        ],
-        "createDefaultProgram": true
-      },
+      "extends": [
+        "plugin:@nrwl/nx/angular",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",
           {
             "type": "attribute",
-            "prefix": "seo",
+            "prefix": "ngaox",
             "style": "camelCase"
           }
         ],
@@ -24,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "seo",
+            "prefix": "ngaox",
             "style": "kebab-case"
           }
         ]
@@ -32,6 +29,7 @@
     },
     {
       "files": ["*.html"],
+      "extends": ["plugin:@nrwl/nx/angular-template"],
       "rules": {}
     }
   ]

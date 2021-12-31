@@ -3,6 +3,7 @@ import { Event } from '@netlify/functions/src/function/event';
 import { DocItems } from '../../docs-content';
 import fetch from 'node-fetch';
 
+// TODO: refactor to use firebase functions
 export const handler: Handler = async (event: Event, context: any) => {
   try {
     const slug: string = `${event?.path?.split('/')?.pop()}`;

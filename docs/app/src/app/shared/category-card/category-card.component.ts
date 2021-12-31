@@ -8,5 +8,4 @@ import { DocContentItem } from 'docs/models';
 })
 export class CategoryCardComponent {
   @Input() category!: DocContentItem;
-  constructor() {}
 }

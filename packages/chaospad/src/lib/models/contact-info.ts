@@ -6,6 +6,6 @@ export interface ContactInfo {
   type: string; // Type & logo are Type.topicname & Type.logo
   logo: string;
   owner: User | IRI;
-  validated: Boolean;
+  validated: boolean;
   visibility: Topic | IRI; // Topic <type:visibility>
 }
