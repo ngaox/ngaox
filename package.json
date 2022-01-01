@@ -4,14 +4,18 @@
   "scripts": {
     "ng": "nx",
     "start": "nx serve",
-    "build": "yarn all:prebuild && yarn all:build",
+    "build": "nx build",
+    "deploy": "nx deploy",
+    "lint": "nx lint",
+    "test": "nx test",
+    "watch": "nx build --watch --c development",
+    "docs:deploy": "nx run-many --target=deploy --projects=docs-app,docs-functions",
+    "docs:start": "npm-run-all -p \"watch docs-app\" \"watch docs-functions\" docs:emulator:start",
+    "docs:emulator:start": "firebase emulators:start --only=functions,hosting",
     "build:icons:svgs": "cd packages/icons && yarn build",
     "build:seo:schematics": "yarn build seo && cd packages/seo && yarn build",
-    "all:prebuild": "yarn build:icons:svgs && yarn build:seo:schematics",
-    "all:build": "nx run-many --target=build --all",
-    "watch": "nx build --watch --c development",
-    "lint": "nx run-many --target=lint --all",
-    "test": "nx run-many --target=test --all",
+    "build:all": "yarn prebuild:all && nx run-many --target=build --all",
+    "prebuild:all": "yarn build:icons:svgs && yarn build:seo:schematics",
     "prepare": "husky install tools/.husky",
     "postinstall": "node ./tools/decorate-angular-cli.js && ngcc --properties es2015 browser module main"
   },
@@ -22,11 +26,15 @@
     "@angular/common": "~13.1.0",
     "@angular/compiler": "~13.1.0",
     "@angular/core": "~13.1.0",
+    "@angular/fire": "^7.2.0",
     "@angular/forms": "~13.1.0",
     "@angular/material": "~13.1.0",
     "@angular/platform-browser": "~13.1.0",
     "@angular/platform-browser-dynamic": "~13.1.0",
     "@angular/router": "~13.1.0",
+    "firebase": "^9.6.1",
+    "firebase-admin": "^10.0.1",
+    "firebase-functions": "^3.16.0",
     "marked": "^3.0.4",
     "prismjs": "^1.25.0",
     "rxjs": "~7.4.0",
@@ -48,6 +56,7 @@
     "@nrwl/eslint-plugin-nx": "13.4.1",
     "@nrwl/jest": "13.4.1",
     "@nrwl/linter": "13.4.1",
+    "@nrwl/node": "^13.4.1",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/tao": "13.4.1",
     "@nrwl/workspace": "13.4.1",
@@ -65,6 +74,7 @@
     "jest-preset-angular": "11.0.0",
     "lint-staged": "^12.1.4",
     "ng-packagr": "^13.0.0",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.5",
     "postcss-import": "^14.0.2",
     "postcss-preset-env": "^6.7.0",
@@ -76,13 +86,16 @@
   },
   "lint-staged": {
     "package.json": [
-      "node ./tools/sync-versions.js"
+      "node ./tools/sync-versions.js",
+      "git add"
     ],
     "*.{js,ts}": [
-      "eslint --fix"
+      "eslint --fix",
+      "git add"
     ],
     "*.{js,json,css,scss,md,ts,html}": [
-      "prettier --write"
+      "prettier --write",
+      "git add"
     ]
   }
 }

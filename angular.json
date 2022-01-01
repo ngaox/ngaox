@@ -1,8 +1,9 @@
 {
   "version": 2,
   "projects": {
-    "docs": "docs/app",
     "chaospad": "packages/chaospad",
+    "docs-app": "docs/app",
+    "docs-functions": "docs/functions",
     "icons": "packages/icons",
     "seo": "packages/seo"
   }

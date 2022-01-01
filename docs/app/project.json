@@ -59,10 +59,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "docs:build:production"
+          "browserTarget": "docs-app:build:production"
         },
         "development": {
-          "browserTarget": "docs:build:development"
+          "browserTarget": "docs-app:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -70,13 +70,23 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "docs:build"
+        "browserTarget": "docs-app:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": ["docs/app/src/**/*.ts", "docs/app/src/**/*.html"]
+      }
+    },
+    "deploy": {
+      "executor": "@angular/fire:deploy",
+      "options": {
+        "prerender": false,
+        // "ssr": false,
+        "browserTarget": "docs-app:build:production",
+        "firebaseProject": "chaospad-ngaox",
+        "firebaseHostingSite": "chaospad-ngaox"
       }
     }
   },

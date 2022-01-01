@@ -1,0 +1,62 @@
+{
+  "root": "docs/functions",
+  "sourceRoot": "docs/functions/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/docs/functions",
+        "main": "docs/functions/src/main.ts",
+        "tsConfig": "docs/functions/tsconfig.app.json",
+        "assets": ["docs/functions/src/assets"],
+        "generatePackageJson": true,
+        "extractLicenses": false
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "docs/functions/src/environments/environment.ts",
+              "with": "docs/functions/src/environments/environment.prod.ts"
+            }
+          ]
+        },
+        "development": {}
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "functions:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["docs/functions/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/docs/functions"],
+      "options": {
+        "jestConfig": "docs/functions/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "deploy": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["firebase deploy --only functions"]
+      }
+    }
+  },
+  "tags": []
+}
