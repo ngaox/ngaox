@@ -1,5 +1,46 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/rabraghib/ngaox/compare/v1.4.0...v2.0.0) (2022-01-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* netlify functions is not compatible with firebase functions
+
+### Features
+
+* **docs:** :art: improve sidenav ([183b0f2](https://www.github.com/rabraghib/ngaox/commit/183b0f2314d0e142b1d3b86584b256f7245d09a6))
+* **docs:** add categories page content ([9caa1a8](https://www.github.com/rabraghib/ngaox/commit/9caa1a8c1b1d329bf458729dfba3765ef5bb7781))
+* **docs:** add default markdown styling ([b25bc5f](https://www.github.com/rabraghib/ngaox/commit/b25bc5fb86282403bc456fcbb021aa95757c3ef5))
+* **docs:** add docs pages links on a sidebar ([409f516](https://www.github.com/rabraghib/ngaox/commit/409f5160fb5c1a378f7f8096d90ef5f10f8908da)), closes [#24](https://www.github.com/rabraghib/ngaox/issues/24)
+* **docs:** add footer bar content ([f143674](https://www.github.com/rabraghib/ngaox/commit/f143674b09f19ae08066e29b6b57b15b75e7ad8b))
+* **docs:** add home hero section ([1d72bd0](https://www.github.com/rabraghib/ngaox/commit/1d72bd0b02eb58a6e0ab495a87d99077e4a9a5ad))
+* **docs:** add progress bar and correct title ([76fb5a1](https://www.github.com/rabraghib/ngaox/commit/76fb5a1f39cbfb7cc6579809f21a7792e52a1495))
+* **docs:** implement docs page from md content ([efa3746](https://www.github.com/rabraghib/ngaox/commit/efa374673a9036a03a5a9e33498bc64d1a23351c)), closes [#23](https://www.github.com/rabraghib/ngaox/issues/23)
+* **docs:** init footer component ([21c65db](https://www.github.com/rabraghib/ngaox/commit/21c65db6285bcff9d4260f2b3abb95e5c1e319ac))
+* **docs:** init pages components and routing ([ba91783](https://www.github.com/rabraghib/ngaox/commit/ba9178318f2fc62741ffe4dbf3c336e5c9d1b2d1))
+* **icons:** add arrows icons ([ee2e767](https://www.github.com/rabraghib/ngaox/commit/ee2e767931645575df4ff8233bc42621fe21c973))
+
+
+### Bug Fixes
+
+* :bug: remove inited tests and normalize prefixes ([9be30d1](https://www.github.com/rabraghib/ngaox/commit/9be30d14affd6535df2b5e5ff80212293e506b03))
+* **docs:** add a fixed version of local dependacies ([866fd51](https://www.github.com/rabraghib/ngaox/commit/866fd51c9b26f1e2c98a15487a21135873e0362b))
+* **docs:** layout shift on navigation ([f76c9f0](https://www.github.com/rabraghib/ngaox/commit/f76c9f06500f3bf29080b6c8415e15c7f2c19793))
+* **docs:** navbar responsiveness ([1fbf349](https://www.github.com/rabraghib/ngaox/commit/1fbf349b3dfbf49806a3f2efd5b212b806df8cc9))
+* **icons:** svg ignore height ([fd5ada7](https://www.github.com/rabraghib/ngaox/commit/fd5ada79bdf785ca329c0abdc264fb9cc05d82d2))
+* specify node version in .nvmrc ([8db170a](https://www.github.com/rabraghib/ngaox/commit/8db170a43befb68df83ed133bac0c932ccd332c4))
+
+
+### Reverts
+
+* **padup:** :alien: extract padup from main source ([eb81bd6](https://www.github.com/rabraghib/ngaox/commit/eb81bd6e42691e5462c409c36c545cf17523b2dd))
+
+
+### Code Refactoring
+
+* :clown_face: netlify functions => firebase functions ([91fdfe7](https://www.github.com/rabraghib/ngaox/commit/91fdfe7eb00c268cc58d59279cd242533be13d0b))
+
 ### [1.5.1](https://www.github.com/rabraghib/ngaox/compare/ngaox-v1.5.0...ngaox-v1.5.1) (2021-11-21)
 
 ### Reverts
