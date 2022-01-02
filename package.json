@@ -3,7 +3,7 @@
   "version": "1.5.1",
   "scripts": {
     "ng": "nx",
-    "nx-all": "nx run-many --all --target",
+    "nx-all": "nx run-many --all --exclude=docs-functions --target",
     "nx-effected": "nx affected --target",
     "start": "nx serve",
     "build": "nx build",

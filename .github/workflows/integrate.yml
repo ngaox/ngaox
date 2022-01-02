@@ -26,22 +26,21 @@ jobs:
         run: yarn nx-effected lint --parallel --max-parallel=2
       - name: 🧪 Test effected apps/packages
         run: yarn nx-effected test --parallel --max-parallel=2
-
-  analyze:
-    needs: lint-test
-    runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-    steps:
-      - uses: actions/checkout@v2
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v1
-        with:
-          languages: 'javascript'
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v1
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v1
+# TODO: uncomment this (#63)
+#   analyze:
+#     needs: lint-test
+#     runs-on: ubuntu-latest
+#     permissions:
+#       actions: read
+#       contents: read
+#       security-events: write
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Initialize CodeQL
+#         uses: github/codeql-action/init@v1
+#         with:
+#           languages: 'javascript'
+#       - name: Autobuild
+#         uses: github/codeql-action/autobuild@v1
+#       - name: Perform CodeQL Analysis
+#         uses: github/codeql-action/analyze@v1
