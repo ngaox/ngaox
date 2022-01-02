@@ -29,6 +29,14 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@ngaox'
           cache: 'yarn'
+      - name: Sync versions across monorepo (package.json files)
+        run: |
+          node ./tools/sync-versions.js
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit --amend --no-edit --no-verify
+          git push
       - run: yarn install --frozen-lockfile
       - name: 🛠 Build packages
         run: yarn nx-all build
