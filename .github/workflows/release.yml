@@ -23,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v1
         with:
           node-version: '16'
@@ -37,8 +39,8 @@ jobs:
           git config user.email github-actions@github.com
           git add .
           git commit --amend --no-edit --no-verify
-          git tag -f ${{ needs.release-please.outputs.tag_name }}
-          git push -f --tags && git push -f
+          git tag -af -m ${{ needs.release-please.outputs.tag_name }} ${{ needs.release-please.outputs.tag_name }}
+          git push -f origin ${{ needs.release-please.outputs.tag_name }} --tags && git push -f
       - name: 🛠 Build packages
         run: yarn nx-all build
       - name: 🎉 Deploy docs & packages packages
