@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "nx",
     "nx-all": "nx run-many --all --target",
+    "nx-effected": "nx affected --target",
     "start": "nx serve",
     "build": "nx build",
     "deploy": "nx deploy",

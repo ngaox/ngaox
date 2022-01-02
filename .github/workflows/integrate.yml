@@ -2,31 +2,33 @@ name: Continuous Integration
 
 on:
   push:
-    paths:
-      - 'packages/**'
-      - '!**/*.md'
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    paths:
-      - 'packages/**'
-      - '!**/*.md'
-    branches: [main]
 
 jobs:
   lint-test:
     runs-on: ubuntu-latest
-    name: 🧪 Lint & Test Packages
     steps:
       - uses: actions/checkout@v2
-      - name: Install dependencies
+        with:
+          # prevent setting ref to pr merge commit
+          ref: ${{ github.event.pull_request.head.ref || '' }}
+          fetch-depth: 0
+      - uses: nrwl/nx-set-shas@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - name: 🛠 Install dependencies
         run: yarn --frozen-lockfile
-      - name: Lint packages
-        run: yarn lint
-      - name: Test packages
-        run: yarn test
+      - name: 🧿 Lint effected apps/packages
+        run: yarn nx-effected lint --parallel --max-parallel=2
+      - name: 🧪 Test effected apps/packages
+        run: yarn nx-effected test --parallel --max-parallel=2
+
   analyze:
     needs: lint-test
-    name: Analyze Code
     runs-on: ubuntu-latest
     permissions:
       actions: read
