@@ -57,7 +57,7 @@
     "@nrwl/cli": "13.4.1",
     "@nrwl/eslint-plugin-nx": "13.4.1",
     "@nrwl/jest": "13.4.1",
-    "@nrwl/linter": "13.4.1",
+    "@nrwl/linter": "13.4.2",
     "@nrwl/node": "^13.4.1",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/tao": "13.4.1",
