@@ -1,0 +1,12 @@
+{
+  "name": "@ngaox/docs-functions",
+  "version": "1.5.1",
+  "private": true,
+  "dependencies": {
+    "firebase-admin": "",
+    "firebase-functions": ""
+  },
+  "engines": {
+    "node": "16"
+  }
+}

@@ -1,20 +1,19 @@
 {
   "name": "@ngaox/icons",
-  "version": "1.1.0",
+  "version": "1.5.1",
   "description": "Easily inline SVG icons into your angular app with a ready to import and use set of icons",
   "bin": {
-    "ngaox-icons": "bin/bundle.js"
+    "ngaox-icons": "bin/index.js"
   },
   "scripts": {
-    "bundle-bin": "../../node_modules/.bin/webpack -c ./webpack.config.js --mode production",
-    "build": "yarn bundle-bin && node bin/bundle.js build src/svgs src/svgs/index.json"
+    "build": "node bin/index.js build src/svgs src/svgs/index.json"
   },
   "peerDependencies": {
-    "@angular/common": "^12.1.2",
-    "@angular/core": "^12.1.2"
+    "@angular/common": "",
+    "@angular/core": ""
   },
   "dependencies": {
-    "tslib": "^2.2.0"
+    "tslib": ""
   },
   "repository": {
     "type": "git",

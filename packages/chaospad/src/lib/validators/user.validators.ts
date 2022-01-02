@@ -9,8 +9,6 @@ import { catchError, debounceTime, mergeMap, take } from 'rxjs/operators';
 import { ApiService } from '../services/api.service';
 
 export class UserValidators {
-  constructor() {}
-
   static Unique(api: ApiService): AsyncValidatorFn {
     return (control: AbstractControl) => {
       return control.valueChanges.pipe(

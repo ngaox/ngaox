@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "chaospad-ngaox"
+  },
+  "targets": {
+    "chaospad-ngaox": {
+      "hosting": {
+        "docs-app": [
+          "chaospad-ngaox"
+        ]
+      }
+    }
+  }
+}

@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   getLoggedUser(): UserResponse | null {
-    let content = localStorage.getItem(this.LOGGED_USER);
+    const content = localStorage.getItem(this.LOGGED_USER);
     return !content ? null : JSON.parse(content);
   }
 

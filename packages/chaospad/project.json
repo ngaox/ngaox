@@ -1,0 +1,49 @@
+{
+  "projectType": "library",
+  "root": "packages/chaospad",
+  "sourceRoot": "packages/chaospad/src",
+  "prefix": "ngaox",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/packages/chaospad"],
+      "options": {
+        "project": "packages/chaospad/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/chaospad/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "packages/chaospad/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/chaospad"],
+      "options": {
+        "jestConfig": "packages/chaospad/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/chaospad/src/**/*.ts",
+          "packages/chaospad/src/**/*.html"
+        ]
+      }
+    },
+    "deploy": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public",
+        "buildTarget": "production"
+      }
+    }
+  },
+  "tags": []
+}

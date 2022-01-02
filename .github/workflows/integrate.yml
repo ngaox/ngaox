@@ -1,0 +1,46 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # prevent setting ref to pr merge commit
+          ref: ${{ github.event.pull_request.head.ref || '' }}
+          fetch-depth: 0
+      - uses: nrwl/nx-set-shas@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - name: 🛠 Install dependencies
+        run: yarn --frozen-lockfile
+      - name: 🧿 Lint effected apps/packages
+        run: yarn nx-effected lint --parallel --max-parallel=2
+      - name: 🧪 Test effected apps/packages
+        run: yarn nx-effected test --parallel --max-parallel=2
+# TODO: uncomment this (#63)
+#   analyze:
+#     needs: lint-test
+#     runs-on: ubuntu-latest
+#     permissions:
+#       actions: read
+#       contents: read
+#       security-events: write
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Initialize CodeQL
+#         uses: github/codeql-action/init@v1
+#         with:
+#           languages: 'javascript'
+#       - name: Autobuild
+#         uses: github/codeql-action/autobuild@v1
+#       - name: Perform CodeQL Analysis
+#         uses: github/codeql-action/analyze@v1

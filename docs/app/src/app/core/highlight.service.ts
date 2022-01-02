@@ -5,7 +5,7 @@ import { isPlatformBrowser } from '@angular/common';
 
 import * as Prism from 'prismjs';
 import 'prismjs/components/prism-typescript';
-Prism.languages['preview-html'] = Prism.languages.html;
+// Prism.languages['preview-html'] = Prism.languages['html'];
 // import 'prismjs/plugins/toolbar/prism-toolbar';
 // import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard';
 
@@ -13,7 +13,7 @@ Prism.languages['preview-html'] = Prism.languages.html;
   providedIn: 'root'
 })
 export class HighlightService {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: string) {}
 
   highlightAll() {
     if (isPlatformBrowser(this.platformId)) {

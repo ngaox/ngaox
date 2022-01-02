@@ -1,0 +1,49 @@
+{
+  "projectType": "library",
+  "root": "packages/seo",
+  "sourceRoot": "packages/seo/src",
+  "prefix": "ngaox",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/packages/seo"],
+      "options": {
+        "project": "packages/seo/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/seo/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "packages/seo/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/seo"],
+      "options": {
+        "jestConfig": "packages/seo/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/seo/src/**/*.ts",
+          "packages/seo/src/**/*.html"
+        ]
+      }
+    },
+    "deploy": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public",
+        "buildTarget": "production"
+      }
+    }
+  },
+  "tags": []
+}
