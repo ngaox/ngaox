@@ -3,11 +3,11 @@
   "version": "1.5.1",
   "description": "Chaospad SDK & rest api client for angular",
   "peerDependencies": {
-    "@angular/common": "^13.1.0",
-    "@angular/core": "^13.1.0"
+    "@angular/common": "",
+    "@angular/core": ""
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": ""
   },
   "repository": {
     "type": "git",

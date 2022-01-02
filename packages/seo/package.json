@@ -14,11 +14,11 @@
   },
   "description": "Angular library to help generate & managing Social-Media/SEO meta tags, canonical links & page title.",
   "peerDependencies": {
-    "@angular/common": "^13.1.0",
-    "@angular/core": "^13.1.0"
+    "@angular/common": "",
+    "@angular/core": ""
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": ""
   },
   "repository": {
     "type": "git",
