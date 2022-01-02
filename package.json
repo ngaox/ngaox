@@ -14,10 +14,6 @@
     "docs:deploy": "nx run-many --target=deploy --projects=docs-app,docs-functions",
     "docs:start": "npm-run-all -p \"watch docs-app\" \"watch docs-functions\" docs:emulator:start",
     "docs:emulator:start": "firebase emulators:start --only=functions,hosting",
-    "build:icons:svgs": "cd packages/icons && yarn build",
-    "build:seo:schematics": "yarn build seo && cd packages/seo && yarn build",
-    "build:all": "yarn prebuild:all && nx run-many --target=build --all",
-    "prebuild:all": "yarn build:icons:svgs && yarn build:seo:schematics",
     "prepare": "husky install tools/.husky",
     "postinstall": "node ./tools/decorate-angular-cli.js && ngcc --properties es2015 browser module main"
   },
