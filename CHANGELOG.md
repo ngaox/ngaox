@@ -1,5 +1,14 @@
 # Changelog
 
+### [2.0.1](https://www.github.com/rabraghib/ngaox/compare/v2.0.0...v2.0.1) (2022-01-02)
+
+
+### Bug Fixes
+
+* :bug: version difference between packages ([05528df](https://www.github.com/rabraghib/ngaox/commit/05528df8cf631e96685dc5d6d57e28795459a90e))
+* :triangular_flag_on_post: extract helper scripts & schematics from packages ([afd3fb7](https://www.github.com/rabraghib/ngaox/commit/afd3fb71249a369a680d760555add104f44dc136))
+* docs accessing old API & release workflow fetch depth ([43b91eb](https://www.github.com/rabraghib/ngaox/commit/43b91eb49632fb2f7b98df19debecce819f87623))
+
 ## [2.0.0](https://www.github.com/rabraghib/ngaox/compare/v1.4.0...v2.0.0) (2022-01-02)
 
 
