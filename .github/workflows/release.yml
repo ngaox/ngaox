@@ -1,79 +1,53 @@
-# TODO: Implement this...
-# name: 🚀 Build & Release
-# on:
-#   push:
-#     branches:
-#       - main
-# jobs:
-#   release-please:
-#     runs-on: ubuntu-latest
-#     outputs:
-#       release_created: ${{ steps.release.outputs.release_created }}
-#       upload_url: ${{ steps.release.outputs.upload_url }}
-#       version: ${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}
-#       yarn-cache-dir-path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-#     steps:
-#       - uses: google-github-actions/release-please-action@v2
-#         id: release
-#         with:
-#           token: ${{ secrets.GITHUB_TOKEN }}
-#           release-type: node
-#       - name: Get yarn cache directory path
-#         id: yarn-cache-dir-path
-#         run: echo "::set-output name=dir::$(yarn cache dir)"
-#       - uses: actions/cache@v2
-#         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-#         with:
-#           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-#           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-#           restore-keys: |
-#             yarn-node_modules
-#       - name: Install dependencies
-#         if: steps.yarn-cache.outputs.cache-hit != 'true'
-#         run: yarn install --frozen-lockfile
+name: 🚀 Build & Release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+      version: ${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}
+    steps:
+      - uses: google-github-actions/release-please-action@v2
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: node
 
-#   release-publish:
-#     needs: release-please
-#     if: ${{ needs.release-please.outputs.release_created && success() }}
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: nrwl/nx-set-shas@v2
-#       - uses: actions/setup-node@v1
-#         with:
-#           node-version: '14'
-#           registry-url: 'https://registry.npmjs.org'
-#           scope: '@ngaox'
-#       - uses: actions/cache@v2
-#         id: yarn-cache
-#         with:
-#           path: ${{ needs.release-please.outputs.yarn-cache-dir-path }}
-#           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-#           restore-keys: |
-#             yarn-node_modules
-#       - run: yarn install --frozen-lockfile
-#       - name: 🛠 Build packages
-#         run: yarn build
-#       - name: 🎉 Publish packages to npm
-#         run: |
-#           for package in dist/packages/*/; do
-#             yarn publish $package
-#           done
-#         env:
-#           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-#       - name: Zip package dist folder
-#         run: zip -r ${{ matrix.distPath }}.zip ${{ matrix.distPath }}
-#       - name: Upload Release Asset
-#         id: upload-release-asset
-#         uses: actions/upload-release-asset@v1
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         with:
-#           upload_url: ${{ needs.release-please.outputs.upload_url }}
-#           asset_path: ${{ matrix.distPath }}.zip
-#           asset_name: ${{ matrix.name }}.zip
-#           asset_content_type: application/zip
-#       - run: |
-#           echo "Asset Uploaded!"
-#           echo "\tID: ${{ steps.upload-release-asset.outputs.id }}"
-#           echo "\tDownload-Url: ${{ steps.upload-release-asset.outputs.browser_download_url }}"
+  release-publish:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created && success() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@ngaox'
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - name: 🛠 Build packages
+        run: yarn nx-all build
+      - name: 🎉 Deploy docs & packages packages
+        run: yarn nx-all deploy --package-version ${{ needs.release-please.outputs.version }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Zip each package dist folder
+        run: |
+          cd dist/packages
+          for package in */; do
+            zip -r ../ngaox-$(basename $package)-${{ needs.release-please.outputs.version }}.zip $package;
+          done
+      - name: Upload zip files to github release
+        run: |
+          cd ..
+          for package in *.zip; do
+            gh release upload --repo $GITHUB_REPOSITORY ${{ needs.release-please.outputs.tag_name }} $package;
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
