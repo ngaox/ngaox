@@ -61,7 +61,7 @@
     "@nrwl/node": "^13.4.1",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/tao": "13.4.1",
-    "@nrwl/workspace": "13.4.1",
+    "@nrwl/workspace": "13.4.2",
     "@types/jest": "27.0.2",
     "@types/marked": "^3.0.1",
     "@types/node": "14.14.33",
