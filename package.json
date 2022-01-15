@@ -33,7 +33,7 @@
     "firebase": "^9.6.1",
     "firebase-admin": "^10.0.1",
     "firebase-functions": "^3.16.0",
-    "marked": "^3.0.4",
+    "marked": "^4.0.10",
     "prismjs": "^1.25.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.0.0",
