@@ -1,5 +1,20 @@
 # Changelog
 
+### [2.0.1](https://www.github.com/rabraghib/ngaox/compare/v2.0.0...v2.0.1) (2022-01-19)
+
+
+### Bug Fixes
+
+* :bug: version difference between packages ([05528df](https://www.github.com/rabraghib/ngaox/commit/05528df8cf631e96685dc5d6d57e28795459a90e))
+* :triangular_flag_on_post: extract helper scripts & schematics from packages ([afd3fb7](https://www.github.com/rabraghib/ngaox/commit/afd3fb71249a369a680d760555add104f44dc136))
+* docs accessing old API & release workflow fetch depth ([c78616c](https://www.github.com/rabraghib/ngaox/commit/c78616c08f6796fa815abdecbb0044befde84d3a))
+* **docs-content:** correct LICENSE year & README badge url ([a0bfab1](https://www.github.com/rabraghib/ngaox/commit/a0bfab1f57f1758991729754161d786a6a2414a1))
+
+
+### Reverts
+
+* :rewind: remove chaospad package from the repo ([#93](https://www.github.com/rabraghib/ngaox/issues/93)) ([e2345bc](https://www.github.com/rabraghib/ngaox/commit/e2345bc33a0f6616ee09707d04f484638102fd47))
+
 ### [2.0.1](https://www.github.com/rabraghib/ngaox/compare/v2.0.0...v2.0.1) (2022-01-02)
 
 
