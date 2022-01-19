@@ -1,7 +1,6 @@
 {
   "version": 2,
   "projects": {
-    "chaospad": "packages/chaospad",
     "docs-app": "docs/app",
     "docs-functions": "docs/functions",
     "icons": "packages/icons",

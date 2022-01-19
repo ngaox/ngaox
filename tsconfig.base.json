@@ -7,7 +7,6 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "resolveJsonModule": true, // TODO: DELETE This
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
@@ -16,7 +15,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ngaox/chaospad": ["packages/chaospad/src/index.ts"],
       "@ngaox/icons": ["packages/icons/src/index.ts"],
       "@ngaox/seo": ["packages/seo/src/index.ts"]
     }

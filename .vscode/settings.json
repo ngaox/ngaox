@@ -1,6 +1,5 @@
 {
   "conventionalCommits.scopes": [
-    "chaospad",
     "deps-dev",
     "docs-content",
     "docs-infra",

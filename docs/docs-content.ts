@@ -9,13 +9,6 @@ export const DocItems: DocContentItem[] = [
     contentUrl: '/README.md'
   },
   {
-    name: 'Chaospad README',
-    slug: 'chaospad',
-    type: DocItemType.Guide,
-    screenshotUrl: 'https://picsum.photos/320/200?id=chaospad',
-    contentUrl: '/packages/chaospad/README.md'
-  },
-  {
     name: 'Seo README',
     slug: 'seo',
     type: DocItemType.Demo,
