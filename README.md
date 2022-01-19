@@ -7,8 +7,8 @@
     <a href="#license">
         <img src="https://img.shields.io/github/license/chaospad/ngaox?style=flat" alt="License"/>
     </a>
-    <a href="https://github.com/rabraghib/ngaox/actions/workflows/ci.yml">
-        <img src="https://github.com/rabraghib/ngaox/actions/workflows/ci.yml/badge.svg" alt="🧪 Lint, Test & Analyze"/>
+    <a href="https://github.com/rabraghib/ngaox/actions/workflows/integrate.yml">
+        <img src="https://github.com/rabraghib/ngaox/actions/workflows/integrate.yml/badge.svg" alt="🧪 Lint, Test & Analyze"/>
     </a>
 </p>
 

@@ -56,7 +56,7 @@ jobs:
           done
       - name: Upload zip files to github release
         run: |
-          cd ..
+          cd dist
           for package in *.zip; do
             gh release upload --repo $GITHUB_REPOSITORY ${{ needs.release-please.outputs.tag_name }} $package;
           done
