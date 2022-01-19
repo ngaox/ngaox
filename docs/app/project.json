@@ -83,7 +83,6 @@
       "executor": "@angular/fire:deploy",
       "options": {
         "prerender": false,
-        // "ssr": false,
         "browserTarget": "docs-app:build:production",
         "firebaseProject": "chaospad-ngaox",
         "firebaseHostingSite": "chaospad-ngaox"

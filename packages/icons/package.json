@@ -2,6 +2,9 @@
   "name": "@ngaox/icons",
   "version": "2.0.1",
   "description": "Easily inline SVG icons into your angular app with a ready to import and use set of icons",
+  "ng-add": {
+    "save": "dependencies"
+  },
   "peerDependencies": {
     "@angular/common": "",
     "@angular/core": ""
@@ -21,7 +24,7 @@
     "svg",
     "ssr"
   ],
-  "author": "Rabyâ Raghib",
+  "author": "Rabyâ Raghib <rabraghib@gmail.com> (https://rabraghib.me/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/rabraghib/ngaox/issues"

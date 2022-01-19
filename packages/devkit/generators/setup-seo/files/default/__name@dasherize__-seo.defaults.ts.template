@@ -1,0 +1,8 @@
+import { PageSeoData } from "@ngaox/seo";
+
+export const <%= classify(name) %>SeoDefaults: PageSeoData = {
+  title: "Alien",
+  description: "🧪🤖",
+  twitterCreator: "@TheCoolAlien",
+  // Add defaults data set...
+};
