@@ -1,0 +1,12 @@
+import { NgModule } from "@angular/core";
+import { SeoModule } from "@ngaox/seo";
+import { <%= classify(name) %>SeoDefaults } from "./<%= dasherize(name) %>-seo.defaults";
+import { <%= classify(name) %>SeoLoader } from "./<%= dasherize(name) %>-seo.loader";
+
+@NgModule({
+  imports: [
+    SeoModule.forRoot(<%= classify(name) %>SeoDefaults, <%= classify(name) %>SeoLoader),
+  ],
+  exports: [SeoModule],
+})
+export class <%= classify(name) %>SeoModule {}

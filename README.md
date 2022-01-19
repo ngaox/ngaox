@@ -21,10 +21,11 @@
 
 This repository contains several npm packages that are published under the scope `@ngaox` which are tools & libraries to speed up and facilitate developing angular web apps.
 
-| package                               | description                                                                                              | Docs                       |
-| ------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------- |
-| [@ngaox/seo](packages/seo#readme)     | An angular library to help generate & managing Social-Media/SEO meta tags, canonical links & page title. | [↗](packages/seo#readme)   |
-| [@ngaox/icons](packages/icons#readme) | Easily inline SVG icons into your angular app with a ready to import and use set of icons.               | [↗](packages/icons#readme) |
+| package                                 | description                                                                                              | Docs                       |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------- |
+| [@ngaox/devkit](packages/devkit#readme) | Schematics, Builders, Commands for better DX with ngaox                                                  | [↗](packages/seo#readme)   |
+| [@ngaox/seo](packages/seo#readme)       | An angular library to help generate & managing Social-Media/SEO meta tags, canonical links & page title. | [↗](packages/seo#readme)   |
+| [@ngaox/icons](packages/icons#readme)   | Easily inline SVG icons into your angular app with a ready to import and use set of icons.               | [↗](packages/icons#readme) |
 
 ## Contributing
 

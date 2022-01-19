@@ -1,16 +1,10 @@
 {
-  "name": "@ngaox/seo",
+  "name": "@ngaox/devkit",
   "version": "2.0.1",
-  "description": "Angular library to help generate & managing Social-Media/SEO meta tags, canonical links & page title.",
+  "description": "Schematics, Builders, Commands for better DX with ngaox",
+  "schematics": "./schematics.json",
   "ng-add": {
-    "save": "dependencies"
-  },
-  "peerDependencies": {
-    "@angular/common": "",
-    "@angular/core": ""
-  },
-  "dependencies": {
-    "tslib": ""
+    "save": "devDependencies"
   },
   "repository": {
     "type": "git",
@@ -18,11 +12,11 @@
   },
   "keywords": [
     "ngaox",
-    "seo",
+    "devkit",
     "ngx",
     "angular",
-    "universal",
-    "ssr"
+    "schematics",
+    "builders"
   ],
   "author": "Rabyâ Raghib <rabraghib@gmail.com> (https://rabraghib.me/)",
   "license": "MIT",

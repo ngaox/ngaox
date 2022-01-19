@@ -1,0 +1,39 @@
+{
+  "root": "packages/devkit",
+  "sourceRoot": "packages/devkit/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/devkit",
+        "tsConfig": "packages/devkit/tsconfig.lib.json",
+        "packageJson": "packages/devkit/package.json",
+        "main": "packages/devkit/src/index.ts",
+        "assets": [
+          "packages/devkit/*.md",
+          "packages/devkit/schematics.json",
+          {
+            "input": "packages/devkit/generators",
+            "glob": "*/files/**",
+            "output": "generators"
+          },
+          {
+            "input": "packages/devkit/generators",
+            "glob": "*/schema.json",
+            "output": "generators"
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/devkit/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}
