@@ -1,6 +1,8 @@
 {
   "conventionalCommits.scopes": [
+    "deps",
     "deps-dev",
+    "tools",
     "docs-content",
     "docs-infra",
     "icons",
