@@ -6,32 +6,33 @@ on:
     branches:
       - main
 
-env:
-  ARTIFACTS_KEY: release-artifacts
-
 jobs:
   integrate:
     uses: ./.github/workflows/integrate.yml
 
   changelog:
+    needs: integrate
     runs-on: ubuntu-20.04
     outputs:
       skipped: ${{ steps.changelog.outputs.skipped }}
       tag_name: ${{ steps.changelog.outputs.tag }}
       version: ${{ steps.changelog.outputs.version }}
       release_notes: ${{ steps.changelog.outputs.clean_changelog }}
+      artifacts-key: ${{ steps.artifacts-key.outputs.name }}
     steps:
       - uses: TriPSs/conventional-changelog-action@v3
         id: changelog
         with:
           git-user-name: github-actions
           git-user-email: github-actions@github.com
+      - run: echo ::set-output name=name::release-artifacts
+        id: artifacts-key
 
   build:
     needs: changelog
     uses: ./.github/workflows/build.yml
     with:
-      artifacts-key: ${{ env.ARTIFACTS_KEY }}
+      artifacts-key: ${{ needs.changelog.outputs.artifacts-key }}
       tag_name: ${{ needs.changelog.outputs.tag_name }}
 
   release:
@@ -39,15 +40,15 @@ jobs:
     if: ${{ needs.changelog.outputs.skipped == 'false' }}
     uses: ./.github/workflows/release.yml
     with:
-      artifacts-key: ${{ env.ARTIFACTS_KEY }}
+      artifacts-key: ${{ needs.changelog.outputs.artifacts-key }}
       tag_name: ${{ needs.changelog.outputs.tag_name }}
       version: ${{ needs.changelog.outputs.version }}
       release_notes: ${{ needs.changelog.outputs.release_notes }}
 
   deploy:
-    needs: build
+    needs: [build, changelog]
     if: ${{ needs.changelog.outputs.skipped == 'false' }}
     uses: ./.github/workflows/deploy.yml
     with:
-      artifacts-key: ${{ env.ARTIFACTS_KEY }}
+      artifacts-key: ${{ needs.changelog.outputs.artifacts-key }}
       version: ${{ needs.changelog.outputs.version }}
