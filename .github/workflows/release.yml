@@ -33,4 +33,3 @@ jobs:
           body: ${{ inputs.release_notes }}
           files: |
             dist/artifacts/*
-            LICENSE

@@ -1,7 +1,6 @@
 name: 🚀 Test, Release & Deploy
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
@@ -24,6 +23,7 @@ jobs:
       - uses: TriPSs/conventional-changelog-action@v3
         id: changelog
         with:
+          pre-commit: ./tools/sync-versions.js
           git-user-name: github-actions
           git-user-email: github-actions@github.com
       - run: echo ::set-output name=name::release-artifacts
@@ -52,3 +52,7 @@ jobs:
     with:
       artifacts-key: ${{ needs.changelog.outputs.artifacts-key }}
       version: ${{ needs.changelog.outputs.version }}
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      token: ${{ secrets.GITHUB_TOKEN }}
+      FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHAOSPAD_NGAOX }}

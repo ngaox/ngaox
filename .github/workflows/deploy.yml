@@ -7,6 +7,13 @@ on:
       version:
         required: true
         type: string
+    secrets:
+      NPM_TOKEN:
+        required: true
+      token:
+        required: true
+      FIREBASE_SERVICE_ACCOUNT:
+        required: true
 jobs:
   deploy:
     runs-on: ubuntu-20.04
@@ -31,7 +38,7 @@ jobs:
           cd dist/packages
           for package in */; do
             cd $package
-            yarn publish --new-version ${{ inputs.version }} --access public
+            npm publish --access public
             cd ..
           done
 
@@ -40,19 +47,19 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
       - name: 🎉 Publish packages to GPR
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.token }}
         run: |
           cd dist/packages
           for package in */; do
             cd $package
-            yarn publish --new-version ${{ inputs.version }} --access public
+            npm publish --access public
             cd ..
           done
 
       - name: 🎉 Deploy docs & demos
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHAOSPAD_NGAOX }}'
+          repoToken: '${{ secrets.token }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           channelId: live
           projectId: chaospad-ngaox

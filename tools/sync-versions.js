@@ -1,13 +1,25 @@
-const { version } = require('../package.json');
 const { projects } = require('../angular.json');
-const fs = require('fs-extra');
+const packageJsonVersion = require('../package.json').version;
+const fs = require('fs');
 const path = require('path');
 
-Object.values(projects)
-  .map(dir => path.resolve(`${__dirname}/../${dir}/package.json`))
-  .filter(fs.existsSync)
-  .forEach(packageJsonPath => {
-    const packageJson = require(packageJsonPath);
-    packageJson.version = version;
-    fs.writeJsonSync(packageJsonPath, packageJson, { spaces: 2 });
-  });
+module.exports = {
+  preCommit
+};
+
+function preCommit(props) {
+  version = props ? props.version || packageJsonVersion : packageJsonVersion;
+  Object.values(projects)
+    .map(dir => path.resolve(`${__dirname}/../${dir}/package.json`))
+    .filter(fs.existsSync)
+    .forEach(packageJsonPath => {
+      const packageJson = require(packageJsonPath);
+      packageJson.version = version;
+      fs.writeFileSync(
+        packageJsonPath,
+        JSON.stringify(packageJson, null, 2) + '\n'
+      );
+    });
+}
+
+preCommit();
