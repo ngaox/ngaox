@@ -30,6 +30,7 @@ jobs:
 
   build:
     needs: changelog
+    if: ${{ needs.changelog.outputs.skipped == 'false' }}
     uses: ./.github/workflows/build.yml
     with:
       artifacts-key: ${{ needs.changelog.outputs.artifacts-key }}
@@ -37,7 +38,6 @@ jobs:
 
   release:
     needs: [build, changelog]
-    if: ${{ needs.changelog.outputs.skipped == 'false' }}
     uses: ./.github/workflows/release.yml
     with:
       artifacts-key: ${{ needs.changelog.outputs.artifacts-key }}
@@ -47,7 +47,6 @@ jobs:
 
   deploy:
     needs: [build, changelog]
-    if: ${{ needs.changelog.outputs.skipped == 'false' }}
     uses: ./.github/workflows/deploy.yml
     with:
       artifacts-key: ${{ needs.changelog.outputs.artifacts-key }}

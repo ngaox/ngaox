@@ -22,15 +22,15 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
         with:
-          languages: go, javascript
+          languages: javascript
 
       - name: 🛠 Install dependencies
         run: yarn --frozen-lockfile
-      - name: 🧿 Lint effected apps/packages
-        run: yarn nx-effected lint --parallel --max-parallel=2
-      - name: 🧪 Test effected apps/packages
-        run: yarn nx-effected test --parallel --max-parallel=2
-      - name: 🧪 Test effected apps/packages
+      - name: 🧪 Lint & Test
+        run: |
+          yarn nx-effected lint --parallel --max-parallel=2
+          yarn nx-effected test --parallel --max-parallel=2
+      - name: 🛠 Build
         run: yarn nx-effected build --parallel --max-parallel=2
 
       - name: Perform CodeQL Analysis
