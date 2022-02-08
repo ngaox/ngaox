@@ -3,7 +3,6 @@
   "projects": {
     "devkit": "packages/devkit",
     "docs-app": "docs/app",
-    "docs-functions": "docs/functions",
     "icons": "packages/icons",
     "seo": "packages/seo"
   }

@@ -78,15 +78,6 @@
       "options": {
         "lintFilePatterns": ["docs/app/src/**/*.ts", "docs/app/src/**/*.html"]
       }
-    },
-    "deploy": {
-      "executor": "@angular/fire:deploy",
-      "options": {
-        "prerender": false,
-        "browserTarget": "docs-app:build:production",
-        "firebaseProject": "chaospad-ngaox",
-        "firebaseHostingSite": "chaospad-ngaox"
-      }
     }
   },
   "tags": []

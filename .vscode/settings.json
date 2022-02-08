@@ -1,10 +1,11 @@
 {
   "conventionalCommits.scopes": [
+    "infra",
     "deps",
     "deps-dev",
     "tools",
     "docs-content",
-    "docs-infra",
+    "docs-app",
     "icons",
     "seo",
     "devkit"

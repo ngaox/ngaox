@@ -35,21 +35,5 @@
         }
       ]
     }
-  ],
-  "functions": {
-    "predeploy": ["yarn lint docs-functions", "yarn build docs-functions"],
-    "source": "dist/docs/functions"
-  },
-  "emulators": {
-    "functions": {
-      "port": 5001
-    },
-    "hosting": {
-      "port": 5000
-    },
-    "ui": {
-      "enabled": true,
-      "port": 5555
-    }
-  }
+  ]
 }
