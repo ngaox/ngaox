@@ -1,0 +1,53 @@
+name: 🚀 Test, Release & Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+env:
+  ARTIFACTS_KEY: release-artifacts
+
+jobs:
+  integrate:
+    uses: ./.github/workflows/integrate.yml
+
+  changelog:
+    runs-on: ubuntu-20.04
+    outputs:
+      skipped: ${{ steps.changelog.outputs.skipped }}
+      tag_name: ${{ steps.changelog.outputs.tag }}
+      version: ${{ steps.changelog.outputs.version }}
+      release_notes: ${{ steps.changelog.outputs.clean_changelog }}
+    steps:
+      - uses: TriPSs/conventional-changelog-action@v3
+        id: changelog
+        with:
+          git-user-name: github-actions
+          git-user-email: github-actions@github.com
+
+  build:
+    needs: changelog
+    uses: ./.github/workflows/build.yml
+    with:
+      artifacts-key: ${{ env.ARTIFACTS_KEY }}
+      tag_name: ${{ needs.changelog.outputs.tag_name }}
+
+  release:
+    needs: [build, changelog]
+    if: ${{ needs.changelog.outputs.skipped == 'false' }}
+    uses: ./.github/workflows/release.yml
+    with:
+      artifacts-key: ${{ env.ARTIFACTS_KEY }}
+      tag_name: ${{ needs.changelog.outputs.tag_name }}
+      version: ${{ needs.changelog.outputs.version }}
+      release_notes: ${{ needs.changelog.outputs.release_notes }}
+
+  deploy:
+    needs: build
+    if: ${{ needs.changelog.outputs.skipped == 'false' }}
+    uses: ./.github/workflows/deploy.yml
+    with:
+      artifacts-key: ${{ env.ARTIFACTS_KEY }}
+      version: ${{ needs.changelog.outputs.version }}
