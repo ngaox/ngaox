@@ -26,6 +26,7 @@ jobs:
           pre-commit: ./tools/sync-versions.js
           git-user-name: github-actions
           git-user-email: github-actions@github.com
+          release-count: 0
       - run: echo ::set-output name=name::release-artifacts
         id: artifacts-key
 

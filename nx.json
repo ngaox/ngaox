@@ -13,6 +13,7 @@
   },
   "implicitDependencies": {
     "package.json": {
+      "version": "*",
       "dependencies": "*",
       "devDependencies": "*"
     },

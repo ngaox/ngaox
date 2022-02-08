@@ -8,7 +8,9 @@ module.exports = {
 };
 
 function preCommit(props) {
-  version = props ? props.version || packageJsonVersion : packageJsonVersion;
+  const version = props
+    ? props.version || packageJsonVersion
+    : packageJsonVersion;
   Object.values(projects)
     .map(dir => path.resolve(`${__dirname}/../${dir}/package.json`))
     .filter(fs.existsSync)
