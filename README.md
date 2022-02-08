@@ -5,17 +5,17 @@
 
 <p align="center">
     <a href="#license">
-        <img src="https://img.shields.io/github/license/chaospad/ngaox?style=flat" alt="License"/>
+        <img src="https://img.shields.io/github/license/ngaox/ngaox?style=flat" alt="License"/>
     </a>
-    <a href="https://github.com/rabraghib/ngaox/actions/workflows/integrate.yml">
-        <img src="https://github.com/rabraghib/ngaox/actions/workflows/integrate.yml/badge.svg" alt="🧪 Lint, Test & Analyze"/>
+    <a href="https://github.com/ngaox/ngaox/actions/workflows/integrate.yml">
+        <img src="https://github.com/ngaox/ngaox/actions/workflows/integrate.yml/badge.svg" alt="🧪 Lint, Test & Analyze"/>
     </a>
 </p>
 
 <br>
 
 - [@rabraghib](https://twitter.com/rabraghib) - Get the latest updates about the project on Twitter
-- Checkout project [road map](https://github.com/rabraghib/ngaox/milestone/1) & tell me your thoughts
+- Checkout project [road map](https://github.com/ngaox/ngaox/milestone/1) & tell me your thoughts
 
 ## Description
 
