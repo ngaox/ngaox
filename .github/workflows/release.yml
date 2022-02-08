@@ -1,64 +1,36 @@
-name: 🚀 Build & Release
 on:
-  push:
-    branches:
-      - main
-jobs:
-  release-please:
-    runs-on: ubuntu-latest
-    outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
-      tag_name: ${{ steps.release.outputs.tag_name }}
-      version: ${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}
-    steps:
-      - uses: google-github-actions/release-please-action@v2
-        id: release
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          release-type: node
+  workflow_call:
+    inputs:
+      artifacts-key:
+        required: true
+        type: string
+      tag_name:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+      release_notes:
+        required: true
+        type: string
 
-  release-publish:
-    needs: release-please
-    if: ${{ needs.release-please.outputs.release_created && success() }}
-    runs-on: ubuntu-latest
+jobs:
+  release:
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
         with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v1
+          name: ${{ inputs.artifacts-key }}
+          path: dist
+
+      - uses: softprops/action-gh-release@v1
+        id: release
         with:
-          node-version: '16'
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@ngaox'
-          cache: 'yarn'
-      - run: yarn install --frozen-lockfile
-      - name: Sync versions across monorepo (package.json files)
-        run: |
-          node ./tools/sync-versions.js
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add .
-          git commit --amend --no-edit --no-verify
-          git tag -af -m ${{ needs.release-please.outputs.tag_name }} ${{ needs.release-please.outputs.tag_name }}
-          git push -f origin ${{ needs.release-please.outputs.tag_name }} --tags && git push -f
-      - name: 🛠 Build packages
-        run: yarn nx-all build
-      - name: 🎉 Deploy docs & packages packages
-        run: yarn nx-all deploy --package-version ${{ needs.release-please.outputs.version }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      - name: Zip each package dist folder
-        run: |
-          cd dist/packages
-          for package in */; do
-            zip -r ../ngaox-$(basename $package)-${{ needs.release-please.outputs.version }}.zip $package;
-          done
-      - name: Upload zip files to github release
-        run: |
-          cd dist
-          for package in *.zip; do
-            gh release upload --repo $GITHUB_REPOSITORY ${{ needs.release-please.outputs.tag_name }} $package;
-          done
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: 'ngaox-${{ inputs.tag_name }}'
+          tag_name: ${{ inputs.tag_name }}
+          body: ${{ inputs.release_notes }}
+          files: |
+            dist/artifacts/*
+            LICENSE
