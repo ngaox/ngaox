@@ -1,4 +1,4 @@
-name: 🚀 Test, Release & Deploy
+name: 🚀 Build, Release & Deploy
 
 on:
   push:
@@ -6,11 +6,7 @@ on:
       - main
 
 jobs:
-  integrate:
-    uses: ./.github/workflows/integrate.yml
-
   changelog:
-    needs: integrate
     runs-on: ubuntu-20.04
     outputs:
       skipped: ${{ steps.changelog.outputs.skipped }}

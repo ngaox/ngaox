@@ -1,0 +1,10 @@
+name: 🧪 Lint, Test & Analyze
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  integrate:
+    uses: ./.github/workflows/integrate.yml
