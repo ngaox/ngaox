@@ -24,8 +24,7 @@ jobs:
         with:
           languages: javascript
 
-      - name: 🛠 Install dependencies
-        run: yarn --frozen-lockfile
+      - run: yarn --frozen-lockfile
       - name: 🧪 Lint & Test
         run: |
           yarn nx-effected lint --parallel --max-parallel=2

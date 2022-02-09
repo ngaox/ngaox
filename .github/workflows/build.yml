@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: '16'
           cache: 'yarn'
-      - run: yarn install --frozen-lockfile
+      - run: yarn --frozen-lockfile
       - name: 🛠 Build everything
         run: yarn nx-all build
       - name: 📦 Zip packages
