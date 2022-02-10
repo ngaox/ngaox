@@ -1,20 +1,27 @@
-<section class="hero-section" focusOnNavigation aria-label="Get started">
-  <div class="container">
-    <div class="header-section">
-      <h1>Ngaox</h1>
-      <h2>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque,
-        maiores.
-      </h2>
-      <a
-        mat-raised-button
-        class="docs-button"
-        routerLink="/guides/getting-started"
-        >Get started</a
-      >
-    </div>
-    <img src="../../assets/ngaox.png" alt="ngaox logo" />
+<section class="hero-section" focusOnNavigation>
+  <h1>{{ headline }}</h1>
+  <h3>{{ description }}</h3>
+  <div class="main-buttons">
+    <a mat-raised-button color="accent" routerLink="/start">Get started</a>
+    <a mat-raised-button routerLink="/docs">Documentation</a>
   </div>
 </section>
+
+<section class="features-section">
+  <ng-container *ngFor="let item of features; let i = index">
+    <docs-feature-promo-card
+      class="feature-card"
+      [routerLink]="item.routerLink"
+      [headline]="item.headline"
+      [body]="item.body"
+      [image]="item.image"
+      [imgAlt]="item.imgAlt"
+      [reverse]="i % 2 !== 0"
+    ></docs-feature-promo-card>
+    <mat-divider *ngIf="i !== features.length - 1"></mat-divider>
+  </ng-container>
+</section>
+
+<docs-support></docs-support>
 
 <docs-footer></docs-footer>

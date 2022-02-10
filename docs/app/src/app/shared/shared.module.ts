@@ -6,8 +6,16 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { DocSectionPipe } from './doc-section.pipe';
 import { CategoryCardComponent } from './category-card/category-card.component';
+import { SupportComponent } from './support/support.component';
+import { FeaturePromoCardComponent } from './feature-promo-card/feature-promo-card.component';
 
-const EXPORTS = [FooterComponent, DocSectionPipe, CategoryCardComponent];
+const EXPORTS = [
+  FooterComponent,
+  DocSectionPipe,
+  CategoryCardComponent,
+  SupportComponent,
+  FeaturePromoCardComponent
+];
 
 @NgModule({
   declarations: [...EXPORTS],

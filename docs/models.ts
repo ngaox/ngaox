@@ -1,4 +1,4 @@
-import { DocItem } from './app/src/app/core/interfaces';
+import { DocItem } from '@docs-core/models';
 
 export enum DocItemType {
   Guide = 'Guides',

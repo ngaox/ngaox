@@ -3,7 +3,12 @@
   box-sizing: border-box;
 }
 :root {
+  font-size: 10px;
+  --bg-color: #fafafa;
   --primary-color: #3f51b5;
+  --brand-color: #2d9cdb;
+  --card-box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #00000024,
+    0 1px 3px #0000001f;
 }
 html,
 body {
@@ -12,6 +17,8 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 1.6rem;
+  background: var(--bg-color);
 }
 svg {
   vertical-align: middle;

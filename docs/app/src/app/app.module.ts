@@ -24,6 +24,7 @@ const routes: Routes = [
     pathMatch: 'full',
     component: HomeComponent
   },
+  { path: 'start', redirectTo: 'docs' }, // TODO: set get started link
   {
     path: 'docs',
     loadChildren: () =>
