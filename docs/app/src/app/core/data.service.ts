@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { DocSection } from 'docs/models';
+import { IDocsItem } from './models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  private _currentDocSection?: DocSection;
+  private _currentDocItem?: IDocsItem;
 
-  setCurrentDocSection(item: DocSection) {
-    this._currentDocSection = item;
+  setCurrentDocsItem(item: IDocsItem) {
+    this._currentDocItem = item;
   }
-  getCurrentDocSection() {
-    return this._currentDocSection;
+  getCurrentDocsItem() {
+    return this._currentDocItem;
   }
 }

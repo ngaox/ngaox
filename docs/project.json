@@ -15,14 +15,17 @@
     "build": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": ["node docs/build", "npx nx build docs-app"],
+        "commands": ["npx nx build-content docs", "npx nx build docs-app"],
         "parallel": false
       }
     },
     "serve": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": ["node docs/build --watch", "npx nx serve docs-app"],
+        "commands": [
+          "npx nx build-content docs --watch",
+          "npx nx serve docs-app"
+        ],
         "parallel": true
       }
     }
