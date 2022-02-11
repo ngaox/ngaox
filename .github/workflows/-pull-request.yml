@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: '16'
           cache: 'yarn'
-      - run: yarn --frozen-lockfile && yarn build:hosting
+      - run: yarn --frozen-lockfile && yarn build docs
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'

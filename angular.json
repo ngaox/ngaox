@@ -1,8 +1,9 @@
 {
   "version": 2,
   "projects": {
-    "devkit": "packages/devkit",
+    "docs": "docs",
     "docs-app": "docs/app",
+    "devkit": "packages/devkit",
     "icons": "packages/icons",
     "seo": "packages/seo"
   }
