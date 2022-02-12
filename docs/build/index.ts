@@ -7,7 +7,7 @@ import matter from 'gray-matter';
 import marked = require('marked');
 import { JSDOM } from 'jsdom';
 import { DOCS_SECTIONS, SortItemsCallback } from '@docs-core/data';
-import { IDocsItem, IDocsSection } from '@docs-core/models';
+import { IDocsItem, IDocsSection, ITocLink } from '@docs-core/models';
 
 import Prism from 'prismjs';
 import 'prismjs/components/prism-typescript';
@@ -27,10 +27,10 @@ yargs(hideBin(process.argv))
     },
     async (argv: Arguments) => {
       if (argv.watch) console.info(`Watch mode is enabled.`);
+      console.info(``);
       await fs.ensureDir(OUT_DIR);
       await fs.emptyDir(OUT_DIR);
       await build((argv.watch as boolean) || false);
-      console.info(`\n`);
     }
   )
   .option('watch', {
@@ -42,16 +42,20 @@ yargs(hideBin(process.argv))
   .parse();
 
 async function build(watch: boolean) {
-  console.info(`\n`);
   const sections = await Promise.all(
     DOCS_SECTIONS.map(async section => {
       const ContentGlobPath = path.join(__dirname, '../../', section.content);
+      const contentFiles = glob.sync(ContentGlobPath);
+
+      console.log(
+        `- Found ${contentFiles.length} items in "${section.name}" section.`
+      );
       section.items = await Promise.all(
-        glob.sync(ContentGlobPath).map(file => buildItem(file, section))
+        contentFiles.map(file => buildItem(file, section))
       );
 
-      console.log(`- ${section.items.length} items in ${section.name}`);
-      section.items.sort(SortItemsCallback).map(item => ({
+      section.items.sort(SortItemsCallback);
+      section.items = section.items.map(item => ({
         name: item.name,
         slug: item.slug
       }));
@@ -69,9 +73,33 @@ async function build(watch: boolean) {
 
 async function buildItem(filePath: string, section: IDocsSection) {
   const content = await fs.readFile(filePath, 'utf8');
+  const TOC: ITocLink[] = [];
   const { data, content: markdown } = matter(content);
 
-  const html = marked.parse(markdown);
+  const markedRenderer = new marked.Renderer();
+  markedRenderer.heading = (text: string, level: number) => {
+    const id = text
+      .toLowerCase()
+      .trim()
+      // remove unwanted chars
+      .replace(
+        /[\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,./:;<=>?@[\]^`{|}~]/g,
+        ''
+      )
+      .replace(/\s/g, '-');
+    if (level === 2 || level === 3) {
+      TOC.push({
+        title: text,
+        id,
+        level: `h${level}`
+      });
+    }
+    return `<h${level} id="${id}">${text}</h${level}>`;
+  };
+
+  const html = marked.parse(markdown, {
+    renderer: markedRenderer
+  });
   const highlightedHtmlNode = new JSDOM(html).window.document.body;
   Prism.highlightAllUnder(highlightedHtmlNode);
 
@@ -82,11 +110,12 @@ async function buildItem(filePath: string, section: IDocsSection) {
       data.slug || path.basename(filePath, '.md')
     }`,
     content: highlightedHtmlNode.innerHTML,
-    order: data?.order
+    order: data?.order,
+    toc: TOC
   };
 
   const outFile = path.join(OUT_DIR, `${outObj.slug}.json`);
-  console.log(`- Writing ${outFile}`);
+  console.log(`  -> Writing ${outFile}`);
 
   await fs.ensureDir(path.dirname(outFile));
   await fs.writeJSON(outFile, outObj);

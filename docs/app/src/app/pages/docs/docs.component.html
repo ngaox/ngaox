@@ -1,3 +1,23 @@
+<mat-toolbar color="primary">
+  <button
+    style="margin-right: 1rem"
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+    (click)="drawer.toggle()"
+    *ngIf="isHandset$ | async"
+  >
+    <ngaox-icon
+      style="width: 2.5rem"
+      name="ui:menu-bars"
+      aria-label="Side nav toggle icon"
+    ></ngaox-icon>
+  </button>
+  <span class="page-title" [title]="pageHeader$ | async">{{
+    pageHeader$ | async
+  }}</span>
+</mat-toolbar>
+
 <mat-sidenav-container class="height-full">
   <mat-sidenav
     #drawer
@@ -6,31 +26,10 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar>Ngaox Docs</mat-toolbar>
-    <mat-divider></mat-divider>
     <docs-sidenav [sections]="(sections$ | async) ?? []"></docs-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="min-height-full">
-      <mat-toolbar color="primary">
-        <button
-          style="margin-right: 1rem"
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          (click)="drawer.toggle()"
-          *ngIf="isHandset$ | async"
-        >
-          <ngaox-icon
-            style="width: 2.5rem"
-            name="ui:menu-bars"
-            aria-label="Side nav toggle icon"
-          ></ngaox-icon>
-        </button>
-        <span class="page-title" [title]="pageHeader$ | async">{{
-          pageHeader$ | async
-        }}</span>
-      </mat-toolbar>
       <!-- Add Content Here -->
       <div class="container">
         <router-outlet></router-outlet>

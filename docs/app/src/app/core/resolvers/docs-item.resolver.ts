@@ -9,7 +9,7 @@ import { IDocsItem } from '@docs-core/models';
 @Injectable({
   providedIn: 'root'
 })
-export class ContentResolver implements Resolve<IDocsItem> {
+export class DocsItemResolver implements Resolve<IDocsItem> {
   constructor(
     private titleService: TitleService,
     private http: HttpClient,

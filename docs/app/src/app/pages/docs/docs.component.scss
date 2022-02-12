@@ -1,3 +1,10 @@
+:host {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
 .sidenav {
   width: 27.5rem;
 }
@@ -13,5 +20,5 @@
   text-overflow: ellipsis;
 }
 .container {
-  padding: 2.5rem;
+  padding: 2.5rem 3rem;
 }

@@ -17,10 +17,11 @@ export interface IDocsSection {
   items?: IDocsItem[];
 }
 
-// table of content interface
-// export interface IToc {
-
-// }
+export interface ITocLink {
+  title: string;
+  id: string;
+  level: 'h2' | 'h3';
+}
 
 export interface IDocsItem {
   name: string;
@@ -28,5 +29,5 @@ export interface IDocsItem {
   description?: string;
   content?: string;
   order?: number;
-  // table of content table
+  toc?: ITocLink[];
 }

@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../../shared/shared.module';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 
-import { ContentResolver } from '@docs-core/resolvers/content.resolver';
+import { DocsItemResolver } from '@docs-core/resolvers/docs-item.resolver';
 import { ContentsMapResolver } from '@docs-core/resolvers/contents-map.resolver';
 
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -35,7 +35,7 @@ const routes: Routes = [
         path: ':slug',
         component: ViewerComponent,
         resolve: {
-          content: ContentResolver
+          docsItem: DocsItemResolver
         }
       }
     ]
