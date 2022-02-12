@@ -28,7 +28,8 @@
   >
     <docs-sidenav [sections]="(sections$ | async) ?? []"></docs-sidenav>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <!-- * `viewer-scroll-container` class is used in ViewComponent -->
+  <mat-sidenav-content class="viewer-scroll-container">
     <div class="min-height-full">
       <!-- Add Content Here -->
       <div class="container">

@@ -5,8 +5,8 @@
       [innerHTML]="safeHtml(docsItem.content)"
     ></div>
     <docs-table-of-contents
-      *ngIf="isViewInited && (showToc$ | async)"
-      container=".mat-drawer-content"
+      *ngIf="showToc$ | async"
+      container=".viewer-scroll-container"
       [toc]="docsItem?.toc ?? []"
     ></docs-table-of-contents>
   </ng-container>

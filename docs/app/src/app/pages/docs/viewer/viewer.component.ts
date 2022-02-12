@@ -1,9 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  OnInit
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
@@ -16,9 +11,8 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   templateUrl: './viewer.component.html',
   styleUrls: ['./viewer.component.scss']
 })
-export class ViewerComponent implements OnInit, AfterViewInit {
+export class ViewerComponent implements OnInit {
   docsItem$?: Observable<IDocsItem>;
-  isViewInited = false;
   showToc$: Observable<boolean> = this.breakpointObserver
     .observe('(max-width: 1200px)')
     .pipe(
@@ -35,9 +29,6 @@ export class ViewerComponent implements OnInit, AfterViewInit {
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
-  ngAfterViewInit(): void {
-    this.isViewInited = true;
-  }
   ngOnInit(): void {
     this.docsItem$ = this.route.data.pipe(map(data => data['docsItem']));
   }

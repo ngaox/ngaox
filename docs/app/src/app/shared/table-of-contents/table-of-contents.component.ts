@@ -1,8 +1,10 @@
 import {
+  AfterViewInit,
+  ChangeDetectorRef,
   Component,
-  ElementRef,
   Inject,
   Input,
+  NgZone,
   OnDestroy,
   OnInit
 } from '@angular/core';
@@ -16,11 +18,13 @@ import { debounceTime, fromEvent, Subscription } from 'rxjs';
   templateUrl: './table-of-contents.component.html',
   styleUrls: ['./table-of-contents.component.scss']
 })
-export class TableOfContentsComponent implements OnInit, OnDestroy {
+export class TableOfContentsComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   @Input() toc: ITocLink[] = [];
   @Input() container!: string;
 
-  activeId!: string;
+  activeId?: string;
 
   private _linksOffsets: { [key: string]: number } = {};
   private _scrollContainer?: HTMLElement | Window;
@@ -28,8 +32,9 @@ export class TableOfContentsComponent implements OnInit, OnDestroy {
 
   constructor(
     private _route: ActivatedRoute,
-    private _element: ElementRef,
-    @Inject(DOCUMENT) private _document: Document
+    private _changeDetectorRef: ChangeDetectorRef,
+    @Inject(DOCUMENT) private _document: Document,
+    private _ngZone: NgZone
   ) {
     this.subscriptions.add(
       this._route.fragment.subscribe(fragment => {
@@ -48,48 +53,64 @@ export class TableOfContentsComponent implements OnInit, OnDestroy {
     document.querySelector(`#${linkId}`)?.scrollIntoView();
   }
   ngOnInit(): void {
-    this._linksOffsets = this.toc
-      .map(item => ({
-        id: item.id,
-        top: (
-          document.querySelector(`#${item.id}`) as HTMLElement
-        ).getBoundingClientRect().top
-      }))
-      .reduce((acc, curr) => ({ ...acc, [curr.id]: curr.top }), {});
+    // On init, the sidenav content element doesn't yet exist, so it's not possible
+    // to subscribe to its scroll event until next tick (when it does exist).
+    this._ngZone.runOutsideAngular(() => {
+      Promise.resolve().then(() => {
+        this._linksOffsets = this.toc
+          .map(item => ({
+            id: item.id,
+            top: (
+              document.querySelector(`#${item.id}`) as HTMLElement
+            ).getBoundingClientRect().top
+          }))
+          .reduce((acc, curr) => ({ ...acc, [curr.id]: curr.top }), {});
 
-    console.log(this._linksOffsets);
+        this._scrollContainer = this._document.querySelector(
+          this.container
+        ) as HTMLElement;
 
-    this._scrollContainer = this.container
-      ? (this._document.querySelector(this.container) as HTMLElement)
-      : window;
-
-    if (this._scrollContainer) {
-      this.subscriptions.add(
-        fromEvent(this._scrollContainer, 'scroll')
-          .pipe(debounceTime(10))
-          .subscribe(() => this.onScroll())
-      );
-    }
-    this.navigateToSection(this.activeId);
+        if (this._scrollContainer) {
+          this.subscriptions.add(
+            fromEvent(this._scrollContainer, 'scroll')
+              .pipe(debounceTime(10))
+              .subscribe(() => this.onScroll())
+          );
+        }
+      });
+    });
   }
   private onScroll(): void {
     const scrollOffset = this.getScrollOffset();
-
+    let hasChanged = false;
+    let found = false;
     for (let i = 0; i < this.toc.length; i++) {
       // A link is considered active if the page is scrolled past the
       // anchor without also being scrolled passed the next link.
       const currentLinkId = this.toc[i].id;
       const nextLinkId = this.toc?.[i + 1]?.id;
+
       const isActive =
         scrollOffset >= this._linksOffsets[currentLinkId] &&
-        (!nextLinkId || this._linksOffsets[nextLinkId] >= scrollOffset);
+        (!nextLinkId || this._linksOffsets[nextLinkId] > scrollOffset);
 
-      console.log(scrollOffset);
-      if (isActive && currentLinkId !== this.activeId) {
-        this.activeId = currentLinkId;
-        // TODO: detect changes
+      if (isActive) {
+        if (currentLinkId !== this.activeId) {
+          this.activeId = currentLinkId;
+          hasChanged = true;
+        }
+        found = true;
         break;
       }
+    }
+    if (this.activeId && !found) {
+      this.activeId = undefined;
+      hasChanged = true;
+    }
+    if (hasChanged) {
+      // The scroll listener runs outside of the Angular zone so
+      // we need to bring it back in only when something has changed.
+      this._ngZone.run(() => this._changeDetectorRef.markForCheck());
     }
   }
 
@@ -97,17 +118,23 @@ export class TableOfContentsComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
+  ngAfterViewInit() {
+    if (this.activeId) {
+      this.navigateToSection(this.activeId);
+    }
+  }
+
   /** Gets the scroll offset of the scroll container */
   private getScrollOffset(): number | void {
-    const { top } = this._element.nativeElement.getBoundingClientRect();
     const container = this._scrollContainer;
 
     if (container instanceof HTMLElement) {
-      return container.scrollTop + top;
+      const { top } = container.getBoundingClientRect();
+      return container.scrollTop + (container.clientHeight * 4) / 5 + top;
     }
 
     if (container) {
-      return container.scrollY + top;
+      return container.scrollY + container.innerHeight;
     }
   }
 }

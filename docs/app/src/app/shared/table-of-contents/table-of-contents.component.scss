@@ -26,6 +26,7 @@ nav {
     }
     &.active {
       color: var(--primary-color);
+      font-weight: 500;
     }
     &.subheading {
       padding-left: 1.5rem;
