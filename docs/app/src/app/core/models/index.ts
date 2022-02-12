@@ -8,8 +8,6 @@ export interface INgaoxFeature {
 
 export interface IDocsSection {
   name: string;
-  /** to use with `ngaox-icon` */
-  icon: string;
   routesPrefix: string;
   /** Glob pattern for matching files */
   content: string;

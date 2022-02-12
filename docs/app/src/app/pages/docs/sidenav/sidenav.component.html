@@ -1,34 +1,12 @@
-<mat-nav-list>
-  <cdk-accordion #accordion="cdkAccordion">
-    <ng-container *ngFor="let item of sections">
-      <cdk-accordion-item
-        class="accordion-item"
-        routerLinkActive="active"
-        #accordionItem="cdkAccordionItem"
-        [expanded]="true"
-      >
-        <div class="accordion-item-header" (click)="accordionItem.toggle()">
+<ng-container *ngFor="let section of sections">
+  <div class="section">
+    <h4 class="section-title">{{ section.name }}</h4>
+    <ul>
+      <li *ngFor="let item of section.items" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/docs', item.slug]">
           {{ item.name }}
-          <ngaox-icon
-            [class.-rotate-90]="accordionItem.expanded"
-            name="chevron:left"
-            class="nested-items-icon"
-          ></ngaox-icon>
-        </div>
-        <div
-          class="accordion-item-body"
-          [@bodyExpansion]="accordionItem.expanded ? 'expanded' : 'collapsed'"
-        >
-          <a
-            mat-list-item
-            *ngFor="let node of item.items"
-            [routerLink]="['/docs', node.slug]"
-            routerLinkActive="active"
-          >
-            {{ node.name }}
-          </a>
-        </div>
-      </cdk-accordion-item>
-    </ng-container>
-  </cdk-accordion>
-</mat-nav-list>
+        </a>
+      </li>
+    </ul>
+  </div>
+</ng-container>

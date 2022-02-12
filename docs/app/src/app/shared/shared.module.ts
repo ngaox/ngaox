@@ -8,7 +8,6 @@ import { CategoryCardComponent } from './category-card/category-card.component';
 import { SupportComponent } from './support/support.component';
 import { FeaturePromoCardComponent } from './feature-promo-card/feature-promo-card.component';
 import { TableOfContentsComponent } from './table-of-contents/table-of-contents.component';
-import { MatListModule } from '@angular/material/list';
 
 const EXPORTS = [
   FooterComponent,
@@ -20,7 +19,7 @@ const EXPORTS = [
 
 @NgModule({
   declarations: [...EXPORTS],
-  imports: [CommonModule, MatCardModule, RouterModule, MatListModule],
+  imports: [CommonModule, MatCardModule, RouterModule],
   exports: [...EXPORTS]
 })
 export class SharedModule {}

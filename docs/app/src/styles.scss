@@ -29,6 +29,28 @@ svg {
   max-width: 1200px;
   margin: auto;
 }
+.section-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+.nav-link {
+  display: inline-block;
+  padding: 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-decoration: none;
+  color: var(--text-color-mute);
+  &:hover {
+    color: var(--text-color);
+  }
+  &.active,
+  .active & {
+    color: var(--brand-color);
+    font-weight: 500;
+  }
+}
 .height-full {
   height: 100%;
 }

@@ -4,32 +4,11 @@
   top: 2.5rem;
   height: fit-content;
 }
-h4 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-weight: 500;
-  color: var(--text-color);
-}
 nav {
   padding: 0;
   padding-left: 1rem;
   border-left: 0.4rem solid var(--primary-color);
-  .nav-link {
-    display: inline-block;
-    padding: 0.5rem 0;
-    font-size: 1.5rem;
-    font-weight: 400;
-    text-decoration: none;
-    color: var(--text-color-mute);
-    &:hover {
-      color: var(--text-color);
-    }
-    &.active {
-      color: var(--primary-color);
-      font-weight: 500;
-    }
-    &.subheading {
-      padding-left: 1.5rem;
-    }
-  }
+}
+.subheading {
+  padding-left: 1.5rem;
 }

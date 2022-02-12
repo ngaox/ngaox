@@ -8,12 +8,9 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatCardModule } from '@angular/material/card';
 
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../../shared/shared.module';
-import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 import { DocsItemResolver } from '@docs-core/resolvers/docs-item.resolver';
 import { ContentsMapResolver } from '@docs-core/resolvers/contents-map.resolver';
@@ -42,14 +39,7 @@ const routes: Routes = [
   }
 ];
 
-const MATERIAL_IMPORTS = [
-  MatToolbarModule,
-  MatButtonModule,
-  MatSidenavModule,
-  MatListModule,
-  MatCardModule,
-  CdkAccordionModule
-];
+const MATERIAL_IMPORTS = [MatToolbarModule, MatButtonModule, MatSidenavModule];
 
 @NgModule({
   declarations: [
