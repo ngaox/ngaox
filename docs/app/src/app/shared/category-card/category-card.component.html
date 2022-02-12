@@ -1,13 +1,13 @@
-<mat-card [routerLink]="['/docs', category.slug]" class="card">
-  <img
+<mat-card [routerLink]="['/docs', category?.items?.[0]?.slug]" class="card">
+  <!-- <img
     mat-card-image
     *ngIf="category.screenshotUrl"
     [src]="category.screenshotUrl"
-  />
+  /> -->
   <mat-card-title style="margin-bottom: 20px">{{
-    category.name
+    category?.name
   }}</mat-card-title>
   <mat-card-subtitle>
-    {{ category.summary || 'No description provided yet!' }}
+    {{ 'No description provided yet!' }}
   </mat-card-subtitle>
 </mat-card>

@@ -14,7 +14,15 @@
         "polyfills": "docs/app/src/polyfills.ts",
         "tsConfig": "docs/app/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["docs/app/src/favicon.ico", "docs/app/src/assets"],
+        "assets": [
+          "docs/app/src/favicon.ico",
+          "docs/app/src/assets",
+          {
+            "glob": "**/*",
+            "input": "dist/docs/content",
+            "output": "content"
+          }
+        ],
         "styles": [
           "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
           "./node_modules/prismjs/themes/prism-okaidia.css",

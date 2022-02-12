@@ -11,21 +11,26 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 
-import { ViewerComponent } from './viewer/viewer.component';
-import { CategoriesComponent } from './categories/categories.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ContentResolver } from './content.resolver';
 import { SharedModule } from '../../shared/shared.module';
-import { SidenavComponent } from './sidenav/sidenav.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+
+import { ContentResolver } from '@docs-core/resolvers/content.resolver';
+import { ContentsMapResolver } from '@docs-core/resolvers/contents-map.resolver';
+
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { ViewerComponent } from './viewer/viewer.component';
 
 const routes: Routes = [
   {
     path: '',
     component: DocsComponent,
+    resolve: {
+      contentsMap: ContentsMapResolver
+    },
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'categories' },
-      { path: 'categories', component: CategoriesComponent },
+      { path: '', component: CategoriesComponent },
       {
         path: ':slug',
         component: ViewerComponent,

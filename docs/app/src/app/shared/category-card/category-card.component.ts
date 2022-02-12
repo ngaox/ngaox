@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DocContentItem } from 'docs/models';
+import { IDocsSection } from '@docs-core/models';
 
 @Component({
   selector: 'docs-category-card',
@@ -7,5 +7,5 @@ import { DocContentItem } from 'docs/models';
   styleUrls: ['./category-card.component.scss']
 })
 export class CategoryCardComponent {
-  @Input() category!: DocContentItem;
+  @Input() category?: IDocsSection;
 }
