@@ -1,12 +1,12 @@
 {
   "projects": {
-    "default": "chaospad-ngaox"
+    "default": "ngaox-lab"
   },
   "targets": {
-    "chaospad-ngaox": {
+    "ngaox-lab": {
       "hosting": {
-        "docs-app": [
-          "chaospad-ngaox"
+        "ngaox-docs": [
+          "ngaox-lab"
         ]
       }
     }
