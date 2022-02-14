@@ -1,1 +1,13 @@
-<div class="docs-markdown mat-typography" [innerHTML]="content$ | async"></div>
+<div class="container" [class.full-width]="(showToc$ | async) === false">
+  <ng-container *ngIf="docsItem$ | async as docsItem">
+    <div
+      class="docs-markdown mat-typography"
+      [innerHTML]="safeHtml(docsItem.content)"
+    ></div>
+    <docs-table-of-contents
+      *ngIf="showToc$ | async"
+      container=".viewer-scroll-container"
+      [toc]="docsItem?.toc ?? []"
+    ></docs-table-of-contents>
+  </ng-container>
+</div>

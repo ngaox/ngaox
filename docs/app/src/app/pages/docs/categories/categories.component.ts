@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { SortedDocItems } from 'docs/docs-map';
+import { DOCS_SECTIONS } from '@docs-core/data';
 import { TitleService } from '../../../core/title.service';
-import { DocSection } from 'docs/models';
 
 @Component({
   selector: 'docs-categories',
@@ -9,7 +8,7 @@ import { DocSection } from 'docs/models';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent {
-  categories: DocSection[] = SortedDocItems;
+  categories: any[] = DOCS_SECTIONS;
 
   constructor(private titleService: TitleService) {
     this.titleService.setTitle('Categories');

@@ -1,33 +1,38 @@
-import {
-  AfterViewChecked,
-  Component,
-  OnInit,
-  ViewEncapsulation
-} from '@angular/core';
-import { HighlightService } from '../../../core/highlight.service';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { IDocsItem } from '@docs-core/models';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'docs-viewer',
   templateUrl: './viewer.component.html',
-  styleUrls: ['./viewer.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./viewer.component.scss']
 })
-export class ViewerComponent implements AfterViewChecked, OnInit {
-  content$?: Observable<string>;
+export class ViewerComponent implements OnInit {
+  docsItem$?: Observable<IDocsItem>;
+  showToc$: Observable<boolean> = this.breakpointObserver
+    .observe('(max-width: 1200px)')
+    .pipe(
+      map(result => {
+        this.changeDetectorRef.detectChanges();
+        return !result.matches;
+      })
+    );
 
   constructor(
-    private highlightService: HighlightService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
+    private breakpointObserver: BreakpointObserver,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.content$ = this.route.data.pipe(map(data => data['content']));
+    this.docsItem$ = this.route.data.pipe(map(data => data['docsItem']));
   }
-
-  ngAfterViewChecked(): void {
-    this.highlightService.highlightAll();
+  safeHtml(html?: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html ?? '');
   }
 }

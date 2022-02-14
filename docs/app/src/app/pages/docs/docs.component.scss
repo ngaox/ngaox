@@ -1,5 +1,12 @@
+:host {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
 .sidenav {
-  width: 250px;
+  width: 27.5rem;
 }
 
 .mat-toolbar.mat-primary {
@@ -11,4 +18,7 @@
 .page-title {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.container {
+  padding: 2.5rem 3rem;
 }

@@ -8,7 +8,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { IconsModule } from '@ngaox/icons';
 
@@ -24,6 +24,7 @@ const routes: Routes = [
     pathMatch: 'full',
     component: HomeComponent
   },
+  { path: 'start', redirectTo: 'docs/start' },
   {
     path: 'docs',
     loadChildren: () =>
@@ -35,7 +36,7 @@ const MATERIAL_IMPORTS = [
   MatToolbarModule,
   MatButtonModule,
   MatSidenavModule,
-  MatListModule,
+  MatDividerModule,
   MatProgressBarModule
 ];
 

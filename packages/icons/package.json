@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rabraghib/ngaox.git"
+    "url": "git+https://github.com/ngaox/ngaox.git"
   },
   "keywords": [
     "ngaox",
@@ -27,7 +27,7 @@
   "author": "Rabyâ Raghib <rabraghib@gmail.com> (https://rabraghib.me/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rabraghib/ngaox/issues"
+    "url": "https://github.com/ngaox/ngaox/issues"
   },
-  "homepage": "https://github.com/rabraghib/ngaox/tree/main/packages/icons"
+  "homepage": "https://github.com/ngaox/ngaox/tree/main/packages/icons"
 }

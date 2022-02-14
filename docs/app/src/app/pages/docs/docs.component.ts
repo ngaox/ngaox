@@ -3,8 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
 import { TitleService } from '../../core/title.service';
-import { SortedDocItems } from 'docs/docs-map';
-import { DocSection } from 'docs/models';
+import { IDocsSection } from '@docs-core/models';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'docs-entry',
@@ -18,16 +18,19 @@ export class DocsComponent {
       map(result => result.matches),
       shareReplay()
     );
-  pageTitle = this.titleService.getTitle().pipe(
+  pageHeader$ = this.titleService.getTitle().pipe(
     tap({
       next: () => this.changeDetector.detectChanges()
     })
   );
-  docSectionsList: DocSection[] = SortedDocItems;
+  sections$: Observable<IDocsSection[]> = this.route.data.pipe(
+    map(data => data['contentsMap'])
+  );
 
   constructor(
     private titleService: TitleService,
     private breakpointObserver: BreakpointObserver,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private route: ActivatedRoute
   ) {}
 }

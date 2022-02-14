@@ -1,66 +1,54 @@
-// The margin between two sections
 .hero-section {
-  position: relative;
-  padding: 40px;
+  text-align: center;
+  padding: 40px 20px;
   min-height: 500px;
-  display: flex;
+  background: linear-gradient(
+    45deg,
+    var(--brand-color) 10%,
+    var(--primary-color) 90%
+  );
   color: #fff;
-
-  &::before {
-    content: '';
-    position: absolute;
-    background: var(--primary-color);
-    height: 100%;
-    z-index: -1;
-    width: calc(50% + 100px);
-    left: 0;
-    top: 0;
-    border-radius: 0 0px 65% 0;
-  }
-
-  .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-
-    align-content: center;
-    justify-content: center;
-    justify-items: center;
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 400px;
-  }
-
-  .header-section {
-    h1 {
-      font-size: 56px;
-      font-weight: bold;
-      line-height: 60px;
-      margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    font-size: 56px;
+    font-weight: bold;
+    line-height: 60px;
+    margin: 15px 0;
+    padding: 0 20px;
+    max-width: 25ch;
+    @media (max-width: 768px) {
+      font-size: 40px;
+      line-height: 45px;
     }
-
-    h2 {
-      font-size: 20px;
-      font-weight: 300;
-      line-height: 28px;
-      margin: 15px 0 25px 0;
-      max-width: 35ch;
+    @media (max-width: 480px) {
+      font-size: 30px;
+      line-height: 35px;
     }
-    // .docs-button {}
   }
-  @media (max-width: 768px) {
-    &::before {
-      width: 100%;
-      height: 75%;
-    }
-    .container {
-      grid-template-columns: 1fr;
-      border-radius: 0 0px 75% 0;
-    }
-    .docs-button {
-      float: right;
+  h3 {
+    margin: 15px 0 25px 0;
+    max-width: 120ch;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 2.8rem;
+  }
+  .main-buttons {
+    display: flex;
+    gap: 10px;
+  }
+}
+.features-section {
+  padding: 0 2rem;
+  .feature-card {
+    cursor: pointer;
+    padding: 1.6rem 2.5rem;
+    border-radius: 0.5rem;
+    &:hover {
+      background-color: #fff;
+      box-shadow: var(--card-box-shadow);
     }
   }
 }

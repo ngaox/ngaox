@@ -7,7 +7,8 @@ on:
 
 jobs:
   integrate:
-    uses: ./.github/workflows/integrate.yml
+    # reusable workflows repo and branch is required for pull request event
+    uses: ngaox/ngaox/.github/workflows/integrate.yml@main
     with:
       ref: ${{ github.event.pull_request.head.ref }}
 
@@ -21,9 +22,8 @@ jobs:
         with:
           node-version: '16'
           cache: 'yarn'
-      - run: yarn && yarn build:hosting
+      - run: yarn --frozen-lockfile && yarn build docs
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHAOSPAD_NGAOX }}'
-          projectId: chaospad-ngaox
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NGAOX_LAB }}'

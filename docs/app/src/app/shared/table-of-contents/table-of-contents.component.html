@@ -1,0 +1,14 @@
+<h4 class="section-title">On this page</h4>
+<nav>
+  <a
+    class="nav-link"
+    [class.subheading]="link.level === 'h3'"
+    routerLink="."
+    [fragment]="link.id"
+    [class.active]="link.id === activeId"
+    (click)="navigateToSection(link.id)"
+    *ngFor="let link of toc"
+  >
+    {{ link.title }}
+  </a>
+</nav>

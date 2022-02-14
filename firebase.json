@@ -1,7 +1,7 @@
 {
   "hosting": [
     {
-      "target": "docs-app",
+      "target": "ngaox-docs",
       "public": "dist/docs/app",
       "ignore": ["**/.*"],
       "headers": [
@@ -25,10 +25,6 @@
         }
       ],
       "rewrites": [
-        {
-          "source": "/api/doc-content",
-          "function": "getDocContent"
-        },
         {
           "source": "**",
           "destination": "/index.html"
