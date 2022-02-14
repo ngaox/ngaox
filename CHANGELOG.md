@@ -1,3 +1,12 @@
+## [3.0.1](https://github.com/ngaox/ngaox/compare/v3.0.0...v3.0.1) (2022-02-14)
+
+
+### Bug Fixes
+
+* **docs-app:** deployement unavailable firebase `projectId` ([5cd62f8](https://github.com/ngaox/ngaox/commit/5cd62f8fd0de02f48dd3263a4e8094352f954c6b))
+
+
+
 # [3.0.0](https://github.com/ngaox/ngaox/compare/v2.0.0...v3.0.0) (2022-02-14)
 
 
