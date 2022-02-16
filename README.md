@@ -1,24 +1,36 @@
-<p align="center">
-    <img src="docs/app/src/assets/ngaox.png" alt="ngaox-logo" width="150px" height="150px"/>
-    <h1 align="center">NGAOX - <i>Where angular apps can't get chaotic</i></h1>
-</p>
+<img align="right" src="docs/app/src/assets/ngaox.png" alt="Ngaox Logo" width="150"/>
 
-<p align="center">
+<h1 >Angular Ngaox</h1>
+
+<p >
     <a href="https://github.com/ngaox/ngaox/blob/main/LICENSE">
         <img src="https://img.shields.io/github/license/ngaox/ngaox?style=flat" alt="License"/>
+    </a>
+    <a href="https://github.com/ngaox/ngaox/releases">
+        <img alt="Latest release tag" src="https://img.shields.io/github/v/release/ngaox/ngaox?label=version">
     </a>
     <a href="https://github.com/ngaox/ngaox/actions/workflows/-main-ci.yml">
         <img src="https://github.com/ngaox/ngaox/actions/workflows/-main-ci.yml/badge.svg" alt="🧪 Lint, Test & Analyze"/>
     </a>
 </p>
 
-<br>
+<br clear="right"/>
 
-<!-- [@rabraghib](https://twitter.com/rabraghib) & [@NgaoxLab](https://twitter.com/NgaoxLab) - Get the latest updates about the project on Twitter -->
+<p align="center">
+    <i><b>Maybe its time to stop wasting time and let Ngaox drive your app to production!</b></i>
+</p>
+
+<p align="center">
+    <a href="https://ngaox-lab.web.app">Documentation</a>
+    &nbsp; ▪ &nbsp;
+    <span>
+        Twitter: <a href="https://twitter.com/rabraghib">@rabraghib</a> & <a href="https://twitter.com/NgaoxLab">@NgaoxLab</a>
+    </span>
+</p>
 
 ## Description
 
-This repository contains several npm packages that are published under the scope `@ngaox` which are tools & libraries to speed up and facilitate developing angular web apps.
+Ngaox is a set of libraries (npm packages) published under the scope `@ngaox` to speed up and facilitate developing angular apps.
 
 | package                                 | description                                                                                              | Docs                       |
 | --------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------- |
