@@ -40,17 +40,21 @@ export class TableOfContentsComponent
       this._route.fragment.subscribe(fragment => {
         if (fragment != null) {
           this.activeId = fragment;
-
-          const target = document.getElementById(this.activeId);
-          if (target) {
-            target.scrollIntoView();
-          }
+          this.navigateToSection(this.activeId);
         }
       })
     );
   }
   navigateToSection(linkId: string) {
-    document.querySelector(`#${linkId}`)?.scrollIntoView();
+    const container = this._scrollContainer;
+    if (container) {
+      const scrollTop =
+        this._linksOffsets[linkId] - this.activeHeaderOffset(container);
+      container.scrollTo({
+        top: scrollTop,
+        behavior: 'smooth'
+      });
+    }
   }
   ngOnInit(): void {
     // On init, the sidenav content element doesn't yet exist, so it's not possible
@@ -81,7 +85,9 @@ export class TableOfContentsComponent
     });
   }
   private onScroll(): void {
-    const scrollOffset = this.getScrollOffset();
+    const container = this._scrollContainer as HTMLElement | Window;
+    const scrollOffset =
+      this.getScrollTop(container) + this.activeHeaderOffset(container);
     let hasChanged = false;
     let found = false;
     for (let i = 0; i < this.toc.length; i++) {
@@ -124,17 +130,14 @@ export class TableOfContentsComponent
     }
   }
 
-  /** Gets the scroll offset of the scroll container */
-  private getScrollOffset(): number | void {
-    const container = this._scrollContainer;
-
-    if (container instanceof HTMLElement) {
-      const { top } = container.getBoundingClientRect();
-      return container.scrollTop + (container.clientHeight * 4) / 5 + top;
-    }
-
-    if (container) {
-      return container.scrollY + container.innerHeight;
-    }
+  private getScrollTop(container: HTMLElement | Window): number {
+    return container instanceof HTMLElement
+      ? container.scrollTop
+      : container.scrollY;
+  }
+  private activeHeaderOffset(container: HTMLElement | Window): number {
+    return container instanceof HTMLElement
+      ? container.clientHeight * 0.55 + container.getBoundingClientRect().top
+      : container.innerHeight * 0.55;
   }
 }

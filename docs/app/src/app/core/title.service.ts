@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class TitleService {
   private _title: BehaviorSubject<string> = new BehaviorSubject('');
-  defaultTitle = 'Ngaox';
+  defaultTitle = 'Angular Ngaox';
 
   getTitle(): BehaviorSubject<string> {
     return this._title;
