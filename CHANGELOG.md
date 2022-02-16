@@ -1,3 +1,12 @@
+## [3.0.2](https://github.com/ngaox/ngaox/compare/v3.0.1...v3.0.2) (2022-02-16)
+
+
+### Bug Fixes
+
+* **docs-app:** :bug: synchronization between TOC active state and its links navigations ([b672e41](https://github.com/ngaox/ngaox/commit/b672e41025619c3ed0191447436a5bfdf9ce5d10))
+
+
+
 ## [3.0.1](https://github.com/ngaox/ngaox/compare/v3.0.0...v3.0.1) (2022-02-14)
 
 

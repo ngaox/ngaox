@@ -1,6 +1,6 @@
 {
   "name": "@ngaox/devkit",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Schematics, Builders, Commands for better DX with ngaox",
   "schematics": "./schematics.json",
   "ng-add": {
