@@ -49,7 +49,7 @@ export class TableOfContentsComponent
     const container = this._scrollContainer;
     if (container) {
       const scrollTop =
-        this._linksOffsets[linkId] - this.activeHeaderOffset(container);
+        this._linksOffsets[linkId] - this.activeHeaderOffset(container) + 10;
       container.scrollTo({
         top: scrollTop,
         behavior: 'smooth'
