@@ -20,11 +20,10 @@ interface ISortable {
 export function SortItemsCallback(a: ISortable, b: ISortable) {
   const orderSort =
     a?.order === b?.order
-      ? 0
+      ? undefined
       : (a?.order ?? Infinity) < (b?.order ?? Infinity)
       ? -1
       : 1;
-  const nameSort = a.name.localeCompare(a.name);
-  // Cast return value to one of 0, 1, -1
-  return orderSort || nameSort === 0 ? 0 : nameSort > 0 ? 1 : -1;
+  const nameSort = a.name.localeCompare(b.name);
+  return orderSort ?? (nameSort === 0 ? 0 : nameSort > 0 ? 1 : -1);
 }

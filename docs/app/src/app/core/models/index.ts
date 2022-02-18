@@ -22,6 +22,8 @@ export interface ITocLink {
 }
 
 export interface IDocsItem {
+  title?: string;
+  /** Short version of the title */
   name: string;
   slug: string;
   description?: string;

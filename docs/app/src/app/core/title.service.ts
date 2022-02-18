@@ -9,6 +9,8 @@ export class TitleService {
   private _title: BehaviorSubject<string> = new BehaviorSubject('');
   defaultTitle = 'Angular Ngaox';
 
+  constructor(private bodyTitle: Title) {}
+
   getTitle(): BehaviorSubject<string> {
     return this._title;
   }
@@ -22,6 +24,4 @@ export class TitleService {
     }
     this.bodyTitle.setTitle(title);
   }
-
-  constructor(private bodyTitle: Title) {}
 }

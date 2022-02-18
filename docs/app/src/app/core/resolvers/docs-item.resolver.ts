@@ -21,7 +21,7 @@ export class DocsItemResolver implements Resolve<IDocsItem> {
     return this.http.get<IDocsItem>(`/content/${slug}.json`).pipe(
       tap(docItem => {
         this.dataService.setCurrentDocsItem(docItem);
-        this.titleService.setTitle(docItem.name);
+        this.titleService.setTitle(docItem?.title ?? docItem.name);
       })
     );
   }

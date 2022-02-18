@@ -3,11 +3,12 @@ import { hideBin } from 'yargs/helpers';
 import fs from 'fs-extra';
 import path from 'path';
 import glob from 'glob';
+import chokidar from 'chokidar';
 import matter from 'gray-matter';
 import marked = require('marked');
 import { JSDOM } from 'jsdom';
 import { DOCS_SECTIONS, SortItemsCallback } from '@docs-core/data';
-import { IDocsItem, IDocsSection, ITocLink } from '@docs-core/models';
+import { IDocsItem, ITocLink } from '@docs-core/models';
 
 import Prism from 'prismjs';
 import 'prismjs/components/prism-typescript';
@@ -23,7 +24,7 @@ yargs(hideBin(process.argv))
     '*',
     `Build all docs content into: "${OUT_DIR}".`,
     () => {
-      console.log('Building docs content...');
+      console.log('Building Ngaox Docs Content');
     },
     async (argv: Arguments) => {
       if (argv.watch) console.info(`Watch mode is enabled.`);
@@ -42,36 +43,74 @@ yargs(hideBin(process.argv))
   .parse();
 
 async function build(watch: boolean) {
-  const sections = await Promise.all(
-    DOCS_SECTIONS.map(async section => {
-      const ContentGlobPath = path.join(__dirname, '../../', section.content);
-      const contentFiles = glob.sync(ContentGlobPath);
+  const sections = DOCS_SECTIONS;
+  const WriteContentMap = async () => {
+    await fs.writeJSON(
+      CONTENT_MAP_FILE,
+      sections.map(section => ({
+        ...section,
+        items: section.items
+          .filter(el => el !== undefined)
+          .sort(SortItemsCallback)
+          .map(item => ({
+            name: item.name,
+            slug: item.slug
+          }))
+      }))
+    );
+    console.log(`- Writing content map to: ${CONTENT_MAP_FILE}`);
+  };
+  for (let i = 0; i < sections.length; i++) {
+    const section = sections[i];
+    const itemsIndexes = {};
+    const ContentGlobPath = path.join(__dirname, '../../', section.content);
+    const SlugsPrefix = section.routesPrefix ?? '';
+    const filesNumber = glob.sync(ContentGlobPath).length;
+    let builtFilesNumber = 0;
+    section.items = [];
+    delete section.routesPrefix;
+    delete section.content;
+    sections[i] = section;
 
-      console.log(
-        `- Found ${contentFiles.length} items in "${section.name}" section.`
-      );
-      section.items = await Promise.all(
-        contentFiles.map(file => buildItem(file, section))
-      );
+    console.log(`- Found ${filesNumber} items in "${section.name}" section.`);
 
-      section.items.sort(SortItemsCallback);
-      section.items = section.items.map(item => ({
-        name: item.name,
-        slug: item.slug
-      }));
-      return section;
-    })
-  );
-  sections.sort(SortItemsCallback);
-  await fs.writeJSON(CONTENT_MAP_FILE, sections);
-  console.log(`- Writing content map to: ${CONTENT_MAP_FILE}`);
-  if (watch) {
-    // TODO: Watch for changes and rebuild
-    // https://github.com/paulmillr/chokidar
+    const watcher = chokidar.watch(ContentGlobPath);
+    const buildDocItemCallback = async (filePath: string) => {
+      const item = await buildItem(filePath, SlugsPrefix);
+      if (itemsIndexes[filePath]) {
+        section.items[itemsIndexes[filePath]] = item;
+      } else {
+        builtFilesNumber++;
+        itemsIndexes[filePath] = section.items.push(item) - 1;
+      }
+      sections[i] = section;
+      if (builtFilesNumber >= filesNumber) {
+        await WriteContentMap();
+        if (!watch) {
+          watcher
+            .close()
+            .then(() =>
+              console.log(`\n- Done building "${section.name}" section!`)
+            );
+        }
+      }
+    };
+    watcher
+      .on('add', buildDocItemCallback)
+      .on('change', buildDocItemCallback)
+      .on('unlink', async (filePath: string) => {
+        const obj = section.items[itemsIndexes[filePath]];
+        console.log(
+          `\t-> Removing "${obj.name}" from "${section.name}" section.`
+        );
+        delete section.items[itemsIndexes[filePath]];
+        delete itemsIndexes[filePath];
+        await WriteContentMap();
+      });
   }
 }
 
-async function buildItem(filePath: string, section: IDocsSection) {
+async function buildItem(filePath: string, slugPrefix: string) {
   const content = await fs.readFile(filePath, 'utf8');
   const TOC: ITocLink[] = [];
   const { data, content: markdown } = matter(content);
@@ -87,7 +126,9 @@ async function buildItem(filePath: string, section: IDocsSection) {
         ''
       )
       .replace(/\s/g, '-');
-    if (level === 2 || level === 3) {
+    if (!data.title && level === 1) {
+      data.title = text;
+    } else if (level === 2 || level === 3) {
       TOC.push({
         title: text,
         id,
@@ -104,18 +145,17 @@ async function buildItem(filePath: string, section: IDocsSection) {
   Prism.highlightAllUnder(highlightedHtmlNode);
 
   const outObj: IDocsItem = {
+    title: data.title,
     name: data.name,
     description: data?.description ?? '',
-    slug: `${section.routesPrefix}${
-      data.slug || path.basename(filePath, '.md')
-    }`,
+    slug: `${slugPrefix}${data.slug || path.basename(filePath, '.md')}`,
     content: highlightedHtmlNode.innerHTML,
     order: data?.order,
     toc: TOC
   };
 
   const outFile = path.join(OUT_DIR, `${outObj.slug}.json`);
-  console.log(`  -> Writing ${outFile}`);
+  console.log(`\t-> Writing ${outFile}`);
 
   await fs.ensureDir(path.dirname(outFile));
   await fs.writeJSON(outFile, outObj);
