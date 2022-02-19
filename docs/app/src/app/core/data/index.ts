@@ -1,12 +1,11 @@
 import { DocsSections } from './docs-sections';
 import { ProjectFeatures } from './project-features';
 
-// TODO: Replace with real data
 export const PROJECT = {
   name: 'Angular Ngaox',
   headline: 'Angular development is easier than ever!',
   description:
-    'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium, rem dolor laborum aliquid voluptatibus molestias, inventore perferendis quam ipsam, tempora autem expedita cum. Explicabo neque laboriosam, adipisci aliquam dicta nobis.',
+    'Ngaox is a collection of Angular components and utilities designed to make your life easier. We mainly aim at providing solutions for common web needs that are still missing from Angular, such as inlining SVGs, SEO management, and more.',
   features: ProjectFeatures
 };
 
