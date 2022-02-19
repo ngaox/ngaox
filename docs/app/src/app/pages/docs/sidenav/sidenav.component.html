@@ -3,7 +3,7 @@
     <h4 class="section-title">{{ section.name }}</h4>
     <ul>
       <li *ngFor="let item of section.items" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/docs', item.slug]">
+        <a class="nav-link" [routerLink]="['/docs/' + item.slug]">
           {{ item.name }}
         </a>
       </li>
