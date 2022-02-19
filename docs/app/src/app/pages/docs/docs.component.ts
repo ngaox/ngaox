@@ -2,9 +2,9 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
-import { TitleService } from '../../core/title.service';
 import { IDocsSection } from '@docs-core/models';
 import { ActivatedRoute } from '@angular/router';
+import { DocsHeaderService } from '@docs-core/docs-header.service';
 
 @Component({
   selector: 'docs-entry',
@@ -18,7 +18,7 @@ export class DocsComponent {
       map(result => result.matches),
       shareReplay()
     );
-  pageHeader$ = this.titleService.getTitle().pipe(
+  pageHeader$ = this.headerService.getHeader().pipe(
     tap({
       next: () => this.changeDetector.detectChanges()
     })
@@ -28,7 +28,7 @@ export class DocsComponent {
   );
 
   constructor(
-    private titleService: TitleService,
+    private headerService: DocsHeaderService,
     private breakpointObserver: BreakpointObserver,
     private changeDetector: ChangeDetectorRef,
     private route: ActivatedRoute

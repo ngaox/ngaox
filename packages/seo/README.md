@@ -1,16 +1,10 @@
-# Ngaox Seo <!-- omit in toc -->
+# Ngaox Seo
 
 `@ngaox/seo` is an angular library to help generate & managing meta & other necessary tags that allow Social Media sharing & improve page SEO ranking.
 
-# Table of contents <!-- omit in toc -->
+Full documentation: https://ngaox-lab.web.app/docs/seo
 
-- [Installation](#installation)
-- [Getting started](#getting-started)
-  - [Usage via SEO component](#usage-via-seo-component)
-  - [Set global defaults](#set-global-defaults)
-  - [SeoService](#seoservice)
-  - [How to handle specialized cases](#how-to-handle-specialized-cases)
-- [Angular Schematics](#angular-schematics)
+Schematics for Ngaox Seo are available as part of [Ngaox Devkit](https://www.npmjs.com/package/@ngaox/devkit). Find out more in [the Ngaox Schematics docs page](https://ngaox-lab.web.app/docs/schematics).
 
 # Installation
 
@@ -91,7 +85,7 @@ Ngaox-Seo can also works by including it your page component and passing to it t
 
 ## Set global defaults
 
-You might want to set some default values for your app like `siteName` or `twitterCreator`...
+You might want to set some default values for your app like `siteName` or `twitter.creator`...
 
 thats can be done by passing your defaults values as the first argument to `SeoModule.forRoot` method (The defaults object should implement `IPageSeoData` interface).
 
@@ -107,7 +101,9 @@ import { SeoModule } from '@ngaox/seo';
       title: 'React is garbage 😈',
       keywords: '1, 2, 3',
       type: 'website',
-      twitterCreator: '@twitter',
+      twitter: {
+        creator: '@twitter'
+      },
       siteName: 'Cool app 😎'
       // ...
     })
@@ -140,10 +136,6 @@ constructor(seo: IPageSeoData) {
 ## How to handle specialized cases
 
 Checkout the docs for [How to create a custom SEO loader](https://ngaox-lab.web.app/docs/advanced/custom-seo-loader).
-
-# Angular Schematics
-
-Schematics for Ngaox Seo are available as part of [Ngaox Devkit](https://www.npmjs.com/package/@ngaox/devkit). Find out more in [the schematics docs](https://ngaox-lab.web.app/docs/schematics).
 
 ---
 

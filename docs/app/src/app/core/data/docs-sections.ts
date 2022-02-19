@@ -6,5 +6,10 @@ export const DocsSections: IDocsSection[] = [
     routesPrefix: '',
     content: '/docs/content/start/*.md',
     order: 1
+  },
+  {
+    name: 'Advanced',
+    routesPrefix: 'advanced/',
+    content: '/docs/content/advanced/*.md'
   }
 ];

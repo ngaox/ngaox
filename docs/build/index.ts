@@ -127,7 +127,7 @@ async function buildItem(filePath: string, slugPrefix: string) {
       )
       .replace(/\s/g, '-');
     if (!data.title && level === 1) {
-      data.title = text;
+      data.title = convertToPlain(text);
     } else if (level === 2 || level === 3) {
       TOC.push({
         title: text,
@@ -144,11 +144,13 @@ async function buildItem(filePath: string, slugPrefix: string) {
   const highlightedHtmlNode = new JSDOM(html).window.document.body;
   Prism.highlightAllUnder(highlightedHtmlNode);
 
+  const slug = (data.slug || path.basename(filePath, '.md')) ?? '';
+  const name = data.name ?? slug.replace(/-/g, ' ');
   const outObj: IDocsItem = {
     title: data.title,
-    name: data.name,
+    name: name,
     description: data?.description ?? '',
-    slug: `${slugPrefix}${data.slug || path.basename(filePath, '.md')}`,
+    slug: `${slugPrefix}${slug}`,
     content: highlightedHtmlNode.innerHTML,
     order: data?.order,
     toc: TOC
@@ -160,4 +162,15 @@ async function buildItem(filePath: string, slugPrefix: string) {
   await fs.ensureDir(path.dirname(outFile));
   await fs.writeJSON(outFile, outObj);
   return outObj;
+}
+
+function convertToPlain(html) {
+  // Create a new div element
+  const tempElement = new JSDOM(html).window.document.body;
+
+  // Set the HTML content with the given value
+  tempElement.innerHTML = html;
+
+  // Retrieve the text property of the element
+  return tempElement.textContent || tempElement.innerText || '';
 }
