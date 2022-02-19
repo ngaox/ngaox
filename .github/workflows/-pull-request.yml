@@ -12,7 +12,7 @@ jobs:
     with:
       ref: ${{ github.event.pull_request.head.ref }}
 
-  build_and_preview:
+  build-preview:
     needs: integrate
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
