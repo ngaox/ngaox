@@ -1,53 +1,53 @@
-import { Inject, Injector, ModuleWithProviders, NgModule } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ActivatedRoute, ResolveEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { Loader, PageSeoData } from './interfaces';
-import { SeoService } from './seo.service';
 
-const EXPORTS: any = [];
+import { SeoService } from './seo.service';
+import { RouteDataSeoLoader, SeoDataLoader } from './loaders';
+
+import { currentPageRoute } from './shared/helpers';
+import { IPageSeoData, SeoDefaultsToken } from './shared/modals';
+import { SeoComponent } from './seo.component';
 
 @NgModule({
-  declarations: [...EXPORTS],
+  declarations: [SeoComponent],
   imports: [],
   providers: [
     {
-      provide: 'AutoLoader',
-      useValue: undefined
+      provide: SeoDataLoader,
+      useClass: RouteDataSeoLoader
     }
   ],
-  exports: [...EXPORTS]
+  exports: [SeoComponent]
 })
 export class SeoModule {
   constructor(
-    @Inject('AutoLoader') AutoLoader: Loader | null = null,
-    injector: Injector,
+    Loader: SeoDataLoader,
     router: Router,
+    route: ActivatedRoute,
     seo: SeoService
   ) {
-    if (AutoLoader) {
+    if (Loader) {
       router.events
-        .pipe(filter(event => event instanceof NavigationEnd))
-        .subscribe(event => {
-          seo.set(AutoLoader(event as NavigationEnd, injector));
+        .pipe(filter(event => event instanceof ResolveEnd))
+        .subscribe(() => {
+          seo.set(Loader.resolve(currentPageRoute(route).snapshot));
         });
     }
   }
 
   public static forRoot(
-    defaults: PageSeoData = {},
-    AutoLoader?: Loader
+    defaults: IPageSeoData = {
+      title: 'This title is everywhere 🤔? Set yours!!'
+    }
   ): ModuleWithProviders<SeoModule> {
     return {
       ngModule: SeoModule,
       providers: [
         SeoService,
         {
-          provide: 'Defaults',
+          provide: SeoDefaultsToken,
           useValue: defaults
-        },
-        {
-          provide: 'AutoLoader',
-          useValue: AutoLoader
         }
       ]
     };
