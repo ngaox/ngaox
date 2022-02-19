@@ -3,7 +3,9 @@
  */
 
 export * from './lib/seo.module';
-export * from './lib/interfaces';
 export * from './lib/seo.service';
-export * from './lib/presetsLoader';
-export * from './lib/helpers';
+
+export * from './lib/loaders';
+
+export * from './lib/shared/modals';
+export * from './lib/shared/helpers';

@@ -1,7 +1,12 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, Optional } from '@angular/core';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
-import { imageData, PageSeoData } from './interfaces';
+import {
+  IPageSeoData,
+  ISeoImage,
+  ISeoTwitter,
+  SeoDefaultsToken
+} from './shared/modals';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +16,7 @@ export class SeoService {
     private title: Title,
     private meta: Meta,
     @Inject(DOCUMENT) private document: Document,
-    @Optional() @Inject('Defaults') private defaults: PageSeoData = {}
+    @Optional() @Inject(SeoDefaultsToken) private defaults: IPageSeoData = {}
   ) {}
 
   public generateTags(definitions: MetaDefinition[]): void {
@@ -20,7 +25,7 @@ export class SeoService {
     });
   }
 
-  public set(seoData: PageSeoData) {
+  public set(seoData: IPageSeoData) {
     seoData = {
       ...this.defaults,
       ...seoData
@@ -30,9 +35,8 @@ export class SeoService {
     if (seoData.description) this.setDescription(seoData.description);
     if (seoData.url) this.setUrl(seoData.url);
     if (seoData.type) this.setType(seoData.type);
-    if (seoData.image) this.setImage(seoData.image, seoData.imageData);
-    if (seoData.twitterCreator) this.setTwitterCreator(seoData.twitterCreator);
-    if (seoData.twitterCard) this.setTwitterCard(seoData.twitterCard);
+    if (seoData.image) this.setImage(seoData.image);
+    if (seoData.twitter) this.setTwitter(seoData.twitter);
     if (seoData.fbAppId) this.setFbAppId(seoData.fbAppId);
     if (seoData.siteName) this.setSiteName(seoData.siteName);
   }
@@ -77,51 +81,61 @@ export class SeoService {
     this.generateTags([{ property: 'og:type', content: type }]);
   }
 
-  public setImage(image: string, extra?: imageData): void {
-    this.generateTags([
-      { property: 'og:image', content: image },
-      { name: 'twitter:image', content: image },
-      { property: 'image', content: image }
-    ]);
-    if (image.startsWith('https')) {
-      this.generateTags([{ property: 'og:image:secure_url', content: image }]);
+  public setImage(image: string | ISeoImage): void {
+    if (typeof image === 'string') {
+      this.generateTags([
+        { property: 'og:image', content: image },
+        { name: 'twitter:image', content: image },
+        { property: 'image', content: image }
+      ]);
+    } else {
+      this.generateTags([
+        { property: 'og:image', content: image.url },
+        { name: 'twitter:image', content: image.url },
+        { property: 'image', content: image.url }
+      ]);
+      if (image.url.startsWith('https')) {
+        this.generateTags([
+          { property: 'og:image:secure_url', content: image.url }
+        ]);
+      }
+      if (image.alt) {
+        this.generateTags([
+          { property: 'twitter:image:alt', content: image.alt },
+          { property: 'og:image:alt', content: image.alt }
+        ]);
+      }
+      if (image.height) {
+        this.generateTags([
+          { property: 'og:image:height', content: image.height.toString() }
+        ]);
+      }
+      if (image.width) {
+        this.generateTags([
+          { property: 'og:image:width', content: image.width.toString() }
+        ]);
+      }
+      if (image.width) {
+        this.generateTags([
+          { property: 'og:image:type', content: `${image.mimeType}` }
+        ]);
+      }
     }
-    if (extra) {
-      if (extra.alt) {
-        this.generateTags([
-          { property: 'twitter:image:alt', content: extra.alt },
-          { property: 'og:image:alt', content: extra.alt }
-        ]);
-      }
-      if (extra.height) {
-        this.generateTags([
-          { property: 'og:image:height', content: extra.height.toString() }
-        ]);
-      }
-      if (extra.width) {
-        this.generateTags([
-          { property: 'og:image:width', content: extra.width.toString() }
-        ]);
-      }
-      if (extra.width) {
-        this.generateTags([
-          { property: 'og:image:type', content: `${extra.mimeType}` }
-        ]);
-      }
+  }
+
+  public setTwitter(twitterData: ISeoTwitter): void {
+    if (twitterData.site) {
+      this.generateTags([{ name: 'twitter:site', content: twitterData.site }]);
+    }
+    if (twitterData.creator) {
+      this.generateTags([
+        { name: 'twitter:creator', content: twitterData.creator }
+      ]);
+    }
+    if (twitterData.card) {
+      this.generateTags([{ name: 'twitter:card', content: twitterData.card }]);
     }
   }
-
-  public setTwitterCreator(username: string): void {
-    this.generateTags([
-      { name: 'twitter:site', content: username },
-      { name: 'twitter:creator', content: username }
-    ]);
-  }
-
-  public setTwitterCard(twitterCard: 'summary_large_image' | 'summary'): void {
-    this.generateTags([{ name: 'twitter:card', content: twitterCard }]);
-  }
-
   public setFbAppId(Id: string): void {
     this.generateTags([{ property: 'fb:app_id', content: Id }]);
   }
