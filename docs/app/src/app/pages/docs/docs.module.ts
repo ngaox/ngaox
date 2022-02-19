@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, UrlSegment } from '@angular/router';
 import { DocsComponent } from './docs.component';
 import { IconsModule } from '@ngaox/icons';
 
@@ -29,7 +29,14 @@ const routes: Routes = [
     children: [
       { path: '', component: CategoriesComponent },
       {
-        path: ':slug',
+        matcher: url => {
+          return {
+            consumed: url,
+            posParams: {
+              slug: new UrlSegment(url.map(i => i.path).join('/'), {})
+            }
+          };
+        },
         component: ViewerComponent,
         resolve: {
           docsItem: DocsItemResolver
