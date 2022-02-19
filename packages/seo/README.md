@@ -1,91 +1,99 @@
-# Ngaox-Seo <!-- omit in toc -->
+# Ngaox Seo <!-- omit in toc -->
 
-`@ngaox/seo` is an angular library to help generate & managing meta & other necessary tags that allow Social Media sharing & improve page SEO ranking
+`@ngaox/seo` is an angular library to help generate & managing meta & other necessary tags that allow Social Media sharing & improve page SEO ranking.
 
-Ngaox-Seo mainly provides:
-
-- A [service](#only-want-a-service) which is responsible for generating page title & meta tags
-- `NgaoxModule` to help setting [global defaults](#set-global-defaults) & to define the entry [loader](#loaders)
-- An [Angular schematics](#getting-started) to make setting a SeoModule as easy as possible!
-
----
-
-# Table of Contents <!-- omit in toc -->
+# Table of contents <!-- omit in toc -->
 
 - [Installation](#installation)
 - [Getting started](#getting-started)
-- [Set global defaults](#set-global-defaults)
-- [Loaders](#loaders)
-  - [How to handle Dynamic routes with loaders](#how-to-handle-dynamic-routes-with-loaders)
-  - [Out of the box loaders](#out-of-the-box-loaders)
-- [🤙 Angular Schematics](#-angular-schematics)
-- [Examples](#examples)
-
----
+  - [Usage via SEO component](#usage-via-seo-component)
+  - [Set global defaults](#set-global-defaults)
+  - [SeoService](#seoservice)
+  - [How to handle specialized cases](#how-to-handle-specialized-cases)
+- [Angular Schematics](#angular-schematics)
 
 # Installation
 
 To install this library run:
 
 ```bash
-ng add @ngaox/seo
+npm install @ngaox/seo
 ```
 
----
+or if you from the ngaox ecosystem 🤝:
+
+```bash
+ng g @ngaox/devkit:setup-seo
+```
 
 # Getting started
 
-The `SeoService` is the service you can use to set page meta tags & title & canonical links.
-
-The service is provided in the `root` module. So you need just to inject it wherever you need it.
-
-and set page `SeoData` by calling `set` method & passing in your Data
+You can start using Ngaox Seo by importing `SeoModule` and configuring it for the root module. Optionally you can sets up [the global defaults for your app](#set-global-defaults).
 
 ```ts
-import { SeoService, PageSeoData } from '@ngaox/seo';
+// app.module.ts
+import { SeoModule } from '@ngaox/seo';
 
-seoData: PageSeoData = {
-  title: 'What if you were an alien?'
-  // check PageSeoData interface below
-};
-constructor(seo: SeoService) {
-  seo.set(seoData);
-  // ...
-}
+@NgModule({
+  /* ... */
+  imports: [
+    /* ... */
+    SeoModule.forRoot()
+  ]
+})
+export class AppModule {}
 ```
 
-the SeoData given to `.set` method should be of type `PageSeoData` which is:
+By default it will set the page SeoData to the deepest route's `NgaoxSeo` data property:
 
 ```ts
-export interface PageSeoData {
-  title?: string;
-  keywords?: string;
-  description?: string;
-  url?: string;
-  type?: string;
-  image?: string;
-  imageData?: {
-    alt?: string;
-    width?: number;
-    height?: number;
-    mimeType?: string;
-  };
-  twitterCreator?: string;
-  twitterCard?: 'summary_large_image' | 'summary';
-  fbAppId?: string;
-  siteName?: string;
-}
+const routes: Routes = [
+  {
+    path: 'users',
+    data: {
+      // This 👇 will be used as the page seo data
+      NgaoxSeo: {
+        title: 'Users List Page',
+        description: 'A short description goes here.',
+        siteName: 'Ngaox'
+      }
+    },
+    children: [
+      {
+        path: ':id',
+        resolve: {
+          // For dynamic pages resolvers is your friend 😉
+          NgaoxSeo: UserSeoResolver
+        }
+      }
+    ]
+  }
+];
 ```
 
-It also comes with a method `generateTags` to create/update meta tags from a given `MetaDefinition` array to generate non-supported meta tags.
+Check out the docs for [all available options and their utility](https://ngaox-lab.web.app/docs/seo#available-seo-options).
 
----
+## Usage via SEO component
 
-# Set global defaults
+Ngaox-Seo can also works by including it your page component and passing to it the `seoData` as inputs (attribute).
 
-You might want to set some default values for your app like `siteName` or `twitterCreator` ...
+```html
+<ngaox-seo
+  title="Hello World"
+  description="This is a description"
+  keywords="keyword1, keyword2, keyword3"
+  [twitter]="{
+    site: '@NgaoxLab',
+    creator: '@rabraghib'
+  }"
+></ngaox-seo>
+```
 
-thats can be done by importing `SeoModule` and calling `forRoot` method with your defaults values ass its first argument which are also of type `PageSeoData`
+## Set global defaults
+
+You might want to set some default values for your app like `siteName` or `twitterCreator`...
+
+thats can be done by passing your defaults values as the first argument to `SeoModule.forRoot` method (The defaults object should implement `IPageSeoData` interface).
 
 ```ts
 // app.module.ts
@@ -108,107 +116,34 @@ import { SeoModule } from '@ngaox/seo';
 export class AppModule {}
 ```
 
----
+## SeoService
 
-# Loaders
+The `SeoService` is the service you can use to set page meta tags & title.
 
-Ngaox Seo comes with support of **loader** concept which is a function that `SeoModule` call whenever navigating to any route on the app & it pass it a `NavigationEnd` event & an `Injector` and expect `PageSeoData` object to be returned that represent the SeoData for the current page.
+The service is provided in the `root` module. So you need just to inject it wherever you need it.
+
+and set page `SeoData` by calling `set` method & passing in your Data
 
 ```ts
-import { Injector } from '@angular/core';
-import { NavigationEnd } from '@angular/router';
+import { SeoService, IPageSeoData } from '@ngaox/seo';
 
-// Loader Type
-export type Loader = (event: NavigationEnd, Injector: Injector) => PageSeoData;
-```
-
-To implement loaders concept just create one and pass it as a second argument for `SeoModule.forRoot()`
-
-<!-- prettier-ignore -->
-```ts
-// app.module.ts
-import { Injector } from '@angular/core';
-import { NavigationEnd } from '@angular/router';
-import { PageSeoData, Loader } from '@ngaox/seo';
-
-const myLoader: Loader = (event: NavigationEnd, injector: Injector): PageSeoData => {
-  /* ... */
+seoData: IPageSeoData = {
+  title: 'What if you were an alien?'
+  // check PageSeoData interface below
 };
-
-@NgModule({
-  /* ... */
-  imports: [
-    SeoModule.forRoot({/* ... */}, myLoader)
-  ]
-})
-export class AppModule {}
+constructor(seo: IPageSeoData) {
+  seo.set(this.seoData);
+  // ...
+}
 ```
 
-## How to handle Dynamic routes with loaders
+## How to handle specialized cases
 
-As mentioned above the `loader` get an [injector](https://angular.io/api/core/Injector-0) that can inject any injectable service like the [ActivatedRoute](https://angular.io/api/router/ActivatedRoute) which give access to your route params & your resolved data...
+Checkout the docs for [How to create a custom SEO loader](https://ngaox-lab.web.app/docs/advanced/custom-seo-loader).
 
-And to make that even easier `@ngaox/seo` provide a helper function to get current `ActivatedRoute` from injector
+# Angular Schematics
 
-```js
-import { currentPageRoute /* ... */ } from '@ngaox/seo';
-
-const itemPageLoader: Loader = (
-  e: NavigationEnd,
-  injector: Injector
-): PageSeoData => {
-  const route = currentPageRoute(injector);
-  const item = route.snapshot.data['item'];
-  return {
-    title: `This page is for ${item.name}`
-    // ...
-  };
-};
-```
-
-## Out of the box loaders
-
-coming soon...
-
----
-
-# 🤙 Angular Schematics
-
-To set up a module to manage all pages SEO in your application, after the library is [installed](#installation) run the following CLI command:
-
-```bash
-ng generate @ngaox/seo:setup
-```
-
-make sure to firstly check `ng generate @ngaox/seo:setup --help` to see all possible args & params...
-
-**And you good to go 🎉** you should see the title changed for all routes
-
-The previous command did update your module to import the generated SeoModule? If not, You can add it yourself.
-
-```ts
-// app.module.ts
-
-import { AppSeoModule } from 'app-seo/app-seo.module.ts'; // the generated SeoModule
-/* ... */
-@NgModule({
-  imports: [
-    AppSeoModule
-    /* ... */
-  ]
-})
-export class AppModule {}
-```
-
-Don't forget to Edit `AppSeoDefaults` in the generated file `app-seo/app-seo.defaults.ts` & define default SeoData (page infos)
-
-& also update the pre given [loader](#loaders) `AppSeoLoader` from `app-seo/app-seo.loader.ts` to load `SeoData` for the each route (overwrite your defaults)
-
----
-
-# Examples
-
-you can check [blog-up implementation](https://github.com/rabraghib/blog-up/blob/main/src/app/app-seo/app-seo.module.ts) as an example for a full `@ngaox/seo` setup
+Schematics for Ngaox Seo are available as part of [Ngaox Devkit](https://www.npmjs.com/package/@ngaox/devkit). Find out more in [the schematics docs](https://ngaox-lab.web.app/docs/schematics).
 
 ---
 
