@@ -77,7 +77,7 @@ async function build(watch: boolean) {
     const watcher = chokidar.watch(ContentGlobPath);
     const buildDocItemCallback = async (filePath: string) => {
       const item = await buildItem(filePath, SlugsPrefix);
-      if (itemsIndexes[filePath]) {
+      if (itemsIndexes[filePath] !== undefined) {
         section.items[itemsIndexes[filePath]] = item;
       } else {
         builtFilesNumber++;

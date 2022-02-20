@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DOCS_SECTIONS } from '@docs-core/data';
-import { TitleService } from '../../../core/title.service';
+import { DocsHeaderService } from '@docs-core/docs-header.service';
+import { IDocsSection } from '@docs-core/models';
 
 @Component({
   selector: 'docs-categories',
@@ -8,9 +9,9 @@ import { TitleService } from '../../../core/title.service';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent {
-  categories: any[] = DOCS_SECTIONS;
+  categories: IDocsSection[] = DOCS_SECTIONS;
 
-  constructor(private titleService: TitleService) {
-    this.titleService.setTitle('Categories');
+  constructor(private headerService: DocsHeaderService) {
+    this.headerService.setHeader('Sections List');
   }
 }

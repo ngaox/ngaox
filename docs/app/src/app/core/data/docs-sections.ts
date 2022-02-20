@@ -8,6 +8,12 @@ export const DocsSections: IDocsSection[] = [
     order: 1
   },
   {
+    name: 'Ngaox Tools',
+    routesPrefix: 'dx/',
+    content: '/docs/content/devkit/*.md',
+    order: 2
+  },
+  {
     name: 'Advanced',
     routesPrefix: 'advanced/',
     content: '/docs/content/advanced/*.md'
