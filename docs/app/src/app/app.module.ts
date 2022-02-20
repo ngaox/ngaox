@@ -10,7 +10,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 import { IconsModule } from '@ngaox/icons';
+import { SeoModule } from '@ngaox/seo';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -46,10 +48,14 @@ const MATERIAL_IMPORTS = [
     BrowserModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    IconsModule.forRoot(':(', APP_ICONS),
     BrowserAnimationsModule,
     LayoutModule,
     SharedModule,
+    IconsModule.forRoot(':(', APP_ICONS),
+    SeoModule.forRoot({
+      title: 'Angular Ngaox',
+      description: 'Angular development is easier than ever!'
+    }),
     ...MATERIAL_IMPORTS
   ],
   providers: [],

@@ -4,7 +4,7 @@
 
 Full documentation: https://ngaox-lab.web.app/docs/seo
 
-Schematics for Ngaox Seo are available as part of [Ngaox Devkit](https://www.npmjs.com/package/@ngaox/devkit). Find out more in [the Ngaox Schematics docs page](https://ngaox-lab.web.app/docs/schematics).
+Schematics for Ngaox Seo are available as part of [Ngaox Devkit](https://www.npmjs.com/package/@ngaox/devkit). Find out more in [the Ngaox Schematics docs page](https://ngaox-lab.web.app/docs/dx/schematics).
 
 # Installation
 

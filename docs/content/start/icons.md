@@ -1,0 +1,3 @@
+---
+name: Inline SVG Icons
+---
