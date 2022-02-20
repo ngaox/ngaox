@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { ActivatedRoute, ResolveEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 import { SeoService } from './seo.service';
@@ -29,7 +29,7 @@ export class SeoModule {
   ) {
     if (Loader) {
       router.events
-        .pipe(filter(event => event instanceof ResolveEnd))
+        .pipe(filter(event => event instanceof NavigationEnd))
         .subscribe(() => {
           seo.set(Loader.resolve(currentPageRoute(route).snapshot));
         });
