@@ -9,9 +9,9 @@
       "type": "string"
     },
     "inline": {
-      "description": "whather ot not including all configs in one file",
+      "description": "whether ot not including all configs in one file",
       "type": "boolean",
-      "default": "false"
+      "default": false
     },
     "project": {
       "type": "string",
