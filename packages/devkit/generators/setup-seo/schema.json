@@ -1,28 +1,22 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "setup",
-  "title": "Easy setup to get started with Ngaox-Seo in a specific Module",
+  "$id": "setup-seo",
+  "title": "Setup Ngaox-Seo in your project",
   "type": "object",
   "properties": {
-    "name": {
-      "description": "The name of the seo module",
-      "type": "string"
-    },
-    "inline": {
-      "description": "whether ot not including all configs in one file",
-      "type": "boolean",
-      "default": false
-    },
     "project": {
       "type": "string",
-      "description": "The targeted project",
+      "description": "The targeted project name",
       "$default": {
         "$source": "projectName"
       }
     },
     "module": {
       "type": "string",
-      "description": "The module that will import the generated Seo-Module"
+      "description": "The module that will import the generated Seo-Module",
+      "$default": {
+        "$source": "moduleName"
+      }
     }
   },
   "required": []

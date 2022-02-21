@@ -7,7 +7,7 @@
     },
     "setup-seo": {
       "description": "Setup Ngaox-Seo",
-      "factory": "./generators/setup-seo/index#setup",
+      "factory": "./generators/setup-seo/index",
       "schema": "./generators/setup-seo/schema.json"
     }
   }

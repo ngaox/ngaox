@@ -1,0 +1,18 @@
+import { NgModule } from '@angular/core';
+import { SeoModule, IPageSeoData } from '@ngaox/seo';
+
+const SeoDefaults: IPageSeoData = {
+  title: "Alien",
+  description: "🧪🤖",
+  twitter: {
+    creator: "@TheCoolAlien"
+  }
+};
+
+@NgModule({
+  imports: [
+    SeoModule.forRoot(SeoDefaults)
+  ],
+  exports: [ SeoModule ]
+})
+export class <%= classify(name) %>SeoModule { }
