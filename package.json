@@ -1,6 +1,6 @@
 {
   "name": "ngaox",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "scripts": {
     "nx-all": "nx run-many --all --target",
     "nx-effected": "nx affected --target",
