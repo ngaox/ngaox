@@ -1,9 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, map } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { FALLBACK_ICON } from './models';
+import { NGAOX_FALLBACK, ILazyIcon } from './models';
 
 @Injectable()
 export class IconsService {
@@ -13,7 +13,7 @@ export class IconsService {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private http: HttpClient,
-    @Optional() @Inject(FALLBACK_ICON) private fallbackIcon: string
+    @Optional() @Inject(NGAOX_FALLBACK) private fallbackIcon: string
   ) {}
 
   private textToSvgElement(svg: string): SVGElement {
@@ -21,12 +21,19 @@ export class IconsService {
     div.innerHTML = svg;
     const svgEl = div.querySelector('svg') as SVGElement;
     if (svgEl) {
-      svgEl.removeAttribute('style');
-      svgEl.removeAttribute('class');
-      svgEl.setAttribute('fill', 'currentColor');
-      svgEl.setAttribute('style', 'height: 100%; width: 100%;');
+      svgEl.setAttribute('height', '100%');
+      svgEl.setAttribute('width', '100%');
     }
     return svgEl;
+  }
+
+  /**
+   * Get the fallback icon specified in the import of the `IconsModule.forRoot`
+   * Used in the `ngaox-icon` component when the icon is not found
+   * @see {@link https://ngaox-lab.web.app/docs/icons#fallback-icon}
+   */
+  getFallbackIcon() {
+    return this.fallbackIcon;
   }
 
   /**
@@ -34,49 +41,40 @@ export class IconsService {
    *
    * @see  {@link IconsService.add} & {@link IconsService.addByUrl}
    */
-  get(name: string): Observable<SVGElement | undefined> | undefined {
+  get(name: string): Observable<SVGElement | undefined> {
     if (this.icons.has(name)) {
       return of(this.icons.get(name));
     } else if (this.lazyIcons.has(name)) {
-      return this.lazyIcons.get(name);
+      return this.lazyIcons.get(name) ?? of(undefined);
     }
-    return throwError(`Svg with name '${name}' has not been added`);
-  }
-
-  getFallbackIcon() {
-    return this.fallbackIcon;
+    throw new Error(`Svg with name '${name}' has not been added`);
   }
 
   /**
-   * Add an SVG icon to the registry with an alias `name`
+   * Add an SVG icon to the NgaoxIcons registry
    *
-   * pass to it a `name` for the icon and the `svg` element
-   * you can pass also a boolean value `override` whether or not replacing existing `svg` if `name` already exists
+   * @param name the name of the Icon in the registry (used in `ngaox-icon` component and {@link IconsService.get})
+   * @param value the SVG content or {@link ILazyIcon} for lazy loaded icons
+   * @param override (default to true) whether or not replacing existing `svg` if `name` already exists
    *
    * @see {@link IconsService.addByUrl}
    */
-  add(name: string, svg: string, override?: boolean) {
+  add(
+    name: string,
+    value: string | ILazyIcon,
+    override: boolean = true
+  ): Observable<SVGElement | undefined> {
     if (override || !this.icons.has(name)) {
-      this.icons.set(name, this.textToSvgElement(svg));
-    } else if (this.icons.has(name) && override === undefined) {
-      throw new Error(
-        'svg icon name already used!!\nset override argument whether you want to replace its content or not.'
-      );
+      if (typeof value === 'string') {
+        this.icons.set(name, this.textToSvgElement(value));
+      } else {
+        return this.http.get(value.url, { responseType: 'text' }).pipe(
+          tap(svg => this.add(name, svg, override)),
+          map(() => this.icons.get(name))
+        );
+      }
     }
-  }
-
-  /**
-   * Add an SVG icon to the registry via a `url` with an alias `name` (default to `url`)
-   *
-   * you can pass also a boolean value `override` (default to false) whether or not replacing existing `svg` if `name` already exists
-   *
-   * @see {@link IconsService.add}
-   */
-  async addByUrl(url: string, name: string = url, override: boolean = false) {
-    await this.http
-      .get(url, { responseType: 'text' })
-      .pipe(tap(svg => this.add(name, svg, override)))
-      .toPromise();
+    return this.get(name);
   }
 
   /**

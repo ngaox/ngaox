@@ -1,14 +1,19 @@
 import { InjectionToken } from '@angular/core';
 
-export const FALLBACK_ICON: InjectionToken<string> = new InjectionToken(
-  'FALLBACK_ICON'
+export const NGAOX_FALLBACK: InjectionToken<string> = new InjectionToken(
+  'NgaoxFallbackIcon'
 );
 
-export interface SvgIcon {
-  name: string;
-  svg: string;
-}
-export interface IconByUrl {
-  name?: string;
+export interface ILazyIcon {
   url: string;
+  lazy: true;
+}
+
+export interface INgaoxIcon {
+  name: string;
+  data: string | ILazyIcon;
+}
+
+export interface ICompactIcons {
+  [name: string]: string | ILazyIcon;
 }
