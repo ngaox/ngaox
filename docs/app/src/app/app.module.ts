@@ -51,7 +51,7 @@ const MATERIAL_IMPORTS = [
     BrowserAnimationsModule,
     LayoutModule,
     SharedModule,
-    IconsModule.forRoot(':(', APP_ICONS),
+    IconsModule.forRoot(APP_ICONS),
     SeoModule.forRoot({
       title: 'Angular Ngaox',
       description: 'Angular development is easier than ever!'

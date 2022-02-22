@@ -1,5 +1,6 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
 import { IconsService } from './icons.service';
 
 @Component({
@@ -15,30 +16,38 @@ import { IconsService } from './icons.service';
   ]
 })
 export class IconComponent implements OnInit {
-  @HostBinding('innerHTML') svgEl?: SafeHtml;
   @Input() name?: string;
-  @Input() svgUrl?: string;
+  @Input() url?: string;
+  @HostBinding('innerHTML') svgEl?: SafeHtml;
+  @HostBinding('style.width') @Input() width?: string;
+  @HostBinding('style.height') @Input() height?: string;
 
   constructor(private icons: IconsService, private sanitizer: DomSanitizer) {}
 
-  async ngOnInit() {
-    if (this.svgUrl) {
-      await this.icons.addByUrl(this.svgUrl, this.name, true);
-      this.name = this.name ?? this.svgUrl;
+  ngOnInit() {
+    let icon: Observable<SVGElement | undefined>;
+    if (this.name === undefined) {
+      throw new Error("Attribute 'name' is required");
     }
-    if (this.name) {
-      this.icons.get(this.name)?.subscribe({
-        next: svg => {
-          if (!svg?.outerHTML) throw new Error('incorrect svg content');
-          this.svgEl = this.sanitizer.bypassSecurityTrustHtml(svg.outerHTML);
-        },
-        error: err => {
-          this.svgEl = this.sanitizer.bypassSecurityTrustHtml(
-            this.icons.getFallbackIcon()
-          );
-          console.error(err);
-        }
+    if (this.url) {
+      icon = this.icons.add(this.name, {
+        url: this.url,
+        lazy: true
       });
+    } else {
+      icon = this.icons.get(this.name);
     }
+    icon.subscribe({
+      next: svg => {
+        if (!svg?.outerHTML) throw new Error('incorrect svg content');
+        this.svgEl = this.sanitizer.bypassSecurityTrustHtml(svg.outerHTML);
+      },
+      error: err => {
+        this.svgEl = this.sanitizer.bypassSecurityTrustHtml(
+          this.icons.getFallbackIcon()
+        );
+        console.error(err);
+      }
+    });
   }
 }
