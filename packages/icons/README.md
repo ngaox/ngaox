@@ -37,9 +37,8 @@ class AppModule {}
 
 you can pass `IconsModule.forRoot` three params:
 
-- `fallbackSvgIcon` a string represent the SVG element to fallback to when the icon not exist
 - `icons` an array of icons to be registered globally with a unique name
-- `iconsByUrl` an array of icons urls to be registered globally with a name default to the icon url
+- `fallbackHtml` a string represent the SVG element to fallback to when the icon not exist
 
 And for other child modules that need access to `<ngaox-icon>` you only will need to import `IconsModule`.
 
@@ -55,7 +54,7 @@ class MyNgModule {}
 To inject an public (accessible via browser) SVG file to a component template:
 
 ```html
-<svg-icon svgUrl="assets/my-icon.svg" style="width: 100px;"></svg-icon>
+<svg-icon name="my-icon-name" url="assets/my-icon.svg" width="100px"></svg-icon>
 ```
 
 _By default, the icon has no width set so It may not appear!_
@@ -63,7 +62,7 @@ _By default, the icon has no width set so It may not appear!_
 Or if the icon was previously registered with a name you can use it like:
 
 ```html
-<svg-icon name="my-icon" style="width: 100px;"></svg-icon>
+<svg-icon name="my-icon" width="100px"></svg-icon>
 ```
 
 ## Register icons
@@ -76,7 +75,10 @@ However you can use `IconsService` to add, remove and get icons from the registr
 import { IconsService } from '@ngaox/icons';
 
 constructor(icons: IconsService) {
-  icons.addByUrl('assets/my-icon.svg', 'my-icon');
+  icons.add('my-icon-name', {
+    url: 'assets/my-icon.svg',
+    lazy: true
+  }, 'my-icon');
   icons.remove('ugly-icon');
   icons.add(
     'linkedIn-icon',
