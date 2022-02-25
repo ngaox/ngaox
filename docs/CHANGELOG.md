@@ -1,3 +1,12 @@
+## [3.1.1](https://github.com/ngaox/ngaox/compare/v3.1.0...v3.1.1) (2022-02-25)
+
+
+### Bug Fixes
+
+* **icons:** icon not changing when input changes ([fac7897](https://github.com/ngaox/ngaox/commit/fac7897d368e1045e69c3f81d5157e2479ecf632))
+
+
+
 # [3.1.0](https://github.com/ngaox/ngaox/compare/v3.0.2...v3.1.0) (2022-02-22)
 
 
