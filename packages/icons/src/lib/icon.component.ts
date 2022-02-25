@@ -1,4 +1,10 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  Input,
+  OnChanges,
+  OnInit
+} from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { IconsService } from './icons.service';
@@ -15,7 +21,7 @@ import { IconsService } from './icons.service';
     `
   ]
 })
-export class IconComponent implements OnInit {
+export class IconComponent implements OnInit, OnChanges {
   @Input() name?: string;
   @Input() url?: string;
   @HostBinding('innerHTML') svgEl?: SafeHtml;
@@ -23,6 +29,10 @@ export class IconComponent implements OnInit {
   @HostBinding('style.height') @Input() height?: string;
 
   constructor(private icons: IconsService, private sanitizer: DomSanitizer) {}
+
+  ngOnChanges() {
+    this.ngOnInit();
+  }
 
   ngOnInit() {
     let icon: Observable<SVGElement | undefined>;
@@ -39,8 +49,12 @@ export class IconComponent implements OnInit {
     }
     icon.subscribe({
       next: svg => {
-        if (!svg?.outerHTML) throw new Error('incorrect svg content');
-        this.svgEl = this.sanitizer.bypassSecurityTrustHtml(svg.outerHTML);
+        let outerHTML = svg?.outerHTML;
+        if (!outerHTML) {
+          console.error('incorrect svg content');
+          outerHTML = this.icons.getFallbackIcon();
+        }
+        this.svgEl = this.sanitizer.bypassSecurityTrustHtml(outerHTML);
       },
       error: err => {
         this.svgEl = this.sanitizer.bypassSecurityTrustHtml(
