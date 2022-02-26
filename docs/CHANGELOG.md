@@ -1,3 +1,12 @@
+## [3.1.2](https://github.com/ngaox/ngaox/compare/v3.1.1...v3.1.2) (2022-02-26)
+
+
+### Bug Fixes
+
+* **docs-app:** ensure `doc-item.title` is always available in app runtime ([cd65fa7](https://github.com/ngaox/ngaox/commit/cd65fa70c5c54db22bd2d2f60d97380173d57133))
+
+
+
 ## [3.1.1](https://github.com/ngaox/ngaox/compare/v3.1.0...v3.1.1) (2022-02-25)
 
 
