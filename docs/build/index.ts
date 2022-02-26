@@ -5,7 +5,7 @@ import path from 'path';
 import glob from 'glob';
 import chokidar from 'chokidar';
 import matter from 'gray-matter';
-import marked = require('marked');
+import { marked } from 'marked';
 import { JSDOM } from 'jsdom';
 import { DOCS_SECTIONS, SortItemsCallback } from '@docs-core/data';
 import { IDocsItem, ITocLink } from '@docs-core/models';
@@ -54,6 +54,7 @@ async function build(watch: boolean) {
           .sort(SortItemsCallback)
           .map(item => ({
             name: item.name,
+            title: item.title,
             slug: item.slug
           }))
       }))
@@ -126,9 +127,7 @@ async function buildItem(filePath: string, slugPrefix: string) {
         ''
       )
       .replace(/\s/g, '-');
-    if (!data.title && level === 1) {
-      data.title = convertToPlain(text);
-    } else if (level === 2 || level === 3) {
+    if (level === 2 || level === 3) {
       TOC.push({
         title: text,
         id,
@@ -138,16 +137,18 @@ async function buildItem(filePath: string, slugPrefix: string) {
     return `<h${level} id="${id}">${text}</h${level}>`;
   };
 
-  const html = marked.parse(markdown, {
+  const html = marked(markdown, {
     renderer: markedRenderer
   });
   const highlightedHtmlNode = new JSDOM(html).window.document.body;
   Prism.highlightAllUnder(highlightedHtmlNode);
 
   const slug = (data.slug || path.basename(filePath, '.md')) ?? '';
-  const name = data.name ?? slug.replace(/-/g, ' ');
+  const name =
+    data.name ??
+    (slug.replace(/-/g, ' ') as string).replace(/^\w/, c => c.toUpperCase());
   const outObj: IDocsItem = {
-    title: data.title,
+    title: data.title ?? name,
     name: name,
     description: data?.description ?? '',
     slug: `${slugPrefix}${slug}`,
@@ -162,15 +163,4 @@ async function buildItem(filePath: string, slugPrefix: string) {
   await fs.ensureDir(path.dirname(outFile));
   await fs.writeJSON(outFile, outObj);
   return outObj;
-}
-
-function convertToPlain(html) {
-  // Create a new div element
-  const tempElement = new JSDOM(html).window.document.body;
-
-  // Set the HTML content with the given value
-  tempElement.innerHTML = html;
-
-  // Retrieve the text property of the element
-  return tempElement.textContent || tempElement.innerText || '';
 }

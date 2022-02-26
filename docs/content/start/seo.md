@@ -1,8 +1,7 @@
 ---
 name: SEO & Social Sharing
+title: Mange your Seo and Social-Media previews
 ---
-
-# Mange your Seo and Social-Media previews
 
 ## Available SEO Options
 
