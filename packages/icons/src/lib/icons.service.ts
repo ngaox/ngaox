@@ -2,7 +2,6 @@ import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
 import { Observable, of, map } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { NGAOX_FALLBACK, ILazyIcon } from './models';
 
 @Injectable()
@@ -47,7 +46,7 @@ export class IconsService {
     } else if (this.lazyIcons.has(name)) {
       return this.lazyIcons.get(name) ?? of(undefined);
     }
-    throw new Error(`Svg with name '${name}' has not been added`);
+    return of(undefined);
   }
 
   /**
@@ -64,13 +63,17 @@ export class IconsService {
     value: string | ILazyIcon,
     override: boolean = true
   ): Observable<SVGElement | undefined> {
-    if (override || !this.icons.has(name)) {
-      if (typeof value === 'string') {
+    if (typeof value === 'string') {
+      if (override || !this.icons.has(name)) {
         this.icons.set(name, this.textToSvgElement(value));
-      } else {
-        return this.http.get(value.url, { responseType: 'text' }).pipe(
-          tap(svg => this.add(name, svg, override)),
-          map(() => this.icons.get(name))
+      }
+    } else {
+      if (override || !this.lazyIcons.has(name)) {
+        this.lazyIcons.set(
+          name,
+          this.http
+            .get(value.url, { responseType: 'text' })
+            .pipe(map(svg => this.textToSvgElement(svg)))
         );
       }
     }

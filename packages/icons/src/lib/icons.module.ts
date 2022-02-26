@@ -42,7 +42,7 @@ export class IconsModule {
     iconsService: IconsService
   ) {
     icons.forEach(icon => {
-      iconsService.add(icon.name, icon.data, true);
+      iconsService.add(icon.name, icon.data);
     });
   }
 
