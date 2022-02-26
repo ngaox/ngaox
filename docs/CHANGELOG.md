@@ -1,3 +1,12 @@
+## [3.1.3](https://github.com/ngaox/ngaox/compare/v3.1.2...v3.1.3) (2022-02-26)
+
+
+### Bug Fixes
+
+* **icons:** improve override logic and ensure lazy icons works ([7c9b5e2](https://github.com/ngaox/ngaox/commit/7c9b5e2410bd71bdf90a1541fe80744e1f283e64))
+
+
+
 ## [3.1.2](https://github.com/ngaox/ngaox/compare/v3.1.1...v3.1.2) (2022-02-26)
 
 
