@@ -29,9 +29,11 @@ jobs:
         run: |
           yarn nx-effected lint --parallel --max-parallel=2
           yarn nx-effected test --parallel --max-parallel=2
+
       - uses: codecov/codecov-action@v2
         with:
-          files: ./coverage/**/clover.xml
+          files: coverage/**/clover.xml
+
       - name: 🛠 Build
         run: yarn nx-effected build --parallel --max-parallel=2
 
