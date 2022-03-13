@@ -7,7 +7,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "commands": [
-          "npx -y typescript-json-schema@0.53.0 packages/devkit/tsconfig.lib.json IBuilderOptions > packages/devkit/builder/schema.json",
+          "npx -y typescript-json-schema@0.53.0 packages/devkit/tsconfig.lib.json IBuilderOptions > packages/devkit/builders/schema.json",
           "yarn nx run devkit:build-ts"
         ],
         "parallel": false
@@ -31,9 +31,9 @@
         "assets": [
           "packages/devkit/*.md",
           {
-            "input": "packages/devkit/builder",
+            "input": "packages/devkit/builders",
             "glob": "**/*.json",
-            "output": "builder"
+            "output": "builders"
           },
           {
             "input": "packages/devkit/generators",
