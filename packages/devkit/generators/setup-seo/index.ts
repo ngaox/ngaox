@@ -19,7 +19,7 @@ import {
   addImportToNgModule,
   getModuleInfo,
   getProject
-} from '../../shared/generators-utils';
+} from '../../src/generators-utils';
 
 export default function (options: SetupSchema): Rule {
   return async (tree: Tree, context: SchematicContext) => {

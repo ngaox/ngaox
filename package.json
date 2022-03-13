@@ -24,6 +24,7 @@
     "@angular/platform-browser": "^13.0.0",
     "@angular/platform-browser-dynamic": "^13.0.0",
     "@angular/router": "^13.0.0",
+    "deepmerge": "^4.2.2",
     "prismjs": "^1.25.0",
     "rxjs": "^7.5.4",
     "tslib": "^2.0.0",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^13.0.0",
+    "@angular-devkit/schematics": "^13.0.0",
     "@angular-eslint/eslint-plugin": "^13.0.0",
     "@angular-eslint/eslint-plugin-template": "^13.0.0",
     "@angular-eslint/template-parser": "^13.0.0",
@@ -59,6 +61,7 @@
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
     "chokidar": "^3.5.3",
+    "dotenv-expand": "^8.0.2",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.4.0",
     "fs-extra": "^10.0.0",
