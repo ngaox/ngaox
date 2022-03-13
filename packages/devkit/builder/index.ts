@@ -3,7 +3,11 @@ import {
   BuilderOutput,
   createBuilder
 } from '@angular-devkit/architect';
-import { executeBrowserBuilder } from '@angular-devkit/build-angular';
+import {
+  Type as BudgetType,
+  executeBrowserBuilder,
+  BrowserBuilderOptions
+} from '@angular-devkit/build-angular';
 import { lastValueFrom } from 'rxjs';
 import { IBuilderOptions } from '../src';
 import * as path from 'path';
@@ -11,6 +15,10 @@ import * as deepmerge from 'deepmerge';
 
 import { envVariablesPlugin } from './plugins/env-variables';
 import { MdContentTask } from './tasks/md-content';
+import {
+  InlineStyleLanguage,
+  OutputHashing
+} from '@angular-devkit/build-angular/src/builders/browser/schema';
 
 export default createBuilder(ngaoxBuild);
 
@@ -29,11 +37,16 @@ export async function ngaoxBuild(
     workspaceRoot,
     (projectMetadata.root as string | undefined) ?? ''
   );
+  const sourceRoot = path.join(
+    workspaceRoot,
+    (projectMetadata.sourceRoot as string | undefined) ?? ''
+  );
 
   const options: IBuilderOptions = await getBuildOptions(
     opts,
     workspaceRoot,
-    projectRoot
+    projectRoot,
+    sourceRoot
   );
 
   if (options.press) {
@@ -41,39 +54,95 @@ export async function ngaoxBuild(
   }
 
   return (await executeBrowserBuilder(
-    options.ngBuild,
+    options.ngBuild as BrowserBuilderOptions,
     context,
     options.allowEnvVariables ? envVariablesPlugin() : undefined
   ).toPromise()) as BuilderOutput;
 }
 
+function getCleanRelativePath(from: string, to: string) {
+  return path.relative(from, to).replace(/\\/g, '/').replace(/^\//, '');
+}
+
 async function getBuildOptions(
   opts: Partial<IBuilderOptions>,
   workspaceRoot: string,
-  projectRoot: string
+  projectRoot: string,
+  sourceRoot: string
 ): Promise<IBuilderOptions> {
-  let options: IBuilderOptions = {
-    ngBuild: opts.ngBuild,
-    allowEnvVariables: false
+  const clearSourceRoot = getCleanRelativePath(workspaceRoot, sourceRoot);
+  const clearProjectRoot = getCleanRelativePath(workspaceRoot, projectRoot);
+  let options: Partial<IBuilderOptions> = {
+    ngBuild: {
+      outputPath: `dist/${clearProjectRoot}`,
+      index: `${clearSourceRoot}/index.html`,
+      main: `${clearSourceRoot}/main.ts`,
+      polyfills: `${clearSourceRoot}/polyfills.ts`,
+      tsConfig: `${clearProjectRoot}/tsconfig.app.json`,
+      inlineStyleLanguage: InlineStyleLanguage.Css
+    },
+    allowEnvVariables: false,
+    configurations: {
+      development: {
+        ngBuild: {
+          buildOptimizer: false,
+          optimization: false,
+          vendorChunk: true,
+          extractLicenses: false,
+          sourceMap: true,
+          namedChunks: true
+        }
+      },
+      production: {
+        ngBuild: {
+          budgets: [
+            {
+              type: BudgetType.Initial,
+              maximumWarning: '500kb',
+              maximumError: '1mb'
+            },
+            {
+              type: BudgetType.AnyComponentStyle,
+              maximumWarning: '2kb',
+              maximumError: '4kb'
+            }
+          ],
+          fileReplacements: [
+            {
+              replace: `${clearSourceRoot}/environments/environment.ts`,
+              with: `${clearSourceRoot}/environments/environment.prod.ts`
+            }
+          ],
+          outputHashing: OutputHashing.All
+        }
+      }
+    }
   };
 
   try {
-    options = {
-      ...options,
-      ...(await import(workspaceRoot + '/ngaox.config.js'))
-    };
+    options = deepmerge(
+      options,
+      await import(workspaceRoot + '/ngaox.config.js')
+    );
   } catch (e) {
     /* Dont throw error */
   }
 
   try {
-    options = {
-      ...options,
-      ...(await import(projectRoot + '/ngaox.config.js'))
-    };
+    options = deepmerge(
+      options,
+      await import(projectRoot + '/ngaox.config.js')
+    );
   } catch (e) {
     /* Dont throw error */
   }
 
-  return deepmerge(options, JSON.parse(JSON.stringify(opts)));
+  const mergedOptions = deepmerge(options, JSON.parse(JSON.stringify(opts)));
+  return {
+    ...deepmerge(
+      mergedOptions,
+      mergedOptions.configurations[mergedOptions.config] ?? {}
+    ),
+    configurations: undefined
+  };
 }
