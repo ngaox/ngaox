@@ -1,5 +1,5 @@
 {
-  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "ng-add": {
       "description": "Add Ngaox to the project.",
@@ -7,8 +7,8 @@
     },
     "setup-seo": {
       "description": "Setup Ngaox-Seo",
-      "factory": "./generators/setup-seo/index",
-      "schema": "./generators/setup-seo/schema.json"
+      "factory": "./setup-seo/index",
+      "schema": "./setup-seo/schema.json"
     }
   }
 }
