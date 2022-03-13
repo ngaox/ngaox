@@ -1,7 +1,12 @@
 import { BrowserBuilderOptions } from '@angular-devkit/build-angular';
 
-export interface IBuilderOptions {
-  ngBuild: BrowserBuilderOptions;
+export type IBuilderOptions = {
+  config?: string;
+  configurations?: { [key: string]: Partial<IBuilderConfiguration> };
+} & IBuilderConfiguration;
+
+export interface IBuilderConfiguration {
+  ngBuild: Partial<BrowserBuilderOptions>;
   press?: IPressOptions;
   // Checkout https://github.com/chihab/ngx-env before using this option
   allowEnvVariables?: boolean;
