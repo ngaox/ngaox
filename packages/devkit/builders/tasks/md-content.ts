@@ -10,24 +10,31 @@ import { JSDOM } from 'jsdom';
 
 import * as Prism from 'prismjs';
 import { IPressOptions, ITocLink } from '../../src';
-import { first, fromEvent, tap } from 'rxjs';
+import { fromEvent } from 'rxjs';
+import { colors } from '@angular-devkit/build-angular/src/utils/color';
 
 export function MdContentTask(opts: IPressOptions, context: BuilderContext) {
   const contentPath = path.join(context.workspaceRoot, opts.content);
   const watcher = chokidar.watch(contentPath);
   watcher
     .on('add', async (path: string) => {
-      const htmlFile = await parseFile(path);
-      context.logger.info(`--> "${htmlFile}" created`);
+      const jsonFilePath = await parseFile(path);
+      context.logger.info(
+        `${colors.greenBright(colors.symbols.check)} Generated: ${jsonFilePath}`
+      );
     })
     .on('change', async (path: string) => {
-      const htmlFile = await parseFile(path);
-      context.logger.info(`--> "${htmlFile}" updated`);
+      const jsonFilePath = await parseFile(path);
+      context.logger.info(
+        `${colors.greenBright(colors.symbols.check)} Updated: ${jsonFilePath}`
+      );
     })
     .on('unlink', (path: string) => {
-      const outPath = getOutPath(path);
-      fs.unlinkSync(outPath);
-      context.logger.info(`--> "${outPath}" removed`);
+      const jsonFilePath = getOutPath(path);
+      fs.unlinkSync(jsonFilePath);
+      context.logger.info(
+        `${colors.greenBright(colors.symbols.check)} Removed: ${jsonFilePath}`
+      );
     });
 
   process.on('SIGINT', () => {
@@ -35,12 +42,7 @@ export function MdContentTask(opts: IPressOptions, context: BuilderContext) {
     process.exit(0);
   });
 
-  return fromEvent(watcher, 'ready').pipe(
-    tap(() => {
-      context.logger.info('Content is ready...');
-    }),
-    first()
-  );
+  return fromEvent(watcher, 'ready');
 }
 
 async function parseFile(filePath: string) {
