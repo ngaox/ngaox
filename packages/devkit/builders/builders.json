@@ -5,6 +5,11 @@
       "implementation": "./index",
       "schema": "./schema.json",
       "description": "Build your Angular App with Ngaox Builder!"
+    },
+    "dev-server": {
+      "implementation": "./dev-server/index",
+      "schema": "./dev-server/schema.json",
+      "description": "Dev server!"
     }
   }
 }
