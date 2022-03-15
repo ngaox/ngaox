@@ -9,10 +9,7 @@ import { Type as BudgetType } from '@angular-devkit/build-angular';
 import * as deepmerge from 'deepmerge';
 import * as path from 'path';
 import { colors } from '@angular-devkit/build-angular/src/utils/color';
-
-function cleanPath(str: string) {
-  return str.replace(/\\/g, '/').replace(/^\//, '');
-}
+import { cleanPath } from '../../src/utils/generators-helpers';
 
 export async function getBuilderOptions(
   context: BuilderContext,
@@ -37,8 +34,8 @@ export async function getBuilderOptions(
   );
   let isOutputted = false;
   let options: Partial<IBuilderOptions> = {
+    outputPath: `dist/${projectRoot}`,
     ngBuild: {
-      outputPath: `dist/${projectRoot}`,
       index: `${sourceRoot}/index.html`,
       main: `${sourceRoot}/main.ts`,
       polyfills: `${sourceRoot}/polyfills.ts`,

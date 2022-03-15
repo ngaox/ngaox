@@ -12,26 +12,72 @@ import * as Prism from 'prismjs';
 import { IPressOptions, ITocLink } from '../../src';
 import { fromEvent } from 'rxjs';
 import { colors } from '@angular-devkit/build-angular/src/utils/color';
+import { cleanPath } from '../../src/utils/generators-helpers';
+import { genericPressMapper } from '../../src/lib/generic-press-mapper';
 
-export function MdContentTask(opts: IPressOptions, context: BuilderContext) {
-  const contentPath = path.join(context.workspaceRoot, opts.content);
+const CONTENT_OUTPUT_DIR = '~content';
+const CONTENT_MAP_FILENAME = '.content-map.json';
+
+export function MdContentTask(
+  opts: IPressOptions,
+  context: BuilderContext,
+  outputPath: string
+) {
+  const contentMapPath = path.join(
+    context.workspaceRoot,
+    outputPath,
+    CONTENT_OUTPUT_DIR,
+    CONTENT_MAP_FILENAME
+  );
+  const contentPath = path.join(context.workspaceRoot, opts.dir, opts.content);
+  const mapper =
+    opts.mapper !== false ? opts.mapper ?? genericPressMapper : undefined;
+
   const watcher = chokidar.watch(contentPath);
+  let contentMap = [];
+
+  const buildFile = async (filePath: string) => {
+    const outputFilePath = getOutPath(
+      filePath,
+      path.join(context.workspaceRoot, opts.dir)
+    );
+    const metadata = await parseFile(
+      filePath,
+      path.join(outputPath, CONTENT_OUTPUT_DIR, outputFilePath)
+    );
+
+    if (mapper !== undefined) {
+      contentMap = mapper.push(contentMap, outputFilePath, metadata);
+      await fs.writeJSON(contentMapPath, contentMap);
+    }
+    return outputFilePath;
+  };
+
   watcher
-    .on('add', async (path: string) => {
-      const jsonFilePath = await parseFile(path);
+    .on('add', async (filePath: string) => {
+      const outputFilePath = await buildFile(filePath);
       context.logger.info(
-        `${colors.greenBright(colors.symbols.check)} Generated: ${jsonFilePath}`
+        `${colors.greenBright(
+          colors.symbols.check
+        )} Generated: ${outputFilePath}`
       );
     })
-    .on('change', async (path: string) => {
-      const jsonFilePath = await parseFile(path);
+    .on('change', async (filePath: string) => {
+      const outputFilePath = await buildFile(filePath);
       context.logger.info(
-        `${colors.greenBright(colors.symbols.check)} Updated: ${jsonFilePath}`
+        `${colors.greenBright(colors.symbols.check)} Updated: ${outputFilePath}`
       );
     })
-    .on('unlink', (path: string) => {
-      const jsonFilePath = getOutPath(path);
-      fs.unlinkSync(jsonFilePath);
+    .on('unlink', async (filePath: string) => {
+      const jsonFilePath = getOutPath(
+        filePath,
+        path.join(context.workspaceRoot, opts.dir)
+      );
+      await fs.unlink(jsonFilePath);
+      if (mapper !== undefined) {
+        contentMap = mapper.remove(contentMap, jsonFilePath);
+        await fs.writeJSON(contentMapPath, contentMap);
+      }
       context.logger.info(
         `${colors.greenBright(colors.symbols.check)} Removed: ${jsonFilePath}`
       );
@@ -45,8 +91,7 @@ export function MdContentTask(opts: IPressOptions, context: BuilderContext) {
   return fromEvent(watcher, 'ready');
 }
 
-async function parseFile(filePath: string) {
-  const outFile = getOutPath(filePath);
+async function parseFile(filePath: string, outFile: string) {
   const content = await fs.readFile(filePath, 'utf8');
   const TOC: ITocLink[] = [];
   const { data, content: markdown } = matter(content);
@@ -79,11 +124,12 @@ async function parseFile(filePath: string) {
 
   await fs.ensureDir(path.dirname(outFile));
   await fs.writeJSON(outFile, { data, content: html.innerHTML, toc: TOC });
-  return outFile;
+  return data;
 }
 
-function getOutPath(path: string): string {
-  const index = path.lastIndexOf('.');
-  const htmlFileName = path.substring(0, index) + '.json';
+function getOutPath(filePath: string, dir: string): string {
+  filePath = cleanPath(path.relative(dir, filePath));
+  const index = filePath.lastIndexOf('.');
+  const htmlFileName = filePath.substring(0, index) + '.json';
   return htmlFileName;
 }

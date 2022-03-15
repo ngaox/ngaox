@@ -6,15 +6,30 @@ export type IBuilderOptions = {
 } & IBuilderConfiguration;
 
 export interface IBuilderConfiguration {
-  ngBuild: Partial<BrowserBuilderOptions>;
+  watch?: boolean;
+  outputPath: string;
+  ngBuild: Partial<Omit<BrowserBuilderOptions, 'watch' | 'outputPath'>>;
   press?: IPressOptions;
   // Checkout https://github.com/chihab/ngx-env before using this option
   allowEnvVariables?: boolean;
 }
 
+export interface IPressMapper<T> {
+  push: (
+    previous: T,
+    filePath: string,
+    metadata: {
+      [key: string]: any;
+    }
+  ) => T;
+  remove: (previous: T, filePath: string) => T;
+}
+
 export interface IPressOptions {
+  dir: string;
   // The path/glob-pattern to the markdown files.
   content: string;
+  mapper?: IPressMapper<any> | false;
 }
 
 export interface ITocLink {
