@@ -1,3 +1,12 @@
+## [3.2.2](https://github.com/ngaox/ngaox/compare/v3.2.1...v3.2.2) (2022-03-15)
+
+
+### Bug Fixes
+
+* **devkit:** ensure content is available with dev-server ([e5f6a00](https://github.com/ngaox/ngaox/commit/e5f6a00ebe4939b33f8b195ca23423b91b8a800e))
+
+
+
 ## [3.2.1](https://github.com/ngaox/ngaox/compare/v3.2.0...v3.2.1) (2022-03-15)
 
 
