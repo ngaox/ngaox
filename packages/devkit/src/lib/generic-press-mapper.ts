@@ -10,7 +10,7 @@ export const genericPressMapper: IPressMapper<
 > = {
   push: (previous, filePath, metadata) => {
     return [
-      ...previous,
+      ...previous.filter(({ path }) => path !== filePath),
       {
         path: filePath,
         metadata

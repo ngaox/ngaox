@@ -1,5 +1,5 @@
 import { BuilderContext } from '@angular-devkit/architect';
-import { IBuilderOptions } from '../../src/modals';
+import { IBuilderOptions, cleanPath } from '../../src';
 import { targetFromTargetString } from '@angular-devkit/architect';
 import {
   InlineStyleLanguage,
@@ -9,7 +9,6 @@ import { Type as BudgetType } from '@angular-devkit/build-angular';
 import * as deepmerge from 'deepmerge';
 import * as path from 'path';
 import { colors } from '@angular-devkit/build-angular/src/utils/color';
-import { cleanPath } from '../../src/utils/generators-helpers';
 
 export async function getBuilderOptions(
   context: BuilderContext,

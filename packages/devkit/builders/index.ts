@@ -4,13 +4,12 @@ import {
   createBuilder
 } from '@angular-devkit/architect';
 import { executeBrowserBuilder } from '@angular-devkit/build-angular';
-import { IBuilderOptions } from '../src';
+import { IBuilderOptions, extractBrowserOptions } from '../src';
 
 import { envVariablesPlugin } from './plugins/env-variables';
 import { MdContentTask } from './tasks/md-content';
 import { getBuilderOptions } from './plugins/builder-options';
 import { first, lastValueFrom } from 'rxjs';
-import { extractBrowserOptions } from '../src/utils/extract-browser-options';
 import * as fs from 'fs-extra';
 
 export default createBuilder(ngaoxBuild);

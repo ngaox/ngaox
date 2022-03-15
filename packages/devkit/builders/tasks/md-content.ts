@@ -9,14 +9,15 @@ import { marked } from 'marked';
 import { JSDOM } from 'jsdom';
 
 import * as Prism from 'prismjs';
-import { IPressOptions, ITocLink } from '../../src';
+import {
+  CONTENT_MAP_FILENAME,
+  CONTENT_OUTPUT_DIR,
+  IPressOptions,
+  ITocLink
+} from '../../src';
 import { fromEvent } from 'rxjs';
 import { colors } from '@angular-devkit/build-angular/src/utils/color';
-import { cleanPath } from '../../src/utils/generators-helpers';
-import { genericPressMapper } from '../../src/lib/generic-press-mapper';
-
-const CONTENT_OUTPUT_DIR = '~content';
-const CONTENT_MAP_FILENAME = '.content-map.json';
+import { cleanPath, genericPressMapper } from '../../src';
 
 export function MdContentTask(
   opts: IPressOptions,
@@ -56,6 +57,8 @@ export function MdContentTask(
   watcher
     .on('add', async (filePath: string) => {
       const outputFilePath = await buildFile(filePath);
+      process.stdout.clearLine(0); // clear current text
+      process.stdout.cursorTo(0); // move cursor to beginning of line
       context.logger.info(
         `${colors.greenBright(
           colors.symbols.check
@@ -64,6 +67,8 @@ export function MdContentTask(
     })
     .on('change', async (filePath: string) => {
       const outputFilePath = await buildFile(filePath);
+      process.stdout.clearLine(0); // clear current text
+      process.stdout.cursorTo(0); // move cursor to beginning of line
       context.logger.info(
         `${colors.greenBright(colors.symbols.check)} Updated: ${outputFilePath}`
       );
@@ -78,6 +83,8 @@ export function MdContentTask(
         contentMap = mapper.remove(contentMap, jsonFilePath);
         await fs.writeJSON(contentMapPath, contentMap);
       }
+      process.stdout.clearLine(0); // clear current text
+      process.stdout.cursorTo(0); // move cursor to beginning of line
       context.logger.info(
         `${colors.greenBright(colors.symbols.check)} Removed: ${jsonFilePath}`
       );

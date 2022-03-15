@@ -41,14 +41,18 @@ import {
   I18nOptions,
   loadTranslations
 } from '@angular-devkit/build-angular/src/utils/i18n-options';
-import { getBuilderOptions } from '../plugins/builder-options';
-import { extractBrowserOptions } from '../../src/utils/extract-browser-options';
+import {
+  IBuilderOptions,
+  extractBrowserOptions,
+  getOutputtedAssets
+} from '../../src';
 
 const transforms = envVariablesPlugin();
 
 export async function overrodeSetup(
   options: DevServerBuilderOptions,
-  context: BuilderContext
+  context: BuilderContext,
+  builderOptions: IBuilderOptions
 ) {
   const projectName = context.target?.project;
   const { logger, workspaceRoot } = context;
@@ -97,7 +101,7 @@ export async function overrodeSetup(
   }
   // Get the browser configuration from the target name.
   const rawBrowserOptions = extractBrowserOptions(
-    await getBuilderOptions(context, options.browserTarget)
+    builderOptions
   ) as json.JsonObject & BrowserBuilderOptions;
 
   if (
@@ -119,6 +123,10 @@ export async function overrodeSetup(
   const browserOptions = (await context.validateOptions(
     {
       ...rawBrowserOptions,
+      assets: [
+        ...rawBrowserOptions.assets,
+        ...getOutputtedAssets(builderOptions)
+      ],
       watch: options.watch,
       verbose: options.verbose,
       // In dev server we should not have budgets because of extra libs such as socks-js
