@@ -1,11 +1,9 @@
 {
   "conventionalCommits.scopes": [
-    "infra",
     "deps",
     "deps-dev",
-    "tools",
-    "docs-content",
-    "docs-app",
+    "ngaox-infra",
+    "ngaox-docs",
     "icons",
     "seo",
     "devkit"
