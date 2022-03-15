@@ -41,10 +41,11 @@ export function ngaoxDevServer(
   const logger = context.logger;
   return merge(
     from(getBuilderOptions(context, options.browserTarget, true)).pipe(
-      switchMap(builderOptions => {
+      switchMap(options => {
         return MdContentTask(
-          builderOptions.press as IPressOptions,
-          context
+          options.press as IPressOptions,
+          context,
+          options.outputPath
         ).pipe(
           map(() => {
             if (!contentIsReady$.value) {

@@ -42,6 +42,7 @@ import {
   loadTranslations
 } from '@angular-devkit/build-angular/src/utils/i18n-options';
 import { getBuilderOptions } from '../plugins/builder-options';
+import { extractBrowserOptions } from '../../src/utils/extract-browser-options';
 
 const transforms = envVariablesPlugin();
 
@@ -95,9 +96,9 @@ export async function overrodeSetup(
       `);
   }
   // Get the browser configuration from the target name.
-  const rawBrowserOptions = (
+  const rawBrowserOptions = extractBrowserOptions(
     await getBuilderOptions(context, options.browserTarget)
-  ).ngBuild as json.JsonObject & BrowserBuilderOptions;
+  ) as json.JsonObject & BrowserBuilderOptions;
 
   if (
     rawBrowserOptions.outputHashing &&

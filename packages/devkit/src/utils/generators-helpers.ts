@@ -7,6 +7,10 @@ import { InsertChange } from '@schematics/angular/utility/change';
 
 import { strings, virtualFs, workspaces } from '@angular-devkit/core';
 
+export function cleanPath(str: string) {
+  return str.replace(/\\/g, '/').replace(/^\//, '');
+}
+
 export async function getProject(tree: Tree, projectName?: string) {
   const host = createHost(tree);
   const { workspace } = await workspaces.readWorkspace('/', host);
