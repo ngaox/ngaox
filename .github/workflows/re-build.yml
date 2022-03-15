@@ -1,3 +1,4 @@
+name: '[RE] 🛠️ Build'
 on:
   workflow_call:
     inputs:
@@ -20,7 +21,7 @@ jobs:
           cache: 'yarn'
       - run: yarn --frozen-lockfile
       - name: 🛠 Build everything
-        run: yarn nx-all build --skip-nx-cache
+        run: yarn nx-all build
       - name: 📦 Zip packages
         run: |
           mkdir -p dist/artifacts

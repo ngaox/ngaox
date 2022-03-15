@@ -87,10 +87,6 @@
     "yargs": "^17.1.1"
   },
   "lint-staged": {
-    "package.json": [
-      "node ./tools/sync-versions.js",
-      "git add"
-    ],
     "*.{js,ts}": [
       "eslint --fix",
       "git add"

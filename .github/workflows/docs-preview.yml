@@ -1,4 +1,4 @@
-name: PR Continuous Integration
+name: 👀 Docs Preview
 
 on:
   pull_request:
@@ -6,14 +6,7 @@ on:
       - main
 
 jobs:
-  integrate:
-    # reusable workflows repo and branch is required for pull request event
-    uses: ngaox/ngaox/.github/workflows/integrate.yml@main
-    with:
-      ref: ${{ github.event.pull_request.head.ref }}
-
-  build-preview:
-    needs: integrate
+  preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
