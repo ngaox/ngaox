@@ -1,3 +1,20 @@
+# [3.2.0](https://github.com/ngaox/ngaox/compare/v3.1.3...v3.2.0) (2022-03-15)
+
+
+### Bug Fixes
+
+* **icons:** allow changing color of default fallback icon ([ce31e9b](https://github.com/ngaox/ngaox/commit/ce31e9b916d9260cc5165287261cd9873bf1c06b))
+
+
+### Features
+
+* **devkit:** :sparkles: add Ngaox Builder ([151d53b](https://github.com/ngaox/ngaox/commit/151d53bc6679287154e2e552472b5ef40cf6bb09)), closes [#139](https://github.com/ngaox/ngaox/issues/139) [#135](https://github.com/ngaox/ngaox/issues/135)
+* **devkit:** allow builder multi configs options & set defaults ([3cc1ce9](https://github.com/ngaox/ngaox/commit/3cc1ce9d14e42266d60e674b98c08996f2051549)), closes [#136](https://github.com/ngaox/ngaox/issues/136)
+* **devkit:** provide dev-server builder ([69660a9](https://github.com/ngaox/ngaox/commit/69660a94794865c9e8c528d6379a2f705c4fa0d1))
+* **devkit:** support generating content map (& custom mappers) ([80f9325](https://github.com/ngaox/ngaox/commit/80f93251b4dab9500ef125eeb502546878bc6fee)), closes [#137](https://github.com/ngaox/ngaox/issues/137)
+
+
+
 ## [3.1.3](https://github.com/ngaox/ngaox/compare/v3.1.2...v3.1.3) (2022-02-26)
 
 
