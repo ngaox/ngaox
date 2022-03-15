@@ -1,28 +1,25 @@
+name: 🧪 Lint, Test & Analyze
+
 on:
-  workflow_call:
-    inputs:
-      ref:
-        default: ''
-        required: false
-        type: string
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  lint-test-analyze:
+  lint-test:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ inputs.ref }}
           fetch-depth: 0
       - uses: nrwl/nx-set-shas@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
           cache: 'yarn'
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v1
-        with:
-          languages: javascript
 
       - run: yarn --frozen-lockfile
       - name: 🧪 Lint & Test
@@ -34,8 +31,23 @@ jobs:
         with:
           files: coverage/**/clover.xml
 
+  analyze:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: nrwl/nx-set-shas@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: javascript
+      - run: yarn --frozen-lockfile
       - name: 🛠 Build
         run: yarn nx-effected build --parallel --max-parallel=2
-
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1

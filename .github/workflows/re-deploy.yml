@@ -1,10 +1,8 @@
+name: '[RE] 🚀 Deploy'
 on:
   workflow_call:
     inputs:
       artifacts-key:
-        required: true
-        type: string
-      version:
         required: true
         type: string
     secrets:
@@ -15,22 +13,14 @@ on:
       FIREBASE_SERVICE_ACCOUNT:
         required: true
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@ngaox'
-          cache: 'yarn'
       - uses: actions/download-artifact@v2
         with:
           name: ${{ inputs.artifacts-key }}
           path: dist
-      - run: yarn --frozen-lockfile
-
       - name: 🎉 Publish packages to npmjs
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -41,7 +31,6 @@ jobs:
             npm publish --access public
             cd ..
           done
-
       - uses: actions/setup-node@v2
         with:
           registry-url: 'https://npm.pkg.github.com'
@@ -55,7 +44,14 @@ jobs:
             npm publish --access public
             cd ..
           done
-
+  hosting:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: ${{ inputs.artifacts-key }}
+          path: dist
       - name: 🎉 Deploy docs & demos
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
