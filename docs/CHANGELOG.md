@@ -1,3 +1,12 @@
+## [3.2.1](https://github.com/ngaox/ngaox/compare/v3.2.0...v3.2.1) (2022-03-15)
+
+
+### Bug Fixes
+
+* :green_heart: add missing deploy workflow step ([f394be4](https://github.com/ngaox/ngaox/commit/f394be4bb0f1052928f33054a0d6625d25562813))
+
+
+
 # [3.2.0](https://github.com/ngaox/ngaox/compare/v3.1.3...v3.2.0) (2022-03-15)
 
 

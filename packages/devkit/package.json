@@ -1,6 +1,6 @@
 {
   "name": "@ngaox/devkit",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Schematics, Builders, Commands for better DX with ngaox",
   "schematics": "./generators/schematics.json",
   "builders": "./builders/builders.json",
