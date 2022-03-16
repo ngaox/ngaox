@@ -10,6 +10,7 @@ import { JSDOM } from 'jsdom';
 
 import * as Prism from 'prismjs';
 import {
+  clearCurrentLine,
   CONTENT_MAP_FILENAME,
   CONTENT_OUTPUT_DIR,
   getCleanRelative,
@@ -71,14 +72,12 @@ export function MdContentTask(
   watcher
     .on('add', async (filePath: string) => {
       const outputFilePath = await buildFile(filePath);
-      process.stdout.clearLine(0); // clear current text
-      process.stdout.cursorTo(0); // move cursor to beginning of line
+      clearCurrentLine();
       context.logger.info(`${greenCheckSymbol} Generated: ${outputFilePath}`);
     })
     .on('change', async (filePath: string) => {
       const outputFilePath = await buildFile(filePath);
-      process.stdout.clearLine(0); // clear current text
-      process.stdout.cursorTo(0); // move cursor to beginning of line
+      clearCurrentLine();
       context.logger.info(`${greenCheckSymbol} Updated: ${outputFilePath}`);
     })
     .on('unlink', async (filePath: string) => {
@@ -92,8 +91,7 @@ export function MdContentTask(
       if (createContentMap) {
         await fs.writeJSON(contentMapPath, contentMap);
       }
-      process.stdout.clearLine(0); // clear current text
-      process.stdout.cursorTo(0); // move cursor to beginning of line
+      clearCurrentLine();
       context.logger.info(`${greenCheckSymbol} Removed: ${jsonFilePath}`);
     });
 
