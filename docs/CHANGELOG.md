@@ -1,3 +1,12 @@
+# [3.3.0](https://github.com/ngaox/ngaox/compare/v3.2.2...v3.3.0) (2022-03-16)
+
+
+### Features
+
+* **devkit:** provide docs press mapper ([21dbb22](https://github.com/ngaox/ngaox/commit/21dbb22b2f1177580524ec4df831b1b9218077ed))
+
+
+
 ## [3.2.2](https://github.com/ngaox/ngaox/compare/v3.2.1...v3.2.2) (2022-03-15)
 
 
