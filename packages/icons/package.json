@@ -1,7 +1,7 @@
 {
   "name": "@ngaox/icons",
   "version": "3.3.0",
-  "description": "Easily inline SVG icons into your angular app with a ready to import and use set of icons",
+  "description": "Inline SVG icons from (src | files | your favorite icons library | ...)!",
   "ng-add": {
     "save": "dependencies"
   },

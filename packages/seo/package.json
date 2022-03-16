@@ -1,7 +1,7 @@
 {
   "name": "@ngaox/seo",
   "version": "3.3.0",
-  "description": "Angular library to help generate & managing Social-Media/SEO meta tags, canonical links & page title.",
+  "description": "Easily generate and manage SEO-friendly meta tags, page title,...",
   "ng-add": {
     "save": "dependencies"
   },

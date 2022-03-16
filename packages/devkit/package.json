@@ -1,7 +1,7 @@
 {
   "name": "@ngaox/devkit",
   "version": "3.3.0",
-  "description": "Schematics, Builders, Commands for better DX with ngaox",
+  "description": "Schematics, Builders and other dev utilities for developing Angular apps with Ngaox.",
   "schematics": "./generators/schematics.json",
   "builders": "./builders/builders.json",
   "ng-add": {
