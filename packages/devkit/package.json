@@ -1,6 +1,6 @@
 {
   "name": "@ngaox/devkit",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "description": "Schematics, Builders and other dev utilities for developing Angular apps with Ngaox.",
   "schematics": "./generators/schematics.json",
   "builders": "./builders/builders.json",

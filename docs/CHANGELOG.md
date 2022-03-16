@@ -1,3 +1,12 @@
+## [3.3.2](https://github.com/ngaox/ngaox/compare/v3.3.1...v3.3.2) (2022-03-16)
+
+
+### Bug Fixes
+
+* **@ngaox/devkit:** node.js stdout clearline() and cursorTo() are not functions ([3b35057](https://github.com/ngaox/ngaox/commit/3b35057c820f6293c38b984397f5f75d9d5bf242))
+
+
+
 ## [3.3.1](https://github.com/ngaox/ngaox/compare/v3.3.0...v3.3.1) (2022-03-16)
 
 
