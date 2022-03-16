@@ -50,18 +50,18 @@ jobs:
             npm publish --access public
             cd ..
           done
-  # hosting:
-  #   runs-on: ubuntu-20.04
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/download-artifact@v2
-  #       with:
-  #         name: ${{ inputs.artifacts-key }}
-  #         path: dist
-  #     - name: 🎉 Deploy docs & demos
-  #       uses: FirebaseExtended/action-hosting-deploy@v0
-  #       with:
-  #         repoToken: '${{ secrets.token }}'
-  #         firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-  #         channelId: live
-  #         projectId: ngaox-lab
+  hosting:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: ${{ inputs.artifacts-key }}
+          path: dist
+      - name: 🎉 Deploy docs & demos
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.token }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          channelId: live
+          projectId: ngaox-lab

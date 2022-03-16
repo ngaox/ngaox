@@ -2,7 +2,7 @@
   "name": "ngaox",
   "version": "3.3.2",
   "scripts": {
-    "nx-all": "nx run-many --all --exclude=docs --target",
+    "nx-all": "nx run-many --all --target",
     "nx-effected": "nx affected --target",
     "start": "nx serve",
     "build": "nx build",
@@ -41,7 +41,7 @@
     "@angular/language-service": "^13.0.0",
     "@commitlint/cli": "^16.0.1",
     "@commitlint/config-conventional": "^16.0.0",
-    "@ngaox/devkit": "^3.3.0",
+    "@ngaox/devkit": "^3.3.2",
     "@nrwl/angular": "13.8.3",
     "@nrwl/cli": "13.8.3",
     "@nrwl/eslint-plugin-nx": "13.8.3",

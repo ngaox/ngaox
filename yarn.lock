@@ -1796,10 +1796,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@ngaox/devkit@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@ngaox/devkit/-/devkit-3.3.0.tgz#e1afc9c99646f0b8d3ffb8c1cc520dff4620a66d"
-  integrity sha512-WlEFMVv3jooWGjmUkHlY9Tc0aGtE3D9FB4qmD+6iAKFRrfc4VMUy51ULy0/9OknUoGKG6Hsl5lvM6/Cy4RZmug==
+"@ngaox/devkit@^3.3.2":
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/@ngaox/devkit/-/devkit-3.3.2.tgz#631df0abc7acc13a2011b257613480ab61fa0aba"
+  integrity sha512-kvZH8TljSggNnD30DPBn6n+qrFZPcVnfXEH2TYHMtuq0FLWd7wfmxEX5bRciTfRvvGPyvD81ip7OKCc8qP5Z0w==
   dependencies:
     deepmerge "^4.2.2"
     prismjs "^1.25.0"
