@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "ngaox-docs",
-      "public": "dist/docs/app",
+      "public": "dist/docs",
       "ignore": ["**/.*"],
       "headers": [
         {

@@ -1,32 +1,48 @@
 {
-  "root": "docs",
-  "sourceRoot": "docs/content",
+  "root": "docs/app",
+  "sourceRoot": "docs/app/src",
   "projectType": "application",
+  "prefix": "docs",
   "targets": {
-    "build-content": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "npx ts-node --project docs/build/tsconfig.json -r tsconfig-paths/register -T docs/build"
-        ],
-        "parallel": false
-      }
-    },
     "build": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "@ngaox/devkit:builder",
+      "outputs": ["{options.outputPath}"],
       "options": {
-        "commands": ["npx nx build-content docs", "npx nx build docs-app"],
-        "parallel": false
-      }
+        "config-dir": "docs",
+        "outputPath": "dist/docs"
+      },
+      "configurations": {
+        "production": {
+          "config": "production"
+        },
+        "development": {
+          "config": "development"
+        }
+      },
+      "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "@ngaox/devkit:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "docs:build:production"
+        },
+        "development": {
+          "browserTarget": "docs:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "commands": [
-          "npx nx build-content docs --watch",
-          "npx nx serve docs-app"
-        ],
-        "parallel": true
+        "browserTarget": "docs:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["docs/app/src/**/*.ts", "docs/app/src/**/*.html"]
       }
     }
   },

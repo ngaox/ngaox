@@ -1796,6 +1796,15 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@ngaox/devkit@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@ngaox/devkit/-/devkit-3.3.0.tgz#e1afc9c99646f0b8d3ffb8c1cc520dff4620a66d"
+  integrity sha512-WlEFMVv3jooWGjmUkHlY9Tc0aGtE3D9FB4qmD+6iAKFRrfc4VMUy51ULy0/9OknUoGKG6Hsl5lvM6/Cy4RZmug==
+  dependencies:
+    deepmerge "^4.2.2"
+    prismjs "^1.25.0"
+    rxjs "^7.5.4"
+
 "@ngtools/webpack@13.2.5":
   version "13.2.5"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-13.2.5.tgz#083ac647926403df741d5f6b5a3edd3a545a9b2f"
@@ -9804,7 +9813,7 @@ tsconfig-paths-webpack-plugin@3.5.2:
     enhanced-resolve "^5.7.0"
     tsconfig-paths "^3.9.0"
 
-tsconfig-paths@^3.12.0, tsconfig-paths@^3.9.0:
+tsconfig-paths@^3.9.0:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.12.0.tgz#19769aca6ee8f6a1a341e38c8fa45dd9fb18899b"
   integrity sha512-e5adrnOYT6zqVnWqZu7i/BQ3BnhzvGbjEjejFXO20lKIKpwTaupkCPgEfv4GZK1IBciJUEhYs3J3p75FdaTFVg==

@@ -18,7 +18,7 @@ export class DocsItemResolver implements Resolve<IDocsItem> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<IDocsItem> {
     const slug = route.paramMap.get('slug');
-    return this.http.get<IDocsItem>(`/content/${slug}.json`).pipe(
+    return this.http.get<IDocsItem>(`/~content/${slug}.json`).pipe(
       tap(docItem => {
         this.dataService.setCurrentDocsItem(docItem);
         this.headerService.setHeader(docItem.title);

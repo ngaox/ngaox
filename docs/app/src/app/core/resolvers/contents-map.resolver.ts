@@ -11,6 +11,6 @@ export class ContentsMapResolver implements Resolve<IDocsSection> {
   constructor(private http: HttpClient) {}
 
   resolve(): Observable<IDocsSection> {
-    return this.http.get<IDocsSection>(`/content/docs-contents-map.json`);
+    return this.http.get<IDocsSection>(`/~content/.content-map.json`);
   }
 }
