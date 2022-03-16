@@ -2,7 +2,7 @@
   "name": "ngaox",
   "version": "3.3.1",
   "scripts": {
-    "nx-all": "nx run-many --all --target",
+    "nx-all": "nx run-many --all --exclude=docs --target",
     "nx-effected": "nx affected --target",
     "start": "nx serve",
     "build": "nx build",
