@@ -1,3 +1,12 @@
+## [3.3.3](https://github.com/ngaox/ngaox/compare/v3.3.2...v3.3.3) (2022-03-16)
+
+
+### Reverts
+
+* reenable docs deployment ([1fc7f83](https://github.com/ngaox/ngaox/commit/1fc7f83c29aead54a4bbd595f95035be541bc2c0))
+
+
+
 ## [3.3.2](https://github.com/ngaox/ngaox/compare/v3.3.1...v3.3.2) (2022-03-16)
 
 
