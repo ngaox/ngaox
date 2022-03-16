@@ -2,11 +2,11 @@
   "conventionalCommits.scopes": [
     "deps",
     "deps-dev",
-    "ngaox-infra",
-    "ngaox-docs",
-    "icons",
-    "seo",
-    "devkit"
+    "docs",
+    "infra",
+    "@ngaox/icons",
+    "@ngaox/seo",
+    "@ngaox/devkit"
   ],
   "yaml.schemas": {
     "https://json.schemastore.org/github-workflow": "/.github/workflows/**/*.yml"
