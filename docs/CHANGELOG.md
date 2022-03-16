@@ -1,3 +1,12 @@
+## [3.3.1](https://github.com/ngaox/ngaox/compare/v3.3.0...v3.3.1) (2022-03-16)
+
+
+### Bug Fixes
+
+* **docs:** ensure docs items are sorted in the sidebar ([b3264d5](https://github.com/ngaox/ngaox/commit/b3264d5dbaecc1598acf2bcfe7fc0a7608742dda))
+
+
+
 # [3.3.0](https://github.com/ngaox/ngaox/compare/v3.2.2...v3.3.0) (2022-03-16)
 
 
