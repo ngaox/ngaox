@@ -12,12 +12,17 @@ import * as Prism from 'prismjs';
 import {
   CONTENT_MAP_FILENAME,
   CONTENT_OUTPUT_DIR,
+  getCleanRelative,
+  IParsedContent,
+  IPressMapper,
   IPressOptions,
   ITocLink
 } from '../../src';
 import { fromEvent } from 'rxjs';
 import { colors } from '@angular-devkit/build-angular/src/utils/color';
 import { cleanPath, genericPressMapper } from '../../src';
+
+const greenCheckSymbol = colors.greenBright(colors.symbols.check);
 
 export function MdContentTask(
   opts: IPressOptions,
@@ -31,24 +36,33 @@ export function MdContentTask(
     CONTENT_MAP_FILENAME
   );
   const contentPath = path.join(context.workspaceRoot, opts.dir, opts.content);
-  const mapper =
-    opts.mapper !== false ? opts.mapper ?? genericPressMapper : undefined;
+  const mapper = (
+    opts.mapper !== false
+      ? opts.mapper ?? genericPressMapper
+      : genericPressMapper
+  ) as IPressMapper<any, any>;
+  const createContentMap = opts.mapper !== false;
 
   const watcher = chokidar.watch(contentPath);
-  let contentMap = [];
+  let contentMap = mapper.empty;
 
   const buildFile = async (filePath: string) => {
-    const outputFilePath = getOutPath(
+    const rawParsed = await parseFile(filePath);
+    filePath = getCleanRelative(
       filePath,
       path.join(context.workspaceRoot, opts.dir)
     );
-    const metadata = await parseFile(
+    const [outputFilePath, parsed] = mapper.mapValues(
+      contentMap,
       filePath,
-      path.join(outputPath, CONTENT_OUTPUT_DIR, outputFilePath)
+      rawParsed
     );
+    const outFile = path.join(outputPath, CONTENT_OUTPUT_DIR, outputFilePath);
+    await fs.ensureDir(path.dirname(outFile));
+    await fs.writeJSON(outFile, parsed);
 
-    if (mapper !== undefined) {
-      contentMap = mapper.push(contentMap, outputFilePath, metadata);
+    if (createContentMap) {
+      contentMap = mapper.push(contentMap, cleanPath(filePath), parsed);
       await fs.writeJSON(contentMapPath, contentMap);
     }
     return outputFilePath;
@@ -59,35 +73,28 @@ export function MdContentTask(
       const outputFilePath = await buildFile(filePath);
       process.stdout.clearLine(0); // clear current text
       process.stdout.cursorTo(0); // move cursor to beginning of line
-      context.logger.info(
-        `${colors.greenBright(
-          colors.symbols.check
-        )} Generated: ${outputFilePath}`
-      );
+      context.logger.info(`${greenCheckSymbol} Generated: ${outputFilePath}`);
     })
     .on('change', async (filePath: string) => {
       const outputFilePath = await buildFile(filePath);
       process.stdout.clearLine(0); // clear current text
       process.stdout.cursorTo(0); // move cursor to beginning of line
-      context.logger.info(
-        `${colors.greenBright(colors.symbols.check)} Updated: ${outputFilePath}`
-      );
+      context.logger.info(`${greenCheckSymbol} Updated: ${outputFilePath}`);
     })
     .on('unlink', async (filePath: string) => {
-      const jsonFilePath = getOutPath(
+      let jsonFilePath: string;
+      filePath = getCleanRelative(
         filePath,
         path.join(context.workspaceRoot, opts.dir)
       );
-      await fs.unlink(jsonFilePath);
-      if (mapper !== undefined) {
-        contentMap = mapper.remove(contentMap, jsonFilePath);
+      [contentMap, jsonFilePath] = mapper.remove(contentMap, filePath);
+      await fs.unlink(path.join(outputPath, CONTENT_OUTPUT_DIR, jsonFilePath));
+      if (createContentMap) {
         await fs.writeJSON(contentMapPath, contentMap);
       }
       process.stdout.clearLine(0); // clear current text
       process.stdout.cursorTo(0); // move cursor to beginning of line
-      context.logger.info(
-        `${colors.greenBright(colors.symbols.check)} Removed: ${jsonFilePath}`
-      );
+      context.logger.info(`${greenCheckSymbol} Removed: ${jsonFilePath}`);
     });
 
   process.on('SIGINT', () => {
@@ -98,7 +105,7 @@ export function MdContentTask(
   return fromEvent(watcher, 'ready');
 }
 
-async function parseFile(filePath: string, outFile: string) {
+async function parseFile(filePath: string): Promise<IParsedContent> {
   const content = await fs.readFile(filePath, 'utf8');
   const TOC: ITocLink[] = [];
   const { data, content: markdown } = matter(content);
@@ -129,14 +136,5 @@ async function parseFile(filePath: string, outFile: string) {
   ).window.document.body;
   Prism.highlightAllUnder(html);
 
-  await fs.ensureDir(path.dirname(outFile));
-  await fs.writeJSON(outFile, { data, content: html.innerHTML, toc: TOC });
-  return data;
-}
-
-function getOutPath(filePath: string, dir: string): string {
-  filePath = cleanPath(path.relative(dir, filePath));
-  const index = filePath.lastIndexOf('.');
-  const htmlFileName = filePath.substring(0, index) + '.json';
-  return htmlFileName;
+  return { data, content: html.innerHTML, toc: TOC };
 }

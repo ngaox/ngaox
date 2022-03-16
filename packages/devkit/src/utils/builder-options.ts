@@ -1,7 +1,7 @@
 import { BrowserBuilderOptions } from '@angular-devkit/build-angular';
 import * as path from 'path';
 import { CONTENT_OUTPUT_DIR } from '..';
-import { IBuilderOptions } from '../modals';
+import { IBuilderOptions } from '../index';
 
 export function extractBrowserOptions(
   options: IBuilderOptions

@@ -1,11 +1,16 @@
 import { Rule, Tree, SchematicsException } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
+import * as path from 'path';
 
 import { addImportToModule } from '@schematics/angular/utility/ast-utils';
 import { findModuleFromOptions } from '@schematics/angular/utility/find-module';
 import { InsertChange } from '@schematics/angular/utility/change';
 
 import { strings, virtualFs, workspaces } from '@angular-devkit/core';
+
+export function getCleanRelative(filePath: string, dir: string): string {
+  return cleanPath(path.relative(dir, filePath));
+}
 
 export function cleanPath(str: string) {
   return str.replace(/\\/g, '/').replace(/^\//, '');
