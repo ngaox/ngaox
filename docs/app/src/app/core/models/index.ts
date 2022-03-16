@@ -26,8 +26,7 @@ export interface IDocsItem {
   /** Short version of the title */
   name: string;
   slug: string;
-  description?: string;
+  metadata: any;
   content?: string;
-  order?: number;
   toc?: ITocLink[];
 }
