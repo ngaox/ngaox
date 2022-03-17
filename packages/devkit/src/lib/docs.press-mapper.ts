@@ -55,8 +55,8 @@ export function getDocsPressMapper(
       const item = {
         ...obj
       };
-      delete obj.content;
-      delete obj.toc;
+      delete item.content;
+      delete item.toc;
       return [
         ...previous.filter(sec => sec !== section),
         {
