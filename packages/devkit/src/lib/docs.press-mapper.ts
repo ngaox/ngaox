@@ -52,6 +52,11 @@ export function getDocsPressMapper(
       const section = previous.find(
         sec => !sec?.directory || filePath.startsWith(sec?.directory + '/')
       );
+      const item = {
+        ...obj
+      };
+      delete obj.content;
+      delete obj.toc;
       return [
         ...previous.filter(sec => sec !== section),
         {
@@ -60,7 +65,7 @@ export function getDocsPressMapper(
             ...(section?.items ?? []).filter(
               item => item.metadata.filePath !== filePath
             ),
-            obj
+            item
           ]
         }
       ];
