@@ -1,3 +1,13 @@
+## [3.3.4](https://github.com/ngaox/ngaox/compare/v3.3.3...v3.3.4) (2022-03-17)
+
+
+### Bug Fixes
+
+* **@ngaox/devkit:** ensure ngBuilder doesnt remove other assets ([5c5dfce](https://github.com/ngaox/ngaox/commit/5c5dfce9092358700c09f99bffdc90f26c6e78fe))
+* **@ngaox/devkit:** remove unnecessary fields from content map ([c19da5a](https://github.com/ngaox/ngaox/commit/c19da5ae49e7ce485df01055f9a5c5114b0097c5))
+
+
+
 ## [3.3.3](https://github.com/ngaox/ngaox/compare/v3.3.2...v3.3.3) (2022-03-16)
 
 
