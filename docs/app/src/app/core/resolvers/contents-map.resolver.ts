@@ -12,7 +12,7 @@ export class ContentsMapResolver implements Resolve<IDocsSection[]> {
   constructor(private http: HttpClient) {}
 
   resolve(): Observable<IDocsSection[]> {
-    return this.http.get<IDocsSection[]>(`/~content/.content-map.json`).pipe(
+    return this.http.get<IDocsSection[]>(`/~content/~content-map.json`).pipe(
       map(data =>
         data.sort(SortItemsCallback).map(section => ({
           ...section,
