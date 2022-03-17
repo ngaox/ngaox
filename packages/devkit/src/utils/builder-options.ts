@@ -9,7 +9,8 @@ export function extractBrowserOptions(
   return {
     ...options.ngBuild,
     watch: options?.watch,
-    outputPath: options.outputPath
+    outputPath: options.outputPath,
+    deleteOutputPath: false
   } as BrowserBuilderOptions;
 }
 

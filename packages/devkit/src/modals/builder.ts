@@ -9,7 +9,9 @@ export type IBuilderOptions = {
 export interface IBuilderConfiguration {
   watch?: boolean;
   outputPath: string;
-  ngBuild: Partial<Omit<BrowserBuilderOptions, 'watch' | 'outputPath'>>;
+  ngBuild: Partial<
+    Omit<BrowserBuilderOptions, 'watch' | 'outputPath' | 'deleteOutputPath'>
+  >;
   press?: IPressOptions;
   // Checkout https://github.com/chihab/ngx-env before using this option
   allowEnvVariables?: boolean;
