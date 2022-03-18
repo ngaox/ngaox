@@ -1,3 +1,12 @@
+## [3.4.2](https://github.com/ngaox/ngaox/compare/v3.4.1...v3.4.2) (2022-03-18)
+
+
+### Bug Fixes
+
+* **@ngaox/devkit:** prevent type error when not using a builder option ([1d85b57](https://github.com/ngaox/ngaox/commit/1d85b57549470ce7def4eeedf53da1c0657bb980))
+
+
+
 ## [3.4.1](https://github.com/ngaox/ngaox/compare/v3.4.0...v3.4.1) (2022-03-18)
 
 
