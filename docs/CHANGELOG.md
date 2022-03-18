@@ -1,3 +1,18 @@
+# [3.4.0](https://github.com/ngaox/ngaox/compare/v3.3.5...v3.4.0) (2022-03-18)
+
+
+### Bug Fixes
+
+* **@ngaox/devkit:** ensure all dependacies added to package.json ([01bf6b8](https://github.com/ngaox/ngaox/commit/01bf6b8086d7865adb31766e7e8f5bcab0a75caa))
+* **@ngaox/devkit:** remove title from docs press mapper ([9f92d76](https://github.com/ngaox/ngaox/commit/9f92d766e6a709d90456867dfcf6646441439863))
+
+
+### Features
+
+* **docs:** redesign docs layout ([5834dec](https://github.com/ngaox/ngaox/commit/5834deccfae01c3febd13249c4efa373166a51b6))
+
+
+
 ## [3.3.5](https://github.com/ngaox/ngaox/compare/v3.3.4...v3.3.5) (2022-03-17)
 
 
