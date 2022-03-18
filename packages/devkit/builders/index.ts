@@ -7,10 +7,11 @@ import { executeBrowserBuilder } from '@angular-devkit/build-angular';
 import { IBuilderOptions, extractBrowserOptions } from '../src';
 
 import { envVariablesPlugin } from './plugins/env-variables';
-import { MdContentTask } from './tasks/md-content';
 import { getBuilderOptions } from './plugins/builder-options';
-import { first, lastValueFrom } from 'rxjs';
+import { first, forkJoin, lastValueFrom } from 'rxjs';
 import * as fs from 'fs-extra';
+import { getNgaoxTasks } from './tasks';
+import { getNgBuildTransforms } from './plugins';
 
 export default createBuilder(ngaoxBuild);
 
@@ -28,15 +29,11 @@ export async function ngaoxBuild(
   await fs.ensureDir(options.outputPath);
   await fs.emptyDir(options.outputPath);
 
-  if (options.press) {
-    await lastValueFrom(
-      MdContentTask(options.press, context, options.outputPath).pipe(first())
-    );
-  }
+  await lastValueFrom(forkJoin(getNgaoxTasks(options, context)).pipe(first()));
 
   return (await executeBrowserBuilder(
     extractBrowserOptions(options),
     context,
-    options.allowEnvVariables ? envVariablesPlugin() : undefined
+    getNgBuildTransforms(options)
   ).toPromise()) as BuilderOutput;
 }

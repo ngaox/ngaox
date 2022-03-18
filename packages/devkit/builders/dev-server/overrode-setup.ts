@@ -3,7 +3,6 @@ import {
   DevServerBuilderOptions,
   OutputHashing
 } from '@angular-devkit/build-angular';
-import { envVariablesPlugin } from '../plugins/env-variables';
 import {
   BuilderContext,
   targetFromTargetString
@@ -46,14 +45,14 @@ import {
   extractBrowserOptions,
   getOutputtedAssets
 } from '../../src';
-
-const transforms = envVariablesPlugin();
+import { getNgBuildTransforms } from '../plugins';
 
 export async function overrodeSetup(
   options: DevServerBuilderOptions,
   context: BuilderContext,
   builderOptions: IBuilderOptions
 ) {
+  const transforms = getNgBuildTransforms(builderOptions);
   const projectName = context.target?.project;
   const { logger, workspaceRoot } = context;
 
