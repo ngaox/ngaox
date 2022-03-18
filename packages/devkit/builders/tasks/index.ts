@@ -7,7 +7,8 @@ export function getNgaoxTasks(
   options: IBuilderOptions,
   context: BuilderContext
 ): Observable<BuilderOutput>[] {
-  const tasks: Observable<BuilderOutput>[] = [];
+  const tasks: Observable<BuilderOutput>[] = [of({ success: true })];
+
   if (options.press) {
     tasks.push(
       MdContentTask(options.press, context, options.outputPath).pipe(
