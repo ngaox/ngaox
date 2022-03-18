@@ -24,7 +24,7 @@ jobs:
           output-file: docs/CHANGELOG.md
 
   build:
-    if: needs.release-up.outputs.released
+    if: needs.release-up.outputs.released == 'true'
     needs: release-up
     uses: ./.github/workflows/re-build.yml
     with:
