@@ -1,3 +1,5 @@
+require('prismjs/components/prism-typescript');
+
 /**
  * @type {import('@ngaox/devkit').IBuilderOptions}
  */
@@ -5,31 +7,11 @@ module.exports = {
   press: {
     dir: 'docs/content',
     content: '**/*.md',
-    mapper: require('@ngaox/devkit').getDocsPressMapper([
-      {
-        name: 'Getting Started',
-        routesPrefix: '',
-        directory: 'start',
-        order: 1
-      },
-      {
-        name: 'Ngaox Tools',
-        routesPrefix: 'dx/',
-        directory: 'devkit',
-        order: 2
-      },
-      {
-        name: 'Advanced',
-        routesPrefix: 'advanced/',
-        directory: 'advanced'
-      }
-    ])
+    mapper: require('@ngaox/devkit').getDocsPressMapper(
+      require('./docs.sections.js')
+    )
   },
   ngBuild: {
-    index: 'docs/app/src/index.html',
-    main: 'docs/app/src/main.ts',
-    polyfills: 'docs/app/src/polyfills.ts',
-    tsConfig: 'docs/app/tsconfig.app.json',
     inlineStyleLanguage: 'scss',
     assets: ['docs/app/src/favicon.ico', 'docs/app/src/assets'],
     styles: [

@@ -11,6 +11,8 @@
   }
 }
 .docs-markdown {
+  min-width: 0;
+  max-width: 100%;
   padding: 3rem;
   box-shadow: var(--card-box-shadow);
   background: #fff;
