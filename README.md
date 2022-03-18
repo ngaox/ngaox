@@ -3,7 +3,7 @@
 <h1>Angular Ngaox</h1>
 
 <p>
-    <a href="https://github.com/ngaox/ngaox/blob/main/LICENSE">
+    <a href="https://github.com/ngaox/ngaox/blob/main/LICENSE.md">
         <img src="https://img.shields.io/github/license/ngaox/ngaox?style=flat" alt="License"/>
     </a>
     <a href="https://github.com/ngaox/ngaox/releases">
@@ -40,7 +40,9 @@ Ngaox mainly provides a comprehensive toolset with all the features you need in 
 
 ## 🤝 Contributing
 
-Contributions are always welcome ✨! Check out the [contributing guideline](https://) for ways to get started as well as our code of conduct.
+Contributions are always welcome in this project ✨!
+
+Check out our [contributing guideline](https://github.com/ngaox/.github/blob/main/CONTRIBUTING.md) for ways to get started making your touch into Ngaox.
 
 ---
 
