@@ -29,7 +29,11 @@ export async function ngaoxBuild(
   await fs.ensureDir(options.outputPath);
   await fs.emptyDir(options.outputPath);
 
-  await lastValueFrom(forkJoin(getNgaoxTasks(options, context)).pipe(first()));
+  await lastValueFrom(
+    forkJoin(
+      getNgaoxTasks(options, context).map(ob$ => ob$.pipe(first()))
+    ).pipe(first())
+  );
 
   return (await executeBrowserBuilder(
     extractBrowserOptions(options),
