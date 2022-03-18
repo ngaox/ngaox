@@ -1,3 +1,12 @@
+## [3.4.3](https://github.com/ngaox/ngaox/compare/v3.4.2...v3.4.3) (2022-03-18)
+
+
+### Bug Fixes
+
+* **@ngaox/devkit:** builder never actually complete ([aa3e181](https://github.com/ngaox/ngaox/commit/aa3e181f7f4868a20610c0ec4ad4716131c4a523))
+
+
+
 ## [3.4.2](https://github.com/ngaox/ngaox/compare/v3.4.1...v3.4.2) (2022-03-18)
 
 
