@@ -47,8 +47,6 @@ export interface IDocsSection {
 }
 
 export interface IDocsItem {
-  title: string;
-  /** Short version of the title */
   name: string;
   slug: string;
   metadata: IMetaData;

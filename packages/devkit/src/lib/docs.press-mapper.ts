@@ -39,7 +39,6 @@ export function getDocsPressMapper(
       return [
         `${slug}.json`,
         {
-          title: parsed.data.title ?? name,
           name: name,
           slug: slug,
           content: parsed.content,
