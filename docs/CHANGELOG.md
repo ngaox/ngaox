@@ -1,3 +1,12 @@
+## [3.4.1](https://github.com/ngaox/ngaox/compare/v3.4.0...v3.4.1) (2022-03-18)
+
+
+### Bug Fixes
+
+* **@ngaox/devkit:** remove options diffrence btwn builder and dev-server ([1390787](https://github.com/ngaox/ngaox/commit/1390787d62ccc63153e41cc204d29dd7d3659452))
+
+
+
 # [3.4.0](https://github.com/ngaox/ngaox/compare/v3.3.5...v3.4.0) (2022-03-18)
 
 
