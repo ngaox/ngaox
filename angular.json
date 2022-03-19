@@ -4,6 +4,7 @@
     "docs": "docs",
     "devkit": "packages/devkit",
     "icons": "packages/icons",
+    "press": "packages/press",
     "seo": "packages/seo"
   }
 }
