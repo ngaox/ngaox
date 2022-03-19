@@ -1796,12 +1796,21 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@ngaox/devkit@^3.3.5":
-  version "3.3.5"
-  resolved "https://registry.yarnpkg.com/@ngaox/devkit/-/devkit-3.3.5.tgz#9ab880db24aefcc020faef7578986da7bd3f39a8"
-  integrity sha512-lwTQxgWhi0YmJpKd9N2wJLgoaav96ZZVPq2DhXRr5t5rAqYC7x/nvG0AVboDcQlRsl7t01JTPX71z2eMJXkZyw==
+"@ngaox/devkit@^3.4.3":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@ngaox/devkit/-/devkit-3.4.3.tgz#e3d1fcf2e97e1386237fa6695645354832f82922"
+  integrity sha512-/vvf/T1jRoec5M1N1jAo66awxXZw2ol3hNkaVFX/xqnTQzYUTlzDkBm8JjxfAG1UFiiBMLbWY1O0dv2uV7ZcIQ==
   dependencies:
+    "@angular-devkit/build-angular" "^13.0.0"
+    "@angular-devkit/schematics" "^13.0.0"
+    chokidar "^3.5.3"
     deepmerge "^4.2.2"
+    dotenv "^16.0.0"
+    dotenv-expand "^8.0.2"
+    fs-extra "^10.0.0"
+    gray-matter "^4.0.3"
+    jsdom "^19.0.0"
+    marked "^4.0.12"
     prismjs "^1.25.0"
     rxjs "^7.5.4"
 
@@ -10213,7 +10222,7 @@ yargs@^16.2.0:
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
 
-yargs@^17.0.0, yargs@^17.1.1, yargs@^17.2.1:
+yargs@^17.0.0, yargs@^17.2.1:
   version "17.3.1"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.3.1.tgz#da56b28f32e2fd45aefb402ed9c26f42be4c07b9"
   integrity sha512-WUANQeVgjLbNsEmGk20f+nlHgOqzRFpiGWVaBrYGYIGANIIu3lWjoyi0fNlFmJkvfhCZ6BXINe7/W2O2bV4iaA==
