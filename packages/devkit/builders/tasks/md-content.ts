@@ -11,14 +11,16 @@ import { JSDOM } from 'jsdom';
 import * as Prism from 'prismjs';
 import {
   clearCurrentLine,
-  CONTENT_MAP_FILENAME,
-  CONTENT_OUTPUT_DIR,
   getCleanRelative,
-  IParsedContent,
   IPressMapper,
-  IPressOptions,
-  ITocLink
+  IPressOptions
 } from '../../src';
+import {
+  IParsedContent,
+  ITocLink,
+  CONTENT_MAP_FILENAME,
+  CONTENT_OUTPUT_DIR
+} from '@ngaox/press';
 import { fromEvent } from 'rxjs';
 import { colors } from '@angular-devkit/build-angular/src/utils/color';
 import { cleanPath, genericPressMapper } from '../../src';

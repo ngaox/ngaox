@@ -1,9 +1,5 @@
-import {
-  IParsedContent,
-  IPressMapper,
-  IDocsItem,
-  IDocsSection
-} from '../index';
+import { IPressMapper } from '../index';
+import { IParsedContent, IDocsItem, IDocsSection } from '@ngaox/press';
 
 function getSlug(section?: IDocsSection, slug?: string, filePath?: string) {
   return `${section?.routesPrefix ?? ''}${

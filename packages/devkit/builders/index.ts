@@ -4,10 +4,12 @@ import {
   createBuilder
 } from '@angular-devkit/architect';
 import { executeBrowserBuilder } from '@angular-devkit/build-angular';
-import { IBuilderOptions, extractBrowserOptions } from '../src';
+import { IBuilderOptions } from '../src';
 
-import { envVariablesPlugin } from './plugins/env-variables';
-import { getBuilderOptions } from './plugins/builder-options';
+import {
+  getBuilderOptions,
+  extractBrowserOptions
+} from '../src/utils/builder-options';
 import { first, forkJoin, lastValueFrom } from 'rxjs';
 import * as fs from 'fs-extra';
 import { getNgaoxTasks } from './tasks';

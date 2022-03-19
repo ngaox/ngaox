@@ -1,4 +1,5 @@
-import { IGenericContentMap, IParsedContent, IPressMapper } from '../index';
+import { IPressMapper } from '../index';
+import { IGenericContentMap, IParsedContent } from '@ngaox/press';
 
 export const genericPressMapper: IPressMapper<
   IGenericContentMap,

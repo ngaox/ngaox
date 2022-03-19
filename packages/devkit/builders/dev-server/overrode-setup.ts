@@ -40,11 +40,11 @@ import {
   I18nOptions,
   loadTranslations
 } from '@angular-devkit/build-angular/src/utils/i18n-options';
+import { IBuilderOptions } from '../../src';
 import {
-  IBuilderOptions,
   extractBrowserOptions,
   getOutputtedAssets
-} from '../../src';
+} from '../../src/utils/builder-options';
 import { getNgBuildTransforms } from '../plugins';
 
 export async function overrodeSetup(

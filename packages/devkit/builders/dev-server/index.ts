@@ -15,7 +15,7 @@ import { tags } from '@angular-devkit/core';
 import { from, Observable, concatMap, switchMap, fromEvent, merge } from 'rxjs';
 import { overrodeSetup } from './overrode-setup';
 import { EventEmitter } from 'events';
-import { getBuilderOptions } from '../plugins/builder-options';
+import { getBuilderOptions } from '../../src/utils/builder-options';
 import * as fs from 'fs-extra';
 import { getNgaoxTasks } from '../tasks';
 
