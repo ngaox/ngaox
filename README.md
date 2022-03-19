@@ -37,6 +37,7 @@ Ngaox mainly provides a comprehensive toolset with all the features you need in 
 - 📦 [@ngaox/devkit](packages/devkit#readme) - Schematics, Builders and other dev utilities
 - 📦 [@ngaox/seo](packages/seo#readme) - Easily generate and manage SEO-friendly meta tags, page title,...
 - 📦 [@ngaox/icons](packages/icons#readme) - Inline SVG icons from (src | files | your favorite icons library | ...)!
+- 📦 [@ngaox/press](packages/press#readme) - Write your content how you wish!
 
 ## 🤝 Contributing
 

@@ -1,11 +1,32 @@
 {
   "name": "@ngaox/press",
   "version": "0.0.1",
+  "description": "Write your content how you wish!",
+  "ng-add": {
+    "save": "dependencies"
+  },
   "peerDependencies": {
     "@angular/common": "^13.2.0",
     "@angular/core": "^13.2.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngaox/ngaox.git"
+  },
+  "keywords": [
+    "ngaox",
+    "press",
+    "ngx",
+    "markdown",
+    "static"
+  ],
+  "author": "Rabyâ Raghib <rabraghib@gmail.com> (https://rabraghib.me/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ngaox/ngaox/issues"
+  },
+  "homepage": "https://github.com/ngaox/ngaox/tree/main/packages/press"
 }
