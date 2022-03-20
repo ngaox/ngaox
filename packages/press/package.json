@@ -1,6 +1,6 @@
 {
   "name": "@ngaox/press",
-  "version": "0.0.1",
+  "version": "3.5.0",
   "description": "Write your content how you wish!",
   "ng-add": {
     "save": "dependencies"
