@@ -1,12 +1,12 @@
 import { IPressMapper } from '../index';
-import { IGenericContentMap, IParsedContent } from '@ngaox/press';
+import { IGenericContentMap, IParsedContent } from './modals';
 
 export const genericPressMapper: IPressMapper<
   IGenericContentMap,
   IParsedContent
 > = {
   empty: [],
-  mapValues: (curr, filePath: string, parsed: IParsedContent) => [
+  mapValues: async (curr, filePath: string, parsed: IParsedContent) => [
     filePath.replace(/\..+$/, '.json'),
     parsed
   ],

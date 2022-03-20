@@ -17,7 +17,11 @@
     "paths": {
       "@docs-core/*": ["docs/app/src/app/core/*"],
       "@ngaox/icons": ["packages/icons/src/index.ts"],
-      "@ngaox/press": ["dist/packages/press", "packages/press/src/index.ts"],
+      "@ngaox/press": ["packages/press/src/index.ts"],
+      "@ngaox/devkit-src/*": [
+        "dist/packages/devkit/src/*",
+        "packages/devkit/src/*"
+      ],
       "@ngaox/seo": ["packages/seo/src/index.ts"]
     }
   },

@@ -15,12 +15,7 @@ import {
   IPressMapper,
   IPressOptions
 } from '../../src';
-import {
-  IParsedContent,
-  ITocLink,
-  CONTENT_MAP_FILENAME,
-  CONTENT_OUTPUT_DIR
-} from '@ngaox/press';
+import { IParsedContent, ITocLink, pressOuts } from '../../src/press/modals';
 import { fromEvent } from 'rxjs';
 import { colors } from '@angular-devkit/build-angular/src/utils/color';
 import { cleanPath, genericPressMapper } from '../../src';
@@ -32,18 +27,17 @@ export function MdContentTask(
   context: BuilderContext,
   outputPath: string
 ) {
-  const contentMapPath = path.join(
-    context.workspaceRoot,
-    outputPath,
-    CONTENT_OUTPUT_DIR,
-    CONTENT_MAP_FILENAME
-  );
+  outputPath = path.join(outputPath, pressOuts.dir);
   const contentPath = path.join(context.workspaceRoot, opts.dir, opts.content);
-  const mapper = (
-    opts.mapper !== false
+  const mapper = {
+    write: async (contentMap, extra) => {
+      const contentMapOutPath = path.join(extra.outputPath, pressOuts.map);
+      await fs.writeJSON(contentMapOutPath, contentMap);
+    },
+    ...(opts.mapper !== false
       ? opts.mapper ?? genericPressMapper
-      : genericPressMapper
-  ) as IPressMapper<any, any>;
+      : genericPressMapper)
+  } as IPressMapper<any, any>;
   const createContentMap = opts.mapper !== false;
 
   const watcher = chokidar.watch(contentPath);
@@ -55,18 +49,27 @@ export function MdContentTask(
       filePath,
       path.join(context.workspaceRoot, opts.dir)
     );
-    const [outputFilePath, parsed] = mapper.mapValues(
+    const [outputFilePath, parsed] = await mapper.mapValues(
       contentMap,
       filePath,
-      rawParsed
+      rawParsed,
+      {
+        context,
+        options: opts,
+        outputPath
+      }
     );
-    const outFile = path.join(outputPath, CONTENT_OUTPUT_DIR, outputFilePath);
+    const outFile = path.join(outputPath, outputFilePath);
     await fs.ensureDir(path.dirname(outFile));
     await fs.writeJSON(outFile, parsed);
 
     if (createContentMap) {
       contentMap = mapper.push(contentMap, cleanPath(filePath), parsed);
-      await fs.writeJSON(contentMapPath, contentMap);
+      await mapper.write(contentMap, {
+        context,
+        options: opts,
+        outputPath
+      });
     }
     return outputFilePath;
   };
@@ -89,9 +92,13 @@ export function MdContentTask(
         path.join(context.workspaceRoot, opts.dir)
       );
       [contentMap, jsonFilePath] = mapper.remove(contentMap, filePath);
-      await fs.unlink(path.join(outputPath, CONTENT_OUTPUT_DIR, jsonFilePath));
+      await fs.unlink(path.join(outputPath, jsonFilePath));
       if (createContentMap) {
-        await fs.writeJSON(contentMapPath, contentMap);
+        await mapper.write(contentMap, {
+          context,
+          options: opts,
+          outputPath
+        });
       }
       clearCurrentLine();
       context.logger.info(`${greenCheckSymbol} Removed: ${jsonFilePath}`);

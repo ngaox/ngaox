@@ -1,5 +1,7 @@
 import { IMetaData, ITocLink } from './generic-mapper';
 
+export type IDocsMap = Array<IDocsSection>;
+
 export interface IDocsSection {
   name: string;
   routesPrefix: string;

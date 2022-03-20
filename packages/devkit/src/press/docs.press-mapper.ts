@@ -1,5 +1,6 @@
 import { IPressMapper } from '../index';
-import { IParsedContent, IDocsItem, IDocsSection } from '@ngaox/press';
+import { omitKeys } from '../utils/omit-keys';
+import { IParsedContent, IDocsItem, IDocsSection } from './modals';
 
 function getSlug(section?: IDocsSection, slug?: string, filePath?: string) {
   return `${section?.routesPrefix ?? ''}${
@@ -16,22 +17,18 @@ export function getDocsPressMapper(
 ): IPressMapper<IDocsSection[], IDocsItem> {
   return {
     empty: sections,
-    mapValues: (curr, filePath: string, parsed: IParsedContent) => {
+    mapValues: async (curr, filePath: string, parsed: IParsedContent) => {
       const section = curr.find(
         section =>
           !section?.directory || filePath.startsWith(section?.directory + '/')
       );
-      const slug = getSlug(section, parsed.data.slug, filePath);
+      const { slug: rawSlug, ...metadata } = parsed.data;
+      const slug = getSlug(section, rawSlug, filePath);
       const name =
         parsed.data.name ??
         (slug.replace(/-/g, ' ') as string).replace(/^\w/, c =>
           c.toUpperCase()
         );
-      const metadata = {
-        ...parsed.data
-      };
-      delete metadata.slug;
-      delete metadata.title;
       return [
         `${slug}.json`,
         {
@@ -47,11 +44,6 @@ export function getDocsPressMapper(
       const section = previous.find(
         sec => !sec?.directory || filePath.startsWith(sec?.directory + '/')
       );
-      const item = {
-        ...obj
-      };
-      delete item.content;
-      delete item.toc;
       return [
         ...previous.filter(sec => sec !== section),
         {
@@ -60,7 +52,7 @@ export function getDocsPressMapper(
             ...(section?.items ?? []).filter(
               item => item.metadata.filePath !== filePath
             ),
-            item
+            omitKeys(obj, ['content', 'toc']) as IDocsItem
           ]
         }
       ];

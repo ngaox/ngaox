@@ -1,4 +1,5 @@
-import { IParsedContent } from '@ngaox/press';
+import { IParsedContent } from '../press/modals';
+import { BuilderContext } from '@angular-devkit/architect';
 
 export interface IPressOptions {
   dir: string;
@@ -7,13 +8,21 @@ export interface IPressOptions {
   mapper?: IPressMapper<any, any> | false;
 }
 
+export interface IMapperExtraOptions {
+  options: IPressOptions;
+  context: BuilderContext;
+  outputPath: string;
+}
+
 export interface IPressMapper<T, T2> {
   empty: T;
   mapValues: (
     current: T,
     filePath: string,
-    parsed: IParsedContent
-  ) => [string, T2];
+    parsed: IParsedContent,
+    extra: IMapperExtraOptions
+  ) => Promise<[string, T2]>;
+  write?: (contentMap: T, extra: IMapperExtraOptions) => Promise<void>;
   push: (previous: T, filePath: string, obj: T2) => T;
   remove: (previous: T, filePath: string) => [T, string];
 }

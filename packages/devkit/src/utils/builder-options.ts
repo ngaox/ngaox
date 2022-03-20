@@ -1,6 +1,5 @@
 import { BuilderContext } from '@angular-devkit/architect';
 import { IBuilderOptions, cleanPath } from '..';
-import { CONTENT_OUTPUT_DIR } from '@ngaox/devkit';
 import { targetFromTargetString } from '@angular-devkit/architect';
 import {
   InlineStyleLanguage,
@@ -11,6 +10,7 @@ import * as deepmerge from 'deepmerge';
 import * as path from 'path';
 import { colors } from '@angular-devkit/build-angular/src/utils/color';
 import { BrowserBuilderOptions } from '@angular-devkit/build-angular';
+import { pressOuts } from '../press/modals';
 
 export function extractBrowserOptions(
   options: IBuilderOptions
@@ -28,8 +28,8 @@ export function getOutputtedAssets(options: IBuilderOptions) {
   if (options.press) {
     assets.push({
       glob: '**/*',
-      input: path.join(options.outputPath, CONTENT_OUTPUT_DIR),
-      output: CONTENT_OUTPUT_DIR
+      input: path.join(options.outputPath, pressOuts.dir),
+      output: pressOuts.dir
     });
   }
   return assets;
