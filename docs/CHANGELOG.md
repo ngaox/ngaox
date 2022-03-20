@@ -1,3 +1,12 @@
+## [3.5.1](https://github.com/ngaox/ngaox/compare/v3.5.0...v3.5.1) (2022-03-20)
+
+
+### Bug Fixes
+
+* **deps-dev:** remove duplicated dependacy ([cb02aee](https://github.com/ngaox/ngaox/commit/cb02aeead7d310158b8e9cfaecb613d4de9227d5))
+
+
+
 # [3.5.0](https://github.com/ngaox/ngaox/compare/v3.4.3...v3.5.0) (2022-03-20)
 
 
