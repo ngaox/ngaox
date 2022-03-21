@@ -18,9 +18,9 @@
       "@docs-core/*": ["docs/app/src/app/core/*"],
       "@ngaox/icons": ["packages/icons/src/index.ts"],
       "@ngaox/press": ["packages/press/src/index.ts"],
-      "@ngaox/devkit-src/*": [
-        "dist/packages/devkit/src/*",
-        "packages/devkit/src/*"
+      "@ngaox/devkit/*": [
+        "dist/packages/devkit",
+        "packages/devkit/src/index,ts"
       ],
       "@ngaox/seo": ["packages/seo/src/index.ts"]
     }

@@ -1,9 +1,7 @@
 import { IMetaData } from './generic-mapper';
 
 export type IChallengesMap = Array<
-  IChallenge & {
-    editions?: number;
-  }
+  Omit<IChallenge, 'submissions' | 'editions'>
 >;
 
 export type IChallenge = ISingleChallenge | IPeriodicChallenge;

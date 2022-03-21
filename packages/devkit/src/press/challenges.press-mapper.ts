@@ -135,12 +135,18 @@ export function getChallengesPressMapper(
           return 'editions' in item
             ? {
                 ...omitKeys(item, ['editions']),
-                editions: item.editions.length,
                 metadata: {
-                  ...omitKeys(item.metadata, ['manifestFile'])
+                  ...omitKeys(item.metadata, ['manifestFile']),
+                  editionsNum: item.editions.length
                 }
               }
-            : item;
+            : {
+                ...omitKeys(item, ['submissions']),
+                metadata: {
+                  ...omitKeys(item.metadata, ['filePath']),
+                  submissionsNum: item.submissions.length
+                }
+              };
         })
       );
       await fs.writeJSON(
