@@ -1,3 +1,12 @@
+## [3.5.2](https://github.com/ngaox/ngaox/compare/v3.5.1...v3.5.2) (2022-03-21)
+
+
+### Bug Fixes
+
+* **@ngaox/devkit:** :bug: remove unnecessary fields in content map ([95055a4](https://github.com/ngaox/ngaox/commit/95055a47c4f8a6c4b5c6f1f43b4c9bf8abb32755))
+
+
+
 ## [3.5.1](https://github.com/ngaox/ngaox/compare/v3.5.0...v3.5.1) (2022-03-20)
 
 
