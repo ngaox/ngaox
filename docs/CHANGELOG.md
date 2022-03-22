@@ -1,3 +1,12 @@
+## [3.5.3](https://github.com/ngaox/ngaox/compare/v3.5.2...v3.5.3) (2022-03-22)
+
+
+### Bug Fixes
+
+* **@ngaox/devkit:** reduce challenges press-mapper content map size ([7805e89](https://github.com/ngaox/ngaox/commit/7805e89af4914d0c471ce30ac30d25f18ac99069))
+
+
+
 ## [3.5.2](https://github.com/ngaox/ngaox/compare/v3.5.1...v3.5.2) (2022-03-21)
 
 
