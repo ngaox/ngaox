@@ -1,6 +1,7 @@
 import {
   IAnnouncement,
   IChallenge,
+  IChallengesMap,
   IEdition,
   IParsedContent,
   IPeriodicChallenge,
@@ -13,8 +14,6 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import { omitKeys } from '../utils/omit-keys';
 import { cleanPath } from '../utils/generators-options';
-
-type IChallengesMap = Array<IChallenge>;
 
 export function getChallengesPressMapper(
   submissionsDir?: string,
@@ -76,6 +75,7 @@ export function getChallengesPressMapper(
           })
         );
       };
+
       const edition: IEdition = {
         date: parsed.data.date ?? '',
         duration: parsed.data.duration ?? 'Forever!',
@@ -101,12 +101,30 @@ export function getChallengesPressMapper(
         const manifestFile = cleanPath(
           path.relative(extra.options.dir, periodicManifestPath)
         );
+        const bodyUrl =
+          getSlug(undefined, path.join(slug, filePath.split('/').pop())) +
+          '.json';
+        await fs.ensureDir(path.dirname(path.join(extra.outputPath, bodyUrl)));
+        await fs.writeJson(path.join(extra.outputPath, bodyUrl), {
+          body: edition.body
+        });
         challenge = {
           name: name,
           slug: slug,
           summary: manifest.summary ?? '',
           next: announcements[slug],
-          editions: [edition],
+          editions: [
+            omitKeys(
+              {
+                ...edition,
+                metadata: {
+                  ...edition.metadata,
+                  bodyUrl
+                }
+              },
+              ['body']
+            ) as IEdition
+          ],
           metadata: {
             ...omitKeys(manifest, ['name', 'slug', 'summary']),
             manifestFile
@@ -132,21 +150,25 @@ export function getChallengesPressMapper(
       await fs.writeJSON(
         path.join(extra.outputPath, pressOuts.map),
         contentMap.challenges.map(item => {
-          return 'editions' in item
-            ? {
-                ...omitKeys(item, ['editions']),
-                metadata: {
-                  ...omitKeys(item.metadata, ['manifestFile']),
-                  editionsNum: item.editions.length
-                }
+          if ('submissions' in item) {
+            return {
+              ...omitKeys(item, ['submissions', 'body']),
+              metadata: {
+                ...omitKeys(item.metadata, ['filePath']),
+                submissionsNum: item?.submissions?.length ?? 0
               }
-            : {
-                ...omitKeys(item, ['submissions']),
-                metadata: {
-                  ...omitKeys(item.metadata, ['filePath']),
-                  submissionsNum: item.submissions.length
-                }
-              };
+            };
+          }
+          if ('editions' in item) {
+            return {
+              ...omitKeys(item, ['editions']),
+              metadata: {
+                ...omitKeys(item.metadata, ['manifestFile']),
+                editionsNum: item?.editions?.length ?? 0
+              }
+            };
+          }
+          return omitKeys(item, ['body']);
         })
       );
       await fs.writeJSON(

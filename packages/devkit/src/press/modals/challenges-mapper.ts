@@ -1,8 +1,6 @@
 import { IMetaData } from './generic-mapper';
 
-export type IChallengesMap = Array<
-  Omit<IChallenge, 'submissions' | 'editions'>
->;
+export type IChallengesMap = Array<IChallenge>;
 
 export type IChallenge = ISingleChallenge | IPeriodicChallenge;
 
@@ -11,7 +9,7 @@ export type IPeriodicChallenge = IChallengeBase & {
   metadata: IMetaData;
   next?: IAnnouncement;
   // Is set to a number (length of editions) only in content map
-  editions: IEdition[];
+  editions?: IEdition[];
 };
 
 export interface IAnnouncement {
@@ -24,9 +22,9 @@ export interface IAnnouncement {
 export interface IEdition {
   date: string;
   duration: string;
-  body: string;
+  body?: string;
   metadata: IMetaData;
-  submissions: ISubmission[];
+  submissions?: ISubmission[];
 }
 
 export interface ISubmission {
