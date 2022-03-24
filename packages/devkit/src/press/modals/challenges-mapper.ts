@@ -9,7 +9,9 @@ export type IPeriodicChallenge = IChallengeBase & {
   metadata: IMetaData;
   next?: IAnnouncement;
   // Is set to a number (length of editions) only in content map
-  editions?: IEdition[];
+  editions?: {
+    [slug: string]: string; // path to edition
+  };
 };
 
 export interface IAnnouncement {

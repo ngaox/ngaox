@@ -5,15 +5,23 @@ import {
   IEdition,
   IParsedContent,
   IPeriodicChallenge,
+  ISingleChallenge,
   PERIODIC_MANIFEST,
-  pressOuts,
-  REVIEW_MANIFEST
+  pressOuts
 } from './modals';
 import { IMapperExtraOptions, IPressMapper } from '../modals/press';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { omitKeys } from '../utils/omit-keys';
 import { cleanPath } from '../utils/generators-options';
+import { fileExists } from '../utils/filesystem';
+import {
+  ensureChallengeExists,
+  findChallengeCallback,
+  getEditionSubmissions,
+  uniqueChallenges
+} from '../utils/challenges-mapper-utils';
+import { titleCase } from '../utils/strings';
 
 export function getChallengesPressMapper(
   submissionsDir?: string,
@@ -27,7 +35,7 @@ export function getChallengesPressMapper(
       [author: string]: number;
     };
   },
-  IChallenge
+  IEdition | IChallenge
 > {
   const includeSubmissions = submissionsDir !== undefined;
   return {
@@ -41,40 +49,20 @@ export function getChallengesPressMapper(
       parsed: IParsedContent,
       extra: IMapperExtraOptions
     ) => {
+      const slug = filePath.replace(/\.[^/.]+$/, '');
       const periodicManifestPath = path.join(
         extra.options.dir,
         path.dirname(filePath),
         PERIODIC_MANIFEST
       );
+      const manifestFile = cleanPath(
+        path.relative(extra.options.dir, periodicManifestPath)
+      );
       const isPeriodic = await fileExists(periodicManifestPath);
-      let challenge: IChallenge;
-      let slug: string;
-      const getEditionSubmissions = async () => {
-        const slug = getSlug(undefined, filePath);
-        const directory = path.join(submissionsDir, slug);
-        const subDirs = (await dirExists(directory))
-          ? (await fs.readdir(directory, { withFileTypes: true }))
-              .filter(dirent => dirent.isDirectory())
-              .map(dirent => dirent.name)
-          : [];
-        return await Promise.all(
-          subDirs.map(async dirname => {
-            const reviewFilePath = path.join(
-              directory,
-              dirname,
-              REVIEW_MANIFEST
-            );
-            const review = (await fileExists(reviewFilePath))
-              ? await fs.readJson(reviewFilePath)
-              : {};
-            return {
-              author: dirname,
-              path: cleanPath(path.join(slug, dirname)),
-              review
-            };
-          })
-        );
-      };
+      const challenge = ensureChallengeExists(
+        curr.challenges,
+        isPeriodic ? manifestFile : filePath
+      );
 
       const edition: IEdition = {
         date: parsed.data.date ?? '',
@@ -85,132 +73,81 @@ export function getChallengesPressMapper(
             'date',
             'duration',
             ...(isPeriodic ? [] : ['name', 'slug', 'summary'])
-          ]),
-          filePath
+          ])
         },
-        submissions: includeSubmissions ? await getEditionSubmissions() : []
+        submissions: includeSubmissions
+          ? await getEditionSubmissions(slug, submissionsDir)
+          : []
       };
       if (isPeriodic) {
         const manifest = await fs.readJson(periodicManifestPath);
-        slug = getSlug(manifest.slug, `${path.dirname(filePath)}.md`);
-        const name =
-          manifest.name ??
-          (slug.replace(/-/g, ' ') as string).replace(/^\w/, c =>
-            c.toUpperCase()
-          );
-        const manifestFile = cleanPath(
-          path.relative(extra.options.dir, periodicManifestPath)
-        );
-        const bodyUrl =
-          getSlug(undefined, path.join(slug, filePath.split('/').pop())) +
-          '.json';
-        await fs.ensureDir(path.dirname(path.join(extra.outputPath, bodyUrl)));
-        await fs.writeJson(path.join(extra.outputPath, bodyUrl), {
-          body: edition.body
-        });
-        challenge = {
-          name: name,
-          slug: slug,
-          summary: manifest.summary ?? '',
-          next: announcements[slug],
-          editions: [
-            omitKeys(
-              {
-                ...edition,
-                metadata: {
-                  ...edition.metadata,
-                  bodyUrl
-                }
-              },
-              ['body']
-            ) as IEdition
-          ],
-          metadata: {
-            ...omitKeys(manifest, ['name', 'slug', 'summary']),
-            manifestFile
-          }
+        const periodicSlug = cleanPath(path.dirname(slug));
+        const editionSlug = cleanPath(path.basename(slug));
+        challenge.name = manifest.name ?? titleCase(slug);
+        challenge.slug = periodicSlug;
+        challenge.summary = manifest.summary ?? '';
+        (challenge as IPeriodicChallenge).next = announcements[periodicSlug];
+        (challenge as IPeriodicChallenge).editions =
+          (challenge as IPeriodicChallenge).editions ?? {};
+        (challenge as IPeriodicChallenge).editions[editionSlug] = edition.date;
+        challenge.metadata = {
+          ...omitKeys(manifest, ['name', 'summary']),
+          manifestFile
         };
+        return [`${slug}.json`, edition];
       } else {
-        slug = getSlug(parsed.data.slug, filePath);
-        const name =
-          parsed.data.name ??
-          (slug.replace(/-/g, ' ') as string).replace(/^\w/, c =>
-            c.toUpperCase()
-          );
-        challenge = {
-          name: name,
-          slug: slug,
-          summary: parsed.data.summary ?? '',
-          ...edition
-        };
+        challenge.name = parsed.data.name ?? titleCase(slug);
+        challenge.name = parsed.data.name ?? titleCase(slug);
+        challenge.slug = slug;
+        challenge.summary = parsed.data.summary ?? '';
+        challenge.metadata = edition.metadata;
+        (challenge as ISingleChallenge).date = edition.date;
+        (challenge as ISingleChallenge).duration = edition.duration;
+        (challenge as ISingleChallenge).submissions = edition.submissions;
+        (challenge as ISingleChallenge).body = edition.body;
       }
-      return [`${slug}.json`, challenge];
+      return [`${slug}.json`, challenge as IChallenge];
     },
     write: async (contentMap, extra: IMapperExtraOptions) => {
+      const outContentMap: any = contentMap.challenges.map(item => {
+        if ('submissions' in item) {
+          return {
+            ...omitKeys(item, ['submissions', 'body']),
+            metadata: {
+              ...omitKeys(item.metadata, ['filePath']),
+              submissionsNum: item?.submissions?.length ?? 0
+            }
+          };
+        }
+        if ('editions' in item) {
+          return {
+            ...item,
+            metadata: omitKeys(item.metadata, ['manifestFile'])
+          };
+        }
+        return omitKeys(item, ['body']);
+      });
+      for (let i = 0; i < outContentMap.length; i++) {
+        const element = outContentMap[i];
+        if ('editions' in element) {
+          const outFile = `${path.join(extra.outputPath, element?.slug)}.json`;
+          await fs.ensureDir(path.dirname(outFile));
+          await fs.writeJson(outFile, element);
+        }
+      }
       await fs.writeJSON(
         path.join(extra.outputPath, pressOuts.map),
-        contentMap.challenges.map(item => {
-          if ('submissions' in item) {
-            return {
-              ...omitKeys(item, ['submissions', 'body']),
-              metadata: {
-                ...omitKeys(item.metadata, ['filePath']),
-                submissionsNum: item?.submissions?.length ?? 0
-              }
-            };
-          }
-          if ('editions' in item) {
-            return {
-              ...omitKeys(item, ['editions']),
-              metadata: {
-                ...omitKeys(item.metadata, ['manifestFile']),
-                editionsNum: item?.editions?.length ?? 0
-              }
-            };
-          }
-          return omitKeys(item, ['body']);
-        })
+        outContentMap
       );
       await fs.writeJSON(
         path.join(extra.outputPath, pressOuts.leaderboard),
         contentMap.leaderboard
       );
     },
-    push: (previous, filePath, obj) => {
-      const isPeriodic = 'editions' in obj;
-      const manifestFile = cleanPath(
-        path.join(path.dirname(filePath), PERIODIC_MANIFEST)
-      );
-      const editions =
-        (
-          previous.challenges.find(
-            item => item.metadata.manifestFile === manifestFile
-          ) as IPeriodicChallenge
-        )?.editions ?? [];
-      if (isPeriodic && obj.slug in announcements) {
-        delete announcements[obj.slug];
-      }
+    push: previous => {
       return {
         ...previous,
-        challenges: [
-          ...previous.challenges.filter(
-            findChallengeCallback(isPeriodic ? manifestFile : filePath, true)
-          ),
-          isPeriodic
-            ? {
-                ...obj,
-                editions: [
-                  ...editions.filter(
-                    findChallengeCallback(
-                      obj.editions[0].metadata.filePath,
-                      true
-                    )
-                  ),
-                  ...obj.editions
-                ]
-              }
-            : obj
-        ]
+        challenges: uniqueChallenges(previous.challenges)
       };
     },
     remove: (previous, filePath: string) => {
@@ -218,51 +155,17 @@ export function getChallengesPressMapper(
         findChallengeCallback(filePath)
       );
       const isPeriodic = 'editions' in challenge;
-      const outFilePath = `${challenge.slug}.json`;
-      const leftItemsInChallenge = isPeriodic
-        ? [
-            {
-              ...challenge,
-              editions: challenge.editions.filter(
-                findChallengeCallback(filePath, true)
-              )
-            }
-          ]
-        : [];
-      if (isPeriodic && challenge.next) {
-        announcements[challenge.slug] = challenge.next;
+      const slug = filePath.replace(/\.[^/.]+$/, '');
+
+      if (isPeriodic) {
+        delete challenge.editions[slug];
+      } else {
+        previous.challenges = previous.challenges.filter(
+          findChallengeCallback(filePath, true)
+        );
       }
-      return [
-        {
-          ...previous,
-          challenges: [
-            ...previous.challenges.filter(
-              findChallengeCallback(filePath, true)
-            ),
-            ...leftItemsInChallenge
-          ]
-        },
-        outFilePath
-      ];
+
+      return [previous, `${slug}.json`];
     }
   };
-}
-async function fileExists(filePath: string) {
-  return (await fs.pathExists(filePath)) && (await fs.stat(filePath)).isFile();
-}
-async function dirExists(filePath: string) {
-  return (
-    (await fs.pathExists(filePath)) && (await fs.stat(filePath)).isDirectory()
-  );
-}
-
-function getSlug(slug?: string, filePath?: string) {
-  return cleanPath(slug ?? filePath.replace(/\..+$/, '') ?? '');
-}
-function findChallengeCallback(filePath: string, reverseOutput = false) {
-  return (item: IChallenge | IEdition) =>
-    ('editions' in item
-      ? item.metadata.manifestFile === filePath ||
-        item.editions.some(edition => edition.metadata.filePath === filePath)
-      : item.metadata.filePath === filePath) !== reverseOutput;
 }
