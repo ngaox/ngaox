@@ -1,3 +1,12 @@
+## [3.5.4](https://github.com/ngaox/ngaox/compare/v3.5.3...v3.5.4) (2022-03-24)
+
+
+### Bug Fixes
+
+* **@ngaox/devkit:** :bug: output both challenge & editions for periodic challenges ([b3af10b](https://github.com/ngaox/ngaox/commit/b3af10b2e9a87862be3cd2d56b9eebec5adcfb70))
+
+
+
 ## [3.5.3](https://github.com/ngaox/ngaox/compare/v3.5.2...v3.5.3) (2022-03-22)
 
 
