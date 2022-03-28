@@ -29,7 +29,7 @@
     "chokidar": "^3.5.3",
     "deepmerge": "^4.2.2",
     "dotenv": "^16.0.0",
-    "dotenv-expand": "^8.0.2",
+    "dotenv-expand": "^8.0.3",
     "fs-extra": "^10.0.0",
     "gray-matter": "^4.0.3",
     "jsdom": "^19.0.0",
