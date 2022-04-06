@@ -1,4 +1,6 @@
 import { BuilderContext } from '@angular-devkit/architect';
+import { colors } from '@angular-devkit/build-angular/src/utils/color';
+import { fromEvent } from 'rxjs';
 
 import * as path from 'path';
 import * as chokidar from 'chokidar';
@@ -9,16 +11,14 @@ import { marked } from 'marked';
 import { JSDOM } from 'jsdom';
 
 import * as Prism from 'prismjs';
+import { clearCurrentLine, getCleanRelative, cleanPath } from '../../src/utils';
+import { IPressMapper, IPressOptions } from '../../src/models';
 import {
-  clearCurrentLine,
-  getCleanRelative,
-  IPressMapper,
-  IPressOptions
-} from '../../src';
-import { IParsedContent, ITocLink, pressOuts } from '../../src/press/modals';
-import { fromEvent } from 'rxjs';
-import { colors } from '@angular-devkit/build-angular/src/utils/color';
-import { cleanPath, genericPressMapper } from '../../src';
+  IParsedContent,
+  ITocLink,
+  pressOuts,
+  genericPressMapper
+} from '../../src/press';
 
 const greenCheckSymbol = colors.greenBright(colors.symbols.check);
 
@@ -34,11 +34,8 @@ export function MdContentTask(
       const contentMapOutPath = path.join(extra.outputPath, pressOuts.map);
       await fs.writeJSON(contentMapOutPath, contentMap);
     },
-    ...(opts.mapper !== false
-      ? opts.mapper ?? genericPressMapper
-      : genericPressMapper)
-  } as IPressMapper<any, any>;
-  const createContentMap = opts.mapper !== false;
+    ...(opts.mapper ?? genericPressMapper)
+  } as IPressMapper<unknown, unknown>;
 
   const watcher = chokidar.watch(contentPath);
   let contentMap = mapper.empty;
@@ -63,14 +60,12 @@ export function MdContentTask(
     await fs.ensureDir(path.dirname(outFile));
     await fs.writeJSON(outFile, parsed);
 
-    if (createContentMap) {
-      contentMap = mapper.push(contentMap, cleanPath(filePath), parsed);
-      await mapper.write(contentMap, {
-        context,
-        options: opts,
-        outputPath
-      });
-    }
+    contentMap = mapper.push(contentMap, cleanPath(filePath), parsed);
+    await mapper.write(contentMap, {
+      context,
+      options: opts,
+      outputPath
+    });
     return outputFilePath;
   };
 
@@ -93,13 +88,11 @@ export function MdContentTask(
       );
       [contentMap, jsonFilePath] = mapper.remove(contentMap, filePath);
       await fs.unlink(path.join(outputPath, jsonFilePath));
-      if (createContentMap) {
-        await mapper.write(contentMap, {
-          context,
-          options: opts,
-          outputPath
-        });
-      }
+      await mapper.write(contentMap, {
+        context,
+        options: opts,
+        outputPath
+      });
       clearCurrentLine();
       context.logger.info(`${greenCheckSymbol} Removed: ${jsonFilePath}`);
     });

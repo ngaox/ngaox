@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, PRIMARY_OUTLET } from '@angular/router';
-import { IPageSeoData, ISeoLoader, SeoKey } from '../shared/modals';
+import { IPageSeoData, ISeoLoader, SeoKey } from '../shared/models';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import { dirExists, fileExists } from './filesystem';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import { IChallenge, IMetaData, REVIEW_MANIFEST } from '../press/modals';
+import { IChallenge, IMetaData, REVIEW_MANIFEST } from '../press';
 import { cleanPath } from './generators-options';
 
 export const getEditionSubmissions = async (

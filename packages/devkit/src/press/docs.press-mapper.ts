@@ -1,6 +1,6 @@
 import { IPressMapper } from '../index';
 import { omitKeys } from '../utils/omit-keys';
-import { IParsedContent, IDocsItem, IDocsSection } from './modals';
+import { IParsedContent, IDocsItem, IDocsSection } from './models';
 
 function getSlug(section?: IDocsSection, slug?: string, filePath?: string) {
   return `${section?.routesPrefix ?? ''}${

@@ -6,7 +6,7 @@ import { SeoService } from './seo.service';
 import { RouteDataSeoLoader, SeoDataLoader } from './loaders';
 
 import { currentPageRoute } from './shared/helpers';
-import { IPageSeoData, SeoDefaultsToken } from './shared/modals';
+import { IPageSeoData, SeoDefaultsToken } from './shared/models';
 import { SeoComponent } from './seo.component';
 
 @NgModule({

@@ -6,7 +6,7 @@ import {
   ISeoImage,
   ISeoTwitter,
   SeoDefaultsToken
-} from './shared/modals';
+} from './shared/models';
 
 @Injectable({
   providedIn: 'root'

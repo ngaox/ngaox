@@ -8,8 +8,8 @@ import {
   ISingleChallenge,
   PERIODIC_MANIFEST,
   pressOuts
-} from './modals';
-import { IMapperExtraOptions, IPressMapper } from '../modals/press';
+} from './models';
+import { IMapperExtraOptions, IPressMapper } from '../models/press';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { omitKeys } from '../utils/omit-keys';

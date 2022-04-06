@@ -1,7 +1,7 @@
-import { IBuilderOptions } from '../../src';
 import { map, Observable, of } from 'rxjs';
 import { BuilderContext, BuilderOutput } from '@angular-devkit/architect';
 import { MdContentTask } from './md-content';
+import { IBuilderOptions } from '../../src/models';
 
 export function getNgaoxTasks(
   options: IBuilderOptions,

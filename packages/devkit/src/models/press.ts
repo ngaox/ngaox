@@ -1,11 +1,11 @@
-import { IParsedContent } from '../press/modals';
+import { IParsedContent } from '../press/models';
 import { BuilderContext } from '@angular-devkit/architect';
 
 export interface IPressOptions {
   dir: string;
   // The path/glob-pattern to the markdown files.
   content: string;
-  mapper?: IPressMapper<any, any> | false;
+  mapper?: IPressMapper<unknown, unknown>;
 }
 
 export interface IMapperExtraOptions {

@@ -8,5 +8,5 @@ export * from './lib/seo.component';
 
 export * from './lib/loaders';
 
-export * from './lib/shared/modals';
+export * from './lib/shared/models';
 export * from './lib/shared/helpers';

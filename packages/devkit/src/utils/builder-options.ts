@@ -10,7 +10,7 @@ import * as deepmerge from 'deepmerge';
 import * as path from 'path';
 import { colors } from '@angular-devkit/build-angular/src/utils/color';
 import { BrowserBuilderOptions } from '@angular-devkit/build-angular';
-import { pressOuts } from '../press/modals';
+import { pressOuts } from '../press';
 
 export function extractBrowserOptions(
   options: IBuilderOptions
@@ -37,8 +37,7 @@ export function getOutputtedAssets(options: IBuilderOptions) {
 
 export async function getBuilderOptions(
   context: BuilderContext,
-  extra: string | IBuilderOptions,
-  log = false
+  extra: string | IBuilderOptions
 ): Promise<IBuilderOptions> {
   const overridesOpts =
     typeof extra === 'string'
@@ -108,13 +107,11 @@ export async function getBuilderOptions(
     const workspaceConfigPath = path.join(workspaceRoot, 'ngaox.config.js');
     options = deepmerge(options, await import(workspaceConfigPath));
     isOutputted = true;
-    if (log) {
-      context.logger.info(
-        `${colors.blueBright(
-          colors.symbols.pointer
-        )} Found workspace config from: ${workspaceConfigPath}`
-      );
-    }
+    context.logger.info(
+      `${colors.blueBright(
+        colors.symbols.pointer
+      )} Found workspace config from: ${workspaceConfigPath}`
+    );
   } catch (e) {
     /* Dont throw error */
   }
@@ -128,22 +125,22 @@ export async function getBuilderOptions(
 
     options = deepmerge(options, await import(projectConfigPath));
     isOutputted = true;
-    if (log) {
-      context.logger.info(
-        `${colors.blueBright(
-          colors.symbols.pointer
-        )} Found project config from: ${projectConfigPath}`
-      );
-    }
+    context.logger.info(
+      `${colors.blueBright(
+        colors.symbols.pointer
+      )} Found project config from: ${projectConfigPath}`
+    );
   } catch (e) {
     /* Dont throw error */
   }
-  if (isOutputted && log) context.logger.info(``);
+
+  if (isOutputted) context.logger.info(``);
 
   const mergedOptions = deepmerge(
     options,
     JSON.parse(JSON.stringify(overridesOpts))
   );
+
   return {
     ...deepmerge(
       mergedOptions,

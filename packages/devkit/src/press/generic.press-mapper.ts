@@ -1,5 +1,5 @@
 import { IPressMapper } from '../index';
-import { IGenericContentMap, IParsedContent } from './modals';
+import { IGenericContentMap, IParsedContent } from './models';
 
 export const genericPressMapper: IPressMapper<
   IGenericContentMap,

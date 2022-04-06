@@ -34,25 +34,23 @@ import {
   getDevServerConfig,
   getStylesConfig
 } from '@angular-devkit/build-angular/src/webpack/configs';
-
 import { tags, json } from '@angular-devkit/core';
 import {
   I18nOptions,
   loadTranslations
 } from '@angular-devkit/build-angular/src/utils/i18n-options';
-import { IBuilderOptions } from '../../src';
+import { IBuilderOptions } from '../../../../src/models';
 import {
   extractBrowserOptions,
   getOutputtedAssets
-} from '../../src/utils/builder-options';
-import { getNgBuildTransforms } from '../plugins';
+} from '../../../../src/utils';
 
 export async function overrodeSetup(
   options: DevServerBuilderOptions,
   context: BuilderContext,
-  builderOptions: IBuilderOptions
+  builderOptions: IBuilderOptions,
+  transforms: any = {}
 ) {
-  const transforms = getNgBuildTransforms(builderOptions);
   const projectName = context.target?.project;
   const { logger, workspaceRoot } = context;
 

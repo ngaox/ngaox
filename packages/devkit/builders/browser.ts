@@ -3,16 +3,13 @@ import {
   BuilderOutput,
   createBuilder
 } from '@angular-devkit/architect';
-import { executeBrowserBuilder } from '@angular-devkit/build-angular';
-import { IBuilderOptions } from '../src';
+import { IBuilderOptions } from '../src/models';
 
-import {
-  getBuilderOptions,
-  extractBrowserOptions
-} from '../src/utils/builder-options';
+import { getBuilderOptions } from '../src/utils';
 import { first, forkJoin, lastValueFrom } from 'rxjs';
 import * as fs from 'fs-extra';
 import { getNgaoxTasks } from './tasks';
+import { NgBuildTask } from './tasks/ng-build';
 import { getNgBuildTransforms } from './plugins';
 
 export default createBuilder(ngaoxBuild);
@@ -26,20 +23,16 @@ export async function ngaoxBuild(
     throw new Error('The builder requires a target.');
   }
 
-  const options: IBuilderOptions = await getBuilderOptions(context, opts, true);
+  const options: IBuilderOptions = await getBuilderOptions(context, opts);
+  const transforms = getNgBuildTransforms(options);
 
   await fs.ensureDir(options.outputPath);
   await fs.emptyDir(options.outputPath);
 
-  await lastValueFrom(
-    forkJoin(
-      getNgaoxTasks(options, context).map(ob$ => ob$.pipe(first()))
-    ).pipe(first())
-  );
-
-  return (await executeBrowserBuilder(
-    extractBrowserOptions(options),
-    context,
-    getNgBuildTransforms(options)
-  ).toPromise()) as BuilderOutput;
+  return (await lastValueFrom(
+    forkJoin([
+      ...getNgaoxTasks(options, context).map(ob$ => ob$.pipe(first())),
+      NgBuildTask(options, context, transforms)
+    ]).pipe(first())
+  )) as BuilderOutput;
 }
