@@ -1,7 +1,6 @@
 {
   "conventionalCommits.scopes": [
     "deps",
-    "deps-dev",
     "docs",
     "infra",
     "@ngaox/icons",

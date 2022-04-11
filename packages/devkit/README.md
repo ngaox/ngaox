@@ -6,4 +6,4 @@
 
 **Schematics, Builders and other dev utilities for developing Angular apps with Ngaox.**
 
-## [Getting Started with Ngaox Devkit](https://ngaox-lab.web.app/docs/devkit)
+## [Getting Started with Ngaox Devkit](https://ngaox-lab.web.app/)

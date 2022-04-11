@@ -1796,10 +1796,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@ngaox/devkit@^3.4.3":
-  version "3.4.3"
-  resolved "https://registry.yarnpkg.com/@ngaox/devkit/-/devkit-3.4.3.tgz#e3d1fcf2e97e1386237fa6695645354832f82922"
-  integrity sha512-/vvf/T1jRoec5M1N1jAo66awxXZw2ol3hNkaVFX/xqnTQzYUTlzDkBm8JjxfAG1UFiiBMLbWY1O0dv2uV7ZcIQ==
+"@ngaox/devkit@3.5.4":
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/@ngaox/devkit/-/devkit-3.5.4.tgz#d49217674351450e5809d444704e6e4c08ca3f11"
+  integrity sha512-5bKw/XazuWXyWvP66ijRCwxq/ag8N+Fgv5kDEOUqMGn9XRv0I/y8XCZlF6og/JZ5rnK5zV3SxEtajbriXRE1MA==
   dependencies:
     "@angular-devkit/build-angular" "^13.0.0"
     "@angular-devkit/schematics" "^13.0.0"
