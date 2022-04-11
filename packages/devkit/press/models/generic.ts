@@ -1,5 +1,5 @@
 export interface IMetaData {
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 export interface ITocLink {

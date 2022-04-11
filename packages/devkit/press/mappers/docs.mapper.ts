@@ -1,29 +1,15 @@
 import { IPressMapper } from '../../src/builders';
 import { unlinkFile, writeFile } from '../../src/utils';
-import { pressMaps } from '../constants';
+import { MAP_FILES } from '../constants';
 import { IDocsSection } from '../models/docs';
 import { IParsedContent } from '../models/generic';
 
-export function getDocsMapper(sections: IDocsSection[]): IPressMapper {
-  const getSection = (filePath: string) => {
-    const section = sections.find(
-      sec => !sec?.directory || filePath.startsWith(sec?.directory + '/')
-    );
-    let unknownIndex: number | undefined;
-    if (!section) {
-      unknownIndex = sections.push({
-        name: 'unknown items..',
-        routesPrefix: '--unknown--',
-        directory: ''
-      });
-    }
-    return section ?? sections[unknownIndex];
-  };
+const memory = {};
 
-  const memory = {};
+export function getDocsMapper(sections: IDocsSection[]): IPressMapper {
   return {
     push: async (parsed: IParsedContent, filePath: string, extra) => {
-      const section = getSection(filePath);
+      const section = getSection(sections, filePath);
       const { slug: rawSlug, ...metadata } = parsed.data;
       const slug = getSlug(section, rawSlug as string, filePath);
       const name =
@@ -59,12 +45,12 @@ export function getDocsMapper(sections: IDocsSection[]): IPressMapper {
           logger: extra.context.logger
         }
       );
-      await writeFile(pressMaps.main, sections, {
+      await writeFile(MAP_FILES.main, sections, {
         dir: extra.outputPath
       });
     },
     remove: async (filePath: string, extra) => {
-      const section = getSection(filePath);
+      const section = getSection(sections, filePath);
       const slug = memory?.[filePath]?.slug;
       const itemIndex =
         slug !== undefined
@@ -81,7 +67,7 @@ export function getDocsMapper(sections: IDocsSection[]): IPressMapper {
         dir: extra.outputPath,
         logger: extra.context.logger
       });
-      await writeFile(pressMaps.main, memory, {
+      await writeFile(MAP_FILES.main, memory, {
         dir: extra.outputPath
       });
     }
@@ -96,4 +82,19 @@ function getSlug(section?: IDocsSection, slug?: string, filePath?: string) {
       .replace(/\..+$/, '') ??
     ''
   }`;
+}
+
+function getSection(sections: IDocsSection[], filePath: string) {
+  const section = sections.find(
+    sec => !sec?.directory || filePath.startsWith(sec?.directory + '/')
+  );
+  let unknownIndex: number | undefined;
+  if (!section) {
+    unknownIndex = sections.push({
+      name: 'unknown items..',
+      routesPrefix: '--unknown--',
+      directory: ''
+    });
+  }
+  return section ?? sections[unknownIndex];
 }

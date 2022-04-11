@@ -14,7 +14,7 @@ import { getCleanRelative } from '../../utils';
 import { IPressMapper, IPressOptions } from '../models/press';
 import { IParsedContent, ITocLink } from '../../../press/models/generic';
 import { getGenericMapper } from '../../../press/mappers/generic.mapper';
-import { pressOutputFolder } from '../../../press/constants';
+import { CONTENT_DIR } from '../../../press/constants';
 
 export function MdContentTask(
   opts: IPressOptions,
@@ -26,7 +26,7 @@ export function MdContentTask(
   const mapperExtraOpts = {
     context,
     options: opts,
-    outputPath: path.join(outputPath, pressOutputFolder)
+    outputPath: path.join(outputPath, CONTENT_DIR)
   };
 
   const watcher = chokidar.watch(contentPath);

@@ -1,18 +1,23 @@
 import { IMetaData } from './generic';
 
-export type IChallengesMap = Array<IChallenge>;
+export type IContest = IUniqueContest | IPeriodicContest;
 
-export type IChallenge = ISingleChallenge | IPeriodicChallenge;
-
-export type ISingleChallenge = IChallengeBase & IEdition;
-export type IPeriodicChallenge = IChallengeBase & {
+export type IUniqueContest = IContestMeta & IChallenge;
+export type IPeriodicContest = IContestMeta & {
   metadata: IMetaData;
   next?: IAnnouncement;
-  // Is set to a number (length of editions) only in content map
   editions?: {
-    [slug: string]: string; // path to edition
+    [slug: string]: string; // date string
   };
 };
+
+export interface IChallenge {
+  date: string;
+  duration: string;
+  body?: string;
+  metadata: IMetaData;
+  submissions?: ISubmission[];
+}
 
 export interface IAnnouncement {
   title: string;
@@ -21,21 +26,14 @@ export interface IAnnouncement {
   date: string;
 }
 
-export interface IEdition {
-  date: string;
-  duration: string;
-  body?: string;
-  metadata: IMetaData;
-  submissions?: ISubmission[];
-}
-
 export interface ISubmission {
   author: string;
+  points: number;
   path: string;
-  review: IMetaData;
+  metadata: IMetaData;
 }
 
-interface IChallengeBase {
+interface IContestMeta {
   name: string;
   slug: string;
   summary: string;

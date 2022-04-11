@@ -1,6 +1,6 @@
 import { IPressMapper } from '../../src/builders';
 import { unlinkFile, writeFile } from '../../src/utils';
-import { pressMaps } from '../constants';
+import { MAP_FILES } from '../constants';
 import { IMetaData, IParsedContent } from '../models/generic';
 
 const memory = {};
@@ -14,7 +14,7 @@ export function getGenericMapper(): IPressMapper {
         dir: extra.outputPath,
         logger: extra.context.logger
       });
-      await writeFile(pressMaps.main, Object.values(memory), {
+      await writeFile(MAP_FILES.main, Object.values(memory), {
         dir: extra.outputPath
       });
     },
@@ -25,7 +25,7 @@ export function getGenericMapper(): IPressMapper {
         dir: extra.outputPath,
         logger: extra.context.logger
       });
-      await writeFile(pressMaps.main, Object.values(memory), {
+      await writeFile(MAP_FILES.main, Object.values(memory), {
         dir: extra.outputPath
       });
     }

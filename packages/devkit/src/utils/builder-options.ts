@@ -11,7 +11,7 @@ import * as path from 'path';
 import { colors } from '@angular-devkit/build-angular/src/utils/color';
 import { BrowserBuilderOptions } from '@angular-devkit/build-angular';
 import { IBuilderOptions } from '../builders/models/builder';
-import { pressOutputFolder } from '../../press/constants';
+import { CONTENT_DIR } from '../../press/constants';
 import { cleanPath } from './generators-options';
 
 export function extractBrowserOptions(
@@ -30,8 +30,8 @@ export function getOutputtedAssets(options: IBuilderOptions) {
   if (options.press) {
     assets.push({
       glob: '**/*',
-      input: path.join(options.outputPath, pressOutputFolder),
-      output: pressOutputFolder
+      input: path.join(options.outputPath, CONTENT_DIR),
+      output: CONTENT_DIR
     });
   }
   return assets;
