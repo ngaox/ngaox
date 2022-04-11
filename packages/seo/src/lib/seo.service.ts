@@ -39,6 +39,8 @@ export class SeoService {
     if (seoData.twitter) this.setTwitter(seoData.twitter);
     if (seoData.fbAppId) this.setFbAppId(seoData.fbAppId);
     if (seoData.siteName) this.setSiteName(seoData.siteName);
+    if (seoData['theme-color']) this.setSiteName(seoData['theme-color']);
+    if (seoData.canonical) this.setCanonical(seoData.canonical);
   }
 
   public setTitle(title: string): void {
@@ -48,6 +50,14 @@ export class SeoService {
       { name: 'twitter:title', content: title },
       { name: 'title', content: title }
     ]);
+  }
+
+  public setCanonical(url: string): void {
+    this.generateTags([{ name: 'canonical', content: url }]);
+  }
+
+  public setThemeColor(color: string): void {
+    this.generateTags([{ name: 'theme-color', content: color }]);
   }
 
   public setKeywords(keywords: string): void {

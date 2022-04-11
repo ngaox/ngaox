@@ -17,6 +17,8 @@ export interface IPageSeoData {
   twitter?: ISeoTwitter;
   fbAppId?: string;
   siteName?: string;
+  'theme-color'?: string;
+  canonical?: string;
 }
 
 export interface ISeoImage {
