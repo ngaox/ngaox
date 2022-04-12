@@ -1,7 +1,7 @@
-import { ActivatedRouteSnapshot } from "@angular/router";
+import { ActivatedRouteSnapshot } from '@angular/router';
 
-export const SeoKey = "NgaoxSeo";
-export const SeoDefaultsToken = Symbol("DefaultsSeoData");
+export const SeoKey = 'NgaoxSeo';
+export const SeoDefaultsToken = Symbol('DefaultsSeoData');
 
 export interface ISeoLoader {
   resolve(route: ActivatedRouteSnapshot): IPageSeoData;
@@ -18,7 +18,7 @@ export interface IPageSeoData {
   fbAppId?: string;
   siteName?: string;
   extra?: {
-    "theme-color"?: string;
+    'theme-color'?: string;
   };
 }
 
@@ -32,5 +32,5 @@ export interface ISeoImage {
 export interface ISeoTwitter {
   site?: string;
   creator?: string;
-  card?: "summary_large_image" | "summary";
+  card?: 'summary_large_image' | 'summary';
 }
