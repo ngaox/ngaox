@@ -1,4 +1,5 @@
 import { ActivatedRouteSnapshot } from '@angular/router';
+import { MetaDefinition } from '@angular/platform-browser';
 
 export const SeoKey = 'NgaoxSeo';
 export const SeoDefaultsToken = Symbol('DefaultsSeoData');
@@ -17,9 +18,7 @@ export interface IPageSeoData {
   twitter?: ISeoTwitter;
   fbAppId?: string;
   siteName?: string;
-  extra?: {
-    'theme-color'?: string;
-  };
+  extra?: MetaDefinition[];
 }
 
 export interface ISeoImage {
@@ -29,6 +28,7 @@ export interface ISeoImage {
   height?: number;
   mimeType?: string;
 }
+
 export interface ISeoTwitter {
   site?: string;
   creator?: string;
