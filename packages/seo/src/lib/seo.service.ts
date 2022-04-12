@@ -39,6 +39,7 @@ export class SeoService {
     if (seoData.twitter) this.setTwitter(seoData.twitter);
     if (seoData.fbAppId) this.setFbAppId(seoData.fbAppId);
     if (seoData.siteName) this.setSiteName(seoData.siteName);
+    if (seoData.extra) this.generateTags(seoData.extra);
   }
 
   public setTitle(title: string): void {
