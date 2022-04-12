@@ -1,3 +1,12 @@
+# [3.6.0](https://github.com/ngaox/ngaox/compare/v3.5.4...v3.6.0) (2022-04-12)
+
+
+### Features
+
+* **@ngaox/seo:** option for `extra` meta tags ([#173](https://github.com/ngaox/ngaox/issues/173)) ([0ce8411](https://github.com/ngaox/ngaox/commit/0ce84110132ba91f386e994edc751cb6b341cd68))
+
+
+
 ## [3.5.4](https://github.com/ngaox/ngaox/compare/v3.5.3...v3.5.4) (2022-03-24)
 
 
