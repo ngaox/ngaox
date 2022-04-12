@@ -10,14 +10,14 @@ import * as webpackDevServer from 'webpack-dev-server';
 import { tags } from '@angular-devkit/core';
 import { from, Observable, concatMap, switchMap } from 'rxjs';
 import { overrodeSetup } from './overrode-setup';
-import { IBuilderOptions } from '../../../models/builder';
+import { IBuilderOptions, IWebpackTransforms } from '../../../models/builder';
 import { v6ToV7Observable } from '../../../../utils';
 
 export function executeDevServerBuilder(
   options: DevServerBuilderOptions,
   builderOptions: IBuilderOptions,
   context: BuilderContext,
-  transforms?: unknown
+  transforms?: IWebpackTransforms
 ): Observable<unknown> {
   const logger = context.logger;
   return from(overrodeSetup(options, context, builderOptions, transforms)).pipe(

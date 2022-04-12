@@ -1,5 +1,5 @@
 import { IPressMapper } from '../../src/builders';
-import { unlinkFile, writeFile } from '../../src/utils';
+import { unlinkFile, writeJSON } from '../../src/utils';
 import { MAP_FILES } from '../constants';
 import { IMetaData, IParsedContent } from '../models/generic';
 
@@ -10,11 +10,11 @@ export function getGenericMapper(): IPressMapper {
     push: async (parsed: IParsedContent, filePath: string, extra) => {
       memory[filePath] = parsed as unknown as IMetaData;
       filePath = filePath.replace(/\..+$/, '.json');
-      await writeFile(filePath, parsed, {
+      await writeJSON(filePath, parsed, {
         dir: extra.outputPath,
         logger: extra.context.logger
       });
-      await writeFile(MAP_FILES.main, Object.values(memory), {
+      await writeJSON(MAP_FILES.main, Object.values(memory), {
         dir: extra.outputPath
       });
     },
@@ -25,7 +25,7 @@ export function getGenericMapper(): IPressMapper {
         dir: extra.outputPath,
         logger: extra.context.logger
       });
-      await writeFile(MAP_FILES.main, Object.values(memory), {
+      await writeJSON(MAP_FILES.main, Object.values(memory), {
         dir: extra.outputPath
       });
     }

@@ -11,13 +11,13 @@ export const getChallengeSubmissions = async (
   submissionsDir: string
 ) => {
   const directory = path.join(submissionsDir, slug);
-  const subDirs = (await dirExists(directory))
+  const submissionFiles = (await dirExists(directory))
     ? (await fs.readdir(directory, { withFileTypes: true }))
         .filter(dirent => dirent.isFile() && dirent.name.endsWith('.json'))
         .map(dirent => dirent.name)
     : [];
   return await Promise.all(
-    subDirs.map(async filename => {
+    submissionFiles.map(async filename => {
       const filePath = path.join(directory, filename);
       const metadata = (await fileExists(filePath))
         ? await fs.readJson(filePath)

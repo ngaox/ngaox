@@ -13,6 +13,7 @@ import { BrowserBuilderOptions } from '@angular-devkit/build-angular';
 import { IBuilderOptions } from '../builders/models/builder';
 import { CONTENT_DIR } from '../../press/constants';
 import { cleanPath } from './generators-options';
+import { ICONS_DIR } from '../builders/plugins/svg-icons';
 
 export function extractBrowserOptions(
   options: IBuilderOptions
@@ -32,6 +33,13 @@ export function getOutputtedAssets(options: IBuilderOptions) {
       glob: '**/*',
       input: path.join(options.outputPath, CONTENT_DIR),
       output: CONTENT_DIR
+    });
+  }
+  if (options.icons) {
+    assets.push({
+      glob: '**/*',
+      input: path.join(options.outputPath, ICONS_DIR),
+      output: ICONS_DIR
     });
   }
   return assets;

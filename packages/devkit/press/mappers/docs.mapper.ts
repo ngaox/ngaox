@@ -1,5 +1,5 @@
 import { IPressMapper } from '../../src/builders';
-import { unlinkFile, writeFile } from '../../src/utils';
+import { unlinkFile, writeJSON } from '../../src/utils';
 import { MAP_FILES } from '../constants';
 import { IDocsSection } from '../models/docs';
 import { IParsedContent } from '../models/generic';
@@ -33,7 +33,7 @@ export function getDocsMapper(sections: IDocsSection[]): IPressMapper {
         section.items.push(memory[filePath]);
       }
 
-      await writeFile(
+      await writeJSON(
         `${slug}.json`,
         {
           ...memory[filePath],
@@ -45,7 +45,7 @@ export function getDocsMapper(sections: IDocsSection[]): IPressMapper {
           logger: extra.context.logger
         }
       );
-      await writeFile(MAP_FILES.main, sections, {
+      await writeJSON(MAP_FILES.main, sections, {
         dir: extra.outputPath
       });
     },
@@ -67,7 +67,7 @@ export function getDocsMapper(sections: IDocsSection[]): IPressMapper {
         dir: extra.outputPath,
         logger: extra.context.logger
       });
-      await writeFile(MAP_FILES.main, memory, {
+      await writeJSON(MAP_FILES.main, memory, {
         dir: extra.outputPath
       });
     }

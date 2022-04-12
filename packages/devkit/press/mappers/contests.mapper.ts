@@ -5,7 +5,7 @@ import {
   omitKeys,
   titleCase,
   unlinkFile,
-  writeFile
+  writeJSON
 } from '../../src/utils';
 
 import * as path from 'path';
@@ -76,7 +76,7 @@ export function getContestsMapper(
         memory.contests[slug] = contest;
       }
 
-      await writeFile(`${slug}.json`, challenge, {
+      await writeJSON(`${slug}.json`, challenge, {
         dir: extra.outputPath,
         logger: extra.context.logger
       });
@@ -123,10 +123,10 @@ async function writeMaps(outputPath) {
       acc[author] = (acc[author] ?? 0) + points;
       return acc;
     }, {});
-  await writeFile(MAP_FILES.main, outContentMap, {
+  await writeJSON(MAP_FILES.main, outContentMap, {
     dir: outputPath
   });
-  await writeFile(MAP_FILES.leaderboard, leaderboard, {
+  await writeJSON(MAP_FILES.leaderboard, leaderboard, {
     dir: outputPath
   });
 }

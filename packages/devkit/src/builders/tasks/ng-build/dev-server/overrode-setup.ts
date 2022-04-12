@@ -39,14 +39,14 @@ import {
   I18nOptions,
   loadTranslations
 } from '@angular-devkit/build-angular/src/utils/i18n-options';
-import { IBuilderOptions } from '../../../models/builder';
+import { IBuilderOptions, IWebpackTransforms } from '../../../models/builder';
 import { extractBrowserOptions, getOutputtedAssets } from '../../../../utils';
 
 export async function overrodeSetup(
   options: DevServerBuilderOptions,
   context: BuilderContext,
   builderOptions: IBuilderOptions,
-  transforms: any = {}
+  transforms: IWebpackTransforms = {}
 ) {
   const projectName = context.target?.project;
   const { logger, workspaceRoot } = context;

@@ -6,7 +6,7 @@ import {
 import { IBuilderOptions } from './models/builder';
 
 import { getBuilderOptions } from '../utils';
-import { first, forkJoin, lastValueFrom } from 'rxjs';
+import { first, forkJoin, lastValueFrom, switchMap } from 'rxjs';
 import * as fs from 'fs-extra';
 import { getNgaoxTasks } from './tasks';
 import { NgBuildTask } from './tasks/ng-build';
@@ -22,9 +22,7 @@ export async function ngaoxBuild(
   if (!projectName) {
     throw new Error('The builder requires a target.');
   }
-
   const options: IBuilderOptions = await getBuilderOptions(context, opts);
-  const transforms = getNgBuildTransforms(options);
 
   await fs.ensureDir(options.outputPath);
   await fs.emptyDir(options.outputPath);
@@ -32,7 +30,10 @@ export async function ngaoxBuild(
   return (await lastValueFrom(
     forkJoin([
       ...getNgaoxTasks(options, context).map(ob$ => ob$.pipe(first())),
-      NgBuildTask(options, context, transforms)
+      getNgBuildTransforms(options, context).pipe(
+        first(),
+        switchMap(transforms => NgBuildTask(options, context, transforms))
+      )
     ]).pipe(first())
   )) as BuilderOutput;
 }
