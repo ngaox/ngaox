@@ -5,11 +5,11 @@ import {
   IPageSeoData,
   ISeoImage,
   ISeoTwitter,
-  SeoDefaultsToken,
+  SeoDefaultsToken
 } from './shared/modals';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class SeoService {
   constructor(
@@ -20,7 +20,7 @@ export class SeoService {
   ) {}
 
   public generateTags(definitions: MetaDefinition[]): void {
-    definitions.forEach((meta) => {
+    definitions.forEach(meta => {
       this.meta.updateTag(meta);
     });
   }
@@ -28,7 +28,7 @@ export class SeoService {
   public set(seoData: IPageSeoData) {
     seoData = {
       ...this.defaults,
-      ...seoData,
+      ...seoData
     };
     if (seoData.title) this.setTitle(seoData.title);
     if (seoData.keywords) this.setKeywords(seoData.keywords);
@@ -39,8 +39,7 @@ export class SeoService {
     if (seoData.twitter) this.setTwitter(seoData.twitter);
     if (seoData.fbAppId) this.setFbAppId(seoData.fbAppId);
     if (seoData.siteName) this.setSiteName(seoData.siteName);
-    if (seoData.extra?.['theme-color'])
-      this.setThemeColor(seoData.extra['theme-color']);
+    if (seoData.extra) this.generateTags(seoData.extra);
   }
 
   public setTitle(title: string): void {
@@ -48,12 +47,8 @@ export class SeoService {
     this.generateTags([
       { property: 'og:title', content: title },
       { name: 'twitter:title', content: title },
-      { name: 'title', content: title },
+      { name: 'title', content: title }
     ]);
-  }
-
-  public setThemeColor(color: string): void {
-    this.generateTags([{ name: 'theme-color', content: color }]);
   }
 
   public setKeywords(keywords: string): void {
@@ -64,7 +59,7 @@ export class SeoService {
     this.generateTags([
       { name: 'description', content: description },
       { property: 'og:description', content: description },
-      { name: 'twitter:description', content: description },
+      { name: 'twitter:description', content: description }
     ]);
   }
 
@@ -92,38 +87,38 @@ export class SeoService {
       this.generateTags([
         { property: 'og:image', content: image },
         { name: 'twitter:image', content: image },
-        { property: 'image', content: image },
+        { property: 'image', content: image }
       ]);
     } else {
       this.generateTags([
         { property: 'og:image', content: image.url },
         { name: 'twitter:image', content: image.url },
-        { property: 'image', content: image.url },
+        { property: 'image', content: image.url }
       ]);
       if (image.url.startsWith('https')) {
         this.generateTags([
-          { property: 'og:image:secure_url', content: image.url },
+          { property: 'og:image:secure_url', content: image.url }
         ]);
       }
       if (image.alt) {
         this.generateTags([
           { property: 'twitter:image:alt', content: image.alt },
-          { property: 'og:image:alt', content: image.alt },
+          { property: 'og:image:alt', content: image.alt }
         ]);
       }
       if (image.height) {
         this.generateTags([
-          { property: 'og:image:height', content: image.height.toString() },
+          { property: 'og:image:height', content: image.height.toString() }
         ]);
       }
       if (image.width) {
         this.generateTags([
-          { property: 'og:image:width', content: image.width.toString() },
+          { property: 'og:image:width', content: image.width.toString() }
         ]);
       }
       if (image.width) {
         this.generateTags([
-          { property: 'og:image:type', content: `${image.mimeType}` },
+          { property: 'og:image:type', content: `${image.mimeType}` }
         ]);
       }
     }
@@ -135,7 +130,7 @@ export class SeoService {
     }
     if (twitterData.creator) {
       this.generateTags([
-        { name: 'twitter:creator', content: twitterData.creator },
+        { name: 'twitter:creator', content: twitterData.creator }
       ]);
     }
     if (twitterData.card) {
