@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IPageSeoData, ISeoImage, ISeoTwitter } from './shared/modals';
 import { SeoService } from './seo.service';
+import { MetaDefinition } from '@angular/platform-browser';
+
 @Component({
   selector: 'ngaox-seo',
   template: ``,
@@ -59,5 +61,11 @@ export class SeoComponent implements OnInit {
   set siteName(value: string) {
     this.seoData.siteName = value;
     this.seoService.setSiteName(value);
+  }
+
+  @Input()
+  set extra(value: MetaDefinition[]) {
+    this.seoData.extra = value;
+    this.seoService.generateTags(value);
   }
 }
