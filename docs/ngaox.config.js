@@ -7,9 +7,13 @@ module.exports = {
   press: {
     dir: 'docs/content',
     content: '**/*.md',
-    mapper: require('@ngaox/devkit').getDocsPressMapper(
+    mapper: require('@ngaox/devkit').getDocsMapper(
       require('./docs.sections.js')
     )
+  },
+  icons: {
+    dir: 'docs/app/src/assets',
+    namespace: 'app'
   },
   ngBuild: {
     inlineStyleLanguage: 'scss',
