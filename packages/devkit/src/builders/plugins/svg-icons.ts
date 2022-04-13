@@ -1,13 +1,14 @@
 import { BuilderContext } from '@angular-devkit/architect';
-import { ISvgIconsOptions } from '../models/icons';
-import { cleanPath, getCleanRelative, writeFile } from '../../utils';
+import { ISvgIconsOptions } from '../../models/builders/icons';
+import { writeFile } from '../../utils/filesystem';
+import { cleanPath, getCleanRelative } from '../../utils/generators-options';
 import { fromEvent, map } from 'rxjs';
 
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as chokidar from 'chokidar';
 import { optimize } from 'svgo';
-import { INgaoxIcon } from '../../index.icons';
+import { INgaoxIcon } from '../../models/builders/icons';
 
 export const ICONS_DIR = '~icons';
 

@@ -10,8 +10,11 @@ import * as webpackDevServer from 'webpack-dev-server';
 import { tags } from '@angular-devkit/core';
 import { from, Observable, concatMap, switchMap } from 'rxjs';
 import { overrodeSetup } from './overrode-setup';
-import { IBuilderOptions, IWebpackTransforms } from '../../../models/builder';
-import { v6ToV7Observable } from '../../../../utils';
+import {
+  IBuilderOptions,
+  IWebpackTransforms
+} from '../../../../models/builders/builder';
+import { v6ToV7Observable } from '../../../../utils/observable-polyfills';
 
 export function executeDevServerBuilder(
   options: DevServerBuilderOptions,

@@ -15,7 +15,11 @@ import { version as NgaoxCurrentVersion } from '../../../package.json';
 import { strings, normalize } from '@angular-devkit/core';
 
 import { SetupSchema } from './schema';
-import { addImportToNgModule, getModuleInfo, getProject } from '../../utils';
+import {
+  addImportToNgModule,
+  getModuleInfo,
+  getProject
+} from '../../utils/generators-options';
 
 export default function (options: SetupSchema): Rule {
   return async (tree: Tree, context: SchematicContext) => {

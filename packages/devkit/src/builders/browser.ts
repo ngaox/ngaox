@@ -3,10 +3,10 @@ import {
   BuilderOutput,
   createBuilder
 } from '@angular-devkit/architect';
-import { IBuilderOptions } from './models/builder';
+import { IBuilderOptions } from '../models/builders/builder';
 
-import { getBuilderOptions } from '../utils';
-import { first, forkJoin, lastValueFrom, switchMap } from 'rxjs';
+import { getBuilderOptions } from '../utils/builder-options';
+import { first, firstValueFrom, forkJoin, switchMap } from 'rxjs';
 import * as fs from 'fs-extra';
 import { getNgaoxTasks } from './tasks';
 import { NgBuildTask } from './tasks/ng-build';
@@ -27,13 +27,16 @@ export async function ngaoxBuild(
   await fs.ensureDir(options.outputPath);
   await fs.emptyDir(options.outputPath);
 
-  return (await lastValueFrom(
-    forkJoin([
-      ...getNgaoxTasks(options, context).map(ob$ => ob$.pipe(first())),
-      getNgBuildTransforms(options, context).pipe(
-        first(),
-        switchMap(transforms => NgBuildTask(options, context, transforms))
+  await firstValueFrom(
+    forkJoin(getNgaoxTasks(options, context).map(ob$ => ob$.pipe(first())))
+  );
+
+  return (await firstValueFrom(
+    getNgBuildTransforms(options, context).pipe(
+      first(),
+      switchMap(transforms =>
+        NgBuildTask(options, context, transforms).pipe(first())
       )
-    ]).pipe(first())
+    )
   )) as BuilderOutput;
 }

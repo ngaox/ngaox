@@ -1,2 +1,2 @@
-export * from './models/builder';
-export * from './models/press';
+export * from '../models/builders/builder';
+export * from '../models/builders/press';

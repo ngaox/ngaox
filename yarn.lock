@@ -1788,23 +1788,9 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@ngaox/devkit@^3.6.0":
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/@ngaox/devkit/-/devkit-3.6.0.tgz#b64f87809225649d9b5bd7e05dade48dd7bd8308"
-  integrity sha512-k3iLCHJIiSt3xzlj48VBUJjUpO3DGSYei/CatT1wL7CzGWnakkI5keaKTPDUGB+zAO31uXJk6ktrPSFJ28+pZQ==
-  dependencies:
-    "@angular-devkit/build-angular" "^13.0.0"
-    "@angular-devkit/schematics" "^13.0.0"
-    chokidar "^3.5.3"
-    deepmerge "^4.2.2"
-    dotenv "^16.0.0"
-    dotenv-expand "^8.0.2"
-    fs-extra "^10.0.0"
-    gray-matter "^4.0.3"
-    jsdom "^19.0.0"
-    marked "^4.0.12"
-    prismjs "^1.25.0"
-    rxjs "^7.5.4"
+"@ngaox/devkit@link:./dist/packages/devkit":
+  version "0.0.0"
+  uid ""
 
 "@ngtools/webpack@13.3.2":
   version "13.3.2"

@@ -10,11 +10,11 @@ import { marked } from 'marked';
 import { JSDOM } from 'jsdom';
 
 import * as Prism from 'prismjs';
-import { getCleanRelative } from '../../utils';
-import { IPressMapper, IPressOptions } from '../models/press';
-import { IParsedContent, ITocLink } from '../../../press/models/generic';
-import { getGenericMapper } from '../../../press/mappers/generic.mapper';
-import { CONTENT_DIR } from '../../../press/constants';
+import { getCleanRelative } from '../../utils/generators-options';
+import { IPressMapper, IPressOptions } from '../../models/builders/press';
+import { IParsedContent, ITocLink } from '../../models/mappers/generic';
+import { getGenericMapper } from '../../mappers/generic.mapper';
+import { CONTENT_DIR } from '../../models/constants';
 
 export function MdContentTask(
   opts: IPressOptions,

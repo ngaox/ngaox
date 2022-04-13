@@ -7,7 +7,8 @@ import {
 } from '@angular/core';
 import { IconComponent } from './icon.component';
 import { IconsService } from './icons.service';
-import { INgaoxIcon, NGAOX_FALLBACK } from './models';
+import { NGAOX_FALLBACK } from './models';
+import { INgaoxIcon } from '@ngaox/devkit/common/icons';
 
 const NgaoxGlobalIcons: InjectionToken<INgaoxIcon[]> = new InjectionToken(
   'NgaoxGlobalIcons'

@@ -1,5 +1,5 @@
 import { BuilderContext } from '@angular-devkit/architect';
-import { IParsedContent } from '../../../press/models/generic';
+import { IParsedContent } from '../../models/mappers/generic';
 
 export interface IPressOptions {
   dir: string;

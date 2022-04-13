@@ -1,8 +1,8 @@
 import { IPressMapper } from '../../src/builders';
-import { unlinkFile, writeJSON } from '../../src/utils';
-import { MAP_FILES } from '../constants';
-import { IDocsSection } from '../models/docs';
-import { IParsedContent } from '../models/generic';
+import { unlinkFile, writeJSON } from '../../src/utils/filesystem';
+import { MAP_FILES } from '../models/constants';
+import { IDocsSection } from '../models/mappers/docs';
+import { IParsedContent } from '../models/mappers/generic';
 
 const memory = {};
 

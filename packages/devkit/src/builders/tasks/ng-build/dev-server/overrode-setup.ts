@@ -39,8 +39,14 @@ import {
   I18nOptions,
   loadTranslations
 } from '@angular-devkit/build-angular/src/utils/i18n-options';
-import { IBuilderOptions, IWebpackTransforms } from '../../../models/builder';
-import { extractBrowserOptions, getOutputtedAssets } from '../../../../utils';
+import {
+  IBuilderOptions,
+  IWebpackTransforms
+} from '../../../../models/builders/builder';
+import {
+  extractBrowserOptions,
+  getOutputtedAssets
+} from '../../../../utils/builder-options';
 
 export async function overrodeSetup(
   options: DevServerBuilderOptions,

@@ -1,10 +1,11 @@
-import { cleanPath, dirExists, fileExists } from '../../src/utils';
+import { dirExists, fileExists } from '../filesystem';
 
 import * as path from 'path';
 import * as fs from 'fs-extra';
 
-import { omitKeys } from '../../src/utils';
-import { IMetaData } from '../index.client';
+import { omitKeys } from '../omit-keys';
+import { cleanPath } from '../generators-options';
+import { IMetaData } from '../../models/mappers/generic';
 
 export const getChallengeSubmissions = async (
   slug: string,

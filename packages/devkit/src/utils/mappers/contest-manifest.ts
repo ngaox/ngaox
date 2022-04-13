@@ -1,8 +1,8 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
 
-import { fileExists } from '../../src/utils';
-import { PERIODIC_MANIFEST } from '../constants';
+import { fileExists } from '../filesystem';
+import { PERIODIC_MANIFEST } from '../../models/constants';
 
 export async function getContestManifest(dir: string, filePath: string) {
   const periodicManifestPath = path.join(

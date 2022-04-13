@@ -7,11 +7,14 @@ import { DevServerBuilderOptions } from '@angular-devkit/build-angular';
 import { DevServerBuilderOutput } from '@angular-devkit/build-angular';
 import { from, Observable, switchMap, merge, mergeMap, map } from 'rxjs';
 import * as fs from 'fs-extra';
-import { getBuilderOptions } from '../utils';
+import { getBuilderOptions } from '../utils/builder-options';
 import { getNgaoxTasks } from './tasks';
 import { NgDevServerTask } from './tasks/ng-build';
 import { getNgBuildTransforms } from './plugins';
-import { IBuilderOptions, IWebpackTransforms } from './models/builder';
+import {
+  IBuilderOptions,
+  IWebpackTransforms
+} from '../models/builders/builder';
 
 export default createBuilder<DevServerBuilderOptions, DevServerBuilderOutput>(
   ngaoxDevServer

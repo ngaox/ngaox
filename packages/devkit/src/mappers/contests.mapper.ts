@@ -1,18 +1,19 @@
-import { IParsedContent } from '../models/generic';
-import { IPressMapper } from '../../src/builders';
-import {
-  cleanPath,
-  omitKeys,
-  titleCase,
-  unlinkFile,
-  writeJSON
-} from '../../src/utils';
-
+import { cleanPath } from '../utils/generators-options';
+import { unlinkFile, writeJSON } from '../utils/filesystem';
+import { titleCase } from '../utils/strings';
+import { omitKeys } from '../utils/omit-keys';
 import * as path from 'path';
-import { getContestManifest } from '../utils/contest-manifest';
-import { getChallengeSubmissions } from '../utils/submissions';
-import { MAP_FILES } from '../constants';
-import { IAnnouncement, IChallenge, IContest } from '../models/contests';
+
+import { IPressMapper } from '../builders';
+import { getContestManifest } from '../utils/mappers/contest-manifest';
+import { getChallengeSubmissions } from '../utils/mappers/submissions';
+import { MAP_FILES } from '../models/constants';
+import {
+  IAnnouncement,
+  IChallenge,
+  IContest
+} from '../models/mappers/contests';
+import { IParsedContent } from '../models/mappers/generic';
 
 const memory = {
   submissions: {},
