@@ -4,7 +4,6 @@ import { Routes, RouterModule, UrlSegment } from '@angular/router';
 import { DocsComponent } from './docs.component';
 import { IconsModule } from '@ngaox/icons';
 
-import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -17,6 +16,7 @@ import { ContentsMapResolver } from '@docs-core/resolvers/contents-map.resolver'
 
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ViewerComponent } from './viewer/viewer.component';
+import { TableOfContentsComponent } from './table-of-contents/table-of-contents.component';
 
 const routes: Routes = [
   {
@@ -48,13 +48,17 @@ const routes: Routes = [
 const MATERIAL_IMPORTS = [MatToolbarModule, MatButtonModule, MatSidenavModule];
 
 @NgModule({
-  declarations: [DocsComponent, ViewerComponent, SidenavComponent],
+  declarations: [
+    DocsComponent,
+    ViewerComponent,
+    SidenavComponent,
+    TableOfContentsComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     HttpClientModule,
     IconsModule,
-    LayoutModule,
     SharedModule,
     ...MATERIAL_IMPORTS
   ]

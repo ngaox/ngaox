@@ -12,7 +12,7 @@ module.exports = {
     )
   },
   icons: {
-    dir: 'docs/app/src/assets',
+    dir: 'docs/app/src/icons',
     namespace: 'app'
   },
   ngBuild: {

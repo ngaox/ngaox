@@ -1,9 +1,9 @@
 <div class="container" [class.full-width]="(showToc$ | async) === false">
   <ng-container *ngIf="docsItem$ | async as docsItem">
-    <div
+    <section
       class="docs-markdown mat-typography"
       [innerHTML]="safeHtml(docsItem.content)"
-    ></div>
+    ></section>
     <div class="right-panel">
       <docs-table-of-contents
         *ngIf="showToc$ | async"
