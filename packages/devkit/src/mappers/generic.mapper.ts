@@ -20,7 +20,7 @@ export function getGenericMapper(): IPressMapper {
     },
     remove: async (filePath: string, extra) => {
       delete memory[filePath];
-      filePath = filePath.replace(/\..+$/, '.json');
+      filePath = filePath.replace(/\.[^/.]+$/, '.json');
       await unlinkFile(filePath, {
         dir: extra.outputPath,
         logger: extra.context.logger

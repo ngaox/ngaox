@@ -79,7 +79,7 @@ function getSlug(section?: IDocsSection, slug?: string, filePath?: string) {
     slug ??
     filePath
       .replace(new RegExp(`^(${section?.directory ?? ''}/)`), '')
-      .replace(/\..+$/, '') ??
+      .replace(/\.[^/.]+$/, '') ??
     ''
   }`;
 }
