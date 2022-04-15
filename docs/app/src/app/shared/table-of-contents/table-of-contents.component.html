@@ -1,14 +1,22 @@
 <h4 class="section-title">On this page</h4>
 <nav>
-  <a
-    class="nav-link"
-    [class.subheading]="link.level === 'h3'"
-    routerLink="."
-    [fragment]="link.id"
-    [class.active]="link.id === activeId"
-    (click)="navigateToSection(link.id)"
-    *ngFor="let link of toc"
-  >
-    {{ link.title }}
-  </a>
+  <ul>
+    <li
+      class="nav-link"
+      [class.active]="link.id === activeId"
+      *ngFor="let link of toc"
+    >
+      <ngaox-icon
+        name="app:chevron:right"
+        *ngIf="link.level === 'h3'"
+      ></ngaox-icon>
+      <a
+        routerLink="."
+        [fragment]="link.id"
+        (click)="navigateToSection(link.id)"
+      >
+        {{ link.title }}
+      </a>
+    </li>
+  </ul>
 </nav>

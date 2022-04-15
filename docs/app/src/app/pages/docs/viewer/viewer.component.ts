@@ -30,7 +30,12 @@ export class ViewerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.docsItem$ = this.route.data.pipe(map(data => data['docsItem']));
+    this.docsItem$ = this.route.data.pipe(
+      map(data => {
+        document.querySelector('.viewer-scroll-container')?.scrollTo(0, 0);
+        return data['docsItem'];
+      })
+    );
   }
   safeHtml(html?: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html ?? '');

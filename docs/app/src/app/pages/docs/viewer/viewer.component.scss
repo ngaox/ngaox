@@ -3,18 +3,21 @@
 }
 .container {
   display: grid;
-  grid-template-columns: 4fr 1fr;
-  gap: 2.5rem;
+  grid-template-columns: 6fr minmax(25rem, 1fr);
+  gap: 3rem;
   width: 100%;
   &.full-width {
     grid-template-columns: 1fr;
   }
 }
+
 .docs-markdown {
   min-width: 0;
   max-width: 100%;
-  padding: 3rem;
-  box-shadow: var(--card-box-shadow);
-  background: #fff;
-  border-radius: 0.4rem;
+}
+
+.right-panel {
+  position: sticky;
+  height: fit-content;
+  top: 8rem;
 }

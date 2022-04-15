@@ -1,12 +1,11 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   Inject,
   Input,
   NgZone,
   OnDestroy,
-  OnInit
+  AfterViewInit
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
@@ -18,13 +17,21 @@ import { debounceTime, fromEvent, Subscription } from 'rxjs';
   templateUrl: './table-of-contents.component.html',
   styleUrls: ['./table-of-contents.component.scss']
 })
-export class TableOfContentsComponent
-  implements OnInit, OnDestroy, AfterViewInit
-{
-  @Input() toc: ITocLink[] = [];
+export class TableOfContentsComponent implements OnDestroy, AfterViewInit {
+  _toc: ITocLink[] = [];
   @Input() container!: string;
 
   activeId?: string;
+
+  get toc(): ITocLink[] {
+    return this._toc;
+  }
+
+  @Input()
+  set toc(toc: ITocLink[]) {
+    this._toc = toc;
+    this.calculateOffsets(true);
+  }
 
   private _linksOffsets: { [key: string]: number } = {};
   private _scrollContainer?: HTMLElement | Window;
@@ -35,7 +42,9 @@ export class TableOfContentsComponent
     private _changeDetectorRef: ChangeDetectorRef,
     @Inject(DOCUMENT) private _document: Document,
     private _ngZone: NgZone
-  ) {
+  ) {}
+
+  ngAfterViewInit() {
     this.subscriptions.add(
       this._route.fragment.subscribe(fragment => {
         if (fragment != null) {
@@ -44,32 +53,10 @@ export class TableOfContentsComponent
         }
       })
     );
-  }
-  navigateToSection(linkId: string) {
-    const container = this._scrollContainer;
-    if (container) {
-      const scrollTop =
-        this._linksOffsets[linkId] - this.activeHeaderOffset(container) + 10;
-      container.scrollTo({
-        top: scrollTop,
-        behavior: 'smooth'
-      });
-    }
-  }
-  ngOnInit(): void {
     // On init, the sidenav content element doesn't yet exist, so it's not possible
     // to subscribe to its scroll event until next tick (when it does exist).
     this._ngZone.runOutsideAngular(() => {
       Promise.resolve().then(() => {
-        this._linksOffsets = this.toc
-          .map(item => ({
-            id: item.id,
-            top: (
-              document.querySelector(`#${item.id}`) as HTMLElement
-            ).getBoundingClientRect().top
-          }))
-          .reduce((acc, curr) => ({ ...acc, [curr.id]: curr.top }), {});
-
         this._scrollContainer = this._document.querySelector(
           this.container
         ) as HTMLElement;
@@ -84,7 +71,46 @@ export class TableOfContentsComponent
       });
     });
   }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  calculateOffsets(force = false) {
+    if (this.toc.length < 0) {
+      this._linksOffsets = {};
+      return;
+    }
+    const itemId = this.toc[this.toc.length - 1].id;
+    const currentTop = (
+      document.querySelector(`#${itemId}`) as HTMLElement
+    ).getBoundingClientRect().top;
+    if (currentTop !== this._linksOffsets[itemId] || force) {
+      this._linksOffsets = this.toc
+        .map(item => ({
+          id: item.id,
+          top: (
+            document.querySelector(`#${item.id}`) as HTMLElement
+          ).getBoundingClientRect().top
+        }))
+        .reduce((acc, curr) => ({ ...acc, [curr.id]: curr.top }), {});
+    }
+  }
+
+  navigateToSection(linkId: string) {
+    const container = this._scrollContainer;
+    if (container) {
+      const scrollTop =
+        this._linksOffsets[linkId] - this.activeHeaderOffset(container) + 10;
+      container.scrollTo({
+        top: scrollTop,
+        behavior: 'smooth'
+      });
+    }
+  }
+
   private onScroll(): void {
+    this.calculateOffsets();
     const container = this._scrollContainer as HTMLElement | Window;
     const scrollOffset =
       this.getScrollTop(container) + this.activeHeaderOffset(container);
@@ -120,24 +146,15 @@ export class TableOfContentsComponent
     }
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
-  }
-
-  ngAfterViewInit() {
-    if (this.activeId) {
-      this.navigateToSection(this.activeId);
-    }
-  }
-
   private getScrollTop(container: HTMLElement | Window): number {
     return container instanceof HTMLElement
       ? container.scrollTop
       : container.scrollY;
   }
+
   private activeHeaderOffset(container: HTMLElement | Window): number {
     return container instanceof HTMLElement
-      ? container.clientHeight * 0.55 + container.getBoundingClientRect().top
-      : container.innerHeight * 0.55;
+      ? 100 + container.getBoundingClientRect().top
+      : 100;
   }
 }

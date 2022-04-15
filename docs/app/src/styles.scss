@@ -38,16 +38,24 @@ svg {
 }
 .nav-link {
   display: block;
-  padding: 0.5rem 0;
   font-size: 1.5rem;
   font-weight: 400;
-  text-decoration: none;
-  color: var(--text-color-mute);
-  &:hover {
+  > a {
+    display: block;
+    text-decoration: none;
+    padding: 0.5rem 0;
+    cursor: pointer;
+  }
+  &,
+  > a {
+    color: var(--text-color-mute);
+  }
+  &:hover,
+  &:hover > a {
     color: var(--text-color);
   }
   &.active,
-  .active & {
+  &.active > a {
     color: var(--brand-color);
   }
 }

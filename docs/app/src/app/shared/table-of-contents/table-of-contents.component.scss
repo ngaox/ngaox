@@ -1,14 +1,14 @@
-:host {
-  display: block;
-  position: sticky;
-  top: 9rem;
-  height: fit-content;
-}
-nav {
-  padding: 0;
-  padding-left: 1rem;
-  border-left: 0.4rem solid var(--primary-color);
-}
-.subheading {
-  padding-left: 1.5rem;
+nav ul {
+  box-shadow: var(--card-box-shadow);
+  background: #fff;
+  border-radius: 0.4rem;
+  padding: 2rem;
+  li {
+    display: flex;
+    gap: 1rem;
+    ngaox-icon {
+      margin-left: 1rem;
+      width: 0.5rem;
+    }
+  }
 }

@@ -16,7 +16,6 @@ import { DocsItemResolver } from '@docs-core/resolvers/docs-item.resolver';
 import { ContentsMapResolver } from '@docs-core/resolvers/contents-map.resolver';
 
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { CategoriesComponent } from './categories/categories.component';
 import { ViewerComponent } from './viewer/viewer.component';
 
 const routes: Routes = [
@@ -27,7 +26,7 @@ const routes: Routes = [
       contentsMap: ContentsMapResolver
     },
     children: [
-      { path: '', component: CategoriesComponent },
+      { path: '', redirectTo: 'start', pathMatch: 'full' },
       {
         matcher: url => {
           return {
@@ -49,12 +48,7 @@ const routes: Routes = [
 const MATERIAL_IMPORTS = [MatToolbarModule, MatButtonModule, MatSidenavModule];
 
 @NgModule({
-  declarations: [
-    DocsComponent,
-    ViewerComponent,
-    CategoriesComponent,
-    SidenavComponent
-  ],
+  declarations: [DocsComponent, ViewerComponent, SidenavComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

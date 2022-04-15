@@ -4,14 +4,13 @@ import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 
 import { FooterComponent } from './footer/footer.component';
-import { CategoryCardComponent } from './category-card/category-card.component';
 import { SupportComponent } from './support/support.component';
 import { FeaturePromoCardComponent } from './feature-promo-card/feature-promo-card.component';
 import { TableOfContentsComponent } from './table-of-contents/table-of-contents.component';
+import { IconsModule } from '@ngaox/icons';
 
 const EXPORTS = [
   FooterComponent,
-  CategoryCardComponent,
   SupportComponent,
   FeaturePromoCardComponent,
   TableOfContentsComponent
@@ -19,7 +18,7 @@ const EXPORTS = [
 
 @NgModule({
   declarations: [...EXPORTS],
-  imports: [CommonModule, MatCardModule, RouterModule],
+  imports: [CommonModule, MatCardModule, RouterModule, IconsModule],
   exports: [...EXPORTS]
 })
 export class SharedModule {}
