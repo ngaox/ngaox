@@ -2,27 +2,27 @@ import { BuilderContext } from '@angular-devkit/architect';
 import { ISvgIconsOptions } from '../../models/builders/icons';
 import { writeFile } from '../../utils/filesystem';
 import { cleanPath, getCleanRelative } from '../../utils/generators-options';
-import { fromEvent, map } from 'rxjs';
+import { BehaviorSubject, fromEvent, map, switchMap } from 'rxjs';
 
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as chokidar from 'chokidar';
 import { optimize } from 'svgo';
 import { INgaoxIcon } from '../../models/builders/icons';
-
-export const ICONS_DIR = '~icons';
+import { ICONS_DIR } from '../../models/constants';
 
 const memory: {
   [filePath: string]: INgaoxIcon;
 } = {};
 
-export function svgIconsPlugin(
+export function svgIconsTask(
   options: ISvgIconsOptions,
   context: BuilderContext,
   outputPath: string
 ) {
   const directory = path.join(context.workspaceRoot, options.dir);
   const watcher = chokidar.watch(path.join(directory, '**/*.svg'));
+  const iconsChanged$ = new BehaviorSubject(null);
 
   const compileSvgFile = async (filePath: string) => {
     filePath = getCleanRelative(filePath, directory);
@@ -49,6 +49,7 @@ export function svgIconsPlugin(
         lazy: true
       }
     };
+    iconsChanged$.next(null);
   };
 
   watcher
@@ -58,7 +59,11 @@ export function svgIconsPlugin(
       filePath = getCleanRelative(filePath, directory);
       const url = cleanPath(path.join(ICONS_DIR, filePath));
       delete memory[url];
+      iconsChanged$.next(null);
     });
 
-  return fromEvent(watcher, 'ready').pipe(map(() => Object.values(memory)));
+  return fromEvent(watcher, 'ready').pipe(
+    switchMap(() => iconsChanged$),
+    map(() => Object.values(memory))
+  );
 }

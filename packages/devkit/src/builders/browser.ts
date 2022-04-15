@@ -6,11 +6,11 @@ import {
 import { IBuilderOptions } from '../models/builders/builder';
 
 import { getBuilderOptions } from '../utils/builder-options';
-import { first, firstValueFrom, forkJoin, switchMap } from 'rxjs';
+import { first, firstValueFrom, forkJoin } from 'rxjs';
 import * as fs from 'fs-extra';
-import { getNgaoxTasks } from './tasks';
+import { getIconsTask, getNgaoxTasks } from './tasks';
 import { NgBuildTask } from './tasks/ng-build';
-import { getNgBuildTransforms } from './plugins';
+import { addWebpackPlugin, getNgBuildTransforms } from './plugins';
 
 export default createBuilder(ngaoxBuild);
 
@@ -19,9 +19,11 @@ export async function ngaoxBuild(
   context: BuilderContext
 ): Promise<BuilderOutput> {
   const projectName = context.target && context.target.project;
+
   if (!projectName) {
     throw new Error('The builder requires a target.');
   }
+
   const options: IBuilderOptions = await getBuilderOptions(context, opts);
 
   await fs.ensureDir(options.outputPath);
@@ -31,12 +33,14 @@ export async function ngaoxBuild(
     forkJoin(getNgaoxTasks(options, context).map(ob$ => ob$.pipe(first())))
   );
 
+  const plugin = await firstValueFrom(getIconsTask(options, context));
+
+  const transforms = addWebpackPlugin(
+    getNgBuildTransforms(options, context),
+    plugin
+  );
+
   return (await firstValueFrom(
-    getNgBuildTransforms(options, context).pipe(
-      first(),
-      switchMap(transforms =>
-        NgBuildTask(options, context, transforms).pipe(first())
-      )
-    )
+    NgBuildTask(options, context, transforms).pipe(first())
   )) as BuilderOutput;
 }

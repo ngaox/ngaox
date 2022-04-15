@@ -11,9 +11,8 @@ import * as path from 'path';
 import { colors } from '@angular-devkit/build-angular/src/utils/color';
 import { BrowserBuilderOptions } from '@angular-devkit/build-angular';
 import { IBuilderOptions } from '../models/builders/builder';
-import { CONTENT_DIR } from '../models/constants';
+import { CONTENT_DIR, ICONS_DIR } from '../models/constants';
 import { cleanPath } from './generators-options';
-import { ICONS_DIR } from '../builders/plugins/svg-icons';
 
 export function extractBrowserOptions(
   options: IBuilderOptions
