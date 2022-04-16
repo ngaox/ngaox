@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { IDocsSection } from '@docs-core/models';
-import { SortItemsCallback } from '@docs-core/data';
 import { CONTENT_DIR, MAP_FILES } from '@ngaox/press';
 
 @Injectable({
@@ -36,4 +35,20 @@ export class ContentsMapResolver implements Resolve<IDocsSection[]> {
         )
       );
   }
+}
+
+interface ISortable {
+  name: string;
+  order?: number;
+}
+
+function SortItemsCallback(a: ISortable, b: ISortable) {
+  const orderSort =
+    a?.order === b?.order
+      ? undefined
+      : (a?.order ?? Infinity) < (b?.order ?? Infinity)
+      ? -1
+      : 1;
+  const nameSort = a.name.localeCompare(b.name);
+  return orderSort ?? (nameSort === 0 ? 0 : nameSort > 0 ? 1 : -1);
 }

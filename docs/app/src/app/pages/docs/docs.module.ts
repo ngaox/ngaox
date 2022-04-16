@@ -5,7 +5,6 @@ import { DocsComponent } from './docs.component';
 import { IconsModule } from '@ngaox/icons';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -17,6 +16,7 @@ import { ContentsMapResolver } from '@docs-core/resolvers/contents-map.resolver'
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ViewerComponent } from './viewer/viewer.component';
 import { TableOfContentsComponent } from './table-of-contents/table-of-contents.component';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [
   {

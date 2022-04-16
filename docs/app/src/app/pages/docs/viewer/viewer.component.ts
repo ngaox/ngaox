@@ -13,8 +13,8 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 })
 export class ViewerComponent implements OnInit {
   docsItem$?: Observable<IDocsItem>;
-  showToc$: Observable<boolean> = this.breakpointObserver
-    .observe('(max-width: 1200px)')
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe('(max-width: 1280px)')
     .pipe(
       map(result => {
         this.changeDetectorRef.detectChanges();
@@ -37,6 +37,7 @@ export class ViewerComponent implements OnInit {
       })
     );
   }
+
   safeHtml(html?: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html ?? '');
   }

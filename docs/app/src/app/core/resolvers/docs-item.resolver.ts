@@ -18,7 +18,7 @@ export class DocsItemResolver implements Resolve<IDocsItem> {
     const slug = route.paramMap.get('slug');
     return this.http.get<IDocsItem>(`/~content/${slug}.json`).pipe(
       map(docItem => {
-        this.headerService.setHeader(docItem.name);
+        this.headerService.setHeader(docItem.metadata['title'] ?? docItem.name);
         docItem.toc = docItem?.toc?.filter(
           i => i.level === 'h2' || i.level === 'h3'
         );

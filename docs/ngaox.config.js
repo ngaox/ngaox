@@ -1,4 +1,5 @@
 require('prismjs/components/prism-typescript');
+require('prismjs/components/prism-bash');
 
 /**
  * @type {import('@ngaox/devkit').IBuilderOptions}

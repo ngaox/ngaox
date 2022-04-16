@@ -1,4 +1,4 @@
-<div class="container" [class.full-width]="(showToc$ | async) === false">
+<div class="container" [class.full-width]="(isHandset$ | async) === false">
   <ng-container *ngIf="docsItem$ | async as docsItem">
     <section
       class="docs-markdown mat-typography"
@@ -6,7 +6,7 @@
     ></section>
     <div class="right-panel">
       <docs-table-of-contents
-        *ngIf="showToc$ | async"
+        *ngIf="isHandset$ | async"
         container=".viewer-scroll-container"
         [toc]="docsItem?.toc ?? []"
       ></docs-table-of-contents>

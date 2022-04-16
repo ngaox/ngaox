@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { PROJECT } from '@docs-core/data';
 import { INgaoxFeature } from '@docs-core/models';
+import PROJECT from '@docs-core/data/about-ngaox';
+import FEATURES from '@docs-core/data/project-features';
 
 @Component({
   selector: 'docs-home',
@@ -10,5 +11,5 @@ import { INgaoxFeature } from '@docs-core/models';
 export class HomeComponent {
   headline = PROJECT.headline;
   description = PROJECT.description;
-  features: INgaoxFeature[] = PROJECT.features;
+  features: INgaoxFeature[] = FEATURES;
 }

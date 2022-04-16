@@ -4,10 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
-import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
@@ -41,7 +39,6 @@ const routes: Routes = [
 const MATERIAL_IMPORTS = [
   MatToolbarModule,
   MatButtonModule,
-  MatSidenavModule,
   MatDividerModule,
   MatProgressBarModule
 ];
@@ -55,7 +52,6 @@ const MATERIAL_IMPORTS = [
     FeatureCardComponent
   ],
   imports: [
-    LayoutModule,
     SharedModule,
     BrowserModule,
     HttpClientModule,
