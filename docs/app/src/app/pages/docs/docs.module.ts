@@ -4,9 +4,7 @@ import { Routes, RouterModule, UrlSegment } from '@angular/router';
 import { DocsComponent } from './docs.component';
 import { IconsModule } from '@ngaox/icons';
 
-import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -16,8 +14,9 @@ import { DocsItemResolver } from '@docs-core/resolvers/docs-item.resolver';
 import { ContentsMapResolver } from '@docs-core/resolvers/contents-map.resolver';
 
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { CategoriesComponent } from './categories/categories.component';
 import { ViewerComponent } from './viewer/viewer.component';
+import { TableOfContentsComponent } from './table-of-contents/table-of-contents.component';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [
   {
@@ -27,7 +26,7 @@ const routes: Routes = [
       contentsMap: ContentsMapResolver
     },
     children: [
-      { path: '', component: CategoriesComponent },
+      { path: '', redirectTo: 'start', pathMatch: 'full' },
       {
         matcher: url => {
           return {
@@ -52,15 +51,14 @@ const MATERIAL_IMPORTS = [MatToolbarModule, MatButtonModule, MatSidenavModule];
   declarations: [
     DocsComponent,
     ViewerComponent,
-    CategoriesComponent,
-    SidenavComponent
+    SidenavComponent,
+    TableOfContentsComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     HttpClientModule,
     IconsModule,
-    LayoutModule,
     SharedModule,
     ...MATERIAL_IMPORTS
   ]

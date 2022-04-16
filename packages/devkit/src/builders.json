@@ -1,0 +1,15 @@
+{
+  "$schema": "../../../node_modules/@angular-devkit/architect/src/builders-schema.json",
+  "builders": {
+    "builder": {
+      "implementation": "./builders/browser",
+      "schema": "./builders/schemas/browser.json",
+      "description": "Build your Angular App with Ngaox Builder!"
+    },
+    "dev-server": {
+      "implementation": "./builders/dev-server",
+      "schema": "./builders/schemas/dev-server.json",
+      "description": "Dev server!"
+    }
+  }
+}

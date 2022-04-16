@@ -1,5 +1,5 @@
 {
-  "name": "ngaox",
+  "name": "@ngaox/src",
   "version": "3.6.0",
   "scripts": {
     "nx-all": "nx run-many --all --target",
@@ -9,7 +9,7 @@
     "lint": "nx lint",
     "test": "nx test",
     "watch": "nx build --watch --c development",
-    "prepare": "husky install tools/.husky",
+    "prepare": "husky install tools/.husky && yarn build devkit",
     "postinstall": "node ./tools/decorate-angular-cli.js && ngcc --properties es2015 browser module main"
   },
   "private": true,
@@ -36,6 +36,7 @@
     "marked": "^4.0.12",
     "prismjs": "^1.25.0",
     "rxjs": "^7.5.4",
+    "svgo": "^2.8.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
   },
@@ -48,7 +49,7 @@
     "@angular/language-service": "^13.0.0",
     "@commitlint/cli": "^16.0.1",
     "@commitlint/config-conventional": "^16.0.0",
-    "@ngaox/devkit": "^3.4.3",
+    "@ngaox/devkit": "link:./dist/packages/devkit",
     "@nrwl/angular": "13.8.3",
     "@nrwl/cli": "13.8.3",
     "@nrwl/eslint-plugin-nx": "13.8.3",
@@ -66,6 +67,7 @@
     "@types/marked": "^4.0.2",
     "@types/node": "14.14.33",
     "@types/prismjs": "^1.16.6",
+    "@types/svgo": "^2.6.3",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
     "eslint": "^8.10.0",

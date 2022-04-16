@@ -3,14 +3,22 @@
     {
       "target": "ngaox-docs",
       "public": "dist/docs",
-      "ignore": ["**/.*"],
       "headers": [
         {
-          "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
+          "source": "/*.@(js|css)",
           "headers": [
             {
               "key": "Cache-Control",
               "value": "public,max-age=31536000,immutable"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(jpg|jpeg|gif|png|webp|svg)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public,max-age=31536000"
             }
           ]
         },

@@ -1,18 +1,9 @@
 import { InjectionToken } from '@angular/core';
+import { ILazyIcon } from '@ngaox/devkit/common/icons';
 
 export const NGAOX_FALLBACK: InjectionToken<string> = new InjectionToken(
   'NgaoxFallbackIcon'
 );
-
-export interface ILazyIcon {
-  url: string;
-  lazy: true;
-}
-
-export interface INgaoxIcon {
-  name: string;
-  data: string | ILazyIcon;
-}
 
 export interface ICompactIcons {
   [name: string]: string | ILazyIcon;

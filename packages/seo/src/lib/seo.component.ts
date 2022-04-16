@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IPageSeoData, ISeoImage, ISeoTwitter } from './shared/modals';
+import { IPageSeoData, ISeoImage, ISeoTwitter } from './shared/models';
 import { SeoService } from './seo.service';
 import { MetaDefinition } from '@angular/platform-browser';
 

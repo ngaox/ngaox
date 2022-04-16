@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "setup",
+  "title": "Setup/Update Ngaox features in your project",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The targeted project name",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "module": {
+      "type": "string",
+      "description": "The module that will import the generated Modules",
+      "$default": {
+        "$source": "moduleName"
+      }
+    },
+    "features": {
+      "type": "string",
+      "description": "Ngaox features that you want to enable"
+    }
+  },
+  "required": []
+}

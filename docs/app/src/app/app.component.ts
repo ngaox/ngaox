@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import {
-  ResolveStart,
   Router,
   Event as RouterEvent,
-  ResolveEnd,
   NavigationStart,
-  NavigationEnd
+  NavigationEnd,
+  NavigationCancel,
+  NavigationError
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -37,11 +37,16 @@ import { filter, map } from 'rxjs/operators';
         position: relative;
       }
       .progress-bar-container {
-        position: absolute;
+        position: sticky;
         z-index: 9;
         top: 0;
         left: 0;
         width: 100%;
+        mat-progress-bar {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
       }
     `
   ]
@@ -50,18 +55,12 @@ export class AppComponent {
   showProgressBar$: Observable<boolean> = this.router.events.pipe(
     filter(
       (e: RouterEvent) =>
-        e instanceof ResolveStart ||
-        e instanceof ResolveEnd ||
         e instanceof NavigationStart ||
+        e instanceof NavigationCancel ||
+        e instanceof NavigationError ||
         e instanceof NavigationEnd
     ),
-    map(e => {
-      return (
-        e instanceof ResolveStart ||
-        e instanceof NavigationStart ||
-        !(e instanceof ResolveEnd || e instanceof NavigationEnd)
-      );
-    })
+    map(e => e instanceof NavigationStart)
   );
 
   constructor(private router: Router) {}

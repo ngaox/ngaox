@@ -4,21 +4,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
-import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
-import { IconsModule } from '@ngaox/icons';
+import { builtIconAdapter, IconsModule } from '@ngaox/icons';
 import { SeoModule } from '@ngaox/seo';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './pages/home/home.component';
 import { SharedModule } from './shared/shared.module';
-import { APP_ICONS } from './app.icons';
+import { NavbarComponent } from './navbar/navbar.component';
+
+import { HomeComponent } from './pages/home/home.component';
+import { SupportComponent } from './pages/home/support/support.component';
+import { FeatureCardComponent } from './pages/home/feature-card/feature-card.component';
+
+const icons = builtIconAdapter();
 
 const routes: Routes = [
   {
@@ -37,21 +39,25 @@ const routes: Routes = [
 const MATERIAL_IMPORTS = [
   MatToolbarModule,
   MatButtonModule,
-  MatSidenavModule,
   MatDividerModule,
   MatProgressBarModule
 ];
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    HomeComponent,
+    SupportComponent,
+    FeatureCardComponent
+  ],
   imports: [
+    SharedModule,
     BrowserModule,
-    RouterModule.forRoot(routes),
     HttpClientModule,
     BrowserAnimationsModule,
-    LayoutModule,
-    SharedModule,
-    IconsModule.forRoot(APP_ICONS),
+    IconsModule.forRoot(icons),
+    RouterModule.forRoot(routes),
     SeoModule.forRoot({
       title: 'Angular Ngaox',
       description: 'Angular development is easier than ever!'

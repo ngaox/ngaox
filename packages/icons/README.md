@@ -11,5 +11,5 @@
 ## Samples
 
 ```html
-<svg-icon name="my-icon" width="100px"></svg-icon>
+<ngaox-icon name="my-icon" width="100px"></ngaox-icon>
 ```

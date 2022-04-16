@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
 import { IDocsSection } from '@docs-core/models';
@@ -12,12 +12,6 @@ import { DocsHeaderService } from '@docs-core/docs-header.service';
   styleUrls: ['./docs.component.scss']
 })
 export class DocsComponent {
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
   pageHeader$ = this.headerService.getHeader().pipe(
     tap({
       next: () => this.changeDetector.detectChanges()
@@ -26,6 +20,12 @@ export class DocsComponent {
   sections$: Observable<IDocsSection[]> = this.route.data.pipe(
     map(data => data['contentsMap'])
   );
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe('(max-width: 1024px)')
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
 
   constructor(
     private headerService: DocsHeaderService,

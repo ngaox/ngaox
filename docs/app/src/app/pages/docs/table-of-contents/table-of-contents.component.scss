@@ -1,0 +1,14 @@
+nav ul {
+  box-shadow: var(--card-box-shadow);
+  background: #fff;
+  border-radius: 0.4rem;
+  padding: 2rem;
+  li {
+    display: flex;
+    gap: 1rem;
+    ngaox-icon {
+      margin-left: 1rem;
+      width: 0.5rem;
+    }
+  }
+}

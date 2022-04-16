@@ -1,5 +1,5 @@
 import { ActivatedRouteSnapshot } from '@angular/router';
-import { IPageSeoData, ISeoLoader } from '../shared/modals';
+import { IPageSeoData, ISeoLoader } from '../shared/models';
 
 export * from './route-data.loader';
 

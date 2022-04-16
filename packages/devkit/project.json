@@ -4,23 +4,6 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "npx -y typescript-json-schema@0.53.0 packages/devkit/tsconfig.lib.json IBuilderOptions > packages/devkit/builders/schema.json",
-          "yarn nx run devkit:build-ts"
-        ],
-        "parallel": false
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["packages/devkit/**/*.ts"]
-      }
-    },
-    "build-ts": {
       "executor": "@nrwl/node:package",
       "outputs": ["{options.outputPath}"],
       "options": {
@@ -31,21 +14,22 @@
         "assets": [
           "packages/devkit/*.md",
           {
-            "input": "packages/devkit/builders",
+            "input": "packages/devkit/src/",
             "glob": "**/*.json",
-            "output": "builders"
+            "output": "src"
           },
           {
-            "input": "packages/devkit/generators",
-            "glob": "*/files/**",
-            "output": "generators"
-          },
-          {
-            "input": "packages/devkit/generators",
-            "glob": "**/*.json",
-            "output": "generators"
+            "input": "packages/devkit/src/generator/files",
+            "glob": "**/*",
+            "output": "src/generator/files"
           }
         ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/devkit/src/**/*.ts"]
       }
     }
   },

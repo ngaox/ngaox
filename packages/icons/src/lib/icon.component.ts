@@ -3,15 +3,16 @@ import {
   HostBinding,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import { map, Observable, Subscription, throwError } from 'rxjs';
 import { IconsService } from './icons.service';
 
 @Component({
   selector: 'ngaox-icon',
-  template: `<ng-content></ng-content>`,
+  template: ``,
   styles: [
     `
       :host {
@@ -21,14 +22,19 @@ import { IconsService } from './icons.service';
     `
   ]
 })
-export class IconComponent implements OnInit, OnChanges {
+export class IconComponent implements OnInit, OnChanges, OnDestroy {
   @Input() name?: string;
   @Input() url?: string;
   @HostBinding('innerHTML') svgEl?: SafeHtml;
   @HostBinding('style.width') @Input() width?: string;
   @HostBinding('style.height') @Input() height?: string;
+  private _iconSubscription?: Subscription;
 
   constructor(private icons: IconsService, private sanitizer: DomSanitizer) {}
+
+  ngOnDestroy(): void {
+    this._iconSubscription?.unsubscribe();
+  }
 
   ngOnChanges() {
     this.ngOnInit();
@@ -47,21 +53,26 @@ export class IconComponent implements OnInit, OnChanges {
     } else {
       icon = this.icons.get(this.name);
     }
-    icon.subscribe({
-      next: svg => {
-        let outerHTML = svg?.outerHTML;
-        if (!outerHTML) {
-          console.error('incorrect svg content');
-          outerHTML = this.icons.getFallbackIcon();
+
+    this._iconSubscription = icon
+      .pipe(
+        map(svg => {
+          const outerHTML = svg?.outerHTML;
+          if (!outerHTML) {
+            throw throwError(() => null);
+          }
+          this.svgEl = this.sanitizer.bypassSecurityTrustHtml(outerHTML);
+        })
+      )
+      .subscribe({
+        error: () => {
+          this.svgEl = this.sanitizer.bypassSecurityTrustHtml(
+            this.icons.getFallbackIcon()
+          );
+          throw new Error(
+            `Icon '${this.name}' not found or has incorrect content.`
+          );
         }
-        this.svgEl = this.sanitizer.bypassSecurityTrustHtml(outerHTML);
-      },
-      error: err => {
-        this.svgEl = this.sanitizer.bypassSecurityTrustHtml(
-          this.icons.getFallbackIcon()
-        );
-        console.error(err);
-      }
-    });
+      });
   }
 }
