@@ -2,20 +2,19 @@
 name: Inline SVG Icons
 ---
 
-## Ngaox Icons (@ngaox/icons)
+Ngaox solution for icons is using inlining SVGs. either from source files (Recommended)
+or from CDN using their raw URLs or by bundling them with your application.
 
-The library provides a registry (`IconsService`) that loads, caches and adds SVG by a unique name,
-It also provides a component (`<ngaox-icon>`) for displaying (Inlining) a registered SVG using its name.
+Ngaox Icons (`@ngaox/icons`) provides a registry (`IconsService`) that loads, caches and adds SVG icons by a unique name,
+with a component (`<ngaox-icon>`) for displaying (Inlining) them by their unique name.
 
-## Installation
-
-To install this library run:
+## Installation & Setup
 
 ```bash
-ng add @ngaox/icons
+ng generate @ngaox/devkit:setup icons
 ```
 
-## Setup in your app
+## Getting Started
 
 Integrate `@ngaox/icons` with your app, just by import both the `HttpClientModule` & `IconsModule` in the root module (`AppModule`).
 as follows:
@@ -30,7 +29,7 @@ class AppModule {}
 you can pass `IconsModule.forRoot` three params:
 
 - `icons` an array of icons to be registered globally with a unique name
-- `fallbackHtml` a string represent the SVG element to fallback to when the icon not exist
+- `fallbackHtml` a string represent the content (usually SVG string) to fallback to when the icon not exist
 
 And for other child modules that need access to `<ngaox-icon>` you only will need to import `IconsModule`.
 
@@ -46,20 +45,24 @@ class MyNgModule {}
 To inject an public (accessible via browser) SVG file to a component template:
 
 ```html
-<svg-icon name="my-icon-name" url="assets/my-icon.svg" width="100px"></svg-icon>
+<ngaox-icon
+  name="my-icon-name"
+  url="assets/my-icon.svg"
+  width="100px"
+></ngaox-icon>
 ```
 
-_By default, the icon has no width set so It may not appear!_
+_By default, the icon has no width set so It may not appear if you didn't set it!_
 
 Or if the icon was previously registered with a name you can use it like:
 
 ```html
-<svg-icon name="my-icon" width="100px"></svg-icon>
+<ngaox-icon name="my-icon" width="100px"></ngaox-icon>
 ```
 
 ## Icons Registry
 
-All icons [specified in the module import](#setup-in-your-app) are registered and ready to use.
+All icons [specified in the module import](#manual-setup) are registered and ready to use.
 
 However you can use `IconsService` to add, remove and get icons from the registry, all you need to do is just to inject it wherever you need to:
 

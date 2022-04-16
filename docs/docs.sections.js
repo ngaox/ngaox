@@ -10,7 +10,7 @@ module.exports = [
   },
   {
     name: 'Devkit',
-    routesPrefix: 'dx/',
+    routesPrefix: 'devkit/',
     directory: 'devkit',
     order: 2
   },

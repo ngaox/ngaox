@@ -1,28 +1,14 @@
 ---
 name: SEO & Social Sharing
-title: Mange your Seo and Social-Media previews
+title: Manage your Seo and Social-Media previews
 ---
-
-## Ngaox Seo (@ngaox/seo)
 
 `@ngaox/seo` is an angular library to help generate & managing meta & other necessary tags that allow Social Media sharing & improve page SEO ranking.
 
-Full documentation: https://ngaox-lab.web.app/docs/seo
-
-Schematics for Ngaox Seo are available as part of [Ngaox Devkit](https://www.npmjs.com/package/@ngaox/devkit). Find out more in [the Ngaox Schematics docs page](https://ngaox-lab.web.app/docs/dx/schematics).
-
-## Installation
-
-To install this library run:
+## Installation & Setup
 
 ```bash
-npm install @ngaox/seo
-```
-
-or if you from the ngaox ecosystem 🤝:
-
-```bash
-ng g @ngaox/devkit:setup-seo
+ng g @ngaox/devkit:setup seo
 ```
 
 ## Getting started
@@ -168,4 +154,4 @@ constructor(seo: IPageSeoData) {
 
 ### How to handle specialized cases
 
-Checkout the docs for [How to create a custom SEO loader](https://ngaox-lab.web.app/docs/advanced/custom-seo-loader).
+Docs about How to create a custom SEO loader is Coming soon...
