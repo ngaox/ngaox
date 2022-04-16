@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "setup-seo",
-  "title": "Setup Ngaox-Seo in your project",
+  "$id": "setup",
+  "title": "Setup/Update Ngaox features in your project",
   "type": "object",
   "properties": {
     "project": {
@@ -13,10 +13,14 @@
     },
     "module": {
       "type": "string",
-      "description": "The module that will import the generated Seo-Module",
+      "description": "The module that will import the generated Modules",
       "$default": {
         "$source": "moduleName"
       }
+    },
+    "features": {
+      "type": "string",
+      "description": "Ngaox features that you want to enable"
     }
   },
   "required": []

@@ -3,12 +3,9 @@
   "schematics": {
     "ng-add": {
       "description": "Add Ngaox to the project.",
-      "factory": "./generators/ng-add/index#ngAdd"
-    },
-    "setup-seo": {
-      "description": "Setup Ngaox-Seo",
-      "factory": "./generators/setup-seo/index",
-      "schema": "./generators/setup-seo/schema.json"
+      "factory": "./generator/index",
+      "schema": "./generator/schema/schema.json",
+      "aliases": ["setup"]
     }
   }
 }

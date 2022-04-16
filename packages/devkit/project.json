@@ -35,9 +35,9 @@
             "output": "src"
           },
           {
-            "input": "packages/devkit/src/generators",
-            "glob": "*/files/**",
-            "output": "generators"
+            "input": "packages/devkit/src/generator/files",
+            "glob": "**/*",
+            "output": "src/generator/files"
           }
         ]
       }
