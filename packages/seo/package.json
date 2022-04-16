@@ -1,6 +1,6 @@
 {
   "name": "@ngaox/seo",
-  "version": "3.6.0",
+  "version": "4.0.0",
   "description": "Easily generate and manage SEO-friendly meta tags, page title,...",
   "ng-add": {
     "save": "dependencies"
