@@ -3,28 +3,25 @@ import {
   BuilderOutput,
   createBuilder
 } from '@angular-devkit/architect';
-import { IBuilderOptions } from '../models/builders/builder';
+import { IBrowserBuilderOptions } from '../models/builders/builder';
 
-import { getBuilderOptions } from '../utils/builder-options';
 import { first, firstValueFrom, forkJoin } from 'rxjs';
 import * as fs from 'fs-extra';
 import { getIconsTask, getNgaoxTasks } from './tasks';
 import { NgBuildTask } from './tasks/ng-build';
 import { addWebpackPlugin, getNgBuildTransforms } from './plugins';
+import { getOptions } from '../utils/builders/options';
 
 export default createBuilder(ngaoxBuild);
 
 export async function ngaoxBuild(
-  opts: IBuilderOptions,
+  ngBuildOptions: IBrowserBuilderOptions,
   context: BuilderContext
 ): Promise<BuilderOutput> {
-  const projectName = context.target && context.target.project;
-
-  if (!projectName) {
-    throw new Error('The builder requires a target.');
-  }
-
-  const options: IBuilderOptions = await getBuilderOptions(context, opts);
+  const { builder: options, browser: browserOptions } = await getOptions(
+    context,
+    ngBuildOptions
+  );
 
   await fs.ensureDir(options.outputPath);
   await fs.emptyDir(options.outputPath);
@@ -41,6 +38,6 @@ export async function ngaoxBuild(
   );
 
   return (await firstValueFrom(
-    NgBuildTask(options, context, transforms).pipe(first())
+    NgBuildTask(browserOptions, context, transforms).pipe(first())
   )) as BuilderOutput;
 }

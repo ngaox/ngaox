@@ -11,19 +11,19 @@ import { tags } from '@angular-devkit/core';
 import { from, Observable, concatMap, switchMap } from 'rxjs';
 import { overrodeSetup } from './overrode-setup';
 import {
-  IBuilderOptions,
+  IOptionsObject,
   IWebpackTransforms
 } from '../../../../models/builders/builder';
 import { v6ToV7Observable } from '../../../../utils/observable-polyfills';
 
 export function executeDevServerBuilder(
   options: DevServerBuilderOptions,
-  builderOptions: IBuilderOptions,
+  optionsObj: IOptionsObject,
   context: BuilderContext,
   transforms?: IWebpackTransforms
 ): Observable<unknown> {
   const logger = context.logger;
-  return from(overrodeSetup(options, context, builderOptions, transforms)).pipe(
+  return from(overrodeSetup(options, context, optionsObj, transforms)).pipe(
     switchMap(({ browserOptions, webpackConfig }) => {
       return v6ToV7Observable(
         runWebpackDevServer(webpackConfig, context, {

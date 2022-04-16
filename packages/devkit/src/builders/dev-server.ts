@@ -1,49 +1,39 @@
-import {
-  BuilderContext,
-  BuilderOutput,
-  createBuilder
-} from '@angular-devkit/architect';
+import { BuilderContext, createBuilder } from '@angular-devkit/architect';
 import { DevServerBuilderOptions } from '@angular-devkit/build-angular';
 import { DevServerBuilderOutput } from '@angular-devkit/build-angular';
 import { from, Observable, merge, map, switchMap } from 'rxjs';
 import * as fs from 'fs-extra';
-import { getBuilderOptions } from '../utils/builder-options';
 import { getIconsTask, getNgaoxTasks } from './tasks';
-import { NgDevServerTask } from './tasks/ng-build';
 import { addWebpackPlugin, getNgBuildTransforms } from './plugins';
-import {
-  IBuilderOptions,
-  IWebpackTransforms
-} from '../models/builders/builder';
+import { IOptionsObject, IWebpackTransforms } from '../models/builders/builder';
+import { NgDevServerTask } from './tasks/ng-build';
+import { getOptions } from '../utils/builders/options';
 
 export default createBuilder<DevServerBuilderOptions, DevServerBuilderOutput>(
   ngaoxDevServer
 );
 
 export function ngaoxDevServer(
-  options: DevServerBuilderOptions,
+  devServerOptions: DevServerBuilderOptions,
   context: BuilderContext
-): Observable<DevServerBuilderOutput | BuilderOutput> {
-  return from(getBuilderOptions(context, options.browserTarget)).pipe(
-    map(builderOptions => {
-      fs.ensureDirSync(builderOptions.outputPath);
-      fs.emptyDirSync(builderOptions.outputPath);
+): Observable<DevServerBuilderOutput> {
+  return from(getOptions(context, devServerOptions.browserTarget ?? '')).pipe(
+    map(options => {
+      fs.ensureDirSync(options.builder.outputPath);
+      fs.emptyDirSync(options.builder.outputPath);
 
-      const transforms = getNgBuildTransforms(builderOptions, context);
+      const transforms = getNgBuildTransforms(options.builder, context);
 
-      return [builderOptions, transforms] as [
-        IBuilderOptions,
-        IWebpackTransforms
-      ];
+      return [options, transforms] as [IOptionsObject, IWebpackTransforms];
     }),
-    switchMap(([builderOptions, transforms]) =>
+    switchMap(([options, transforms]) =>
       merge(
-        getNgaoxTasks(builderOptions, context),
-        getIconsTask(builderOptions, context).pipe(
+        getNgaoxTasks(options.builder, context),
+        getIconsTask(options.builder, context).pipe(
           switchMap(plugin => {
             return NgDevServerTask(
+              devServerOptions,
               options,
-              builderOptions,
               context,
               addWebpackPlugin(transforms, plugin)
             );

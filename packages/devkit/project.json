@@ -4,22 +4,6 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "npx -y typescript-json-schema@0.53.0 packages/devkit/tsconfig.lib.json IBuilderOptions > packages/devkit/src/builders/schemas/browser.json",
-          "yarn nx run devkit:build-ts"
-        ],
-        "parallel": false
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["packages/devkit/src/**/*.ts"]
-      }
-    },
-    "build-ts": {
       "executor": "@nrwl/node:package",
       "outputs": ["{options.outputPath}"],
       "options": {
@@ -40,6 +24,12 @@
             "output": "src/generator/files"
           }
         ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/devkit/src/**/*.ts"]
       }
     }
   },

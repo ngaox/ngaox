@@ -40,24 +40,22 @@ import {
   loadTranslations
 } from '@angular-devkit/build-angular/src/utils/i18n-options';
 import {
-  IBuilderOptions,
+  IOptionsObject,
   IWebpackTransforms
 } from '../../../../models/builders/builder';
-import {
-  extractBrowserOptions,
-  getOutputtedAssets
-} from '../../../../utils/builder-options';
+import { getOutputtedAssets } from '../../../../utils/builders/outputted-assets';
 
 export async function overrodeSetup(
   options: DevServerBuilderOptions,
   context: BuilderContext,
-  builderOptions: IBuilderOptions,
+  optionsObj: IOptionsObject,
   transforms: IWebpackTransforms = {}
 ) {
+  const builderOptions = optionsObj.builder;
   const projectName = context.target?.project;
   const { logger, workspaceRoot } = context;
 
-  const browserTarget = targetFromTargetString(options.browserTarget);
+  const browserTarget = optionsObj.browserTarget;
   if (!projectName) {
     throw new Error('The builder requires a target.');
   }
@@ -100,9 +98,7 @@ export async function overrodeSetup(
       `);
   }
   // Get the browser configuration from the target name.
-  const rawBrowserOptions = extractBrowserOptions(
-    builderOptions
-  ) as json.JsonObject & BrowserBuilderOptions;
+  const rawBrowserOptions = optionsObj.browser;
 
   if (
     rawBrowserOptions.outputHashing &&
@@ -124,7 +120,7 @@ export async function overrodeSetup(
     {
       ...rawBrowserOptions,
       assets: [
-        ...rawBrowserOptions.assets,
+        ...((rawBrowserOptions?.assets as any[]) ?? []),
         ...getOutputtedAssets(builderOptions)
       ],
       watch: options.watch,
