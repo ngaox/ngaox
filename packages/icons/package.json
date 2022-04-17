@@ -1,6 +1,6 @@
 {
   "name": "@ngaox/icons",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Inline SVG icons from (src | files | your favorite icons library | ...)!",
   "ng-add": {
     "save": "dependencies"

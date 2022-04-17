@@ -1,3 +1,12 @@
+## [4.0.1](https://github.com/ngaox/ngaox/compare/v4.0.0...v4.0.1) (2022-04-17)
+
+
+### Bug Fixes
+
+* **@ngaox/devkit:** ngBuild task should not delete other tasks output ([a036fd3](https://github.com/ngaox/ngaox/commit/a036fd3a79a3722c009679928d036291409a3b1b))
+
+
+
 # [4.0.0](https://github.com/ngaox/ngaox/compare/v3.6.0...v4.0.0) (2022-04-16)
 
 
