@@ -1,3 +1,13 @@
+## [4.0.3](https://github.com/ngaox/ngaox/compare/v4.0.2...v4.0.3) (2022-04-17)
+
+
+### Bug Fixes
+
+* **@ngaox/devkit:** ensure contests mapper generate all files ([b0572d5](https://github.com/ngaox/ngaox/commit/b0572d5de71cafaab6d0d493384beb37257edc1b))
+* **@ngaox/devkit:** provide default outputPath value ([81ee489](https://github.com/ngaox/ngaox/commit/81ee489b83a1974c0cc5bbff6d868f6b1c06d095))
+
+
+
 ## [4.0.2](https://github.com/ngaox/ngaox/compare/v4.0.1...v4.0.2) (2022-04-17)
 
 
