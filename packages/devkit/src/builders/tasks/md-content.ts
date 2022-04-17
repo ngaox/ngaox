@@ -1,5 +1,5 @@
 import { BuilderContext } from '@angular-devkit/architect';
-import { fromEvent } from 'rxjs';
+import { BehaviorSubject, finalize, fromEvent, switchMap, tap } from 'rxjs';
 
 import * as path from 'path';
 import * as chokidar from 'chokidar';
@@ -15,6 +15,7 @@ import { IPressMapper, IPressOptions } from '../../models/builders/press';
 import { IParsedContent, ITocLink } from '../../models/mappers/generic';
 import { getGenericMapper } from '../../mappers/generic.mapper';
 import { CONTENT_DIR } from '../../models/constants';
+import { logSuccess } from '../../utils/output';
 
 export function MdContentTask(
   opts: IPressOptions,
@@ -28,6 +29,7 @@ export function MdContentTask(
     options: opts,
     outputPath: path.join(outputPath, CONTENT_DIR)
   };
+  const pressCompiled$ = new BehaviorSubject(null);
 
   const watcher = chokidar.watch(contentPath);
 
@@ -38,6 +40,7 @@ export function MdContentTask(
       path.join(context.workspaceRoot, opts.dir)
     );
     await mapper.push(parsed, filePath, mapperExtraOpts);
+    pressCompiled$.next(null);
   };
 
   watcher
@@ -49,6 +52,7 @@ export function MdContentTask(
         path.join(context.workspaceRoot, opts.dir)
       );
       await mapper.remove(filePath, mapperExtraOpts);
+      pressCompiled$.next(null);
     });
 
   process.on('SIGINT', () => {
@@ -56,7 +60,15 @@ export function MdContentTask(
     process.exit(0);
   });
 
-  return fromEvent(watcher, 'ready');
+  return fromEvent(watcher, 'ready').pipe(
+    switchMap(() => pressCompiled$),
+    tap(() => {
+      logSuccess(context.logger, 'Press content compiled successfully');
+    }),
+    finalize(() => {
+      watcher.close();
+    })
+  );
 }
 
 async function parseFile(filePath: string): Promise<IParsedContent> {

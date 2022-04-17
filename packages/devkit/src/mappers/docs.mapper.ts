@@ -40,14 +40,9 @@ export function getDocsMapper(sections: IDocsSection[]): IPressMapper {
           content: parsed.content,
           toc: parsed.toc
         },
-        {
-          dir: extra.outputPath,
-          logger: extra.context.logger
-        }
+        extra.outputPath
       );
-      await writeJSON(MAP_FILES.main, sections, {
-        dir: extra.outputPath
-      });
+      await writeJSON(MAP_FILES.main, sections, extra.outputPath);
     },
     remove: async (filePath: string, extra) => {
       const section = getSection(sections, filePath);
@@ -63,13 +58,8 @@ export function getDocsMapper(sections: IDocsSection[]): IPressMapper {
 
       delete section.items[itemIndex];
       delete memory[filePath];
-      await unlinkFile(`${slug}.json`, {
-        dir: extra.outputPath,
-        logger: extra.context.logger
-      });
-      await writeJSON(MAP_FILES.main, memory, {
-        dir: extra.outputPath
-      });
+      await unlinkFile(`${slug}.json`, extra.outputPath);
+      await writeJSON(MAP_FILES.main, memory, extra.outputPath);
     }
   };
 }

@@ -33,6 +33,8 @@ export function getContestsMapper(
       const slug = filePath.replace(/\.[^/.]+$/, '');
       const manifest = await getContestManifest(extra.options.dir, filePath);
       const contest = {} as IContest;
+      const contestSlug =
+        manifest !== undefined ? cleanPath(path.dirname(slug)) : slug;
       const challenge: IChallenge = {
         date: (parsed.data.date as string) ?? '',
         duration: (parsed.data.duration as string) ?? 'Forever!',
@@ -47,7 +49,6 @@ export function getContestsMapper(
         item.points
       ]);
       if (manifest !== undefined) {
-        const contestSlug = cleanPath(path.dirname(slug));
         const editionSlug = cleanPath(path.basename(slug));
         contest.name = manifest.name ?? titleCase(slug);
         contest.slug = contestSlug;
@@ -59,6 +60,8 @@ export function getContestsMapper(
 
         memory.isChallengePartOfPeriodic[slug] = true;
         memory.contests[contestSlug] = contest;
+
+        await writeJSON(`${slug}.json`, challenge, extra.outputPath);
       } else {
         contest.name = (parsed.data.name as string) ?? titleCase(slug);
         contest.slug = slug;
@@ -77,10 +80,7 @@ export function getContestsMapper(
         memory.contests[slug] = contest;
       }
 
-      await writeJSON(`${slug}.json`, challenge, {
-        dir: extra.outputPath,
-        logger: extra.context.logger
-      });
+      await writeJSON(`${contestSlug}.json`, contest, extra.outputPath);
       await writeMaps(extra.outputPath);
     },
     remove: async (filePath: string, extra) => {
@@ -91,14 +91,12 @@ export function getContestsMapper(
         const contestSlug = cleanPath(path.dirname(slug));
         const editionSlug = cleanPath(path.basename(slug));
         delete memory.contests[contestSlug].editions[editionSlug];
+        await unlinkFile(`${contestSlug}.json`, extra.outputPath);
       } else {
         delete memory.contests[slug];
       }
 
-      await unlinkFile(`${slug}.json`, {
-        dir: extra.outputPath,
-        logger: extra.context.logger
-      });
+      await unlinkFile(`${slug}.json`, extra.outputPath);
       await writeMaps(extra.outputPath);
     }
   };
@@ -124,10 +122,6 @@ async function writeMaps(outputPath) {
       acc[author] = (acc[author] ?? 0) + points;
       return acc;
     }, {});
-  await writeJSON(MAP_FILES.main, outContentMap, {
-    dir: outputPath
-  });
-  await writeJSON(MAP_FILES.leaderboard, leaderboard, {
-    dir: outputPath
-  });
+  await writeJSON(MAP_FILES.main, outContentMap, outputPath);
+  await writeJSON(MAP_FILES.leaderboard, leaderboard, outputPath);
 }

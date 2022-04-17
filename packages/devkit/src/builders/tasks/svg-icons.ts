@@ -2,7 +2,14 @@ import { BuilderContext } from '@angular-devkit/architect';
 import { ISvgIconsOptions } from '../../models/builders/icons';
 import { writeFile } from '../../utils/filesystem';
 import { cleanPath, getCleanRelative } from '../../utils/generators-options';
-import { BehaviorSubject, fromEvent, map, switchMap } from 'rxjs';
+import {
+  BehaviorSubject,
+  finalize,
+  fromEvent,
+  map,
+  switchMap,
+  tap
+} from 'rxjs';
 
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -10,6 +17,7 @@ import * as chokidar from 'chokidar';
 import { optimize } from 'svgo';
 import { INgaoxIcon } from '../../models/builders/icons';
 import { ICONS_DIR } from '../../models/constants';
+import { logSuccess } from '../../utils/output';
 
 const memory: {
   [filePath: string]: INgaoxIcon;
@@ -36,10 +44,7 @@ export function svgIconsTask(
       // TODO: handle this case
       return;
     }
-    await writeFile(url, result['data'], {
-      dir: outputPath,
-      logger: context.logger
-    });
+    await writeFile(url, result['data'], outputPath);
     memory[url] = {
       name: `${
         options.namespace ? `${options.namespace ?? ''}:` : ''
@@ -62,8 +67,19 @@ export function svgIconsTask(
       iconsChanged$.next(null);
     });
 
+  process.on('SIGINT', () => {
+    watcher.close();
+    process.exit(0);
+  });
+
   return fromEvent(watcher, 'ready').pipe(
     switchMap(() => iconsChanged$),
-    map(() => Object.values(memory))
+    map(() => Object.values(memory)),
+    tap(() => {
+      logSuccess(context.logger, 'SVG Icons compiled successfully');
+    }),
+    finalize(() => {
+      watcher.close();
+    })
   );
 }
