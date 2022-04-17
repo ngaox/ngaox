@@ -17,12 +17,11 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as chokidar from 'chokidar';
 import { optimize } from 'svgo';
-import { INgaoxIcon } from '../../models/builders/icons';
 import { ICONS_DIR } from '../../models/constants';
 import { logSuccess } from '../../utils/output';
 
 const memory: {
-  [filePath: string]: INgaoxIcon;
+  [filePath: string]: any;
 } = {};
 
 export function svgIconsTask(
@@ -91,7 +90,7 @@ export function svgIconsTask(
     tap(icons => {
       logSuccess(
         context.logger,
-        `SVG Icons compiled successfully (Total ${icons.length})`
+        `SVG icons compiled! ${icons.length} icons found in total.`
       );
     }),
     finalize(() => {

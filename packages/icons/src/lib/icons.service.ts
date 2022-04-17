@@ -2,8 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
 import { Observable, of, map } from 'rxjs';
-import { ILazyIcon } from '@ngaox/devkit/common/icons';
-import { NGAOX_FALLBACK } from './models';
+import { ILazyIcon, NGAOX_FALLBACK } from './models';
 
 @Injectable()
 export class IconsService {

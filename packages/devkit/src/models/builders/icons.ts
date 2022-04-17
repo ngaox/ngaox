@@ -8,13 +8,3 @@ export interface ISvgIconsOptions {
    */
   svgoConfig?: any;
 }
-
-export interface ILazyIcon {
-  url: string;
-  lazy: true;
-}
-
-export interface INgaoxIcon {
-  name: string;
-  data: string | ILazyIcon;
-}
