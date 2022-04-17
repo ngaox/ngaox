@@ -28,7 +28,7 @@ export function ngaoxDevServer(
     }),
     switchMap(([options, transforms]) =>
       merge(
-        getNgaoxTasks(options.builder, context),
+        ...getNgaoxTasks(options.builder, context),
         getIconsTask(options.builder, context).pipe(
           switchMap(plugin => {
             return NgDevServerTask(

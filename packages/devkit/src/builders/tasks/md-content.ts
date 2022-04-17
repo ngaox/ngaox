@@ -1,5 +1,13 @@
 import { BuilderContext } from '@angular-devkit/architect';
-import { BehaviorSubject, finalize, fromEvent, switchMap, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  concatMap,
+  debounceTime,
+  finalize,
+  fromEvent,
+  skip,
+  tap
+} from 'rxjs';
 
 import * as path from 'path';
 import * as chokidar from 'chokidar';
@@ -29,9 +37,10 @@ export function MdContentTask(
     options: opts,
     outputPath: path.join(outputPath, CONTENT_DIR)
   };
-  const pressCompiled$ = new BehaviorSubject(null);
 
   const watcher = chokidar.watch(contentPath);
+  const pressChanged$ = new BehaviorSubject(null);
+  let isWatcherReady = false;
 
   const buildFile = async (filePath: string) => {
     const parsed = await parseFile(filePath);
@@ -40,7 +49,9 @@ export function MdContentTask(
       path.join(context.workspaceRoot, opts.dir)
     );
     await mapper.push(parsed, filePath, mapperExtraOpts);
-    pressCompiled$.next(null);
+    if (isWatcherReady) {
+      pressChanged$.next(null);
+    }
   };
 
   watcher
@@ -52,7 +63,9 @@ export function MdContentTask(
         path.join(context.workspaceRoot, opts.dir)
       );
       await mapper.remove(filePath, mapperExtraOpts);
-      pressCompiled$.next(null);
+      if (isWatcherReady) {
+        pressChanged$.next(null);
+      }
     });
 
   process.on('SIGINT', () => {
@@ -61,7 +74,10 @@ export function MdContentTask(
   });
 
   return fromEvent(watcher, 'ready').pipe(
-    switchMap(() => pressCompiled$),
+    concatMap(() => {
+      isWatcherReady = true;
+      return pressChanged$.pipe(skip(1), debounceTime(2000));
+    }),
     tap(() => {
       logSuccess(context.logger, 'Press content compiled successfully');
     }),

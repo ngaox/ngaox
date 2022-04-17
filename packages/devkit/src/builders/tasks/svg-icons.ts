@@ -7,8 +7,10 @@ import {
   finalize,
   fromEvent,
   map,
-  switchMap,
-  tap
+  concatMap,
+  tap,
+  skip,
+  debounceTime
 } from 'rxjs';
 
 import * as fs from 'fs-extra';
@@ -31,6 +33,7 @@ export function svgIconsTask(
   const directory = path.join(context.workspaceRoot, options.dir);
   const watcher = chokidar.watch(path.join(directory, '**/*.svg'));
   const iconsChanged$ = new BehaviorSubject(null);
+  let isWatcherReady = false;
 
   const compileSvgFile = async (filePath: string) => {
     filePath = getCleanRelative(filePath, directory);
@@ -54,7 +57,9 @@ export function svgIconsTask(
         lazy: true
       }
     };
-    iconsChanged$.next(null);
+    if (isWatcherReady) {
+      iconsChanged$.next(null);
+    }
   };
 
   watcher
@@ -64,7 +69,9 @@ export function svgIconsTask(
       filePath = getCleanRelative(filePath, directory);
       const url = cleanPath(path.join(ICONS_DIR, filePath));
       delete memory[url];
-      iconsChanged$.next(null);
+      if (isWatcherReady) {
+        iconsChanged$.next(null);
+      }
     });
 
   process.on('SIGINT', () => {
@@ -73,10 +80,19 @@ export function svgIconsTask(
   });
 
   return fromEvent(watcher, 'ready').pipe(
-    switchMap(() => iconsChanged$),
-    map(() => Object.values(memory)),
-    tap(() => {
-      logSuccess(context.logger, 'SVG Icons compiled successfully');
+    concatMap(() => {
+      isWatcherReady = true;
+      return iconsChanged$.pipe(
+        skip(1),
+        debounceTime(2000),
+        map(() => Object.values(memory))
+      );
+    }),
+    tap(icons => {
+      logSuccess(
+        context.logger,
+        `SVG Icons compiled successfully (Total ${icons.length})`
+      );
     }),
     finalize(() => {
       watcher.close();
