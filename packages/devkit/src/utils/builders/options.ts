@@ -35,7 +35,9 @@ export async function getOptions(
   );
 
   browserOptions.outputPath = builderOptions.outputPath =
-    builderOptions.outputPath || browserOptions.outputPath;
+    builderOptions.outputPath ||
+    browserOptions.outputPath ||
+    `dist/${await getProjectRoot(context)}`;
   browserOptions.watch = builderOptions.watch =
     builderOptions.watch || browserOptions.watch;
   browserOptions.deleteOutputPath = false;
@@ -92,4 +94,13 @@ function getTargetProject(context: BuilderContext): Target {
     throw new Error('The builder requires a target.');
   }
   return target;
+}
+
+async function getProjectRoot(context: BuilderContext) {
+  const target = getTargetProject(context);
+  const projectMetadata = await context.getProjectMetadata(target.project);
+  const projectRoot = cleanPath(
+    (projectMetadata.root as string | undefined) ?? ''
+  );
+  return projectRoot;
 }

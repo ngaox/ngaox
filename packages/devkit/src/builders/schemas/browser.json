@@ -362,7 +362,7 @@
     }
   },
   "additionalProperties": false,
-  "required": ["outputPath", "index", "main", "tsConfig"],
+  "required": ["index", "main", "tsConfig"],
   "definitions": {
     "assetPattern": {
       "oneOf": [

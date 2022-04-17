@@ -1,9 +1,12 @@
-import { OptimizeOptions } from 'svgo';
-
 export interface ISvgIconsOptions {
   dir: string;
   namespace?: string;
-  svgoConfig?: OptimizeOptions;
+  /**
+   * Set this if you want to optimize your svg files.
+   *
+   * https://github.com/svg/svgo#configuration
+   */
+  svgoConfig?: any;
 }
 
 export interface ILazyIcon {
