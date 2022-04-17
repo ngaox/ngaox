@@ -3,10 +3,7 @@ import {
   DevServerBuilderOptions,
   OutputHashing
 } from '@angular-devkit/build-angular';
-import {
-  BuilderContext,
-  targetFromTargetString
-} from '@angular-devkit/architect';
+import { BuilderContext } from '@angular-devkit/architect';
 import { normalizeOptimization } from '@angular-devkit/build-angular/src/utils';
 import { checkPort } from '@angular-devkit/build-angular/src/utils/check-port';
 import { purgeStaleBuildCache } from '@angular-devkit/build-angular/src/utils/purge-cache';

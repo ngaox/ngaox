@@ -18,26 +18,25 @@ export async function ngaoxBuild(
   ngBuildOptions: IBrowserBuilderOptions,
   context: BuilderContext
 ): Promise<BuilderOutput> {
-  const { builder: options, browser: browserOptions } = await getOptions(
-    context,
-    ngBuildOptions
-  );
+  const options = await getOptions(context, ngBuildOptions);
 
-  await fs.ensureDir(options.outputPath);
-  await fs.emptyDir(options.outputPath);
+  await fs.ensureDir(options.builder.outputPath);
+  await fs.emptyDir(options.builder.outputPath);
 
   await firstValueFrom(
-    forkJoin(getNgaoxTasks(options, context).map(ob$ => ob$.pipe(first())))
+    forkJoin(
+      getNgaoxTasks(options.builder, context).map(ob$ => ob$.pipe(first()))
+    )
   );
 
-  const plugin = await firstValueFrom(getIconsTask(options, context));
+  const plugin = await firstValueFrom(getIconsTask(options.builder, context));
 
   const transforms = addWebpackPlugin(
-    getNgBuildTransforms(options, context),
+    getNgBuildTransforms(options.builder, context),
     plugin
   );
 
   return (await firstValueFrom(
-    NgBuildTask(browserOptions, context, transforms).pipe(first())
+    NgBuildTask(options.browser, context, transforms).pipe(first())
   )) as BuilderOutput;
 }
