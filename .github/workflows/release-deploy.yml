@@ -20,7 +20,6 @@ jobs:
             packages/**/package.json
             package.json
           output-file: docs/CHANGELOG.md
-
   build-deploy:
     if: needs.release-up.outputs.released == 'true'
     needs: release-up
@@ -38,7 +37,7 @@ jobs:
       - run: yarn --frozen-lockfile
       - name: 🛠 Build everything
         run: yarn nx-all build
-      - name: 📦 Zip & 🎉 Publish packages
+      - name: 📦🎉 Zip & Publish packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
