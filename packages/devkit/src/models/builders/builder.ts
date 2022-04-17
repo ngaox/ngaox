@@ -9,10 +9,7 @@ import { Configuration as WebpackConfiguration } from 'webpack';
 import { WebpackLoggingCallback } from '@angular-devkit/build-webpack';
 import { IndexHtmlTransform } from '@angular-devkit/build-angular/src/utils/index-file/index-html-generator';
 
-export type IBrowserBuilderOptions = Omit<
-  BrowserBuilderOptions,
-  'deleteOutputPath'
-> & {
+export type IBrowserBuilderOptions = BrowserBuilderOptions & {
   'config-dir'?: string;
 };
 

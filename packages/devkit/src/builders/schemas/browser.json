@@ -258,6 +258,11 @@
       "type": "number",
       "description": "Enable and define the file watching poll time period in milliseconds."
     },
+    "deleteOutputPath": {
+      "type": "boolean",
+      "description": "Delete the output path before building.",
+      "default": true
+    },
     "preserveSymlinks": {
       "type": "boolean",
       "description": "Do not use the real path when resolving modules. If unset then will default to `true` if NodeJS option --preserve-symlinks is set."

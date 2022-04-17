@@ -38,7 +38,7 @@ export async function getOptions(
     builderOptions.outputPath || browserOptions.outputPath;
   browserOptions.watch = builderOptions.watch =
     builderOptions.watch || browserOptions.watch;
-  browserOptions['deleteOutputPath'] = false;
+  browserOptions.deleteOutputPath = false;
 
   return {
     browserTarget,
