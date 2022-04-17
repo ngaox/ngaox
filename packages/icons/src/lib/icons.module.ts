@@ -14,6 +14,8 @@ const NgaoxGlobalIcons: InjectionToken<INgaoxIcon[]> = new InjectionToken(
   'NgaoxGlobalIcons'
 );
 
+declare const _NGAOX_BUILT_ICONS: INgaoxIcon[];
+
 /**
  * Integrate `@ngaox/icons` to your app in the root module (`AppModule`). as follows:
  * ```
@@ -30,6 +32,8 @@ const NgaoxGlobalIcons: InjectionToken<INgaoxIcon[]> = new InjectionToken(
  * })
  * class MyNgModule {}
  * ```
+ *
+ * If your using @ngaox/devkit builder all your icons will be auto registered.
  */
 @NgModule({
   declarations: [IconComponent],
@@ -42,6 +46,12 @@ export class IconsModule {
     @Optional() @Inject(NgaoxGlobalIcons) icons: INgaoxIcon[] = [],
     iconsService: IconsService
   ) {
+    if (typeof _NGAOX_BUILT_ICONS !== 'undefined') {
+      _NGAOX_BUILT_ICONS.forEach(icon => {
+        iconsService.add(icon.name, icon.data);
+      });
+    }
+
     icons.forEach(icon => {
       iconsService.add(icon.name, icon.data);
     });

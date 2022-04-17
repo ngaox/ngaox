@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
-import { builtIconAdapter, IconsModule } from '@ngaox/icons';
+import { IconsModule } from '@ngaox/icons';
 import { SeoModule } from '@ngaox/seo';
 
 import { AppComponent } from './app.component';
@@ -19,8 +19,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SupportComponent } from './pages/home/support/support.component';
 import { FeatureCardComponent } from './pages/home/feature-card/feature-card.component';
-
-const icons = builtIconAdapter();
 
 const routes: Routes = [
   {
@@ -56,7 +54,7 @@ const MATERIAL_IMPORTS = [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    IconsModule.forRoot(icons),
+    IconsModule.forRoot(),
     RouterModule.forRoot(routes),
     SeoModule.forRoot({
       title: 'Angular Ngaox',
