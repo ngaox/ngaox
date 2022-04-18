@@ -1,3 +1,18 @@
+# [4.1.0](https://github.com/ngaox/ngaox/compare/v4.0.3...v4.1.0) (2022-04-18)
+
+
+### Bug Fixes
+
+* **@ngaox/devkit:** weird chokidar events emiting :/ ([f217a6e](https://github.com/ngaox/ngaox/commit/f217a6edcb31d7ae335fef2c97e04a473299b5f1))
+* **infra:** browser library should not depend on nodejs one (devkit) ([8e1cc37](https://github.com/ngaox/ngaox/commit/8e1cc37b504ccad793a78c20a263b5c5d30fe473))
+
+
+### Features
+
+* **@ngaox/icons:** :sparkles: auto load built icons instead of using an Adapter ([e4ae8e0](https://github.com/ngaox/ngaox/commit/e4ae8e0959d388b162b25b6dc66b7f12a745d030))
+
+
+
 ## [4.0.3](https://github.com/ngaox/ngaox/compare/v4.0.2...v4.0.3) (2022-04-17)
 
 
