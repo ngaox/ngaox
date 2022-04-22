@@ -5,7 +5,6 @@ import {
   debounceTime,
   finalize,
   fromEvent,
-  skip,
   tap
 } from 'rxjs';
 
@@ -76,10 +75,10 @@ export function MdContentTask(
   return fromEvent(watcher, 'ready').pipe(
     concatMap(() => {
       isWatcherReady = true;
-      return pressChanged$.pipe(skip(1), debounceTime(2000));
+      return pressChanged$.pipe(debounceTime(2000));
     }),
     tap(() => {
-      logSuccess(context.logger, 'Press content compiled successfully');
+      logSuccess(context.logger, 'Press content compiled successfully.');
     }),
     finalize(() => {
       watcher.close();

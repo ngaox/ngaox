@@ -9,7 +9,6 @@ import {
   map,
   concatMap,
   tap,
-  skip,
   debounceTime
 } from 'rxjs';
 
@@ -82,7 +81,6 @@ export function svgIconsTask(
     concatMap(() => {
       isWatcherReady = true;
       return iconsChanged$.pipe(
-        skip(1),
         debounceTime(2000),
         map(() => Object.values(memory))
       );
@@ -90,7 +88,7 @@ export function svgIconsTask(
     tap(icons => {
       logSuccess(
         context.logger,
-        `SVG icons compiled! ${icons.length} icons found in total.`
+        `SVG icons compiled successfully (${icons.length} icons found).`
       );
     }),
     finalize(() => {
