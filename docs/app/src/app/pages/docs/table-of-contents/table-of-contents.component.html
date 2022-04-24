@@ -14,8 +14,8 @@
         routerLink="."
         [fragment]="link.id"
         (click)="navigateToSection(link.id)"
+        [innerHTML]="link.title"
       >
-        {{ link.title }}
       </a>
     </li>
   </ul>

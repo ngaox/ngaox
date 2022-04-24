@@ -1,12 +1,16 @@
-footer {
+:host {
   display: block;
   padding: 2rem;
   background: var(--primary-color);
-  margin: 0;
   text-align: center;
   font-size: 1.6rem;
+  line-height: 1.4;
   color: #fff;
-  a {
-    color: #fff;
-  }
+}
+a {
+  color: #fff;
+}
+ngaox-icon {
+  width: 2rem;
+  height: 2rem;
 }

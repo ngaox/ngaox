@@ -17,8 +17,8 @@ import { SharedModule } from './shared/shared.module';
 import { NavbarComponent } from './navbar/navbar.component';
 
 import { HomeComponent } from './pages/home/home.component';
-import { SupportComponent } from './pages/home/support/support.component';
 import { FeatureCardComponent } from './pages/home/feature-card/feature-card.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -31,7 +31,8 @@ const routes: Routes = [
     path: 'docs',
     loadChildren: () =>
       import('./pages/docs/docs.module').then(m => m.DocsModule)
-  }
+  },
+  { path: '**', component: NotFoundComponent }
 ];
 
 const MATERIAL_IMPORTS = [
@@ -46,8 +47,8 @@ const MATERIAL_IMPORTS = [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    SupportComponent,
-    FeatureCardComponent
+    FeatureCardComponent,
+    NotFoundComponent
   ],
   imports: [
     SharedModule,

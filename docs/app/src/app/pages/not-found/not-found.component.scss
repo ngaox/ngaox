@@ -1,0 +1,32 @@
+section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 6rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 2rem;
+}
+
+section h1,
+section h2 {
+  color: blue;
+  font-size: 50px;
+  font-weight: 500;
+  margin: 0;
+}
+section .progress-bar {
+  width: 50%;
+}
+
+@media (max-width: 768px) {
+  section {
+    gap: 3rem;
+  }
+  section h1,
+  section h2 {
+    font-size: 28px;
+  }
+}
