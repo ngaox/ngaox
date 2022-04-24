@@ -1,10 +1,12 @@
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
-import { Observable, of, map } from 'rxjs';
+import { Observable, of, map, share, shareReplay } from 'rxjs';
 import { ILazyIcon, NGAOX_FALLBACK } from './models';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class IconsService {
   private icons = new Map<string, SVGElement>();
   private lazyIcons = new Map<string, Observable<SVGElement>>();
@@ -38,7 +40,7 @@ export class IconsService {
   /**
    * get an already registered/added icon
    *
-   * @see  {@link IconsService.add} & {@link IconsService.addByUrl}
+   * @see  {@link IconsService.add}
    */
   get(name: string): Observable<SVGElement | undefined> {
     if (this.icons.has(name)) {
@@ -56,26 +58,21 @@ export class IconsService {
    * @param value the SVG content or {@link ILazyIcon} for lazy loaded icons
    * @param override (default to true) whether or not replacing existing `svg` if `name` already exists
    *
-   * @see {@link IconsService.addByUrl}
    */
   add(
     name: string,
-    value: string | ILazyIcon,
-    override: boolean = true
+    value: string | ILazyIcon
   ): Observable<SVGElement | undefined> {
     if (typeof value === 'string') {
-      if (override || !this.icons.has(name)) {
-        this.icons.set(name, this.textToSvgElement(value));
-      }
+      this.icons.set(name, this.textToSvgElement(value));
     } else {
-      if (override || !this.lazyIcons.has(name)) {
-        this.lazyIcons.set(
-          name,
-          this.http
-            .get(value.url, { responseType: 'text' })
-            .pipe(map(svg => this.textToSvgElement(svg)))
-        );
-      }
+      this.lazyIcons.set(
+        name,
+        this.http.get(value.url, { responseType: 'text' }).pipe(
+          map(svg => this.textToSvgElement(svg)),
+          shareReplay(1)
+        )
+      );
     }
     return this.get(name);
   }

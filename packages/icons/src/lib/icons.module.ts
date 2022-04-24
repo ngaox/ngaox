@@ -3,7 +3,8 @@ import {
   InjectionToken,
   ModuleWithProviders,
   NgModule,
-  Optional
+  Optional,
+  Self
 } from '@angular/core';
 import { IconComponent } from './icon.component';
 import { IconsService } from './icons.service';
@@ -42,15 +43,10 @@ declare const _NGAOX_BUILT_ICONS: INgaoxIcon[];
 })
 export class IconsModule {
   constructor(
-    @Optional() @Inject(NgaoxGlobalIcons) icons: INgaoxIcon[] = [],
-    iconsService: IconsService
+    iconsService: IconsService,
+    @Optional() @Self() @Inject(NgaoxGlobalIcons) icons?: INgaoxIcon[]
   ) {
-    if (typeof _NGAOX_BUILT_ICONS !== 'undefined') {
-      _NGAOX_BUILT_ICONS.forEach(icon => {
-        iconsService.add(icon.name, icon.data);
-      });
-    }
-
+    icons ??= [];
     icons.forEach(icon => {
       iconsService.add(icon.name, icon.data);
     });
@@ -90,7 +86,9 @@ export class IconsModule {
         },
         {
           provide: NgaoxGlobalIcons,
-          useValue: icons
+          useValue: icons.concat(
+            typeof _NGAOX_BUILT_ICONS !== 'undefined' ? _NGAOX_BUILT_ICONS : []
+          )
         }
       ]
     };

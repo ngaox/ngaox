@@ -73,7 +73,7 @@ constructor(icons: IconsService) {
   icons.add('my-icon-name', {
     url: 'assets/my-icon.svg',
     lazy: true
-  }, 'my-icon');
+  });
   icons.remove('ugly-icon');
   icons.add(
     'linkedIn-icon',
