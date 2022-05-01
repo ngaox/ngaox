@@ -1,3 +1,22 @@
+# [4.2.0](https://github.com/ngaox/ngaox/compare/v4.1.0...v4.2.0) (2022-05-01)
+
+
+### Bug Fixes
+
+* **@ngaox/devkit:** weird chokidar events emiting p.2 :/ ([6e07766](https://github.com/ngaox/ngaox/commit/6e07766af1b363a9814f9fd8035e8cc76ac8155c))
+
+
+### Features
+
+* **docs:** :sparkles: 404 page & simple UI improvements ([cd2bfc3](https://github.com/ngaox/ngaox/commit/cd2bfc352d75c266f1198599716add7bbb6186ae)), closes [#120](https://github.com/ngaox/ngaox/issues/120) [#36](https://github.com/ngaox/ngaox/issues/36)
+
+
+### Performance Improvements
+
+* **@ngaox/icons:** icons should be laoded only `.forRoot` modules ([8de7d4b](https://github.com/ngaox/ngaox/commit/8de7d4bb92c37a8298db7533d560f6adde1c282b))
+
+
+
 # [4.1.0](https://github.com/ngaox/ngaox/compare/v4.0.3...v4.1.0) (2022-04-18)
 
 
