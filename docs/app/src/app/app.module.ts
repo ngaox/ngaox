@@ -58,7 +58,7 @@ const MATERIAL_IMPORTS = [
     IconsModule.forRoot(),
     RouterModule.forRoot(routes),
     SeoModule.forRoot({
-      title: 'Angular Ngaox',
+      title: 'Ngaox for Angular',
       description: 'Angular development is easier than ever!'
     }),
     ...MATERIAL_IMPORTS

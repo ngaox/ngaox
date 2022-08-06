@@ -1,6 +1,6 @@
 # Ngaox Icons
 
-[![Angular Ngaox](https://img.shields.io/badge/Angular-Ngaox-red.svg)](https://ngaox-lab.web.app)
+[![Ngaox for Angular](https://img.shields.io/badge/Angular-Ngaox-red.svg)](https://ngaox-lab.web.app)
 [![npm Version](https://img.shields.io/npm/v/@ngaox/icons)](https://ngaox-lab.web.app/docs/icons)
 [![Monthly Downloads](https://img.shields.io/npm/dm/@ngaox/icons)](https://www.npmjs.com/package/@ngaox/icons)
 
