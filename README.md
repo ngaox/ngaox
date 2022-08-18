@@ -30,7 +30,13 @@ It mainly provides a comprehensive toolset with all the features you need in a m
 ## 💨 Quick Links
 
 - [📝 Documentation](https://ngaox-lab.web.app/) &nbsp; / &nbsp; Get started with Ngaox and explore all its features and capabilities.
-- [🅰 Angular. The modern web developer's platform](https://angular.io/) <br/><br/>
+- [🅰 Angular. The modern web developer's platform](https://angular.io/)
+- [Inlining SVG Icons](https://ngaox-lab.web.app/docs/icons)
+- [Manage your Seo and Social-Media previews](https://ngaox-lab.web.app/docs/seo)
+
+## ✨ Templates
+
+Coming soon...
 
 ## 🤗 Before you go!
 
@@ -42,7 +48,7 @@ If you want to show some support, you can:
 
 - Give [Ngaox repo](https://github.com/ngaox/ngaox/) a star ⭐ on Github.
 - Follow [@rabraghib](https://twitter.com/rabraghib) and [@NgaoxLab](https://twitter.com/NgaoxLab) on Twitter to stay up to date with all the cool stuff happening here.
-- 💰 Help Ngaox grow and be more awesome: [Sponsor me](https://github.com/sponsors/rabraghib/) or [Buy me a coffee](https://www.buymeacoffee.com/rabraghib).<br/><br/>
+- 💰 Help Ngaox grow and be more awesome: [Sponsor me](https://github.com/sponsors/rabraghib/) or [Buy me a coffee](https://www.buymeacoffee.com/rabraghib).
 
 ---
 
