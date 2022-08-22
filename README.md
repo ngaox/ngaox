@@ -21,7 +21,7 @@
 Ngaox is a tool for speeding and facilitating Angular apps development.
 It mainly provides a comprehensive toolset with all the features you need in a modern web application:
 
-- **🚀 Ship Markdown content** for all types of uses.. you will always find a way/demo that can fit your needs.
+- **🚀 Smoothly integrate your content with your app:** For all your use cases, you will always find default support for it in Ngaox with flexibility and easy customization.
 - **🏗 Inline SVG Icons** to unlock their full power and improve you app performance and code readability, they can be loaded from svg files, TS/JS modules or your favorite icons library.
 - **💡 Seo and Social-Media previews** management for higher ranking in search results and a more elegant preview cards on social platforms.
 
@@ -31,8 +31,9 @@ It mainly provides a comprehensive toolset with all the features you need in a m
 
 - [📝 Documentation](https://ngaox-lab.web.app/) &nbsp; / &nbsp; Get started with Ngaox and explore all its features and capabilities.
 - [🅰 Angular. The modern web developer's platform](https://angular.io/)
-- [Inlining SVG Icons](https://ngaox-lab.web.app/docs/icons)
-- [Manage your Seo and Social-Media previews](https://ngaox-lab.web.app/docs/seo)
+- [🏗 Inlining SVG Icons in Angular](https://ngaox-lab.web.app/docs/icons)
+- [💡 Manage Seo and Social-Media previews the right way](https://ngaox-lab.web.app/docs/seo)
+- [🚀 Ship Markdown/Yaml/Json/... content to your Angular app](https://ngaox-lab.web.app/docs/press)
 
 ## ✨ Templates
 
