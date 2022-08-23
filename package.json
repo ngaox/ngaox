@@ -10,7 +10,8 @@
     "test": "nx test",
     "watch": "nx build --watch --c development",
     "prepare": "husky install tools/.husky && yarn build devkit",
-    "postinstall": "node ./tools/decorate-angular-cli.js && ngcc --properties es2015 browser module main"
+    "postinstall": "node ./tools/decorate-angular-cli.js && ngcc --properties es2015 browser module main",
+    "build:templates": "cd templates && npx run-subdir@v1.0.0 \"yarn && yarn build\""
   },
   "private": true,
   "dependencies": {
