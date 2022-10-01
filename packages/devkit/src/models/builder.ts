@@ -1,5 +1,5 @@
 import { Target } from '@angular-devkit/architect';
-import { IParsedContent } from './mappers/generic';
+import { IParsedContent } from './builders/generic';
 import { Configuration as WebpackConfiguration } from 'webpack';
 import {
   BrowserBuilderOptions,
@@ -45,6 +45,7 @@ export interface IBuilderTaskOptions {
 }
 
 export interface IMapperExtraOptions {
+  name: string;
   outputPath: string;
   options: IBuilderTaskOptions;
   context: BuilderContext;

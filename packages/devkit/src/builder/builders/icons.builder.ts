@@ -1,9 +1,9 @@
 import { optimize } from 'svgo';
 import { IBuilder, IMapperExtraOptions } from '../../models/builder';
-import { IParsedContent } from '../../models/mappers/generic';
+import { IParsedContent } from '../../models/builders/generic';
 import { writeFile } from '../../utils/filesystem';
 import { cleanPath, getCleanRelative } from '../../utils/generators-options';
-import { getIconsPublicPath } from '../helpers/filesystem';
+import { getTaskOutputPath } from '../helpers/filesystem';
 import { unlink } from 'fs/promises';
 import { join as joinPaths } from 'path';
 
@@ -21,7 +21,7 @@ export class IconsBuilder implements IBuilder {
     if (result.error) {
       throw new Error('Failed optimizing SVG file');
     }
-    await writeFile(url, result['data'], getIconsPublicPath(extra));
+    await writeFile(url, result['data'], getTaskOutputPath(extra));
     this.icons[url] = {
       name: `${
         extra.options.extra.namespace
@@ -40,6 +40,6 @@ export class IconsBuilder implements IBuilder {
     const slug = cleanPath(filePath.replace(/\.svg$/, ''));
     const url = `${slug}.svg`;
     delete this.icons[url];
-    await unlink(joinPaths(getIconsPublicPath(extra), url));
+    await unlink(joinPaths(getTaskOutputPath(extra), url));
   }
 }

@@ -1,3 +1,7 @@
+export interface IMetaData {
+  [key: string]: any;
+}
+
 export interface IParsedContent {
   data: {
     [key: string]: unknown;

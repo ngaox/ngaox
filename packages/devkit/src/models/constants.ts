@@ -1,10 +1,5 @@
-export const CONTENT_DIR = '~content';
-export const NGAOX_ICONS_KEY = '_NGAOX_BUILT_ICONS';
+export const CONTENT_PATH = '~content';
+export const CONTENT_MAP_FILE = '~content.map.json';
 
-export const MAP_FILES = {
-  main: '~content.map.json',
-  // Used in Challenges Mapper
-  leaderboard: '~leaderboard.map.json'
-};
-
-export const PERIODIC_MANIFEST = '~periodic.json';
+/** Only when using Contests builder */
+export const LEADERBOARD_PATH = '~leaderboard.map.json';

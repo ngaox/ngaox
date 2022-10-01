@@ -25,35 +25,41 @@ export default createBuilder(
     return options$.pipe(
       switchMap(options => {
         return merge(
-          ...Object.values(options.builder.content).map(value => {
-            const taskOption = value as IBuilderTaskOptions;
-            const directory = joinPaths(context.workspaceRoot, taskOption.dir);
-            const watcher = chokidar.watch(
-              joinPaths(directory, taskOption.glob)
-            );
-            const extraOptions: IMapperExtraOptions = {
-              context,
-              options: taskOption,
-              outputPath: options.browser.outputPath
-            };
-            extraOptions.options.dir = directory;
-            const compileFiles = async ([filePath]: [string]) => {
-              return taskOption.builder.push(
-                taskOption.parser(await readFile(filePath, 'utf8')),
-                filePath,
-                extraOptions
+          ...Object.entries(options.builder.content).map(
+            ([taskName, value]) => {
+              const taskOption = value as IBuilderTaskOptions;
+              const directory = joinPaths(
+                context.workspaceRoot,
+                taskOption.dir
               );
-            };
-            return merge(
-              fromEvent(watcher, 'add').pipe(mergeMap(compileFiles)),
-              fromEvent(watcher, 'change').pipe(mergeMap(compileFiles)),
-              fromEvent(watcher, 'unlink').pipe(
-                mergeMap((filePath: string) =>
-                  taskOption.builder.remove(filePath, extraOptions)
+              const watcher = chokidar.watch(
+                joinPaths(directory, taskOption.glob)
+              );
+              const extraOptions: IMapperExtraOptions = {
+                context,
+                name: taskName,
+                options: taskOption,
+                outputPath: options.browser.outputPath
+              };
+              extraOptions.options.dir = directory;
+              const compileFiles = async ([filePath]: [string]) => {
+                return taskOption.builder.push(
+                  taskOption.parser(await readFile(filePath, 'utf8')),
+                  filePath,
+                  extraOptions
+                );
+              };
+              return merge(
+                fromEvent(watcher, 'add').pipe(mergeMap(compileFiles)),
+                fromEvent(watcher, 'change').pipe(mergeMap(compileFiles)),
+                fromEvent(watcher, 'unlink').pipe(
+                  mergeMap((filePath: string) =>
+                    taskOption.builder.remove(filePath, extraOptions)
+                  )
                 )
-              )
-            );
-          })
+              );
+            }
+          )
         ).pipe(map(() => ({ success: true })));
       }),
       catchError(error => {

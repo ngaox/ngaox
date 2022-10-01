@@ -1,5 +1,6 @@
-// require('prismjs/components/prism-bash');
-// require('prismjs/components/prism-typescript');
+const { DocsBuilder } = require('@ngaox/devkit');
+require('prismjs/components/prism-bash');
+require('prismjs/components/prism-typescript');
 
 /**
  * @type {import('@ngaox/devkit').IBuilderOptions}
@@ -7,7 +8,10 @@
 module.exports = {
   watch: true,
   content: {
-    // docs: 'docs/content',
-    icons: 'docs/app/src/icons'
+    icons: 'docs/app/src/icons',
+    docs: {
+      dir: 'docs/content',
+      builder: new DocsBuilder(require('./docs.sections'))
+    }
   }
 };
