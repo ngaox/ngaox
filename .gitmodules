@@ -1,0 +1,9 @@
+[submodule "templates/blog-up"]
+	path = templates/blog-up
+	url = https://github.com/rabraghib/blog-up
+[submodule "templates/portfolio-v1"]
+	path = templates/portfolio-v1
+	url = https://github.com/rabraghib/portfolio-v1
+[submodule "templates/portfolio-v2"]
+	path = templates/portfolio-v2
+	url = https://github.com/rabraghib/portfolio-v2

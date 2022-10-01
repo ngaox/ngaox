@@ -1,49 +1,55 @@
 <img align="right" src="docs/app/src/assets/ngaox.png" alt="Ngaox Logo" width="150"/>
 
-<h1>Angular Ngaox</h1>
+# Ngaox for Angular
 
 <p>
-    <a href="https://github.com/ngaox/ngaox/blob/main/LICENSE.md">
-        <img src="https://img.shields.io/github/license/ngaox/ngaox?style=flat" alt="License"/>
+    <a href="https://github.com/ngaox/ngaox/actions/workflows/integrate.yml">
+        <img src="https://github.com/ngaox/ngaox/actions/workflows/integrate.yml/badge.svg?branch=main" alt="🧪 Lint, Test & Analyze"/>
     </a>
     <a href="https://github.com/ngaox/ngaox/releases">
         <img alt="Latest release tag" src="https://img.shields.io/github/v/release/ngaox/ngaox?label=version">
     </a>
-    <a href="https://github.com/ngaox/ngaox/actions/workflows/integrate.yml">
-        <img src="https://github.com/ngaox/ngaox/actions/workflows/integrate.yml/badge.svg?branch=main" alt="🧪 Lint, Test & Analyze"/>
+    <a href="https://github.com/ngaox/ngaox/blob/main/LICENSE.md">
+        <img src="https://img.shields.io/github/license/ngaox/ngaox?style=flat" alt="License"/>
     </a>
 </p>
 
+<b>No more wasted time. Ngaox will drive your Angular projects to production!</b>
+
 <br clear="right"/>
 
-<p align="center">
-    <i><b>Maybe its time to stop wasting time and let Ngaox drive your app to production!</b></i>
-</p>
+Ngaox is a tool for speeding and facilitating Angular apps development.
+It mainly provides a comprehensive toolset with all the features you need in a modern web application:
 
-<p align="center">
-    <a href="https://ngaox-lab.web.app">Documentation</a>
-    &nbsp; ▪ &nbsp;
-    <span>
-        Twitter: <a href="https://twitter.com/rabraghib">@rabraghib</a> & <a href="https://twitter.com/NgaoxLab">@NgaoxLab</a>
-    </span>
-</p>
+- **🚀 Smoothly integrate your content with your app:** For all your use cases, you will always find default support for it in Ngaox with flexibility and easy customization.
+- **🏗 Inline SVG Icons** to unlock their full power and improve you app performance and code readability, they can be loaded from svg files, TS/JS modules or your favorite icons library.
+- **💡 Seo and Social-Media previews** management for higher ranking in search results and a more elegant preview cards on social platforms.
 
-## 🧿 Description
+- _...and more 😏_ <br/><br/>
 
-Ngaox is a set of libraries (npm packages) published under the scope `@ngaox` aims at speeding up and facilitating Angular apps development.
+## 💨 Quick Links
 
-Ngaox mainly provides a comprehensive toolset with all the features you need in a modern web application.
+- [📝 Documentation](https://ngaox-lab.web.app/) &nbsp; / &nbsp; Get started with Ngaox and explore all its features and capabilities.
+- [🅰 Angular. The modern web developer's platform](https://angular.io/)
+- [🏗 Inlining SVG Icons in Angular](https://ngaox-lab.web.app/docs/icons)
+- [💡 Manage Seo and Social-Media previews the right way](https://ngaox-lab.web.app/docs/seo)
+- [🚀 Ship Markdown/Yaml/Json/... content to your Angular app](https://ngaox-lab.web.app/docs/press)
 
-- 📦 [@ngaox/devkit](packages/devkit#readme) - Schematics, Builders and other dev utilities
-- 📦 [@ngaox/seo](packages/seo#readme) - Easily generate and manage SEO-friendly meta tags, page title,...
-- 📦 [@ngaox/icons](packages/icons#readme) - Inline SVG icons from (src | files | your favorite icons library | ...)!
-- 📦 [@ngaox/press](packages/press#readme) - Write your content how you wish!
+## ✨ Templates
 
-## 🤝 Contributing
+Coming soon...
 
-Contributions are always welcome in this project ✨!
+## 🤗 Before you go!
 
-Check out our [contributing guideline](https://github.com/ngaox/.github/blob/main/CONTRIBUTING.md) for ways to get started making your touch into Ngaox.
+Contributions are always welcome!
+
+Check out our [contributing guideline](https://github.com/ngaox/.github/blob/main/CONTRIBUTING.md) for ways to get involved and start contributing to Ngaox.
+
+If you want to show some support, you can:
+
+- Give [Ngaox repo](https://github.com/ngaox/ngaox/) a star ⭐ on Github.
+- Follow [@rabraghib](https://twitter.com/rabraghib) and [@NgaoxLab](https://twitter.com/NgaoxLab) on Twitter to stay up to date with all the cool stuff happening here.
+- 💰 Help Ngaox grow and be more awesome: [Sponsor me](https://github.com/sponsors/rabraghib/) or [Buy me a coffee](https://www.buymeacoffee.com/rabraghib).
 
 ---
 
