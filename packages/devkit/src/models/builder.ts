@@ -1,13 +1,7 @@
 import { Target } from '@angular-devkit/architect';
 import { IParsedContent } from './builders/generic';
-import { Configuration as WebpackConfiguration } from 'webpack';
-import {
-  BrowserBuilderOptions,
-  ExecutionTransformer
-} from '@angular-devkit/build-angular';
-import { WebpackLoggingCallback } from '@angular-devkit/build-webpack';
+import { BrowserBuilderOptions } from '@angular-devkit/build-angular';
 import { BuilderContext } from '@angular-devkit/architect';
-import { IndexHtmlTransform } from '@angular-devkit/build-angular/src/utils/index-file/index-html-generator';
 
 export type IBrowserBuilderOptions = {
   configDir?: string;

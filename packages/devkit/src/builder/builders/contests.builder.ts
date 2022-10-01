@@ -1,129 +1,180 @@
-// import { cleanPath } from '../utils/generators-options';
-// import { unlinkFile, writeJSON } from '../utils/filesystem';
-// import { titleCase } from '../utils/strings';
-// import { omitKeys } from '../utils/omit-keys';
-// import * as path from 'path';
-
-// import { IPressMapper } from '../builders';
-// import { getContestManifest } from '../utils/mappers/contest-manifest';
-// import { getChallengeSubmissions } from '../utils/mappers/submissions';
-// import { MAP_FILES } from '../models/constants';
-// import {
-//   IAnnouncement,
-//   IChallenge,
-//   IContest
-// } from '../models/mappers/contests';
-// import { IParsedContent } from '../models/mappers/generic';
+import { IBuilder, IMapperExtraOptions } from '../../models/builder';
+import {
+  IAnnouncement,
+  IChallenge,
+  IContest
+} from '../../models/builders/contests';
+import { IMetaData, IParsedContent } from '../../models/builders/generic';
+import { CONTENT_MAP_FILE, LEADERBOARD_PATH } from '../../models/constants';
+import {
+  dirExists,
+  fileExists,
+  unlinkFile,
+  writeJSON
+} from '../../utils/filesystem';
+import { cleanPath, getCleanRelative } from '../../utils/generators-options';
+import { omitKeys } from '../../utils/omit-keys';
+import { titleCase } from '../../utils/strings';
+import { basename, dirname, join as joinPaths } from 'path';
+import { readJson, readdir } from 'fs-extra';
+import { getTaskOutputPath } from '../helpers/filesystem';
 
 const PERIODIC_MANIFEST = '~periodic.json';
 
-// const memory = {
-//   submissions: {},
-//   isChallengePartOfPeriodic: {},
-//   contests: {}
-// };
+export class ContestsBuilder implements IBuilder {
+  memory = {
+    submissions: {},
+    isChallengePartOfPeriodic: {},
+    contests: {}
+  };
 
-// export function getContestsMapper(
-//   submissionsDir?: string,
-//   announcements: {
-//     [slug: string]: IAnnouncement;
-//   } = {}
-// ): IPressMapper {
-//   const includeSubmissions = submissionsDir !== undefined;
-//   return {
-//     push: async (parsed: IParsedContent, filePath: string, extra) => {
-//       const slug = filePath.replace(/\.[^/.]+$/, '');
-//       const manifest = await getContestManifest(extra.options.dir, filePath);
-//       const contest = {} as IContest;
-//       const contestSlug =
-//         manifest !== undefined ? cleanPath(path.dirname(slug)) : slug;
-//       const challenge: IChallenge = {
-//         date: (parsed.data.date as string) ?? '',
-//         duration: (parsed.data.duration as string) ?? 'Forever!',
-//         metadata: omitKeys(parsed.data, ['date', 'duration']),
-//         submissions: includeSubmissions
-//           ? await getChallengeSubmissions(slug, submissionsDir)
-//           : [],
-//         body: parsed.content
-//       };
-//       memory.submissions[slug] = challenge.submissions.map(item => [
-//         item.author,
-//         item.points
-//       ]);
-//       if (manifest !== undefined) {
-//         const editionSlug = cleanPath(path.basename(slug));
-//         contest.name = manifest.name ?? titleCase(slug);
-//         contest.slug = contestSlug;
-//         contest.summary = manifest.summary ?? '';
-//         contest['next'] = announcements[contestSlug];
-//         contest['editions'] = memory.contests[contestSlug]?.['editions'] ?? {};
-//         contest['editions'][editionSlug] = challenge.date;
-//         contest.metadata = omitKeys(manifest, ['name', 'summary']);
+  constructor(
+    private submissionsDir?: string,
+    private announcements: { [slug: string]: IAnnouncement } = {}
+  ) {}
 
-//         memory.isChallengePartOfPeriodic[slug] = true;
-//         memory.contests[contestSlug] = contest;
+  async push(
+    parsed: IParsedContent,
+    filePath: string,
+    extra: IMapperExtraOptions
+  ) {
+    filePath = getCleanRelative(filePath, extra.options.dir);
+    const slug = filePath.replace(/\.[^/.]+$/, '');
+    const manifest = await getContestManifest(extra.options.dir, filePath);
+    const contest = {} as IContest;
+    const contestSlug =
+      manifest !== undefined ? cleanPath(dirname(slug)) : slug;
+    const challenge: IChallenge = {
+      date: (parsed.data.date as string) ?? '',
+      duration: (parsed.data.duration as string) ?? 'Forever!',
+      metadata: omitKeys(parsed.data, ['date', 'duration']),
+      submissions:
+        this.submissionsDir !== undefined
+          ? await getChallengeSubmissions(slug, this.submissionsDir)
+          : [],
+      body: parsed.content
+    };
+    this.memory.submissions[slug] = challenge.submissions.map(item => [
+      item.author,
+      item.points
+    ]);
+    const outputPath = getTaskOutputPath(extra);
+    if (manifest !== undefined) {
+      const editionSlug = cleanPath(basename(slug));
+      contest.name = manifest.name ?? titleCase(slug);
+      contest.slug = contestSlug;
+      contest.summary = manifest.summary ?? '';
+      contest['next'] = this.announcements[contestSlug];
+      contest['editions'] =
+        this.memory.contests[contestSlug]?.['editions'] ?? {};
+      contest['editions'][editionSlug] = challenge.date;
+      contest.metadata = omitKeys(manifest, ['name', 'summary']);
 
-//         await writeJSON(`${slug}.json`, challenge, extra.outputPath);
-//       } else {
-//         contest.name = (parsed.data.name as string) ?? titleCase(slug);
-//         contest.slug = slug;
-//         contest.summary = (parsed.data.summary as string) ?? '';
-//         contest.metadata = omitKeys(challenge.metadata, [
-//           'name',
-//           'slug',
-//           'summary'
-//         ]);
-//         contest['date'] = challenge.date;
-//         contest['duration'] = challenge.duration;
-//         contest['submissions'] = challenge.submissions;
-//         contest['body'] = challenge.body;
+      this.memory.isChallengePartOfPeriodic[slug] = true;
+      this.memory.contests[contestSlug] = contest;
 
-//         memory.isChallengePartOfPeriodic[slug] = false;
-//         memory.contests[slug] = contest;
-//       }
+      await writeJSON(`${slug}.json`, challenge, outputPath);
+    } else {
+      contest.name = (parsed.data.name as string) ?? titleCase(slug);
+      contest.slug = slug;
+      contest.summary = (parsed.data.summary as string) ?? '';
+      contest.metadata = omitKeys(challenge.metadata, [
+        'name',
+        'slug',
+        'summary'
+      ]);
+      contest['date'] = challenge.date;
+      contest['duration'] = challenge.duration;
+      contest['submissions'] = challenge.submissions;
+      contest['body'] = challenge.body;
 
-//       await writeJSON(`${contestSlug}.json`, contest, extra.outputPath);
-//       await writeMaps(extra.outputPath);
-//     },
-//     remove: async (filePath: string, extra) => {
-//       const slug = filePath.replace(/\.[^/.]+$/, '');
-//       const isPeriodic = memory.isChallengePartOfPeriodic[slug];
-//       delete memory.submissions[slug];
-//       if (isPeriodic) {
-//         const contestSlug = cleanPath(path.dirname(slug));
-//         const editionSlug = cleanPath(path.basename(slug));
-//         delete memory.contests[contestSlug].editions[editionSlug];
-//         await unlinkFile(`${contestSlug}.json`, extra.outputPath);
-//       } else {
-//         delete memory.contests[slug];
-//       }
+      this.memory.isChallengePartOfPeriodic[slug] = false;
+      this.memory.contests[slug] = contest;
+    }
 
-//       await unlinkFile(`${slug}.json`, extra.outputPath);
-//       await writeMaps(extra.outputPath);
-//     }
-//   };
-// }
+    await writeJSON(`${contestSlug}.json`, contest, outputPath);
+    await this.writeMaps(outputPath);
+  }
 
-// async function writeMaps(outputPath) {
-//   const outContentMap = Object.values(memory.contests).map(
-//     (item: IContest) => ({
-//       ...omitKeys<IContest>(item, ['submissions', 'body']),
-//       metadata: {
-//         ...item.metadata,
-//         ...('submissions' in item
-//           ? { submissionsNumber: item.submissions.length }
-//           : {})
-//       }
-//     })
-//   );
-//   const leaderboard = (
-//     Object.values(memory.submissions) as [string, number][][]
-//   )
-//     .reduce((acc, curr) => acc.concat(curr), [])
-//     .reduce((acc, [author, points]) => {
-//       acc[author] = (acc[author] ?? 0) + points;
-//       return acc;
-//     }, {});
-//   await writeJSON(MAP_FILES.main, outContentMap, outputPath);
-//   await writeJSON(MAP_FILES.leaderboard, leaderboard, outputPath);
-// }
+  async remove(filePath: string, extra: IMapperExtraOptions) {
+    filePath = getCleanRelative(filePath, extra.options.dir);
+    const slug = filePath.replace(/\.[^/.]+$/, '');
+    const isPeriodic = this.memory.isChallengePartOfPeriodic[slug];
+    delete this.memory.submissions[slug];
+    const outputPath = getTaskOutputPath(extra);
+    if (isPeriodic) {
+      const contestSlug = cleanPath(dirname(slug));
+      const editionSlug = cleanPath(basename(slug));
+      delete this.memory.contests[contestSlug].editions[editionSlug];
+      await unlinkFile(`${contestSlug}.json`, outputPath);
+    } else {
+      delete this.memory.contests[slug];
+    }
+    await unlinkFile(`${slug}.json`, outputPath);
+    await this.writeMaps(outputPath);
+  }
+
+  async writeMaps(outputPath) {
+    const outContentMap = Object.values(this.memory.contests).map(
+      (item: IContest) => ({
+        ...omitKeys<IContest>(item, ['submissions', 'body']),
+        metadata: {
+          ...item.metadata,
+          ...('submissions' in item
+            ? { submissionsNumber: item.submissions.length }
+            : {})
+        }
+      })
+    );
+    const leaderboard = (
+      Object.values(this.memory.submissions) as [string, number][][]
+    )
+      .reduce((acc, curr) => acc.concat(curr), [])
+      .reduce((acc, [author, points]) => {
+        acc[author] = (acc[author] ?? 0) + points;
+        return acc;
+      }, {});
+    await writeJSON(CONTENT_MAP_FILE, outContentMap, outputPath);
+    await writeJSON(LEADERBOARD_PATH, leaderboard, outputPath);
+  }
+}
+
+export async function getContestManifest(dir: string, filePath: string) {
+  const periodicManifestPath = joinPaths(
+    dir,
+    dirname(filePath),
+    PERIODIC_MANIFEST
+  );
+  const isPeriodic = await fileExists(periodicManifestPath);
+  if (isPeriodic) {
+    const manifest = await readJson(periodicManifestPath);
+    return manifest;
+  }
+  return undefined;
+}
+
+export const getChallengeSubmissions = async (
+  slug: string,
+  submissionsDir: string
+) => {
+  const directory = joinPaths(submissionsDir, slug);
+  const submissionFiles = (await dirExists(directory))
+    ? (await readdir(directory, { withFileTypes: true }))
+        .filter(dirent => dirent.isFile() && dirent.name.endsWith('.json'))
+        .map(dirent => dirent.name)
+    : [];
+  return await Promise.all(
+    submissionFiles.map(async filename => {
+      const filePath = joinPaths(directory, filename);
+      const metadata = (await fileExists(filePath))
+        ? await readJson(filePath)
+        : {};
+      return {
+        author: filename.replace(/\.json$/, ''),
+        points: (metadata.points as number) ?? 0,
+        path: cleanPath(joinPaths(slug, filename)),
+        metadata: omitKeys<IMetaData>(metadata, ['points'])
+      };
+    })
+  );
+};

@@ -1,23 +1,29 @@
-// import { IPressMapper } from '../../src/builders';
-// import { unlinkFile, writeJSON } from '../../src/utils/filesystem';
-// import { MAP_FILES } from '../models/constants';
-// import { IMetaData, IParsedContent } from '../models/mappers/generic';
+import { writeJSON } from 'fs-extra';
+import { IBuilder } from '../../models/builder';
+import { IMetaData, IParsedContent } from '../../models/builders/generic';
+import { CONTENT_MAP_FILE } from '../../models/constants';
+import { unlinkFile } from '../../utils/filesystem';
+import { getCleanRelative } from '../../utils/generators-options';
+import { getTaskOutputPath } from '../helpers/filesystem';
 
-// const memory = {};
+export class GenericBuilder implements IBuilder {
+  memory = {};
 
-// export function getGenericMapper(): IPressMapper {
-//   return {
-//     push: async (parsed: IParsedContent, filePath: string, extra) => {
-//       memory[filePath] = parsed as unknown as IMetaData;
-//       filePath = filePath.replace(/\..+$/, '.json');
-//       await writeJSON(filePath, parsed, extra.outputPath);
-//       await writeJSON(MAP_FILES.main, Object.values(memory), extra.outputPath);
-//     },
-//     remove: async (filePath: string, extra) => {
-//       delete memory[filePath];
-//       filePath = filePath.replace(/\.[^/.]+$/, '.json');
-//       await unlinkFile(filePath, extra.outputPath);
-//       await writeJSON(MAP_FILES.main, Object.values(memory), extra.outputPath);
-//     }
-//   };
-// }
+  async push(parsed: IParsedContent, filePath: string, extra) {
+    filePath = getCleanRelative(filePath, extra.options.dir);
+    filePath = `${filePath.replace(/\.[^/.]+$/, '')}.json`;
+    this.memory[filePath] = parsed as unknown as IMetaData;
+    const outputPath = getTaskOutputPath(extra);
+    await writeJSON(filePath, parsed, outputPath);
+    await writeJSON(CONTENT_MAP_FILE, Object.values(this.memory), outputPath);
+  }
+
+  async remove(filePath: string, extra) {
+    filePath = getCleanRelative(filePath, extra.options.dir);
+    filePath = `${filePath.replace(/\.[^/.]+$/, '')}.json`;
+    delete this.memory[filePath];
+    const outputPath = getTaskOutputPath(extra);
+    await unlinkFile(filePath, outputPath);
+    await writeJSON(CONTENT_MAP_FILE, Object.values(this.memory), outputPath);
+  }
+}

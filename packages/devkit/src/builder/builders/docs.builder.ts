@@ -53,6 +53,7 @@ export class DocsBuilder implements IBuilder {
   }
 
   async remove(filePath: string, extra: IMapperExtraOptions) {
+    filePath = getCleanRelative(filePath, extra.options.dir);
     const section = this.getSection(this.sections, filePath);
     const slug = this.memory?.[filePath]?.slug;
     const itemIndex =
