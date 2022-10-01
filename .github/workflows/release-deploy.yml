@@ -13,7 +13,7 @@ jobs:
       release_notes: ${{ steps.releaser.outputs.release_notes }}
     steps:
       - uses: actions/checkout@v2
-      - uses: chaospad/releaser@v1
+      - uses: rabraghib/releaser-action@v1
         id: releaser
         with:
           bump-files: |
