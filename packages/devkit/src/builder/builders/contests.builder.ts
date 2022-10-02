@@ -2,7 +2,8 @@ import { IBuilder, IMapperExtraOptions } from '../../models/builder';
 import {
   IAnnouncement,
   IChallenge,
-  IContest
+  IContest,
+  ISubmission
 } from '../../models/builders/contests';
 import { IMetaData, IParsedContent } from '../../models/builders/generic';
 import { CONTENT_MAP_FILE, LEADERBOARD_PATH } from '../../models/constants';
@@ -156,7 +157,7 @@ export async function getContestManifest(dir: string, filePath: string) {
 export const getChallengeSubmissions = async (
   slug: string,
   submissionsDir: string
-) => {
+): Promise<ISubmission[]> => {
   const directory = joinPaths(submissionsDir, slug);
   const submissionFiles = (await dirExists(directory))
     ? (await readdir(directory, { withFileTypes: true }))

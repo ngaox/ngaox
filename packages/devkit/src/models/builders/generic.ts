@@ -1,13 +1,11 @@
-export interface IMetaData {
-  [key: string]: any;
-}
-
 export interface IParsedContent {
-  data: {
-    [key: string]: unknown;
-  };
+  data: IMetaData;
   content: string;
   toc?: ITocLink[];
+}
+
+export interface IMetaData {
+  [key: string]: any;
 }
 
 export interface ITocLink {
