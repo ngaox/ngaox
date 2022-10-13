@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "ngaox-lab"
+  },
+  "targets": {
+    "ngaox-lab": {
+      "hosting": {
+        "blog-up": ["blog-up"],
+        "folio-v1": ["folio-v1"],
+        "folio-v2": ["folio-v2"]
+      }
+    }
+  }
+}

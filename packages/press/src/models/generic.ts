@@ -1,7 +1,7 @@
 export interface IParsedContent {
   data: IMetaData;
   content: string;
-  toc: ITocLink[];
+  toc?: ITocLink[];
 }
 
 export interface IMetaData {

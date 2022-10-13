@@ -1,0 +1,16 @@
+{
+  "hosting": [
+    {
+      "target": "blog-up",
+      "public": "blog-up/dist/blog-up"
+    },
+    {
+      "target": "folio-v1",
+      "public": "portfolio-v1/dist/portfolio-v1"
+    },
+    {
+      "target": "folio-v2",
+      "public": "portfolio-v2/dist/portfolio-v2"
+    }
+  ]
+}
