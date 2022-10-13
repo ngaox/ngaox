@@ -10,12 +10,13 @@
     "test": "nx test",
     "watch": "nx build --watch --c development",
     "prepare": "husky install tools/.husky && yarn build devkit",
-    "postinstall": "node ./tools/decorate-angular-cli.js && ngcc --properties es2015 browser module main"
+    "postinstall": "node ./tools/decorate-angular-cli.js && ngcc --properties es2015 browser module main",
+    "build:templates": "cd templates && npx run-subdir@v1.0.0 \"yarn && yarn build\""
   },
   "private": true,
   "dependencies": {
     "@angular-devkit/build-angular": "^13.0.0",
-    "@angular-devkit/schematics": "^13.0.0",
+    "@angular-devkit/schematics": "^14.2.6",
     "@angular/animations": "^13.0.0",
     "@angular/cdk": "^13.0.0",
     "@angular/common": "^13.0.0",
