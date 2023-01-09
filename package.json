@@ -33,7 +33,7 @@
     "dotenv-expand": "^8.0.2",
     "fs-extra": "^10.1.0",
     "gray-matter": "^4.0.3",
-    "jsdom": "^19.0.0",
+    "jsdom": "^21.0.0",
     "marked": "^4.0.12",
     "prismjs": "^1.28.0",
     "rxjs": "^7.5.4",
