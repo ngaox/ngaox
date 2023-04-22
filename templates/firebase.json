@@ -2,15 +2,18 @@
   "hosting": [
     {
       "target": "blog-up",
-      "public": "blog-up/dist/blog-up"
+      "public": "blog-up/dist/blog-up/browser",
+      "rewrites": [{ "source": "**", "destination": "/index.original.html" }]
     },
     {
       "target": "folio-v1",
-      "public": "portfolio-v1/dist/portfolio-v1"
+      "public": "portfolio-v1/dist/portfolio-v1",
+      "rewrites": [{ "source": "**", "destination": "/index.html" }]
     },
     {
       "target": "folio-v2",
-      "public": "portfolio-v2/dist/portfolio-v2"
+      "public": "portfolio-v2/dist/portfolio-v2",
+      "rewrites": [{ "source": "**", "destination": "/index.html" }]
     }
   ]
 }

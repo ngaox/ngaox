@@ -1,0 +1,26 @@
+name: Build & Deploy Templates
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'templates/**'
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - run: yarn build templates
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NGAOX_LAB }}'
+          projectId: ngaox-lab
+          channelId: live
+          entryPoint: templates

@@ -1,65 +1,66 @@
-name: 🚀 Build, Release & Deploy
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-jobs:
-  release-up:
-    runs-on: ubuntu-20.04
-    outputs:
-      released: ${{ steps.releaser.outputs.released }}
-      tag: ${{ steps.releaser.outputs.tag }}
-      release_notes: ${{ steps.releaser.outputs.release_notes }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: rabraghib/releaser-action@v1
-        id: releaser
-        with:
-          bump-files: |
-            packages/**/package.json
-            package.json
-          output-file: docs/CHANGELOG.md
-  build-deploy:
-    if: needs.release-up.outputs.released == 'true'
-    needs: release-up
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: 'main'
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@ngaox'
-          cache: 'yarn'
-      - run: yarn --frozen-lockfile
-      - name: 🛠 Build everything
-        run: yarn nx-all build
-      - name: 📦🎉 Zip & Publish packages
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          mkdir -p dist/artifacts
-          cd dist/packages
-          for package in */; do
-            zip -r ../artifacts/ngaox-$(basename $package)-${{ needs.release-up.outputs.tag }}.zip $package;
-            cd $package
-            npm publish --access public
-            cd ..
-          done
-      - name: 🎉 Deploy docs & demos
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NGAOX_LAB }}'
-          channelId: live
-          projectId: ngaox-lab
-      - uses: softprops/action-gh-release@v1
-        with:
-          name: 'ngaox ${{ needs.release-up.outputs.tag }}'
-          tag_name: ${{ needs.release-up.outputs.tag }}
-          body: ${{ needs.release-up.outputs.release_notes }}
-          files: |
-            dist/artifacts/*
+# TODO: restore this workflow when everything is fixed
+# name: 🚀 Build, Release & Deploy
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   release-up:
+#     runs-on: ubuntu-20.04
+#     outputs:
+#       released: ${{ steps.releaser.outputs.released }}
+#       tag: ${{ steps.releaser.outputs.tag }}
+#       release_notes: ${{ steps.releaser.outputs.release_notes }}
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: rabraghib/releaser-action@v1
+#         id: releaser
+#         with:
+#           bump-files: |
+#             packages/**/package.json
+#             package.json
+#           output-file: docs/CHANGELOG.md
+#   build-deploy:
+#     if: needs.release-up.outputs.released == 'true'
+#     needs: release-up
+#     runs-on: ubuntu-20.04
+#     steps:
+#       - uses: actions/checkout@v2
+#         with:
+#           ref: 'main'
+#       - uses: actions/setup-node@v2
+#         with:
+#           node-version: '16'
+#           registry-url: 'https://registry.npmjs.org'
+#           scope: '@ngaox'
+#           cache: 'yarn'
+#       - run: yarn --frozen-lockfile
+#       - name: 🛠 Build everything
+#         run: yarn nx-all build
+#       - name: 📦🎉 Zip & Publish packages
+#         env:
+#           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+#         run: |
+#           mkdir -p dist/artifacts
+#           cd dist/packages
+#           for package in */; do
+#             zip -r ../artifacts/ngaox-$(basename $package)-${{ needs.release-up.outputs.tag }}.zip $package;
+#             cd $package
+#             npm publish --access public
+#             cd ..
+#           done
+#       - name: 🎉 Deploy docs & demos
+#         uses: FirebaseExtended/action-hosting-deploy@v0
+#         with:
+#           repoToken: '${{ secrets.GITHUB_TOKEN }}'
+#           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NGAOX_LAB }}'
+#           channelId: live
+#           projectId: ngaox-lab
+#       - uses: softprops/action-gh-release@v1
+#         with:
+#           name: 'ngaox ${{ needs.release-up.outputs.tag }}'
+#           tag_name: ${{ needs.release-up.outputs.tag }}
+#           body: ${{ needs.release-up.outputs.release_notes }}
+#           files: |
+#             dist/artifacts/*
