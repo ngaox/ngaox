@@ -4,6 +4,12 @@ export interface IParsedContent {
   toc?: ITocLink[];
 }
 
+export interface IMapItem {
+  slug: string;
+  data: IMetaData;
+  toc?: ITocLink[];
+}
+
 export interface IMetaData {
   [key: string]: any;
 }

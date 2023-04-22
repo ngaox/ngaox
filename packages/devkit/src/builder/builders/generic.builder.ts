@@ -7,12 +7,17 @@ import { getCleanRelative } from '../../utils/generators-options';
 import { getTaskOutputPath } from '../helpers/filesystem';
 
 export class GenericBuilder implements IBuilder {
-  memory = {};
+  memory: { [key: string]: IMetaData } = {};
 
   async push(parsed: IParsedContent, filePath: string, extra) {
     filePath = getCleanRelative(filePath, extra.options.dir);
-    filePath = `${filePath.replace(/\.[^/.]+$/, '')}.json`;
-    this.memory[filePath] = parsed as unknown as IMetaData;
+    const slug = filePath.replace(/\.[^/.]+$/, '');
+    filePath = `${slug}.json`;
+    this.memory[filePath] = {
+      slug,
+      toc: parsed.toc,
+      data: parsed.data
+    } as IMetaData;
     const outputPath = getTaskOutputPath(extra);
     await writeJSON(filePath, parsed, outputPath);
     await writeJSON(CONTENT_MAP_FILE, Object.values(this.memory), outputPath);
