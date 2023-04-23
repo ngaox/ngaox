@@ -3,9 +3,12 @@ import { IParsedContent } from './builders/generic';
 import { BrowserBuilderOptions } from '@angular-devkit/build-angular';
 import { BuilderContext } from '@angular-devkit/architect';
 
-export type IBrowserBuilderOptions = {
-  configDir?: string;
-  browserTarget: string;
+export type IBrowserBuilderOptions = BrowserBuilderOptions & {
+  'config-dir'?: string;
+};
+
+export type IOptionsObjectStrict = Omit<IOptionsObject, 'builder'> & {
+  builder: IBuilderOptions;
 };
 
 export interface IOptionsObject {
@@ -20,7 +23,6 @@ export interface IOptionsObject {
 }
 
 export interface IBuilderOptions {
-  watch?: boolean;
   content: {
     [name: string]: IBuilderTaskOptions;
   };
@@ -45,11 +47,17 @@ export interface IMapperExtraOptions {
   context: BuilderContext;
 }
 
+export interface IClientSideData {
+  type: string;
+  data: unknown;
+}
+
 export interface IBuilder {
   push: (
     parsed: IParsedContent,
     filePath: string,
     extra: IMapperExtraOptions
-  ) => Promise<void>;
-  remove: (filePath: string, extra: IMapperExtraOptions) => Promise<void>;
+  ) => Promise<unknown>;
+  remove: (filePath: string, extra: IMapperExtraOptions) => Promise<unknown>;
+  getClientSideData?: (extra: IMapperExtraOptions) => Promise<IClientSideData>;
 }

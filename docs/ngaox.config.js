@@ -6,7 +6,6 @@ require('prismjs/components/prism-typescript');
  * @type {import('@ngaox/devkit').IBuilderOptions}
  */
 module.exports = {
-  watch: true,
   content: {
     icons: 'docs/app/src/icons',
     docs: {

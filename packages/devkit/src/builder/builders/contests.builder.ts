@@ -140,7 +140,7 @@ export class ContestsBuilder implements IBuilder {
   }
 }
 
-export async function getContestManifest(dir: string, filePath: string) {
+async function getContestManifest(dir: string, filePath: string) {
   const periodicManifestPath = joinPaths(
     dir,
     dirname(filePath),
@@ -154,7 +154,7 @@ export async function getContestManifest(dir: string, filePath: string) {
   return undefined;
 }
 
-export const getChallengeSubmissions = async (
+const getChallengeSubmissions = async (
   slug: string,
   submissionsDir: string
 ): Promise<ISubmission[]> => {

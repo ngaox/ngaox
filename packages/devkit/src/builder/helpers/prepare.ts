@@ -7,7 +7,7 @@ import { BrowserBuilderOptions } from '@angular-devkit/build-angular';
 import { colors } from '@angular-devkit/build-angular/src/utils/color';
 import {
   IBuilderOptions,
-  IOptionsObject,
+  IOptionsObjectStrict,
   IBrowserBuilderOptions,
   IBuilderTaskOptions
 } from '../../models/builder';
@@ -19,23 +19,30 @@ import { contentBuilderPresets } from './presets';
 
 export async function setupAndGetOptions(
   context: BuilderContext,
-  browser: IBrowserBuilderOptions
-): Promise<IOptionsObject & { builder: IBuilderOptions }> {
-  const browserTarget = targetFromTargetString(browser.browserTarget);
-  const browserOptions = (await context.getTargetOptions(
-    browserTarget as Target
-  )) as unknown as BrowserBuilderOptions;
-  const builderOptions = await getProjectOptions(context, browser.configDir);
+  browser: string | IBrowserBuilderOptions
+): Promise<IOptionsObjectStrict> {
+  const browserTarget =
+    typeof browser === 'string'
+      ? targetFromTargetString(browser)
+      : context.target;
+
+  const browserOptions =
+    typeof browser === 'string'
+      ? ((await context.getTargetOptions(
+          browserTarget as Target
+        )) as unknown as BrowserBuilderOptions)
+      : browser;
+  const builderOptions = await getProjectOptions(
+    context,
+    browserOptions['config-dir']
+  );
+
+  browserOptions.deleteOutputPath = false;
   browserOptions.outputPath =
     browserOptions.outputPath || `dist/${await getProjectRoot(context)}`;
-  browserOptions.watch = builderOptions.watch =
-    builderOptions.watch || browserOptions.watch;
-  browserOptions.deleteOutputPath = false;
 
   await fs.emptyDir(browserOptions.outputPath);
   await fs.ensureDir(browserOptions.outputPath);
-
-  process.env.APP_BASE_HREF = browserOptions.baseHref;
 
   return {
     browserTarget,
@@ -114,7 +121,6 @@ async function getProjectOptions(
   }
 
   return {
-    watch: rawOptions.watch,
     content: content
   };
 }
