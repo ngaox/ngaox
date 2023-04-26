@@ -4,7 +4,7 @@ import { BrowserBuilderOptions } from '@angular-devkit/build-angular';
 import { BuilderContext } from '@angular-devkit/architect';
 
 export type IBrowserBuilderOptions = BrowserBuilderOptions & {
-  'config-dir'?: string;
+  configDir?: string;
 };
 
 export type IOptionsObjectStrict = Omit<IOptionsObject, 'builder'> & {
@@ -42,6 +42,7 @@ export interface IBuilderTaskOptions {
 
 export interface IMapperExtraOptions {
   name: string;
+  baseHref: string;
   outputPath: string;
   options: IBuilderTaskOptions;
   context: BuilderContext;

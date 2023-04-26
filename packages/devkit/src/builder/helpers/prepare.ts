@@ -34,7 +34,7 @@ export async function setupAndGetOptions(
       : browser;
   const builderOptions = await getProjectOptions(
     context,
-    browserOptions['config-dir']
+    browserOptions['configDir']
   );
 
   browserOptions.deleteOutputPath = false;

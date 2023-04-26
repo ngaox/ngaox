@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { catchError, map, Observable, of } from 'rxjs';
 import { DocsHeaderService } from '@docs-core/docs-header.service';
-import { IDocsItem } from '@ngaox/press';
+import { IDocsItem, PressService } from '@ngaox/press';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,14 @@ export class DocsItemResolver implements Resolve<IDocsItem> {
   constructor(
     private headerService: DocsHeaderService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private press: PressService
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<IDocsItem> {
     const slug = route.paramMap.get('slug') ?? '';
-    return this.http.get<IDocsItem>(`/~content/${slug}.json`).pipe(
+    const url = this.press.getDocPath('docs', `${slug}.json`);
+    return this.http.get<IDocsItem>(url).pipe(
       map(docItem => {
         this.headerService.setHeader(docItem.metadata['title'] ?? docItem.name);
         docItem.toc = docItem?.toc?.filter(

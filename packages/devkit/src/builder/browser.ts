@@ -9,6 +9,7 @@ import {
 } from './helpers/define-data';
 import { v6ToV7Observable } from '../utils/observable-polyfills';
 import { IBrowserBuilderOptions } from '../models/builder';
+import { logSuccess } from '../utils/output';
 
 export default createBuilder(
   (rawOptions: IBrowserBuilderOptions, context: BuilderContext) => {
@@ -18,15 +19,20 @@ export default createBuilder(
         return forkJoin(
           Object.entries(options.builder.content).map(([taskName, value]) =>
             executeContentTask(context, options, taskName, value).pipe(
-              map(data => ({ type: taskName, data })),
-              take(1)
+              take(1),
+              map(data => (data == null ? null : { type: taskName, data }))
             )
           )
         ).pipe(
           map(mergeDefinedDataObjects),
           switchMap(data => {
+            logSuccess(context.logger, 'Content compiled successfully.');
             return v6ToV7Observable(
-              executeBrowserBuilder(rawOptions, context, defineDataPlugin(data))
+              executeBrowserBuilder(
+                rawOptions,
+                context,
+                defineDataPlugin(options, data)
+              )
             );
           })
         );

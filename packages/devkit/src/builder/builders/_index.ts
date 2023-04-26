@@ -5,7 +5,7 @@ import {
   IMapperExtraOptions,
   IOptionsObject
 } from '../../models/builder';
-import { mergeMap, fromEvent, merge, Observable } from 'rxjs';
+import { mergeMap, fromEvent, merge, Observable, of, debounceTime } from 'rxjs';
 import * as chokidar from 'chokidar';
 import { join as joinPaths } from 'path';
 import { readFile } from 'fs/promises';
@@ -29,7 +29,8 @@ export function executeContentTask(
     context,
     name: taskName,
     options: taskOption,
-    outputPath: options.browser.outputPath
+    outputPath: options.browser.outputPath,
+    baseHref: options.browser.baseHref ?? ''
   };
   extraOptions.options.dir = directory;
   const compileFiles = async ([filePath]: [string]) => {
@@ -48,9 +49,10 @@ export function executeContentTask(
       )
     )
   ).pipe(
+    debounceTime(500),
     mergeMap(() =>
       taskOption.builder.getClientSideData === undefined
-        ? null
+        ? of(null)
         : taskOption.builder.getClientSideData(extraOptions)
     )
   );

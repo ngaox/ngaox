@@ -1788,8 +1788,21 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@ngaox/devkit@link:./dist/packages/devkit":
-  version "0.0.0"
+"@ngaox/devkit@5.0.0-beta":
+  version "5.0.0-beta"
+  resolved "https://registry.yarnpkg.com/@ngaox/devkit/-/devkit-5.0.0-beta.tgz#4f384808d72ad311e5b0b3d4516001ca2b05e431"
+  integrity sha512-zwv2kF7Jwn694/BQo2DsXvDcZ8ewnifRMCbjQn6b/WgxeuE+EB7PcNssB1FjEjSAokxB2TCGtdu0yKd+oaj95w==
+  dependencies:
+    "@angular-devkit/build-angular" "^13.0.0"
+    "@angular-devkit/schematics" "^13.0.0"
+    chokidar "^3.5.3"
+    fs-extra "^10.1.0"
+    gray-matter "^4.0.3"
+    jsdom "^19.0.0"
+    marked "^4.0.12"
+    prismjs "^1.28.0"
+    rxjs "^7.5.4"
+    svgo "^2.8.0"
 
 "@ngtools/webpack@13.3.2":
   version "13.3.2"

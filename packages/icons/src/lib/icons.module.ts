@@ -14,7 +14,12 @@ const NgaoxGlobalIcons: InjectionToken<INgaoxIcon[]> = new InjectionToken(
   'NgaoxGlobalIcons'
 );
 
-declare const _NGAOX_BUILT_ICONS: INgaoxIcon[];
+declare const __NGAOX_DEFINED_DATA__: {
+  [key: string]: {
+    type: string;
+    data: unknown;
+  };
+};
 
 /**
  * Integrate `@ngaox/icons` to your app in the root module (`AppModule`). as follows:
@@ -87,7 +92,7 @@ export class IconsModule {
         {
           provide: NgaoxGlobalIcons,
           useValue: icons.concat(
-            typeof _NGAOX_BUILT_ICONS !== 'undefined' ? _NGAOX_BUILT_ICONS : []
+            (__NGAOX_DEFINED_DATA__?.['icons']?.data ?? []) as INgaoxIcon[]
           )
         }
       ]

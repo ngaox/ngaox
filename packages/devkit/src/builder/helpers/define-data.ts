@@ -1,14 +1,26 @@
 import * as webpack from 'webpack';
 import { Configuration } from 'webpack';
-import { NGAOX_DATA_VAR } from '../../models/constants';
-import { IClientSideData } from '../../models/builder';
+import { CONTENT_PATH, NGAOX_DATA_VAR } from '../../models/constants';
+import { IClientSideData, IOptionsObjectStrict } from '../../models/builder';
+import CopyWebpackPlugin = require('copy-webpack-plugin');
+import { getContentOutputPath } from './filesystem';
 
-export function defineDataPlugin(data: unknown) {
+export function defineDataPlugin(options: IOptionsObjectStrict, data: unknown) {
   return {
     webpackConfiguration: async (webpackConfig: Configuration) => {
       webpackConfig.plugins.push(
         new webpack.DefinePlugin({
           [NGAOX_DATA_VAR]: JSON.stringify(data)
+        })
+      );
+      webpackConfig.plugins.push(
+        new CopyWebpackPlugin({
+          patterns: [
+            {
+              from: getContentOutputPath(options),
+              to: CONTENT_PATH
+            }
+          ]
         })
       );
       return webpackConfig;

@@ -1,14 +1,6 @@
 import { executeContentTask } from './builders/_index';
 import { setupAndGetOptions } from './helpers/prepare';
-import {
-  of,
-  from,
-  map,
-  catchError,
-  switchMap,
-  combineLatest,
-  startWith
-} from 'rxjs';
+import { of, from, map, catchError, switchMap, combineLatest } from 'rxjs';
 import { BuilderContext, createBuilder } from '@angular-devkit/architect';
 import {
   DevServerBuilderOptions,
@@ -19,6 +11,7 @@ import {
   mergeDefinedDataObjects
 } from './helpers/define-data';
 import { v6ToV7Observable } from '../utils/observable-polyfills';
+import { logSuccess } from '../utils/output';
 
 export default createBuilder(
   (rawOptions: DevServerBuilderOptions, context: BuilderContext) => {
@@ -30,18 +23,19 @@ export default createBuilder(
         return combineLatest(
           Object.entries(options.builder.content).map(([taskName, value]) =>
             executeContentTask(context, options, taskName, value).pipe(
-              startWith(null),
-              map(data => ({ type: taskName, data }))
+              // startWith(null),
+              map(data => (data == null ? null : { type: taskName, data }))
             )
           )
         ).pipe(
           map(mergeDefinedDataObjects),
           switchMap(data => {
+            logSuccess(context.logger, 'Content compiled successfully.');
             return v6ToV7Observable(
               executeDevServerBuilder(
                 rawOptions,
                 context,
-                defineDataPlugin(data)
+                defineDataPlugin(options, data)
               )
             );
           })

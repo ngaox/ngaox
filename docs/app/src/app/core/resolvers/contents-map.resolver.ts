@@ -3,15 +3,17 @@ import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { IDocsSection } from '@docs-core/models';
+import { PressService } from '@ngaox/press';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContentsMapResolver implements Resolve<IDocsSection[]> {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private press: PressService) {}
 
   resolve(): Observable<IDocsSection[]> {
-    return this.http.get<IDocsSection[]>(`/~content/~content.map.json`).pipe(
+    const url = this.press.getContentMapPath('docs');
+    return this.http.get<IDocsSection[]>(url).pipe(
       map(data =>
         data.sort(SortItemsCallback).map(section => ({
           ...section,

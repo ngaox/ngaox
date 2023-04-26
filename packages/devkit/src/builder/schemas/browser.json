@@ -4,7 +4,7 @@
   "description": "Browser target options",
   "type": "object",
   "properties": {
-    "config-dir": {
+    "configDir": {
       "type": "string",
       "description": "The full path for ngaox.config.js file, relative to the current workspace.",
       "default": ""

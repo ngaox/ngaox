@@ -3,13 +3,20 @@ import { IBuilder, IMapperExtraOptions } from '../../models/builder';
 import { IParsedContent } from '../../models/builders/generic';
 import { writeFile, writeJSON } from '../../utils/filesystem';
 import { cleanPath, getCleanRelative } from '../../utils/generators-options';
-import { getTaskOutputPath } from '../helpers/filesystem';
+import { getFileBrowserPath, getTaskOutputPath } from '../helpers/filesystem';
 import { unlink } from 'fs/promises';
 import { join as joinPaths } from 'path';
 import { CONTENT_MAP_FILE } from '../../models/constants';
 
 export class IconsBuilder implements IBuilder {
   icons = {};
+
+  async getClientSideData() {
+    return {
+      type: 'icons',
+      data: Object.values(this.icons)
+    };
+  }
 
   async push(
     parsed: IParsedContent,
@@ -32,8 +39,8 @@ export class IconsBuilder implements IBuilder {
           : ''
       }${slug.replace(/\//g, ':')}`,
       data: {
-        url,
-        lazy: true
+        lazy: true,
+        url: getFileBrowserPath(extra, url)
       }
     };
     await writeJSON(CONTENT_MAP_FILE, Object.values(this.icons), outputPath);
