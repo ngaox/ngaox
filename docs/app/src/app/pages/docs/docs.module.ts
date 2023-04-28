@@ -16,7 +16,7 @@ import { ContentsMapResolver } from '@docs-core/resolvers/contents-map.resolver'
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ViewerComponent } from './viewer/viewer.component';
 import { TableOfContentsComponent } from './table-of-contents/table-of-contents.component';
-import { MatButtonModule } from '@angular/material/button';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 
 const routes: Routes = [
   {

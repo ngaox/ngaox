@@ -1,12 +1,13 @@
 {
+  "name": "press",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "packages/press",
   "sourceRoot": "packages/press/src",
   "prefix": "ngaox",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["dist/packages/press"],
+      "outputs": ["{workspaceRoot}/dist/packages/press"],
       "options": {
         "project": "packages/press/ng-package.json"
       },
@@ -22,9 +23,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/press"],
+      "outputs": ["{workspaceRoot}/coverage/packages/press"],
       "options": {
-        "jestConfig": "packages/press/jest.config.js",
+        "jestConfig": "packages/press/jest.config.ts",
         "passWithNoTests": true
       }
     },
