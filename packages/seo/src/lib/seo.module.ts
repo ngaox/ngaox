@@ -38,7 +38,7 @@ export class SeoModule {
 
   public static forRoot(
     defaults: IPageSeoData = {
-      title: 'This title is everywhere 🤔? Set yours!!'
+      title: '📝 Default NgaoxSeo Title - Change me!'
     }
   ): ModuleWithProviders<SeoModule> {
     return {

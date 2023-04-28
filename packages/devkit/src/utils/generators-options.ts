@@ -1,5 +1,5 @@
-import { Rule, Tree, SchematicsException } from '@angular-devkit/schematics';
-import * as ts from 'typescript';
+import { Rule, Tree } from '@angular-devkit/schematics';
+import * as ts from '@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript';
 import * as path from 'path';
 
 import { addImportToModule } from '@schematics/angular/utility/ast-utils';
@@ -24,7 +24,7 @@ export async function getProject(tree: Tree, projectName?: string) {
   }
   const project = workspace.projects.get(projectName);
   if (!project) {
-    throw new SchematicsException(`Invalid project name: "${projectName}"`);
+    throw new Error(`Could not find project in workspace: ${projectName}`);
   }
   return project;
 }
@@ -34,7 +34,7 @@ export function createHost(tree: Tree): workspaces.WorkspaceHost {
     async readFile(path: string): Promise<string> {
       const data = tree.read(path);
       if (!data) {
-        throw new SchematicsException('File not found.');
+        throw new Error('File not found.');
       }
       return virtualFs.fileBufferToString(data);
     },
@@ -58,7 +58,7 @@ export function addImportToNgModule(
   return (tree: Tree) => {
     const text = tree.read(modulePath);
     if (text === null) {
-      throw new SchematicsException(`File ${modulePath} does not exist.`);
+      throw new Error(`File ${modulePath} does not exist.`);
     }
     const sourceText = text.toString();
     const source = ts.createSourceFile(
