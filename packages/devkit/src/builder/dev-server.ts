@@ -15,6 +15,7 @@ import { logSuccess } from '../utils/output';
 
 export default createBuilder(
   (rawOptions: DevServerBuilderOptions, context: BuilderContext) => {
+    let isFirstTime = true;
     const options$ = from(
       setupAndGetOptions(context, rawOptions.browserTarget)
     );
@@ -30,6 +31,10 @@ export default createBuilder(
         ).pipe(
           map(mergeDefinedDataObjects),
           switchMap(data => {
+            if (rawOptions.open) {
+              rawOptions.open = isFirstTime;
+              isFirstTime = false;
+            }
             logSuccess(context.logger, 'Content compiled successfully.');
             return v6ToV7Observable(
               executeDevServerBuilder(
