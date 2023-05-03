@@ -10,6 +10,16 @@
       "implementation": "./builder/dev-server",
       "schema": "./builder/schemas/dev-server.json",
       "description": "Dev server!"
+    },
+    "extract-i18n": {
+      "implementation": "./builder/extract-i18n",
+      "schema": "./builder/schemas/extract-i18n.json",
+      "description": "Extract i18n extended with ngx-env config"
+    },
+    "server": {
+      "implementation": "./builder/server",
+      "schema": "./builder/schemas/server.json",
+      "description": "Build server app extended with ngx-env config"
     }
   }
 }
