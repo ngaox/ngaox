@@ -4,7 +4,7 @@ import { IParsedContent } from '../../models/builders/generic';
 import { unlinkFile, writeJSON } from '../../utils/filesystem';
 import { getTaskOutputPath } from '../helpers/filesystem';
 import { IBuilder, IMapperExtraOptions } from '../../models/builder';
-import { getCleanRelative } from '../../utils/generators-options';
+import { getCleanRelative } from '../../utils/generators';
 
 export class DocsBuilder implements IBuilder {
   memory = {};

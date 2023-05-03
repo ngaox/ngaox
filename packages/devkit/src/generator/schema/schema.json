@@ -20,7 +20,9 @@
     },
     "features": {
       "type": "string",
-      "description": "Ngaox features that you want to enable"
+      "description": "Comma-separated list of features to setup (e.g. seo,icons)",
+      "pattern": "^([a-zA-Z]+)?(,[a-zA-Z]+)*$",
+      "default": ""
     }
   },
   "required": []

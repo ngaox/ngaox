@@ -3376,10 +3376,10 @@
     "@material/theme" "15.0.0-canary.684e33d25.0"
     tslib "^2.1.0"
 
-"@ngaox/devkit@5.0.0-beta-1":
-  version "5.0.0-beta-1"
-  resolved "https://registry.yarnpkg.com/@ngaox/devkit/-/devkit-5.0.0-beta-1.tgz#dd0e653afb4b2103a660ac6210bf2082623ed10c"
-  integrity sha512-S2ijmm+TedkqOe7YYh3GMBdUA3BNdrFiyJLcbQQu3t+W28/cJxt3kDUXjdBZkauegjme9Guc2l5BdnPsX/5vMA==
+"@ngaox/devkit@5.0.0-beta-6":
+  version "5.0.0-beta-6"
+  resolved "https://registry.yarnpkg.com/@ngaox/devkit/-/devkit-5.0.0-beta-6.tgz#109cc973ce55f1f7c1fdda433cd52f0c15472af6"
+  integrity sha512-Xs2S1iNDXUP8ltT+2NLPQq8s4xrmIjbnYtwnJhKcrgEjCw+AKfxGKGugVf2J9CKaTBUWGWMjC+4Nh+APPP4clA==
   dependencies:
     "@angular-devkit/architect" "0.1502.7"
     "@angular-devkit/build-angular" "15.2.7"
@@ -3391,6 +3391,7 @@
     events "3.3.0"
     fs-extra "10.1.0"
     gray-matter "4.0.3"
+    inquirer "8.2.4"
     jsdom "19.0.0"
     marked "4.0.14"
     prismjs "1.28.0"
@@ -4061,6 +4062,14 @@
   dependencies:
     "@types/node" "*"
 
+"@types/inquirer@^8.0.0":
+  version "8.2.6"
+  resolved "https://registry.yarnpkg.com/@types/inquirer/-/inquirer-8.2.6.tgz#abd41a5fb689c7f1acb12933d787d4262a02a0ab"
+  integrity sha512-3uT88kxg8lNzY8ay2ZjP44DKcRaTGztqeIvN2zHvhzIBH/uAPaL75aBtdNRKbA7xXoMbBt5kX0M00VKAnfOYlA==
+  dependencies:
+    "@types/through" "*"
+    rxjs "^7.2.0"
+
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.4.tgz#8467d4b3c087805d63580480890791277ce35c44"
@@ -4252,6 +4261,13 @@
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/@types/svgo/-/svgo-2.6.3.tgz#0786d8329b67cd48d84e57cb92b79832b85e6c8e"
   integrity sha512-5sP0Xgo0dXppY0tbYF6TevB/1+tzFLuu71XXxC/zGvQAn9PW7y+DwtDO81g0ZUPye00K6tPwtsLDOpARa0mFcA==
+  dependencies:
+    "@types/node" "*"
+
+"@types/through@*":
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/@types/through/-/through-0.0.30.tgz#e0e42ce77e897bd6aead6f6ea62aeb135b8a3895"
+  integrity sha512-FvnCJljyxhPM3gkRgWmxmDZyAQSiBQQWLI0A0VFL0K7W1oRUrPJSqNO0NvTnLkBcotdlp3lKvaT0JrnyRDkzOg==
   dependencies:
     "@types/node" "*"
 
@@ -11568,7 +11584,7 @@ rxjs@6.6.7, rxjs@^6.5.4:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@7.8.1, rxjs@^7.5.6:
+rxjs@7.8.1, rxjs@^7.2.0, rxjs@^7.5.6:
   version "7.8.1"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.1.tgz#6f6f3d99ea8044291efd92e7c7fcf562c4057543"
   integrity sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==

@@ -14,7 +14,7 @@ import {
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import { fileExists } from '../../utils/filesystem';
-import { cleanPath } from '../../utils/generators-options';
+import { cleanPath } from '../../utils/generators';
 import { contentBuilderPresets } from './presets';
 
 export async function setupAndGetOptions(
@@ -51,6 +51,30 @@ export async function setupAndGetOptions(
   };
 }
 
+export async function getConfigPath(
+  configDir: string | null,
+  projectRoot: string,
+  workspacePath: string
+): Promise<string> {
+  const projectConfigPath = path.join(
+    workspacePath,
+    projectRoot,
+    'ngaox.config.js'
+  );
+  const workspaceConfigPath = path.join(workspacePath, 'ngaox.config.js');
+
+  if (configDir) {
+    return path.join(workspacePath, configDir, 'ngaox.config.js');
+  }
+  if (
+    !(await fileExists(projectConfigPath)) &&
+    (await fileExists(workspaceConfigPath))
+  ) {
+    return workspaceConfigPath;
+  }
+  return projectConfigPath;
+}
+
 async function getProjectOptions(
   context: BuilderContext,
   configDir?: string
@@ -61,21 +85,13 @@ async function getProjectOptions(
   const projectRoot = cleanPath(
     (projectMetadata.root as string | undefined) ?? ''
   );
-  const projectConfigPath = path.join(
-    workspaceRoot,
-    projectRoot,
-    'ngaox.config.js'
-  );
-  const workspaceConfigPath = path.join(workspaceRoot, 'ngaox.config.js');
 
-  let configPath: string;
-  if (configDir) {
-    configPath = path.join(workspaceRoot, configDir, 'ngaox.config.js');
-  } else if (await fileExists(projectConfigPath)) {
-    configPath = projectConfigPath;
-  } else if (await fileExists(workspaceConfigPath)) {
-    configPath = workspaceConfigPath;
-  } else {
+  const configPath: string = await getConfigPath(
+    configDir,
+    projectRoot,
+    workspaceRoot
+  );
+  if (!(await fileExists(configPath))) {
     throw new Error(
       `The project "${target.project}" doesn't have a ngaox.config.js file.`
     );

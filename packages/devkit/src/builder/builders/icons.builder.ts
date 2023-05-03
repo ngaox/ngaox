@@ -2,7 +2,7 @@ import { optimize } from 'svgo';
 import { IBuilder, IMapperExtraOptions } from '../../models/builder';
 import { IParsedContent } from '../../models/builders/generic';
 import { writeFile, writeJSON } from '../../utils/filesystem';
-import { cleanPath, getCleanRelative } from '../../utils/generators-options';
+import { cleanPath, getCleanRelative } from '../../utils/generators';
 import { getFileBrowserPath, getTaskOutputPath } from '../helpers/filesystem';
 import { unlink } from 'fs/promises';
 import { join as joinPaths } from 'path';

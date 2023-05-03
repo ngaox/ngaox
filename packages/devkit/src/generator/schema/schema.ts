@@ -3,4 +3,5 @@
 export interface SetupSchema {
   project: string;
   module: string;
+  features: string;
 }

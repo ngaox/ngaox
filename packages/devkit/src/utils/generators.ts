@@ -7,6 +7,39 @@ import { findModuleFromOptions } from '@schematics/angular/utility/find-module';
 import { InsertChange } from '@schematics/angular/utility/change';
 
 import { strings, virtualFs, workspaces } from '@angular-devkit/core';
+import { SetupSchema } from '../generator/schema/schema';
+import { FEATURE_OPTIONS, NGAOX_FEATURES } from '../models/generator';
+
+import inquirer = require('inquirer');
+
+export async function getSetupFeatures(options: SetupSchema) {
+  const features = options.features
+    .split(',')
+    .map(feature => feature.trim())
+    .filter(feature => feature !== '');
+  const invalidFeatures = features.filter(
+    feature => !NGAOX_FEATURES.includes(feature)
+  );
+  if (invalidFeatures.length > 0) {
+    throw new Error(
+      `Invalid features: ${invalidFeatures.join(
+        ','
+      )}.\nOnly support: ${NGAOX_FEATURES.join(',')}`
+    );
+  }
+  if (features.length === 0) {
+    const promptConfig: inquirer.DistinctQuestion<inquirer.Answers> = {
+      type: 'checkbox',
+      name: 'features',
+      message: 'Select features to set up:',
+      choices: FEATURE_OPTIONS
+    };
+    features.push(
+      ...((await inquirer.prompt(promptConfig as unknown))['features'] ?? [])
+    );
+  }
+  return features;
+}
 
 export function getCleanRelative(filePath: string, dir: string): string {
   return cleanPath(path.relative(dir, filePath));

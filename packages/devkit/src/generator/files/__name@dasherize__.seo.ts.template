@@ -2,11 +2,17 @@ import { NgModule } from '@angular/core';
 import { SeoModule, IPageSeoData } from '@ngaox/seo';
 
 const SeoDefaults: IPageSeoData = {
+  // Site global default SEO values
+  // See: http://localhost:4200/docs/seo#set-global-defaults
   title: "Alien",
+  type: 'website',
+  keywords: '1, 2, 3',
   description: "🧪🤖",
+  siteName: 'Cool app 😎',
   twitter: {
     creator: "@TheCoolAlien"
   }
+  // ...
 };
 
 @NgModule({

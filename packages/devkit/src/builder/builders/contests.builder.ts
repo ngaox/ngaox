@@ -13,7 +13,7 @@ import {
   unlinkFile,
   writeJSON
 } from '../../utils/filesystem';
-import { cleanPath, getCleanRelative } from '../../utils/generators-options';
+import { cleanPath, getCleanRelative } from '../../utils/generators';
 import { omitKeys } from '../../utils/omit-keys';
 import { titleCase } from '../../utils/strings';
 import { basename, dirname, join as joinPaths } from 'path';

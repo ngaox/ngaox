@@ -3,7 +3,7 @@ import { IBuilder } from '../../models/builder';
 import { IMetaData, IParsedContent } from '../../models/builders/generic';
 import { CONTENT_MAP_FILE } from '../../models/constants';
 import { unlinkFile } from '../../utils/filesystem';
-import { getCleanRelative } from '../../utils/generators-options';
+import { getCleanRelative } from '../../utils/generators';
 import { getTaskOutputPath } from '../helpers/filesystem';
 
 export class GenericBuilder implements IBuilder {
