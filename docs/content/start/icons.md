@@ -133,7 +133,7 @@ With this configuration, all the SVG files in the `src/icons` folder will be add
 
 For example.
 
-```
+```folders
 └── src
 │   │   my-icon.svg
 │   │

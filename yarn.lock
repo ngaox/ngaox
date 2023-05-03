@@ -3376,10 +3376,10 @@
     "@material/theme" "15.0.0-canary.684e33d25.0"
     tslib "^2.1.0"
 
-"@ngaox/devkit@5.0.0-beta-6":
-  version "5.0.0-beta-6"
-  resolved "https://registry.yarnpkg.com/@ngaox/devkit/-/devkit-5.0.0-beta-6.tgz#109cc973ce55f1f7c1fdda433cd52f0c15472af6"
-  integrity sha512-Xs2S1iNDXUP8ltT+2NLPQq8s4xrmIjbnYtwnJhKcrgEjCw+AKfxGKGugVf2J9CKaTBUWGWMjC+4Nh+APPP4clA==
+"@ngaox/devkit@5.0.0-beta-7":
+  version "5.0.0-beta-7"
+  resolved "https://registry.yarnpkg.com/@ngaox/devkit/-/devkit-5.0.0-beta-7.tgz#177f4cd450de3260bcf3a6302629bf02e6861454"
+  integrity sha512-pphh//PeyvRc+Ut/doIu8NfddVtR1gh9MxQAQsECU6ZmHJNAGH4ARW5cycq/YqNz2qNcJIp55+CzNvENg+jYDg==
   dependencies:
     "@angular-devkit/architect" "0.1502.7"
     "@angular-devkit/build-angular" "15.2.7"

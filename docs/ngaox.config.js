@@ -1,4 +1,5 @@
 const { DocsBuilder } = require('@ngaox/devkit');
+
 require('prismjs/components/prism-bash');
 require('prismjs/components/prism-typescript');
 

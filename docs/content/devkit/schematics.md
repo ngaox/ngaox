@@ -1,5 +1,5 @@
 ---
-name: Ngaox Schematics
+name: Schematics in Ngaox
 order: 1
 ---
 

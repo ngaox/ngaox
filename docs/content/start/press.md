@@ -38,7 +38,7 @@ Parsers are used to convert raw content into an intermediate format that can be 
 - `rawParser`: Parses files as raw content without any modification.
 - `markdownParser`: Parses Markdown files into json objects that can be treated better in your Angular application.
 
-You can also create your own custom parser and use it in your configuration file.
+You can also create your own [custom parser](https://ngaox-lab.web.app/docs/devkit/custom-parser) and use it in your configuration file.
 
 ## Builders
 
@@ -50,4 +50,4 @@ Builders are used to generate the final output from the intermediate format gene
 - `IconsBuilder`: Used to optimize SVG icons and automatically register them with `@ngaox/icons`.
   See: [Registering SVG icons with @ngaox/devkit Builders](https://ngaox-lab.web.app/docs/icons#registering-svg-icons-with-ngaoxdevkit-builders) section
 
-You can also create your own custom builder and use it in your configuration file.
+You can also create your own [custom builder](https://ngaox-lab.web.app/docs/devkit/custom-builder) and use it in your configuration file.
