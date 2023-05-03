@@ -1,5 +1,5 @@
 ---
-name: Inline SVG Icons
+name: SVG Icons Inlining
 ---
 
 Ngaox solution for icons is using inlining SVGs. either from source files (Recommended)
@@ -11,7 +11,7 @@ with a component (`<ngaox-icon>`) for displaying (Inlining) them by their unique
 ## Installation & Setup
 
 ```bash
-ng generate @ngaox/devkit:setup icons
+ng generate @ngaox/devkit:setup --features=icons
 ```
 
 ## Getting Started

@@ -16,7 +16,7 @@ export class NavbarComponent {
     },
     {
       name: 'Schematics',
-      path: '/docs/start'
+      path: '/docs/devkit/schematics'
     }
   ];
   isHandset$: Observable<boolean> = this.breakpointObserver

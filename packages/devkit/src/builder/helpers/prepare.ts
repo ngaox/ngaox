@@ -111,7 +111,7 @@ async function getProjectOptions(
     rawOptions.content ?? {}
   )) {
     const taskOption: Partial<IBuilderTaskOptions> =
-      contentBuilderPresets[name] ?? {};
+      contentBuilderPresets[name] ?? contentBuilderPresets['markdown'] ?? {};
     try {
       if (typeof rawTaskOptions === 'string') {
         taskOption['dir'] = rawTaskOptions;

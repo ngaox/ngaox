@@ -13,10 +13,5 @@ module.exports = [
     routesPrefix: 'devkit/',
     directory: 'devkit',
     order: 2
-  },
-  {
-    name: 'Advanced',
-    routesPrefix: 'advanced/',
-    directory: 'advanced'
   }
 ];
