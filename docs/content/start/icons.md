@@ -84,3 +84,69 @@ constructor(icons: IconsService) {
   });
 }
 ```
+
+## Registering SVG icons with @ngaox/devkit Builders
+
+If you are using `@ngaox/devkit` [builders](https://ngaox-lab.web.app/docs/press#builders) and you want to automagically register all the SVG files in a specific folder,
+you can do so by configuring an entry in the `content` option in the `ngaox.config.js` file with `IconsBuilder` and `rawParser`.
+
+Here is an example where we register all the SVG files in the `src/icons` folder:
+
+```javascript
+const { IconsBuilder, rawParser } = require('@ngaox/devkit');
+
+/**
+ * @type {import('@ngaox/devkit').IBuilderOptions}
+ */
+module.exports = {
+  content: {
+    myIconsEntry: {
+      dir: 'src/icons',
+      glob: '**/*.svg',
+      parser: rawParser,
+      builder: new IconsBuilder(),
+      extra: {
+        namespace: 'app', // prefix all icon names with `app:`
+        svgoConfig: {
+          // svgo configuration options
+          // See: https://github.com/svg/svgo#configuration
+        }
+      }
+    }
+    // ...
+  }
+};
+```
+
+You can also use a short form for the configuration above when using `icons` as your entry name:
+
+```javascript
+module.exports = {
+  content: {
+    icons: 'src/icons'
+    // ...
+  }
+};
+```
+
+With this configuration, all the SVG files in the `src/icons` folder will be added to the registry automatically with a normalized version of their filename prefixed with `app:` (as we specified in the `extra.namespace` option) as the icon name.
+
+For example.
+
+```
+└── src
+│   │   my-icon.svg
+│   │
+│   └── sub-folder
+│       │   icon-in-subfolder.svg
+│       │
+│   ...
+
+```
+
+It can be access from the registry with names:
+
+```html
+<ngaox-icon name="app:my-icon"></ngaox-icon>
+<ngaox-icon name="app:sub-folder:icon-in-subfolder"></ngaox-icon>
+```

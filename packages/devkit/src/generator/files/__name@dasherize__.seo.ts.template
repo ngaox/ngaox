@@ -3,7 +3,7 @@ import { SeoModule, IPageSeoData } from '@ngaox/seo';
 
 const SeoDefaults: IPageSeoData = {
   // Site global default SEO values
-  // See: http://localhost:4200/docs/seo#set-global-defaults
+  // See: https://ngaox-lab.web.app/docs/seo#set-global-defaults
   title: "Alien",
   type: 'website',
   keywords: '1, 2, 3',

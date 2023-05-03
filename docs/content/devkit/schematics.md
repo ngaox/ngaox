@@ -1,5 +1,6 @@
 ---
 name: Ngaox Schematics
+order: 1
 ---
 
 @ngaox/devkit provides the ng-add schematics aliased setup that setup Ngaox Devkit builders and configuration.
