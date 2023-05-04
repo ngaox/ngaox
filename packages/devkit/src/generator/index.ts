@@ -5,7 +5,6 @@ import {
   chain,
   SchematicsException
 } from '@angular-devkit/schematics';
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { version as NgaoxCurrentVersion } from '../../package.json';
 
 import { SetupSchema } from './schema/schema';
