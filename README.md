@@ -31,9 +31,9 @@ It mainly provides a comprehensive toolset with all the features you need in a m
 
 - [📝 Documentation](https://ngaox-lab.web.app/) &nbsp; / &nbsp; Get started with Ngaox and explore all its features and capabilities.
 - [🅰 Angular. The modern web developer's platform](https://angular.io/)
-- [🏗 Inlining SVG Icons in Angular](https://ngaox-lab.web.app/docs/icons)
+- [🏗 SVG icons inlining in Angular](https://ngaox-lab.web.app/docs/icons)
 - [💡 Manage Seo and Social-Media previews the right way](https://ngaox-lab.web.app/docs/seo)
-- [🚀 Ship Markdown/Yaml/Json/... content to your Angular app](https://ngaox-lab.web.app/docs/press)
+- [🚀 Seamless content integration for Angular](https://ngaox-lab.web.app/docs/press)
 
 ## ✨ Templates
 
