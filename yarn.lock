@@ -109,10 +109,21 @@
     "@angular-devkit/architect" "0.1502.7"
     rxjs "6.6.7"
 
-"@angular-devkit/core@15.2.7", "@angular-devkit/core@^15.2.7":
+"@angular-devkit/core@15.2.7":
   version "15.2.7"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-15.2.7.tgz#c8a4de89fb0b5398b879621126d3c772fc6167b4"
   integrity sha512-k2MKUm4ygTD9+89neqMmBphDr0o8Tp9RtgfzbS8VHgGkGYlbu0KPsxHyHB3Mvzl1EkSz6EHyrU3t89m+Rcj1lw==
+  dependencies:
+    ajv "8.12.0"
+    ajv-formats "2.1.1"
+    jsonc-parser "3.2.0"
+    rxjs "6.6.7"
+    source-map "0.7.4"
+
+"@angular-devkit/core@15.2.8", "@angular-devkit/core@^15.2.7":
+  version "15.2.8"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-15.2.8.tgz#ff494ae7af137b0f0109deb8ee34f1550ed5cc1d"
+  integrity sha512-Lo4XrbDMtXarKnMrFgWLmQdSX+3QPNAg4otG8cmp/U4jJyjV4dAYKEAsb1sCNGUSM4h4v09EQU/5ugVjDU29lQ==
   dependencies:
     ajv "8.12.0"
     ajv-formats "2.1.1"
@@ -126,6 +137,17 @@
   integrity sha512-umQ+SgEMjqPHimHOBVhDn5NNGVoMLKQkI2fwbENXV72BqQqdh1K3D4QSNlUXitTaH0NEZZaAawE1vZHzzeAoNA==
   dependencies:
     "@angular-devkit/core" "15.2.7"
+    jsonc-parser "3.2.0"
+    magic-string "0.29.0"
+    ora "5.4.1"
+    rxjs "6.6.7"
+
+"@angular-devkit/schematics@15.2.8":
+  version "15.2.8"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-15.2.8.tgz#c7dfc692e3f54e43085a8845d8c9f390a2519aa3"
+  integrity sha512-w6EUGC96kVsH9f8sEzajzbONMawezyVBiSo+JYp5r25rQArAz/a+KZntbuETWHQ0rQOEsKmUNKxwmr11BaptSQ==
+  dependencies:
+    "@angular-devkit/core" "15.2.8"
     jsonc-parser "3.2.0"
     magic-string "0.29.0"
     ora "5.4.1"
@@ -11584,17 +11606,10 @@ rxjs@6.6.7, rxjs@^6.5.4:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@7.8.1, rxjs@^7.2.0, rxjs@^7.5.6:
+rxjs@7.8.1, rxjs@^7.2.0, rxjs@^7.5.5, rxjs@^7.5.6:
   version "7.8.1"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.1.tgz#6f6f3d99ea8044291efd92e7c7fcf562c4057543"
   integrity sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==
-  dependencies:
-    tslib "^2.1.0"
-
-rxjs@^7.5.5:
-  version "7.5.5"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.5.tgz#2ebad89af0f560f460ad5cc4213219e1f7dd4e9f"
-  integrity sha512-sy+H0pQofO95VDmFLzyaw9xNJU4KTRSwQIGM6+iG3SypAtCiLDzpeG8sJrNCWn2Up9km+KhkvTdbkrdy+yzZdw==
   dependencies:
     tslib "^2.1.0"
 
