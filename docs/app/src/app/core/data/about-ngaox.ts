@@ -1,6 +1,5 @@
 export default {
   name: 'Ngaox for Angular',
-  headline: 'Angular development is easier than ever!',
-  description:
-    'Ngaox is a collection of Angular components and utilities designed to make your life easier. We mainly aim at providing solutions for common web needs that are still missing from Angular, such as inlining SVGs, SEO management, and more.'
+  headline:
+    'Take Your Angular App Development to the Next Level with Ngaox: Seamless Content Integration, SVG Icon Optimization & Inlining, Advanced SEO & Social-Media Management, and More'
 };

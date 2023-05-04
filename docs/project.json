@@ -1,5 +1,6 @@
 {
-  "root": "docs/app",
+  "name": "docs",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "docs/app/src",
   "projectType": "application",
   "prefix": "docs",
@@ -9,13 +10,6 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "configDir": "docs",
-        "browserTarget": "docs:build-app"
-      }
-    },
-    "build-app": {
-      "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
-      "options": {
         "outputPath": "dist/docs",
         "index": "docs/app/src/index.html",
         "main": "docs/app/src/main.ts",
@@ -64,21 +58,21 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@ngaox/devkit:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "docs:build-app:production"
+          "browserTarget": "docs:build:production"
         },
         "development": {
-          "browserTarget": "docs:build-app:development"
+          "browserTarget": "docs:build:development"
         }
       },
       "defaultConfiguration": "development"
     },
     "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "executor": "@ngaox/devkit:extract-i18n",
       "options": {
-        "browserTarget": "docs:build-app"
+        "browserTarget": "docs:build"
       }
     },
     "lint": {

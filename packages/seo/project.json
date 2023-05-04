@@ -1,12 +1,13 @@
 {
+  "name": "seo",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "packages/seo",
   "sourceRoot": "packages/seo/src",
   "prefix": "ngaox",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["dist/packages/seo"],
+      "outputs": ["{workspaceRoot}/dist/packages/seo"],
       "options": {
         "project": "packages/seo/ng-package.json"
       },
@@ -22,9 +23,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/seo"],
+      "outputs": ["{workspaceRoot}/coverage/packages/seo"],
       "options": {
-        "jestConfig": "packages/seo/jest.config.js",
+        "jestConfig": "packages/seo/jest.config.ts",
         "passWithNoTests": true
       }
     },

@@ -1,12 +1,13 @@
 {
+  "name": "icons",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "packages/icons",
   "sourceRoot": "packages/icons/src",
   "prefix": "ngaox",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["dist/packages/icons"],
+      "outputs": ["{workspaceRoot}/dist/packages/icons"],
       "options": {
         "project": "packages/icons/ng-package.json"
       },
@@ -22,9 +23,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/icons"],
+      "outputs": ["{workspaceRoot}/coverage/packages/icons"],
       "options": {
-        "jestConfig": "packages/icons/jest.config.js",
+        "jestConfig": "packages/icons/jest.config.ts",
         "passWithNoTests": true
       }
     },

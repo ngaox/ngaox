@@ -1,7 +1,7 @@
 .hero-section {
   text-align: center;
   padding: 40px 20px;
-  min-height: 500px;
+  min-height: 460px;
   background: linear-gradient(
     45deg,
     var(--brand-color) 10%,
@@ -29,11 +29,11 @@
     }
   }
   h3 {
-    margin: 15px 0 25px 0;
-    max-width: 120ch;
+    max-width: 80ch;
     font-weight: 400;
     font-size: 1.6rem;
     line-height: 2.8rem;
+    margin: 15px 0 25px 0;
   }
   .main-buttons {
     display: flex;

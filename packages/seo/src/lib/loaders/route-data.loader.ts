@@ -10,7 +10,10 @@ export class RouteDataSeoLoader implements ISeoLoader {
     let seoData: IPageSeoData | undefined;
     let route: ActivatedRouteSnapshot | undefined = snapshot.root;
     while (route !== undefined) {
-      seoData = route.data[SeoKey] ?? seoData;
+      seoData = {
+        ...(seoData ?? {}),
+        ...(route.data[SeoKey] ?? {})
+      };
       route = route.children.find(child => child.outlet === PRIMARY_OUTLET);
     }
     return seoData ?? {};

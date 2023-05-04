@@ -10,13 +10,22 @@ import {
   url
 } from '@angular-devkit/schematics';
 import { strings, normalize } from '@angular-devkit/core';
-import { addImportToNgModule } from '../../utils/generators-options';
+import { addImportToNgModule } from '../../utils/generators';
+import { INgaoxRuleOptions } from '../../models/generator';
+import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 
 export function getSeoRule(
   tree: Tree,
   context: SchematicContext,
-  options
+  options: INgaoxRuleOptions
 ): Rule {
+  context.logger.info(`Setting up @ngaox/seo...`);
+  context.addTask(
+    new NodePackageInstallTask({
+      packageName: `@ngaox/seo@^${options.NgaoxCurrentVersion}`
+    })
+  );
+
   const templateSource = apply(url('./files'), [
     applyTemplates({
       classify: strings.classify,
@@ -30,7 +39,7 @@ export function getSeoRule(
     addImportToNgModule(
       options.module.path,
       `./${strings.dasherize(options.module.name)}.seo`,
-      `${options.module.name}SeoModule`
+      `${strings.classify(options.module.name)}SeoModule`
     )
   ]);
 }

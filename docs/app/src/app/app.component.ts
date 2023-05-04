@@ -42,6 +42,7 @@ import { filter, map } from 'rxjs/operators';
         top: 0;
         left: 0;
         width: 100%;
+        /* TODO(mdc-migration): The following rule targets internal classes of progress-bar that may no longer apply for the MDC version. */
         mat-progress-bar {
           position: absolute;
           top: 0;

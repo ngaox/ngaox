@@ -4,37 +4,20 @@
     "defaultBase": "main"
   },
   "cli": {
-    "defaultCollection": "@nrwl/angular",
     "packageManager": "yarn"
   },
   "workspaceLayout": {
     "appsDir": "docs/demos",
     "libsDir": "packages"
   },
-  "implicitDependencies": {
-    "package.json": {
-      "version": "*",
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
-    ".eslintrc.json": "*"
-  },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "nx-cloud",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "accessToken": "MGM3ZTk4ZDgtMTdjNy00ZGNkLWJkZjEtNDcxOTFmYTY5ZGE3fHJlYWQtd3JpdGU="
+        "accessToken": "YzY4MmRiOTQtZTI3Ni00MzBmLTk3Y2UtYjIzYjIyYmY0MzJlfHJlYWQtd3JpdGU="
       }
     }
-  },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
   },
   "generators": {
     "@nrwl/angular:application": {
@@ -51,5 +34,23 @@
       "style": "scss"
     }
   },
-  "defaultProject": "docs"
+  "defaultProject": "docs",
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "lint": {
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+    },
+    "test": {
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+    }
+  },
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": [],
+    "production": ["default", "!{projectRoot}/.eslintrc.json"]
+  }
 }

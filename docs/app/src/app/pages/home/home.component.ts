@@ -9,7 +9,7 @@ import FEATURES from '@docs-core/data/project-features';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  name = PROJECT.name;
   headline = PROJECT.headline;
-  description = PROJECT.description;
   features: INgaoxFeature[] = FEATURES;
 }

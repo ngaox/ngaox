@@ -7,6 +7,15 @@
   "ng-add": {
     "save": "devDependencies"
   },
+  "peerDependencies": {
+    "@angular/cli": "^15.0.0",
+    "@angular-devkit/core": "^15.0.0",
+    "@angular-devkit/schematics": "^15.0.0",
+    "@angular-devkit/build-angular": "^15.0.0",
+    "@angular-devkit/architect": "*",
+    "@angular/compiler": "*",
+    "@angular/core": "*"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ngaox/ngaox.git"

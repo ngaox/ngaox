@@ -7,41 +7,72 @@ import { BrowserBuilderOptions } from '@angular-devkit/build-angular';
 import { colors } from '@angular-devkit/build-angular/src/utils/color';
 import {
   IBuilderOptions,
-  IOptionsObject,
+  IOptionsObjectStrict,
   IBrowserBuilderOptions,
   IBuilderTaskOptions
 } from '../../models/builder';
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import { fileExists } from '../../utils/filesystem';
-import { cleanPath } from '../../utils/generators-options';
+import { cleanPath } from '../../utils/generators';
 import { contentBuilderPresets } from './presets';
 
 export async function setupAndGetOptions(
   context: BuilderContext,
-  browser: IBrowserBuilderOptions
-): Promise<IOptionsObject & { builder: IBuilderOptions }> {
-  const browserTarget = targetFromTargetString(browser.browserTarget);
-  const browserOptions = (await context.getTargetOptions(
-    browserTarget as Target
-  )) as unknown as BrowserBuilderOptions;
-  const builderOptions = await getProjectOptions(context, browser.configDir);
+  browser: string | IBrowserBuilderOptions
+): Promise<IOptionsObjectStrict> {
+  const browserTarget =
+    typeof browser === 'string'
+      ? targetFromTargetString(browser)
+      : context.target;
+
+  const browserOptions =
+    typeof browser === 'string'
+      ? ((await context.getTargetOptions(
+          browserTarget as Target
+        )) as unknown as BrowserBuilderOptions)
+      : browser;
+  const builderOptions = await getProjectOptions(
+    context,
+    browserOptions['configDir']
+  );
+
+  browserOptions.deleteOutputPath = false;
   browserOptions.outputPath =
     browserOptions.outputPath || `dist/${await getProjectRoot(context)}`;
-  browserOptions.watch = builderOptions.watch =
-    builderOptions.watch || browserOptions.watch;
-  browserOptions.deleteOutputPath = false;
 
   await fs.emptyDir(browserOptions.outputPath);
   await fs.ensureDir(browserOptions.outputPath);
-
-  process.env.APP_BASE_HREF = browserOptions.baseHref;
 
   return {
     browserTarget,
     browser: browserOptions,
     builder: builderOptions
   };
+}
+
+export async function getConfigPath(
+  configDir: string | null,
+  projectRoot: string,
+  workspacePath: string
+): Promise<string> {
+  const projectConfigPath = path.join(
+    workspacePath,
+    projectRoot,
+    'ngaox.config.js'
+  );
+  const workspaceConfigPath = path.join(workspacePath, 'ngaox.config.js');
+
+  if (configDir) {
+    return path.join(workspacePath, configDir, 'ngaox.config.js');
+  }
+  if (
+    !(await fileExists(projectConfigPath)) &&
+    (await fileExists(workspaceConfigPath))
+  ) {
+    return workspaceConfigPath;
+  }
+  return projectConfigPath;
 }
 
 async function getProjectOptions(
@@ -54,21 +85,13 @@ async function getProjectOptions(
   const projectRoot = cleanPath(
     (projectMetadata.root as string | undefined) ?? ''
   );
-  const projectConfigPath = path.join(
-    workspaceRoot,
-    projectRoot,
-    'ngaox.config.js'
-  );
-  const workspaceConfigPath = path.join(workspaceRoot, 'ngaox.config.js');
 
-  let configPath: string;
-  if (configDir) {
-    configPath = path.join(workspaceRoot, configDir, 'ngaox.config.js');
-  } else if (await fileExists(projectConfigPath)) {
-    configPath = projectConfigPath;
-  } else if (await fileExists(workspaceConfigPath)) {
-    configPath = workspaceConfigPath;
-  } else {
+  const configPath: string = await getConfigPath(
+    configDir,
+    projectRoot,
+    workspaceRoot
+  );
+  if (!(await fileExists(configPath))) {
     throw new Error(
       `The project "${target.project}" doesn't have a ngaox.config.js file.`
     );
@@ -88,7 +111,7 @@ async function getProjectOptions(
     rawOptions.content ?? {}
   )) {
     const taskOption: Partial<IBuilderTaskOptions> =
-      contentBuilderPresets[name] ?? {};
+      contentBuilderPresets[name] ?? contentBuilderPresets['markdown'] ?? {};
     try {
       if (typeof rawTaskOptions === 'string') {
         taskOption['dir'] = rawTaskOptions;
@@ -114,7 +137,6 @@ async function getProjectOptions(
   }
 
   return {
-    watch: rawOptions.watch,
     content: content
   };
 }

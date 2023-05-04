@@ -13,7 +13,7 @@ import {
   unlinkFile,
   writeJSON
 } from '../../utils/filesystem';
-import { cleanPath, getCleanRelative } from '../../utils/generators-options';
+import { cleanPath, getCleanRelative } from '../../utils/generators';
 import { omitKeys } from '../../utils/omit-keys';
 import { titleCase } from '../../utils/strings';
 import { basename, dirname, join as joinPaths } from 'path';
@@ -140,7 +140,7 @@ export class ContestsBuilder implements IBuilder {
   }
 }
 
-export async function getContestManifest(dir: string, filePath: string) {
+async function getContestManifest(dir: string, filePath: string) {
   const periodicManifestPath = joinPaths(
     dir,
     dirname(filePath),
@@ -154,7 +154,7 @@ export async function getContestManifest(dir: string, filePath: string) {
   return undefined;
 }
 
-export const getChallengeSubmissions = async (
+const getChallengeSubmissions = async (
   slug: string,
   submissionsDir: string
 ): Promise<ISubmission[]> => {

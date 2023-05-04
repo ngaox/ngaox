@@ -8,7 +8,7 @@ title: Manage your Seo and Social-Media previews
 ## Installation & Setup
 
 ```bash
-ng g @ngaox/devkit:setup seo
+ng g @ngaox/devkit:setup --features=seo
 ```
 
 ## Getting started
