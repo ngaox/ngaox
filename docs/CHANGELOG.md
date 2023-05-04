@@ -1,3 +1,34 @@
+# [5.0.0](https://github.com/ngaox/ngaox/compare/v4.2.0...v5.0.0) (2023-05-04)
+
+
+### Bug Fixes
+
+* **@ngaox/devkit:** :bug: browser opens on each changes ([19fda83](https://github.com/ngaox/ngaox/commit/19fda83f1927f2b266258df04bd63f19f5ed3417))
+* **@ngaox/devkit:** :pushpin: set releevent peerDependencies ([12fa9c7](https://github.com/ngaox/ngaox/commit/12fa9c7366452d3bc12a324e6ab4deeaa0e00bf6))
+* **@ngaox/devkit:** ensure everything works is as expected ([66a5b48](https://github.com/ngaox/ngaox/commit/66a5b4883f3e0bec219b3d7ae157de23ef1b2212))
+* **@ngaox/devkit:** restore builders logic ([38c0b01](https://github.com/ngaox/ngaox/commit/38c0b01813f8b98d13ef22c58327dbf171c1e9b0))
+* correct templates workflow ([#242](https://github.com/ngaox/ngaox/issues/242)) ([a05096e](https://github.com/ngaox/ngaox/commit/a05096e9540e6877b3eb1ce5484ba7abd39c8206))
+
+
+* chore!: bump major version ([08e19a8](https://github.com/ngaox/ngaox/commit/08e19a80523f1e87e39c2a51636aa87fb538d46c))
+
+
+### Features
+
+* :tada: init templates submodules ([22a2f9b](https://github.com/ngaox/ngaox/commit/22a2f9be1f7c4368eec288a093b54d29eac1f9fc))
+* **@ngaox/devkit:** add other Angular builders ([981048a](https://github.com/ngaox/ngaox/commit/981048a658201d23409c261e17b1ef4aca9fc987))
+* **@ngaox/devkit:** schematics ([e1cf406](https://github.com/ngaox/ngaox/commit/e1cf4064e271ce4fa3c824af4f15d8c1aaf242f0))
+* **@ngaox/devkit:** update builders ([4cc08e8](https://github.com/ngaox/ngaox/commit/4cc08e8fec275e681fb07e4877f9f758577e8abf)), closes [#213](https://github.com/ngaox/ngaox/issues/213) [#212](https://github.com/ngaox/ngaox/issues/212)
+* **docs:** improve hero section text ([4d3f890](https://github.com/ngaox/ngaox/commit/4d3f890abaaf079d27077a5cf154edf54dcab7b8))
+* **infra:** update templates & deployement ([01b5af6](https://github.com/ngaox/ngaox/commit/01b5af61fa3fbcd0159fc95cae55643ad8007c6e))
+
+
+### BREAKING CHANGES
+
+* v5.0.0
+
+
+
 # [4.2.0](https://github.com/ngaox/ngaox/compare/v4.1.0...v4.2.0) (2022-05-01)
 
 
