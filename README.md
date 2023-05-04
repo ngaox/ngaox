@@ -59,7 +59,7 @@ It mainly provides a comprehensive toolset with all the features you need in a m
 - ### [**Blog-Up**](https://github.com/rabraghib/blog-up) - A blog template for developers.
 
     <a href="https://blog-up.web.app/">
-    <img width="100%" alt="Blog-Up's screenshot" src="https://user-images.githubusercontent.com/49442862/236079009-33cb89f8-f160-4c20-b281-16a2fcd8f230.png" />
+    <img width="100%" alt="Blog-Up's screenshot" src="https://user-images.githubusercontent.com/49442862/236199021-93dae621-acc0-4a46-bff7-2bffe3f98fa8.png" />
     </a>
 
 ## 🤗 Before you go!
