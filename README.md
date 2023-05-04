@@ -37,7 +37,30 @@ It mainly provides a comprehensive toolset with all the features you need in a m
 
 ## ✨ Templates
 
-Coming soon...
+- ### [**Moroccan PHPers**](https://github.com/rabraghib/moroccan-phpers) - The Moroccan PHPers community website.
+
+    <a href="https://moroccan-phpers.com/">
+    <img width="100%" alt="Moroccan PHPers's screenshot" src="https://user-images.githubusercontent.com/49442862/236079099-bfe9b247-1e61-4f3c-a17b-2cdb62cce9b9.png" />
+    </a>
+
+- ### [**My Portfolio v2**](https://github.com/rabraghib/portfolio-v2) - My personal portfolio website v2.
+
+    <a href="https://folio-v2.web.app/">
+    <img width="100%" alt="My Portfolio v2's screenshot" src="https://user-images.githubusercontent.com/49442862/236079084-5fcd9092-3d66-4a70-984f-84aab9730d10.png" />
+    </a>
+
+- ### [**My Portfolio v1**](https://github.com/rabraghib/portfolio-v1) - My personal portfolio website v1.
+
+    <a href="https://folio-v1.web.app/">
+    <img width="100%" alt="My Portfolio v1's screenshot - Part-1" src="https://user-images.githubusercontent.com/49442862/236079023-ca5194fb-5e5c-467d-bddb-2c68519e8fb4.png" />
+    <img width="100%" alt="My Portfolio v1's screenshot - Part-2" src="https://user-images.githubusercontent.com/49442862/236079069-55143114-0520-47f7-8d31-127b54555df2.png" />
+    </a>
+
+- ### [**Blog-Up**](https://github.com/rabraghib/blog-up) - A blog template for developers.
+
+    <a href="https://blog-up.web.app/">
+    <img width="100%" alt="Blog-Up's screenshot" src="https://user-images.githubusercontent.com/49442862/236079009-33cb89f8-f160-4c20-b281-16a2fcd8f230.png" />
+    </a>
 
 ## 🤗 Before you go!
 
