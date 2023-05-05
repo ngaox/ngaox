@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'templates/**'
+      - '.github/**'
 jobs:
   release-up:
     runs-on: ubuntu-20.04
