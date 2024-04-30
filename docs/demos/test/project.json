@@ -3,6 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "docs/demos/test/src",
   "projectType": "application",
-  "targets": {},
-  "tags": []
+  "tags": [],
+  "// targets": "to see all targets run: nx show project test --web",
+  "targets": {}
 }
