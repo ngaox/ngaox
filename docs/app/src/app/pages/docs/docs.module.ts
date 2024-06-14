@@ -7,7 +7,10 @@ import { IconsModule } from '@ngaox/icons';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
-import { HttpClientModule } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi
+} from '@angular/common/http';
 import { SharedModule } from '../../shared/shared.module';
 
 import { DocsItemResolver } from '@docs-core/resolvers/docs-item.resolver';
@@ -57,10 +60,10 @@ const MATERIAL_IMPORTS = [MatToolbarModule, MatButtonModule, MatSidenavModule];
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    HttpClientModule,
     IconsModule,
     SharedModule,
     ...MATERIAL_IMPORTS
-  ]
+  ],
+  providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 export class DocsModule {}

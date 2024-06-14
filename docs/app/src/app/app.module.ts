@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi
+} from '@angular/common/http';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -50,10 +53,10 @@ const MATERIAL_IMPORTS = [
     FeatureCardComponent,
     NotFoundComponent
   ],
+  bootstrap: [AppComponent],
   imports: [
     SharedModule,
     BrowserModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     IconsModule.forRoot(),
     RouterModule.forRoot(routes),
@@ -63,7 +66,6 @@ const MATERIAL_IMPORTS = [
     }),
     ...MATERIAL_IMPORTS
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 export class AppModule {}

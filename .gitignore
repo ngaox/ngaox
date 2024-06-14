@@ -45,3 +45,4 @@ Thumbs.db
 .runtimeconfig.json
 
 .nx/cache
+.nx/workspace-data
