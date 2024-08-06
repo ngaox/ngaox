@@ -2,7 +2,14 @@ import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
 import { Observable, of, map, shareReplay } from 'rxjs';
-import { ILazyIcon, NGAOX_FALLBACK } from './models';
+import { ILazyIcon, INgaoxIcon, NGAOX_FALLBACK } from './models';
+import { NgaoxGlobalIcons } from './icons.module';
+
+const defaultFallbackIcon = `
+  <svg viewBox="0 0 612 612" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+    <path d="M306 50C164.6 50 50 164.6 50 306C50 447.4 164.6 562 306 562C447.4 562 562 447.4 562 306C562 164.6 447.4 50 306 50ZM282 202C282 188.8 292.8 178 306 178C319.2 178 330 188.75 330 202V330C330 343.25 319.25 354 306 354C292.75 354 282 343.3 282 330V202ZM306 450C288.64 450 274.56 435.92 274.56 418.56C274.56 401.2 288.63 387.12 306 387.12C323.37 387.12 337.44 401.2 337.44 418.56C337.4 435.9 323.4 450 306 450Z"/>
+  </svg>
+`;
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +19,16 @@ export class IconsService {
   private lazyIcons = new Map<string, Observable<SVGElement>>();
 
   constructor(
-    @Inject(DOCUMENT) private document: Document,
     private http: HttpClient,
-    @Optional() @Inject(NGAOX_FALLBACK) private fallbackIcon: string
-  ) {}
+    @Inject(DOCUMENT) private document: Document,
+    @Optional()
+    @Inject(NGAOX_FALLBACK)
+    private fallbackIcon: string = defaultFallbackIcon,
+    @Optional() @Inject(NgaoxGlobalIcons) icons?: INgaoxIcon[]
+  ) {
+    icons ??= [];
+    this.addAll(icons);
+  }
 
   private textToSvgElement(svg: string): SVGElement {
     const div = this.document.createElement('div');
@@ -75,6 +88,12 @@ export class IconsService {
       );
     }
     return this.get(name);
+  }
+
+  addAll(icons: INgaoxIcon[]) {
+    icons.forEach(icon => {
+      this.add(icon.name, icon.data);
+    });
   }
 
   /**

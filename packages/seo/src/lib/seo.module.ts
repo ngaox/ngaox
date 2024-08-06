@@ -7,10 +7,8 @@ import { RouteDataSeoLoader, SeoDataLoader } from './loaders';
 
 import { currentPageRoute } from './shared/helpers';
 import { IPageSeoData, SeoDefaultsToken } from './shared/models';
-import { SeoComponent } from './seo.component';
 
 @NgModule({
-  declarations: [SeoComponent],
   imports: [],
   providers: [
     {
@@ -18,7 +16,7 @@ import { SeoComponent } from './seo.component';
       useClass: RouteDataSeoLoader
     }
   ],
-  exports: [SeoComponent]
+  exports: []
 })
 export class SeoModule {
   constructor(
