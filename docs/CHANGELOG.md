@@ -1,3 +1,19 @@
+## [5.0.1](https://github.com/ngaox/ngaox/compare/v5.0.0...v5.0.1) (2024-09-07)
+
+
+### Bug Fixes
+
+* **@ngaox/icons:** :bug: cant inject destroy ref in effect ([fbe00cc](https://github.com/ngaox/ngaox/commit/fbe00ccb05c239a8a7bf7599a52245c4cc2126f2))
+* **infra:** update actions node version ([eab816c](https://github.com/ngaox/ngaox/commit/eab816c298811c4a208c25125f69929e56f32b0b))
+
+
+### Reverts
+
+* **docs:** temporally remove docs stuff ([3f24264](https://github.com/ngaox/ngaox/commit/3f2426443151afbce55b797362ab964959bc5e6b))
+* remove devkit and press packages ([f42be67](https://github.com/ngaox/ngaox/commit/f42be67cd4003f9bf3b05528b61935f468d1f544))
+
+
+
 # [5.0.0](https://github.com/ngaox/ngaox/compare/v4.2.0...v5.0.0) (2023-05-04)
 
 

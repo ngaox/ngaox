@@ -1,6 +1,6 @@
 {
   "name": "@ngaox/src",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "scripts": {
     "nx-all": "nx run-many --all --target",
     "nx-effected": "nx affected --target",
