@@ -1,4 +1,12 @@
-import { Component, HostBinding, effect, input, signal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  HostBinding,
+  effect,
+  inject,
+  input,
+  signal
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
@@ -6,7 +14,7 @@ import { IconsService } from './icons.service';
 
 @Component({
   selector: 'ngaox-icon',
-  template: ` <span>hello</span> `,
+  template: ``,
   standalone: true,
   styles: `
     :host {
@@ -20,6 +28,7 @@ export class NgaoxIconComponent {
   readonly url = input<string>();
   readonly width = input<string>();
   readonly height = input<string>();
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly svgContent = signal<SafeHtml>(
     this.sanitizer.bypassSecurityTrustHtml(this.service.getFallbackIcon())
@@ -36,40 +45,50 @@ export class NgaoxIconComponent {
     return this.svgContent();
   }
 
-  constructor(private service: IconsService, private sanitizer: DomSanitizer) {
-    effect(() => {
-      const name = this.name();
-      const url = this.url();
-      let icon: Observable<SVGElement | undefined>;
-      if (url) {
-        icon = this.service.add(name, {
-          url,
-          lazy: true
-        });
-      } else {
-        icon = this.service.get(name);
-      }
-      icon.pipe(takeUntilDestroyed()).subscribe({
-        next: svg => {
-          const outerHTML = svg?.outerHTML;
-          if (!outerHTML) {
+  constructor(
+    private service: IconsService,
+    private sanitizer: DomSanitizer
+  ) {
+    effect(
+      () => {
+        const name = this.name();
+        const url = this.url();
+        let icon: Observable<SVGElement | undefined>;
+        if (url) {
+          icon = this.service.add(name, {
+            url,
+            lazy: true
+          });
+        } else {
+          icon = this.service.get(name);
+        }
+        icon.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+          next: svg => {
+            const outerHTML = svg?.outerHTML;
+            if (!outerHTML) {
+              throw new Error(
+                `Icon '${name}' not found or has incorrect content.`
+              );
+            }
+            this.svgContent.set(
+              this.sanitizer.bypassSecurityTrustHtml(outerHTML)
+            );
+          },
+          error: () => {
+            this.svgContent.set(
+              this.sanitizer.bypassSecurityTrustHtml(
+                this.service.getFallbackIcon()
+              )
+            );
             throw new Error(
               `Icon '${name}' not found or has incorrect content.`
             );
           }
-          this.svgContent.set(
-            this.sanitizer.bypassSecurityTrustHtml(outerHTML)
-          );
-        },
-        error: () => {
-          this.svgContent.set(
-            this.sanitizer.bypassSecurityTrustHtml(
-              this.service.getFallbackIcon()
-            )
-          );
-          throw new Error(`Icon '${name}' not found or has incorrect content.`);
-        }
-      });
-    });
+        });
+      },
+      {
+        allowSignalWrites: true
+      }
+    );
   }
 }
