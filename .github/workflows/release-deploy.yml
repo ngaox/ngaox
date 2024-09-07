@@ -33,7 +33,7 @@ jobs:
           ref: 'main'
       - uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '18'
           registry-url: 'https://registry.npmjs.org'
           scope: '@ngaox'
           cache: 'yarn'
@@ -52,13 +52,13 @@ jobs:
             npm publish --access public
             cd ..
           done
-      - name: 🎉 Deploy docs & demos
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NGAOX_LAB }}'
-          channelId: live
-          projectId: ngaox-lab
+      # - name: 🎉 Deploy docs & demos
+      #   uses: FirebaseExtended/action-hosting-deploy@v0
+      #   with:
+      #     repoToken: '${{ secrets.GITHUB_TOKEN }}'
+      #     firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NGAOX_LAB }}'
+      #     channelId: live
+      #     projectId: ngaox-lab
       - uses: softprops/action-gh-release@v1
         with:
           name: 'ngaox ${{ needs.release-up.outputs.tag }}'

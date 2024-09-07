@@ -4,9 +4,7 @@
     "docs",
     "infra",
     "@ngaox/icons",
-    "@ngaox/seo",
-    "@ngaox/devkit",
-    "@ngaox/press"
+    "@ngaox/seo"
   ],
   "yaml.schemas": {
     "https://json.schemastore.org/github-workflow": "/.github/workflows/**/*.yml"

@@ -4,11 +4,11 @@ import { SeoService } from './seo.service';
 import { MetaDefinition } from '@angular/platform-browser';
 
 @Component({
+  standalone: true,
   selector: 'ngaox-seo',
-  template: ``,
-  styles: []
+  template: ''
 })
-export class SeoComponent implements OnInit {
+export class NgaoxSeoComponent implements OnInit {
   seoData: IPageSeoData = {};
 
   constructor(private seoService: SeoService) {}

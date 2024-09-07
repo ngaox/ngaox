@@ -43,3 +43,6 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
+
+.nx/cache
+.nx/workspace-data

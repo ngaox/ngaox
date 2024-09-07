@@ -16,9 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@docs-core/*": ["docs/app/src/app/core/*"],
-      "@ngaox/devkit": ["packages/devkit"],
       "@ngaox/icons": ["packages/icons/src/index.ts"],
-      "@ngaox/press": ["packages/press/src/index.ts"],
       "@ngaox/seo": ["packages/seo/src/index.ts"]
     }
   },
