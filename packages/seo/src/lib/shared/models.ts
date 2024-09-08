@@ -1,8 +1,9 @@
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { MetaDefinition } from '@angular/platform-browser';
+import { InjectionToken } from '@angular/core';
 
 export const SeoKey = 'NgaoxSeo';
-export const SeoDefaultsToken = Symbol('DefaultsSeoData');
+export const SeoDefaultsToken = new InjectionToken('DefaultsSeoData');
 
 export interface ISeoLoader {
   resolve(route: ActivatedRouteSnapshot): IPageSeoData;
