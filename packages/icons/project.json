@@ -10,15 +10,14 @@
       "executor": "@nx/angular:package",
       "outputs": ["{workspaceRoot}/dist/packages/icons"],
       "options": {
-        "project": "packages/icons/ng-package.json"
+        "project": "packages/icons/ng-package.json",
+        "tsConfig": "packages/icons/tsconfig.lib.json"
       },
       "configurations": {
         "production": {
           "tsConfig": "packages/icons/tsconfig.lib.prod.json"
         },
-        "development": {
-          "tsConfig": "packages/icons/tsconfig.lib.json"
-        }
+        "development": {}
       },
       "defaultConfiguration": "production"
     },
@@ -26,7 +25,8 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/packages/icons"],
       "options": {
-        "jestConfig": "packages/icons/jest.config.ts"
+        "jestConfig": "packages/icons/jest.config.ts",
+        "tsConfig": "packages/icons/tsconfig.spec.json"
       }
     },
     "lint": {
