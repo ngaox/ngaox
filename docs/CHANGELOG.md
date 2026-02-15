@@ -1,3 +1,13 @@
+## [5.0.2](https://github.com/ngaox/ngaox/compare/v5.0.1...v5.0.2) (2026-02-15)
+
+
+### Bug Fixes
+
+* **@ngaox/seo:** use name for Twitter Card image alt ([256edef](https://github.com/ngaox/ngaox/commit/256edef2ec729f545ec897291d8d312321f046fc))
+* Symbol is no more supported as InjectionToken [skip ci] ([7076676](https://github.com/ngaox/ngaox/commit/70766764b5fe150565dd91952440380a35a0602e))
+
+
+
 ## [5.0.1](https://github.com/ngaox/ngaox/compare/v5.0.0...v5.0.1) (2024-09-07)
 
 
