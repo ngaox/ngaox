@@ -1,21 +1,18 @@
-import {
-  Component,
-  DestroyRef,
-  HostBinding,
-  effect,
-  inject,
-  input,
-  signal
-} from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import { Component, DestroyRef, computed, inject, input } from '@angular/core';
+import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DomSanitizer } from '@angular/platform-browser';
+import { catchError, map, Observable, of } from 'rxjs';
 import { IconsService } from './icons.service';
 
 @Component({
   selector: 'ngaox-icon',
   template: ``,
   standalone: true,
+  host: {
+    '[style.width]': 'width()',
+    '[style.height]': 'height()',
+    '[innerHTML]': 'svgContent()'
+  },
   styles: `
     :host {
       display: inline-block;
@@ -24,71 +21,49 @@ import { IconsService } from './icons.service';
   `
 })
 export class NgaoxIconComponent {
+  private service = inject(IconsService);
+  private sanitizer = inject(DomSanitizer);
+
   readonly name = input.required<string>();
   readonly url = input<string>();
   readonly width = input<string>();
   readonly height = input<string>();
   private readonly destroyRef = inject(DestroyRef);
 
-  readonly svgContent = signal<SafeHtml>(
-    this.sanitizer.bypassSecurityTrustHtml(this.service.getFallbackIcon())
-  );
+  readonly svgContent = computed(() => {
+    return this.sanitizer.bypassSecurityTrustHtml(
+      this.svgContentResource.value()
+    );
+  });
 
-  @HostBinding('style.width') get _width() {
-    return this.width();
-  }
-  @HostBinding('style.height') get _height() {
-    return this.height();
-  }
-
-  @HostBinding('innerHTML') get _svgContent() {
-    return this.svgContent();
-  }
-
-  constructor(
-    private service: IconsService,
-    private sanitizer: DomSanitizer
-  ) {
-    effect(
-      () => {
-        const name = this.name();
-        const url = this.url();
-        let icon: Observable<SVGElement | undefined>;
-        if (url) {
-          icon = this.service.add(name, {
-            url,
-            lazy: true
-          });
-        } else {
-          icon = this.service.get(name);
-        }
-        icon.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-          next: svg => {
-            const outerHTML = svg?.outerHTML;
-            if (!outerHTML) {
-              throw new Error(
-                `Icon '${name}' not found or has incorrect content.`
-              );
-            }
-            this.svgContent.set(
-              this.sanitizer.bypassSecurityTrustHtml(outerHTML)
-            );
-          },
-          error: () => {
-            this.svgContent.set(
-              this.sanitizer.bypassSecurityTrustHtml(
-                this.service.getFallbackIcon()
-              )
-            );
+  readonly svgContentResource = rxResource({
+    defaultValue: this.service.getFallbackIcon(),
+    params: () => ({ name: this.name(), url: this.url() }),
+    stream: ({ params }) => {
+      let icon: Observable<SVGElement | undefined>;
+      if (params.url) {
+        icon = this.service.add(params.name, {
+          url: params.url,
+          lazy: true
+        });
+      } else {
+        icon = this.service.get(params.name);
+      }
+      return icon.pipe(takeUntilDestroyed(this.destroyRef)).pipe(
+        map(svg => {
+          const outerHTML = typeof svg === 'string' ? svg : svg?.outerHTML;
+          if (!outerHTML) {
             throw new Error(
-              `Icon '${name}' not found or has incorrect content.`
+              `Icon '${params.name}' not found or has incorrect content.`
             );
           }
-        });
-      },
-      {
-        allowSignalWrites: true
-      }
-    );
-  }
+          return outerHTML;
+        }),
+        catchError(err => {
+          console.error(err);
+          return of(this.service.getFallbackIcon());
+        })
+      );
+    }
+  });
 }

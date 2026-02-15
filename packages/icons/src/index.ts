@@ -4,6 +4,6 @@
 
 export * from './lib/icons.service';
 export * from './lib/icon.component';
-export * from './lib/icons.module';
+export * from './lib/provide-icons';
 export * from './lib/models';
 export * from './lib/adapters';

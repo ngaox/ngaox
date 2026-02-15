@@ -2,7 +2,7 @@
  * Public API Surface of seo
  */
 
-export * from './lib/seo.module';
+export * from './lib/provide-seo';
 export * from './lib/seo.service';
 export * from './lib/seo.component';
 

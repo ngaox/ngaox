@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 import {
   IPageSeoData,
@@ -12,12 +12,11 @@ import {
   providedIn: 'root'
 })
 export class SeoService {
-  constructor(
-    private title: Title,
-    private meta: Meta,
-    @Inject(DOCUMENT) private document: Document,
-    @Optional() @Inject(SeoDefaultsToken) private defaults: IPageSeoData = {}
-  ) {}
+  private title = inject(Title);
+  private meta = inject(Meta);
+  private document = inject<Document>(DOCUMENT);
+  private defaults =
+    inject<IPageSeoData>(SeoDefaultsToken, { optional: true }) ?? {};
 
   public generateTags(definitions: MetaDefinition[]): void {
     definitions.forEach(meta => {

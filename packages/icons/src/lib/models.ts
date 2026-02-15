@@ -17,3 +17,6 @@ export interface ILazyIcon {
   url: string;
   lazy: true;
 }
+
+export const NgaoxGlobalIcons: InjectionToken<INgaoxIcon[]> =
+  new InjectionToken('NgaoxGlobalIcons');

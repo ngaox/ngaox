@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { IPageSeoData, ISeoImage, ISeoTwitter } from './shared/models';
 import { SeoService } from './seo.service';
 import { MetaDefinition } from '@angular/platform-browser';
@@ -9,9 +9,9 @@ import { MetaDefinition } from '@angular/platform-browser';
   template: ''
 })
 export class NgaoxSeoComponent implements OnInit {
-  seoData: IPageSeoData = {};
+  private seoService = inject(SeoService);
 
-  constructor(private seoService: SeoService) {}
+  seoData: IPageSeoData = {};
 
   ngOnInit(): void {
     this.seoService.set(this.seoData);

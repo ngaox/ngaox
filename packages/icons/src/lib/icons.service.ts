@@ -1,9 +1,13 @@
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, of, map, shareReplay } from 'rxjs';
-import { ILazyIcon, INgaoxIcon, NGAOX_FALLBACK } from './models';
-import { NgaoxGlobalIcons } from './icons.module';
+import {
+  ILazyIcon,
+  INgaoxIcon,
+  NGAOX_FALLBACK,
+  NgaoxGlobalIcons
+} from './models';
 
 const defaultFallbackIcon = `
   <svg viewBox="0 0 612 612" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
@@ -15,19 +19,17 @@ const defaultFallbackIcon = `
   providedIn: 'root'
 })
 export class IconsService {
+  private http = inject(HttpClient);
+  private document = inject<Document>(DOCUMENT);
+  private fallbackIcon =
+    inject(NGAOX_FALLBACK, { optional: true }) ?? defaultFallbackIcon;
+
   private icons = new Map<string, SVGElement>();
   private lazyIcons = new Map<string, Observable<SVGElement>>();
 
-  constructor(
-    private http: HttpClient,
-    @Inject(DOCUMENT) private document: Document,
-    @Optional()
-    @Inject(NGAOX_FALLBACK)
-    private fallbackIcon: string = defaultFallbackIcon,
-    @Optional() @Inject(NgaoxGlobalIcons) icons?: INgaoxIcon[]
-  ) {
-    icons ??= [];
-    this.addAll(icons);
+  constructor() {
+    const multiIcons = inject(NgaoxGlobalIcons, { optional: true }) ?? [];
+    this.addAll(multiIcons.flat());
   }
 
   private textToSvgElement(svg: string): SVGElement {
