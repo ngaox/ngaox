@@ -5,11 +5,11 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'templates/**'
-      - '.github/**'
+      - "templates/**"
+      - ".github/**"
 jobs:
   release-up:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     outputs:
       released: ${{ steps.releaser.outputs.released }}
       tag: ${{ steps.releaser.outputs.tag }}
@@ -26,17 +26,17 @@ jobs:
   build-deploy:
     if: needs.release-up.outputs.released == 'true'
     needs: release-up
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: 'main'
+          ref: "main"
       - uses: actions/setup-node@v2
         with:
-          node-version: '18'
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@ngaox'
-          cache: 'yarn'
+          node-version: "18"
+          registry-url: "https://registry.npmjs.org"
+          scope: "@ngaox"
+          cache: "yarn"
       - run: yarn --frozen-lockfile
       - name: 🛠 Build everything
         run: yarn nx-all build
@@ -61,7 +61,7 @@ jobs:
       #     projectId: ngaox-lab
       - uses: softprops/action-gh-release@v1
         with:
-          name: 'ngaox ${{ needs.release-up.outputs.tag }}'
+          name: "ngaox ${{ needs.release-up.outputs.tag }}"
           tag_name: ${{ needs.release-up.outputs.tag }}
           body: ${{ needs.release-up.outputs.release_notes }}
           files: |
