@@ -5,14 +5,14 @@ on:
     branches:
       - main
     paths-ignore:
-      - "templates/**"
-      - ".github/**"
+      - 'templates/**'
+      - '.github/**'
   pull_request:
     branches:
       - main
     paths-ignore:
-      - "templates/**"
-      - ".github/**"
+      - 'templates/**'
+      - '.github/**'
 
 jobs:
   lint-test:
@@ -22,10 +22,10 @@ jobs:
         with:
           fetch-depth: 0
       - uses: nrwl/nx-set-shas@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v6
         with:
-          node-version: "18"
-          cache: "yarn"
+          node-version: 22
+          cache: 'yarn'
 
       - run: yarn --frozen-lockfile
       - name: 🧪 Lint & Test
@@ -44,10 +44,10 @@ jobs:
         with:
           fetch-depth: 0
       - uses: nrwl/nx-set-shas@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v6
         with:
-          node-version: "18"
-          cache: "yarn"
+          node-version: 22
+          cache: 'yarn'
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
         with:

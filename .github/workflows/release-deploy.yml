@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths-ignore:
-      - "templates/**"
-      - ".github/**"
+      - 'templates/**'
+      - '.github/**'
 jobs:
   release-up:
     runs-on: ubuntu-24.04
@@ -30,13 +30,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: "main"
-      - uses: actions/setup-node@v2
+          ref: 'main'
+      - uses: actions/setup-node@v6
         with:
-          node-version: "18"
-          registry-url: "https://registry.npmjs.org"
-          scope: "@ngaox"
-          cache: "yarn"
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@ngaox'
+          cache: 'yarn'
       - run: yarn --frozen-lockfile
       - name: 🛠 Build everything
         run: yarn nx-all build
@@ -61,7 +61,7 @@ jobs:
       #     projectId: ngaox-lab
       - uses: softprops/action-gh-release@v1
         with:
-          name: "ngaox ${{ needs.release-up.outputs.tag }}"
+          name: 'ngaox ${{ needs.release-up.outputs.tag }}'
           tag_name: ${{ needs.release-up.outputs.tag }}
           body: ${{ needs.release-up.outputs.release_notes }}
           files: |
