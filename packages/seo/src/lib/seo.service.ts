@@ -101,7 +101,7 @@ export class SeoService {
       }
       if (image.alt) {
         this.generateTags([
-          { property: 'twitter:image:alt', content: image.alt },
+          { name: 'twitter:image:alt', content: image.alt },
           { property: 'og:image:alt', content: image.alt }
         ]);
       }
