@@ -1,3 +1,12 @@
+## [5.0.3](https://github.com/ngaox/ngaox/compare/v5.0.2...v5.0.3) (2026-02-15)
+
+
+### Bug Fixes
+
+* update CI node version ([79b7bc7](https://github.com/ngaox/ngaox/commit/79b7bc7056f1b8e95c91f5ac4d7529fdc22d5510))
+
+
+
 ## [5.0.2](https://github.com/ngaox/ngaox/compare/v5.0.1...v5.0.2) (2026-02-15)
 
 
