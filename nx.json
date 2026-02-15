@@ -79,11 +79,11 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"],
-      "cache": true
+      "cache": false
     },
     "@nx/jest:jest": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
-      "cache": true,
+      "cache": false,
       "options": {
         "passWithNoTests": true
       },
@@ -96,10 +96,10 @@
     },
     "@nx/eslint:lint": {
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
-      "cache": true
+      "cache": false
     },
     "@nx/angular:package": {
-      "cache": true,
+      "cache": false,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     }
@@ -114,6 +114,5 @@
     ]
   },
   "useInferencePlugins": false,
-  "defaultBase": "main",
-  "nxCloudAccessToken": "NzA1OWE0NWQtMDVkMS00MDgzLThmODctNGU2ZDhmZjJhZmQwfHJlYWQtd3JpdGU="
+  "defaultBase": "main"
 }
