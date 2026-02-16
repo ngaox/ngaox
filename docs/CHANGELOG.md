@@ -1,3 +1,17 @@
+# [6.0.0](https://github.com/ngaox/ngaox/compare/v5.0.5...v6.0.0) (2026-02-16)
+
+
+### Bug Fixes
+
+* upgrade typescript version ([43ff076](https://github.com/ngaox/ngaox/commit/43ff076e7110ab401a20805080d521afe663808a))
+
+
+### BREAKING CHANGES
+
+* new major release
+
+
+
 ## [5.0.5](https://github.com/ngaox/ngaox/compare/v5.0.4...v5.0.5) (2026-02-16)
 
 
