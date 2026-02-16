@@ -1,3 +1,12 @@
+## [5.0.5](https://github.com/ngaox/ngaox/compare/v5.0.4...v5.0.5) (2026-02-16)
+
+
+### Bug Fixes
+
+* set browserlist queries ([4041328](https://github.com/ngaox/ngaox/commit/404132803dab0542522806c390c4658c1d8e73e3))
+
+
+
 ## [5.0.4](https://github.com/ngaox/ngaox/compare/v5.0.3...v5.0.4) (2026-02-15)
 
 
